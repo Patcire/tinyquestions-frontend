@@ -5,7 +5,6 @@ import RootLayout from '/src/layouts/RootLayout.vue'
 import PrivateLayout from '/src/layouts/PrivateLayout.vue'
 import Home from '/src/pages/Home.vue'
 
-
 const routes = [
 
   {

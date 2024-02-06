@@ -1,23 +1,49 @@
 <script>
+import { useSessionStore } from '@/stores/sessionStore.js'
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  data(){
+    return{
+      sessionStore: useSessionStore()
+    }
+  },
+  methods: {
+    auth(){
+      this.sessionStore.authenticade()
+    }
+  }
 }
 
-const userConnected = true
 </script>
 
 <template>
 
   <section>
-    <ul>
-      <router-link to="/">Home</router-link>
-      <router-link to="/games">Games</router-link>
-      <router-link to="/create">Create</router-link>
-      <router-link to="/play">Play</router-link>
-      <router-link to="/about">About</router-link>
+
+    <ul v-if="!this.sessionStore.isConnected">
+      <li>
+        <router-link to="/" >Home</router-link>
+      </li>
+      <li>
+        <router-link to="/play">Play</router-link>
+      </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
+    </ul>
 
 
+    <ul v-if="this.sessionStore.isConnected">
 
+      <li>
+        <router-link to="/games">Games</router-link>
+      </li>
+      <li>
+        <router-link to="/create">Create</router-link>
+      </li>
+      <li>
+        <button @click="auth" >Exit</button>
+      </li>
     </ul>
   </section>
 

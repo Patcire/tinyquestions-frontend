@@ -4,7 +4,8 @@ export const useSessionStore = defineStore('user',{
   state: () => ({isConnected: false}),
   actions: {
     authenticade() {
-      this.state.isConnected = true
+      this.isConnected = !this.isConnected
+      console.log(this.isConnected)
     }
   }
 })
