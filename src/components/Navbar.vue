@@ -20,7 +20,7 @@ export default {
 
   <section>
 
-    <ul v-if="!this.sessionStore.isConnected">
+    <ul v-if="!this.sessionStore.isConnected" class="navbar">
       <li>
         <router-link to="/" >Home</router-link>
       </li>
@@ -33,7 +33,7 @@ export default {
     </ul>
 
 
-    <ul v-if="this.sessionStore.isConnected">
+    <ul v-if="this.sessionStore.isConnected" class="navbar">
 
       <li>
         <router-link to="/games">Games</router-link>
@@ -42,7 +42,7 @@ export default {
         <router-link to="/create">Create</router-link>
       </li>
       <li>
-        <button @click="auth" >Exit</button>
+        <a @click="auth" >Exit</a>
       </li>
     </ul>
   </section>

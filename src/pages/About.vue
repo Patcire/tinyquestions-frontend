@@ -1,6 +1,16 @@
 <script>
 export default {
-  name: 'About'
+  name: 'About',
+  data(){
+    return{
+
+    }
+  },
+  methods: {
+    showContactModal(){
+
+    }
+  }
 }
 
 </script>
@@ -21,7 +31,7 @@ export default {
     </p>
   </article>
 
-  <button>Contact</button>
+  <button @click="showContactModal">Contact</button>
 </template>
 
 <style scoped>
