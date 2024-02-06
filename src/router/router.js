@@ -4,6 +4,9 @@ import NotFound404 from '/src/pages/NotFound404.vue'
 import RootLayout from '/src/layouts/RootLayout.vue'
 import PrivateLayout from '/src/layouts/PrivateLayout.vue'
 import Home from '/src/pages/Home.vue'
+import { useSessionStore } from '@/stores/sessionStore.js'
+
+
 
 const routes = [
 
@@ -37,7 +40,7 @@ const routes = [
         children: [
           {
             path: "",
-            component: ()=> import('/src/pages/Quick.vue')
+            component: ()=> import('/src/pages/Quick.vue'),
           }
         ]
       },

@@ -1,6 +1,7 @@
 @import "../abstracts/index";
 
 .under{
+  padding-top: 15rem;
   @include flex-column();
   font-family: $fontAnswers;
   img{

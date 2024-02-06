@@ -1,11 +1,23 @@
 <script>
+import { useSessionStore } from '@/stores/sessionStore.js'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import router from '@/router/router.js'
 export default {
-  name: 'PrivateLayout'
+  name: 'PrivateLayout',
+  data(){
+    return{
+      seshStore: useSessionStore()
+    }
+  },
+  created() {
+
+    !this.seshStore.isConnected && router.push('/')
+  }
 }
 </script>
 
 <template>
-  <h1>PRIVATE</h1>
+
   <router-view></router-view>
 
 </template>
