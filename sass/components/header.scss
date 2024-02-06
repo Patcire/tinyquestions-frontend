@@ -1,0 +1,15 @@
+@import "../abstracts/mixins";
+
+.header{
+  @include flex-row;
+  justify-content: space-between;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 1%;
+
+  .header__logo{
+      width: 350px;
+      height: auto
+  }
+
+}
