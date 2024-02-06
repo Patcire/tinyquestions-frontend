@@ -1,5 +1,5 @@
 <script>
-  import { useRoute } from 'vue-router'
+
 </script>
 
 <template>
