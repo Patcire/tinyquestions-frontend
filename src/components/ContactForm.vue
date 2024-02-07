@@ -1,6 +1,7 @@
 <script>
 import {Field, Form, ErrorMessage} from 'vee-validate'
 import * as yup from 'yup'
+import { boolean } from 'yup'
 
 export default {
   name: 'ContactForm',
@@ -8,7 +9,7 @@ export default {
 
     const validationSchema = yup.object().shape({
       email: yup.string().required().email('Invalid email format'),
-      date: yup.date().required('Select the incidence date').max(2025).min(2024),
+      date: yup.date().required('Select the incidence date').max(2025, 'not trolling pls').min(2024, 'this web was created at 2024'),
       textarea: yup.string().required(),
       policy: yup.boolean().oneOf([true]).required('You have to accept our privacy policy')
     });
@@ -22,14 +23,16 @@ export default {
   components:{
     vField: Field,
     vForm: Form,
-    vError: ErrorMessage
+    vError: ErrorMessage,
   }
 }
 </script>
 
 <template>
 
-  <vForm class="form-modal" :validation-schema="this.schema">
+  <vForm :validation-schema="this.schema" class="form-contact">
+      <h4>Tell us your problem</h4>
+
     <label>Email <vField type="email" name="email" placeholder="example@gmail.com"/></label>
     <vError name="email"></vError>
 
