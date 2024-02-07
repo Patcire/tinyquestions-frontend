@@ -1,0 +1,12 @@
+@import "../abstracts/index";
+
+.form-modal{
+  display: none;
+  position: relative;
+  z-index: 99999;
+  background-color: pink;
+}
+
+.form-modal--show{
+  @include flex-column;
+}

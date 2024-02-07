@@ -18,11 +18,18 @@ export default {
 </script>
 
 <template>
-  <h1>Login</h1>
-  <button @click="auth">Enter</button>
-  <router-link to="/register">Register</router-link>
+  <section class="temp">
+    <h1>Login</h1>
+    <button @click="auth">Enter</button>
+    <router-link to="/register">Register</router-link>
+  </section>
 </template>
 
 <style scoped>
-
+  .temp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
