@@ -44,6 +44,20 @@ export default {
       <li>
         <router-link to="/create">Create</router-link>
       </li>
+      <li class="navbar__submenu">
+        <button>Comunnity</button>
+        <ul class="submenu__list">
+          <li>
+            <router-link to="/profile">My profile</router-link>
+          </li>
+          <li>
+            <router-link to="/find">Find questions</router-link>
+          </li>
+          <li>
+            <router-link to="/ranks">Ranks</router-link>
+          </li>
+        </ul>
+      </li>
       <li>
         <a @click="auth" class="exit" >Exit</a>
       </li>

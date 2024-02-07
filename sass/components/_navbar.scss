@@ -1,23 +1,20 @@
 @import "../abstracts/_index.scss";
 
 .navbar{
+
   @include flex-row();
   gap: 3rem;
+
   a{
     font-family: $fontLogo;
     font-size: 2.5rem;
     position: relative;
   }
-  a:hover::after {
+
+  a:hover::after, a:active::after {
     content: url('/public/pointpoint.svg');
     position: absolute;
     top: 50%;
-    left: 50%;
-  }
-  a:active::after {
-    content: url('/public/pointpoint.svg');
-    position: absolute;
-    bottom: 50%;
     left: 50%;
   }
 
@@ -26,3 +23,34 @@
   }
 
 }
+
+.navbar__submenu button{
+  border: none;
+  background: none;
+  font-family: $fontLogo;
+  font-size: 2.5rem;
+  cursor: pointer;
+
+}
+
+.submenu__list {
+  display: none;
+  position: absolute;
+  z-index: 1;
+
+}
+
+.submenu__list a {
+  display: block;
+  font-family: $fontAnswers;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.navbar__submenu:hover .submenu__list {
+  display: block;
+}
+
+
+
+
