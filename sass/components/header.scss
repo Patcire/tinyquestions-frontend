@@ -3,9 +3,9 @@
 .header{
   @include flex-row;
   justify-content: space-between;
-  padding-left: 2%;
-  padding-right: 2%;
-  padding-top: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
 
   .header__logo{
       width: 350px;

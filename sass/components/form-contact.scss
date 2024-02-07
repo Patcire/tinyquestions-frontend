@@ -1,0 +1,35 @@
+@import "../abstracts/index";
+
+.form-contact {
+  @include flex-column;
+  font-family: $fontAnswers;
+  padding: 2%;
+  label{
+    display: block;
+    padding-bottom: 2%;
+  }
+  input{
+    display: block;
+    width: 100%;
+  }
+  textarea{
+    display: block;
+    max-width: 190px;
+    max-height: 160px;
+    min-width: 190px;
+    min-height: 160px;
+  }
+  span{
+    color: red;
+    padding: 0.5%;
+  }
+  h4{
+
+  }
+
+}
+
+.form-contact__header{
+  background-color: $purple;
+}
+

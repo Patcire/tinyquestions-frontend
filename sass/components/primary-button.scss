@@ -1,0 +1,17 @@
+
+@import "../abstracts/index";
+
+.primary-button{
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 40px;
+  color: white;
+  font-family: $fontAnswers;
+  font-weight: normal;
+  font-size: 2.04rem;
+  width: 170px;
+  height: 51px;
+  outline: none;
+  cursor: pointer;
+
+}

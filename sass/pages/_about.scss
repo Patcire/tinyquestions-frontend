@@ -1,0 +1,24 @@
+@import "../abstracts/index";
+
+.about{
+
+  padding: 5% 25% 0 25%;
+  @include flex-column;
+  p{
+    font-family: $fontAnswers;
+    font-weight: normal;
+    font-size: 2rem;
+    padding-bottom: 5%;
+  }
+  p:last-child{
+    padding-bottom: 0;
+  }
+
+  .primary-button{
+    position: absolute;
+    left: 85%;
+    top: 90%;
+
+  }
+
+}
