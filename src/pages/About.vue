@@ -1,36 +1,36 @@
 <script>
 import ContactForm from '@/components/ContactForm.vue'
+import Modal from '@/components/Modal.vue'
 
 export default {
+
   name: 'About',
-  components: { ContactForm },
+  components: { Modal, ContactForm },
   data(){
     return{
-      contactModal: false
+      popUp: false
     }
   },
   methods: {
-    showContactModal(){
-      this.contactModal = !this.contactModal
-      console.log('modallll')
-    },
-    handleClose(e){
-      (!this.contactModal && this.$el.contains(e.target)) && this.showContactModal()
+    handleShowModal(e) {
+      e.preventDefault()
+      this.popUp = !this.popUp
     }
   },
   mounted() {
-    document.addEventListener('click', this.handleClose)
-  }
+    window.onclick = (e) => {
+      e.target.classList.contains('modal') && this.handleShowModal(e)
+      }
+    }
 }
 
 </script>
 
 <template>
-  <section class="temp">
-    <h1>About</h1>
+  <section class="about">
 
     <article>
-      <p>At tinyquestion we love filler games that help you
+      <p>At <strong>tinyquestion</strong> we love filler games that help you
         to free all the stress of your day.
       </p>
 
@@ -38,22 +38,15 @@ export default {
         we offer to you the best way to disconnect from daily tasks.
       </p>
       <p>Play little quizzes alone or with friends and free
-        your mind. Maybe even you’ll learn something new!
+        your mind. <strong>Maybe even you’ll learn something new!</strong>
       </p>
     </article>
 
-    <button @click="showContactModal">Contact</button>
+    <img src="../../public/thinker.svg" alt="head doodle" />
+    <button @click="handleShowModal" class="primary-button">Contact</button>
   </section>
 
-  <ContactForm v-if="contactModal" class="form-modal" :class="{'form-modal--show' : contactModal}"></ContactForm>
-
+  <Modal :show="popUp">
+    <ContactForm></ContactForm>
+  </Modal>
 </template>
-
-<style scoped>
-  .temp{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-</style>
