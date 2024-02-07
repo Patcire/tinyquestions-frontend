@@ -1,5 +1,6 @@
 <script>
 import { useSessionStore } from '@/stores/sessionStore.js'
+import router from '@/router/router.js'
 export default {
   name: 'Navbar',
   data(){
@@ -10,6 +11,8 @@ export default {
   methods: {
     auth(){
       this.sessionStore.authenticade()
+      router.push('/');
+      console.log('eeee')
     }
   }
 }
@@ -42,13 +45,9 @@ export default {
         <router-link to="/create">Create</router-link>
       </li>
       <li>
-        <a @click="auth" >Exit</a>
+        <a @click="auth" class="exit" >Exit</a>
       </li>
     </ul>
   </section>
 
 </template>
-
-<style scoped>
-
-</style>

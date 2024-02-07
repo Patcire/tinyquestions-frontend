@@ -1,6 +1,6 @@
 <script>
 import { useSessionStore } from '@/stores/sessionStore.js'
-import { createRouter, createWebHashHistory } from 'vue-router'
+
 import router from '@/router/router.js'
 export default {
   name: 'PrivateLayout',

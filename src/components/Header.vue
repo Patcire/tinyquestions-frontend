@@ -8,7 +8,7 @@ export default {
 
 <template>
   <section class="header">
-    <img class="header__logo" alt="logo of tinyquestions" src="/public/logo.svg">
+    <img class="header__logo" alt="logo of tinyquestions" src="/logo.svg">
     <Navbar></Navbar>
   </section>
 </template>

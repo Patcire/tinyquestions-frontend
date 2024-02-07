@@ -1,5 +1,6 @@
 <script>
 import { useSessionStore } from '@/stores/sessionStore.js'
+import router from '@/router/router.js'
 export default {
   name: 'Login',
   data(){
@@ -10,6 +11,7 @@ export default {
   methods: {
     auth(){
       this.sessionStore.authenticade()
+      router.push('/games');
     }
   }
 }
