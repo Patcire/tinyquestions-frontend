@@ -7,8 +7,8 @@ export default {
 </script>
 
 <template>
-  <section class="header">
-    <img class="header__logo" alt="logo of tinyquestions" src="/logo.svg">
+  <header class="main-header">
+    <img class="main-header__logo" alt="logo of tinyquestions" src="/logo.svg">
     <Navbar></Navbar>
-  </section>
+  </header>
 </template>

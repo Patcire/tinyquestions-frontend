@@ -1,35 +1,48 @@
 @import "../abstracts/index";
 
-.form-contact {
-  @include flex-column;
+.contact {
   font-family: $fontAnswers;
-  padding: 2%;
-  label{
-    display: block;
-    padding-bottom: 2%;
+
+  &__title{
+    background-color: $purple;
+    height: 3rem;
+    text-align: center;
+    padding-top: 4%;
+    font-weight: bold;
+    border-color: $purple;
+
   }
-  input{
+
+  &__input{
+    height: 3rem;
     display: block;
     width: 100%;
   }
-  textarea{
+  &__textarea{
     display: block;
-    max-width: 190px;
+    max-width: 100%;
     max-height: 160px;
-    min-width: 190px;
+    min-width: 100%;
     min-height: 160px;
+    margin: 0 auto;
   }
-  span{
+  &__error{
     color: red;
     padding: 0.5%;
+    display: block;
   }
-  h4{
+
+  &__date{
+    height: 3rem;
+  }
+  &__label{
+    color: grey;
+  }
+
+  &__checkbox{
 
   }
 
 }
 
-.form-contact__header{
-  background-color: $purple;
-}
 

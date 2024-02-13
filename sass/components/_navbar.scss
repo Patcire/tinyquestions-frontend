@@ -5,52 +5,58 @@
   @include flex-row();
   gap: 3rem;
 
-  a{
+  &__link{
     font-family: $fontLogo;
     font-size: 2.5rem;
     position: relative;
+
+    &.pointer{
+      cursor: pointer;
+    }
+
   }
 
-  a:hover::after, a:active::after {
+  &__link:hover::after, &__link:active::after {
     content: url('/public/pointpoint.svg');
     position: absolute;
     top: 50%;
     left: 50%;
+
   }
 
-  .exit{
+  &__submenu{
+    border: none;
+    background: none;
+    font-family: $fontLogo;
+    font-size: 2.5rem;
     cursor: pointer;
+
+    &:hover .navbar__sublist{
+      display: block;
+    }
+
   }
 
+  &__button{
+    background-color: white;
+    border: none;
+  }
+
+  &__sublist{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    padding-left: 3%;
+  }
+
+  &__sublink{
+    display: block;
+    font-family: $fontAnswers;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+
 }
-
-.navbar__submenu button{
-  border: none;
-  background: none;
-  font-family: $fontLogo;
-  font-size: 2.5rem;
-  cursor: pointer;
-
-}
-
-.submenu__list {
-  display: none;
-  position: absolute;
-  z-index: 1;
-
-}
-
-.submenu__list a {
-  display: block;
-  font-family: $fontAnswers;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-.navbar__submenu:hover .submenu__list {
-  display: block;
-}
-
-
 
 

@@ -1,7 +1,6 @@
 @import "../abstracts/index";
 
 .about{
-
   padding: 5% 25% 0 25%;
   @include flex-column;
   p{
@@ -19,6 +18,12 @@
     left: 85%;
     top: 90%;
 
+  }
+
+  &__bg{
+    position: absolute;
+    top: 15%;
+    z-index: -1;
   }
 
 }

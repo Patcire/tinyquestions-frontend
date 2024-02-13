@@ -30,22 +30,26 @@ export default {
 
 <template>
 
-  <vForm :validation-schema="this.schema" class="form-contact">
-      <h4>Tell us your problem</h4>
+  <vForm :validation-schema="this.schema" class="contact">
 
-    <label>Email <vField type="email" name="email" placeholder="example@gmail.com"/></label>
-    <vError name="email"></vError>
+        <legend class="contact__title">Tell us your problem</legend>
 
-    <label>Date of the incidence<vField type="date" name="date"/></label>
-    <vError name="date"></vError>
+    <vField class="contact__input" type="email" name="email" placeholder=" Email..."/>
+    <vError name="email" class="contact__error"></vError>
 
-    <label>Your message: <vField as="textarea" name="textarea"></vField></label>
-    <vError name="textarea"></vError>
+    <label class="contact__label">Date of the incidence
+      <vField type="date" name="date" class="contact__date"/></label>
+    <vError name="date" class="contact__error"></vError>
 
-    <label>Accept our privacy policy<vField type="checkbox" name="policy" :value="true"/></label>
-    <vError name="policy"></vError>
 
-    <button type="submit">Send</button>
+      <vField as="textarea" name="textarea" placeholder="Your message..." class="contact__textarea"></vField>
+    <vError name="textarea" class="contact__error"></vError>
+
+    <label class="contact__label">Accept our privacy policy
+      <vField type="checkbox" name="policy" :value="true" class="contact__checkbox"/></label>
+    <vError name="policy" class="contact__error"></vError>
+
+    <button type="submit" class="contact__button">Send</button>
   </vForm>
 
 </template>

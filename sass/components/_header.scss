@@ -1,13 +1,13 @@
 @import "../abstracts/mixins";
 
-.header{
+.main-header{
   @include flex-row;
   justify-content: space-between;
   padding-left: 3%;
   padding-right: 3%;
   padding-top: 2%;
 
-  .header__logo{
+  &__logo{
       width: 350px;
       height: auto
   }

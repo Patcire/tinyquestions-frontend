@@ -25,13 +25,13 @@ export default {
 
     <ul v-if="!this.sessionStore.isConnected" class="navbar">
       <li>
-        <router-link to="/" >Home</router-link>
+        <router-link to="/"  class="navbar__link">Home</router-link>
       </li>
       <li>
-        <router-link to="/play">Play</router-link>
+        <router-link to="/play" class="navbar__link">Play</router-link>
       </li>
       <li>
-        <router-link to="/about">About</router-link>
+        <router-link to="/about" class="navbar__link">About</router-link>
       </li>
     </ul>
 
@@ -39,27 +39,29 @@ export default {
     <ul v-if="this.sessionStore.isConnected" class="navbar">
 
       <li>
-        <router-link to="/games">Games</router-link>
+        <router-link to="/games" class="navbar__link">Games</router-link>
       </li>
       <li>
-        <router-link to="/create">Create</router-link>
+        <router-link to="/create" class="navbar__link" >Create</router-link>
       </li>
+
       <li class="navbar__submenu">
-        <button>Comunnity</button>
-        <ul class="submenu__list">
+        <button class="navbar__button">Comunnity</button>
+        <ul class="navbar__sublist">
           <li>
-            <router-link to="/profile">My profile</router-link>
+            <router-link to="/profile" class="navbar__sublink" >My profile</router-link>
           </li>
           <li>
-            <router-link to="/find">Find questions</router-link>
+            <router-link to="/find" class="navbar__sublink" >Find questions</router-link>
           </li>
           <li>
-            <router-link to="/ranks">Ranks</router-link>
+            <router-link to="/ranks" class="navbar__sublink">Ranks</router-link>
           </li>
         </ul>
+
       </li>
       <li>
-        <a @click="auth" class="exit" >Exit</a>
+        <a @click="auth" class="navbar__link pointer" >Exit</a>
       </li>
     </ul>
   </section>
