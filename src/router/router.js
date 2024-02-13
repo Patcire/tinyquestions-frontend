@@ -5,7 +5,6 @@ import RootLayout from '/src/layouts/RootLayout.vue'
 import PrivateLayout from '/src/layouts/PrivateLayout.vue'
 import Home from '/src/pages/Home.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
-import { isLogged } from '@/helpers/helpers.js'
 
 const routes = [
 
@@ -37,7 +36,7 @@ const routes = [
         path: "/quick",
         component: PrivateLayout,
         beforeEnter(to, from, next) {
-          isLogged() ? next() : router.push('/')
+          useSessionStore().isLogged() ? next() : router.push('/')
         },
         children: [
           {
@@ -50,7 +49,7 @@ const routes = [
         path: "/mirror",
         component: PrivateLayout,
         beforeEnter(to, from, next) {
-          isLogged() ? next() : router.push('/')
+          useSessionStore().isLogged() ? next() : router.push('/')
         },
         children: [
           {
@@ -63,7 +62,7 @@ const routes = [
         path: "/exploding",
         component: PrivateLayout,
         beforeEnter(to, from, next) {
-          isLogged() ? next() : router.push('/')
+          useSessionStore().isLogged() ? next() : router.push('/')
         },
         children: [
           {
@@ -76,7 +75,7 @@ const routes = [
         path: "/zen",
         component: PrivateLayout,
         beforeEnter(to, from, next) {
-          isLogged() ? next() : router.push('/')
+          useSessionStore().isLogged() ? next() : router.push('/')
         },
         children: [
           {
@@ -89,7 +88,7 @@ const routes = [
         path: "/profile",
         component: PrivateLayout,
         beforeEnter(to, from, next) {
-          isLogged() ? next() : router.push('/')
+          useSessionStore().isLogged() ? next() : router.push('/')
         },
         children: [
           {
@@ -101,7 +100,7 @@ const routes = [
       {
         path: "/find",
         beforeEnter(to, from, next) {
-          isLogged() ? next() : router.push('/')
+          useSessionStore().isLogged() ? next() : router.push('/')
         },
         component: PrivateLayout,
         children: [
@@ -115,7 +114,7 @@ const routes = [
         path: "/ranks",
         component: PrivateLayout,
         beforeEnter(to, from, next) {
-          isLogged() ? next() : router.push('/')
+          useSessionStore().isLogged() ? next() : router.push('/')
         },
         children: [
           {
@@ -128,7 +127,7 @@ const routes = [
         path: "/create",
         component: PrivateLayout,
         beforeEnter(to, from, next) {
-          isLogged() ? next() : router.push('/')
+          useSessionStore().isLogged() ? next() : router.push('/')
         },
         children: [
           {
