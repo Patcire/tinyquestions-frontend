@@ -1,3 +1,4 @@
+@import "fonts";
 
 @mixin flex-column{
   display: flex;
@@ -10,4 +11,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin input-form{
+  padding: 8%;
+  width: 28rem;
+  height: 100px;
+  border-radius: 30px;
+  border-width: 4px;
+  border-color: black;
+  margin: 3%;
+  font-family: $fontAnswers;
+  font-size: 2rem;
+  border-style: solid;
+}
+
+// Transitions/Animations/Transforms
+
+@mixin in-out-scale{
+  transition: transform 0.3s ease-in-out;
 }

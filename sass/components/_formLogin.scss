@@ -1,0 +1,15 @@
+@import "../abstracts/index";
+
+.form{
+  padding-top: 10%;
+  @include flex-column;
+  &__input{
+    @include input-form;
+  }
+  &__input:last-of-type{
+    margin-bottom: 8%;
+  }
+
+}
+
+

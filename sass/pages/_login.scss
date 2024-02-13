@@ -2,81 +2,72 @@
 
 .login{
   @include flex-column;
-  padding: 6% 0 2% 0;
-
-
-}
-
-.login__header{
-  @include flex-row;
-  gap: 5%;
-  padding: 4% 0 2% 0;
-  h1{
+  padding: 2% 0 2% 0;
+  position: relative;
+  &__header{
+    @include flex-row;
+    gap: 5%;
+    padding: 4% 0 0 0;
+    position: absolute;
+    top:9%;
+  }
+  &__title{
     font-family: $fontQuestions;
     font-size: 2rem;
   }
-
-}
-
-.login__form{
-  @include flex-column;
-  input{
-    padding: 8%;
-    width: 28rem;
-    height: 100px;
-    border-radius: 30px;
-    border-width: 4px;
-    border-color: black;
-    margin: 3%;
-    font-family: $fontAnswers;
-    font-size: 2rem;
+  &__suggestion{
+    @include flex-row;
+    width: 90%;
+    gap: 1%;
+    position: relative;
   }
-  input:last-child{
-    margin-bottom: 9%;
-  }
-}
-
-.login__register-anchor {
-  padding: 8% 5% 5% 5%;
-  @include flex-row;
-  width: 90%;
-  gap: 1%;
-  position: relative;
-
-  p {
+  &__phrase{
     font-family: $fontAnswers;
     font-size: 2.5rem;
   }
-
-
-  a {
+  &__anchor{
     font-family: $fontLogo;
     font-size: 2.5rem;
-
+    color: black;
   }
 
-  a:nth-child(3){
+  &__anchor--reforce{
+   -webkit-text-stroke: $purple;
     color: $purple;
-    -webkit-text-stroke: 2px black;
     stroke-width: 9px;
     text-shadow: 4px 2px black;
+    @include in-out-scale;
+    position: absolute;
+    top: 29.5%;
+  }
+  &__anchor--reforce:visited{
+    color: $purple;
+  }
+
+  &__anchor--reforce:hover{
+    cursor: pointer;
+    transform: scale(1.1)
+  }
+  &__hearts{
+    position: relative;
+    top: 45%;
+    right: 21%;
+    z-index: -1;
+    color: $pink;
+  }
+
+  &__hug{
+    position: absolute;
+    top: 8%;
+    right: 40%;
+    z-index: -1;
+  }
+
+  &__sigh{
+    position: relative;
+    right: 12%;
   }
 
 }
 
-.register-anchor__free{
-  @include flex-row
-
-}
-
-.login__doodle{
-    position: absolute;
-    right: 15%;
-    top: 20%;
-
-}
-
-.free__link{
-
-}
 

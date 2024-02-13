@@ -1,6 +1,6 @@
 
 @import "../abstracts/index";
-
+@import "../abstracts/mixins";
 .primary-button{
   background-color: black;
   border: 1px solid black;
@@ -13,5 +13,10 @@
   height: 51px;
   outline: none;
   cursor: pointer;
+  @include in-out-scale;
+  &:hover{
+    transform: scale(1.05)
+  }
 
 }
+
