@@ -1,45 +1,32 @@
 <script>
-import { useSessionStore } from '@/stores/sessionStore.js'
-import router from '@/router/router.js'
-export default {
-  name: 'Login',
-  data(){
-    return{
-      sessionStore: useSessionStore()
-    }
-  },
-  methods: {
-    auth(){
-      this.sessionStore.authenticade()
-      router.push('/games');
-    }
-  }
-}
+import { defineComponent, watch } from 'vue'
+import FormLogin from '@/components/FormLogin.vue'
+
+export default defineComponent({
+  components: { FormLogin },
+})
 </script>
 
 <template>
   <section class="login">
-
+    
     <header class="login__header">
-      <img alt="point" class="header__decoration" src="../../public/pointpoint.svg">
-      <h1>Login</h1>
-      <img alt="point" class="header__decoration" src="../../public/pointpoint.svg">
+      <img alt="point" class="login__decoration" src="../../public/pointpoint.svg">
+      <h1 class="login__title">Login</h1>
+      <img alt="point" class="login__decoration" src="../../public/pointpoint.svg">
     </header>
+    <img alt="hug doodle" src="../../public/hug.svg" class="login__hug">
 
-    <form class="login__form">
-      <input placeholder="Username..."/>
-      <input type="password" placeholder="Password..."/>
-    </form>
+   <FormLogin></FormLogin>
+    <img alt="sigh doodle" src="../../public/sigh.svg" class="login__sigh">
 
-    <button @click="auth" class="primary-button">Enter</button>
+    <article class="login__suggestion">
+      <p class="login__phrase">Don't have an account? </p>
+      <router-link to="/register" class="login__anchor">Register</router-link>
 
-    <article class="login__register-anchor">
-      <p>Don't have an account? </p>
-      <router-link to="/register">Register</router-link>
-
-      <article class="register-anchor__free">
-        <router-link to="/register" class="free__link">free</router-link>
-        <img  class="login__doodle" alt="hearts decoration" src="../../public/hearts.svg">
+      <article class="login__free">
+        <router-link to="/register" class="login__anchor login__anchor--reforce">free</router-link>
+        <img  class="login__hearts" alt="hearts decoration" src="../../public/hearts.svg">
       </article>
 
       </article>

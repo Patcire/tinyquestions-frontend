@@ -10,9 +10,8 @@ export default {
   },
   methods: {
     auth(){
-      this.sessionStore.authenticade()
+      this.sessionStore.checkUserCredentials()
       router.push('/');
-      console.log('eeee')
     }
   }
 }
