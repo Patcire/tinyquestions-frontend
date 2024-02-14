@@ -11,3 +11,11 @@ export const validationLogin = yup.object().shape({
   username: yup.string().required().min(8, 'mínimo 8 carácteres'),
   password: yup.string().required().min(6, 'mínimo 6 carácteres')
 });
+
+
+export const validationRegister = yup.object().shape({
+  email: yup.string().required().email('Invalid email format'),
+  username: yup.string().required().min(8, 'mínimo 8 carácteres'),
+  password: yup.string().required().min(6, 'mínimo 6 carácteres')
+});
+

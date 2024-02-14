@@ -1,9 +1,11 @@
 <script>
-import { defineComponent, watch } from 'vue'
-import FormLogin from '@/components/FormLogin.vue'
+import { defineComponent} from 'vue'
+import FormLogin from '@/components/AuthForm.vue'
+import AuthLogin from '@/components/AuthForm.vue'
+import AuthForm from '@/components/AuthForm.vue'
 
 export default defineComponent({
-  components: { FormLogin },
+  components: { AuthForm },
 })
 </script>
 
@@ -17,7 +19,8 @@ export default defineComponent({
     </header>
     <img alt="hug doodle" src="../../public/hug.svg" class="login__hug">
 
-   <FormLogin></FormLogin>
+   <AuthForm></AuthForm>
+
     <img alt="sigh doodle" src="../../public/sigh.svg" class="login__sigh">
 
     <article class="login__suggestion">
