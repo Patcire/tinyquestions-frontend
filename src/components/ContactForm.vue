@@ -1,15 +1,13 @@
 <script>
 import {Field, Form, ErrorMessage} from 'vee-validate'
-import * as yup from 'yup'
-import { boolean } from 'yup'
-import { validationSchema } from '@/helpers/formHelpers.js'
+import { validationContact } from '@/helpers/formHelpers.js'
 
 export default {
   name: 'ContactForm',
   data(){
 
     return{
-      schema: validationSchema
+      schema: validationContact
     }
   },
   methods: {
