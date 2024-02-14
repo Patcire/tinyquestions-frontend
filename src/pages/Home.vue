@@ -9,9 +9,6 @@ export default {
       sesh: useSessionStore()
     }
   },
-  mounted() {
-    console.log(this.sesh.isConnected)
-  }
 }
 </script>
 
