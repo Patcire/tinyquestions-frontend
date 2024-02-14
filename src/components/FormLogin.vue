@@ -16,18 +16,17 @@ export default {
   methods: {
     handleLogin(){
       this.sessionStore.checkUserCredentials()
-      setTimeout(() => {
-        router.push('/games');
-        console.log(this.sessionStore.isConnected)
-      }, 500);
+      router.push('/games');
+      // setTimeout(()=>{
+      // }, 500)
+
     },
-    onSubmit(){
-      this.$refs.form.validate().then(validation => {
+    onSubmit(e) {
+      e.preventDefault()
+        this.$refs.form.validate().then(validation => {
         validation.valid && this.handleLogin()
-        console.log(this.sessionStore.isConnected)
       })
     }
-
   },
   components:{
     vField: Field,
@@ -35,7 +34,7 @@ export default {
     vError: ErrorMessage,
   },
   mounted() {
-    console.log(this.sessionStore.isConnected)
+    console.log('usermountedlogin: '+this.sessionStore.isConnected)
   }
 }
 </script>
