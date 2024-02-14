@@ -17,8 +17,7 @@ export default {
     handleLogin(){
       this.sessionStore.checkUserCredentials()
       router.push('/games');
-      // setTimeout(()=>{
-      // }, 500)
+
 
     },
     onSubmit(e) {
