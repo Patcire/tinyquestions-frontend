@@ -140,7 +140,7 @@ const routes = [
     ]
 
   },
-  {path: "/:pathMatch(.*)*", component: ()=> NotFound404}
+  {path: "/:pathMatch(.*)*", component: () => import('/src/pages/NotFound404.vue') }
 ]
 
 const router = createRouter({
