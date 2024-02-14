@@ -1,0 +1,30 @@
+@import "../abstracts/index";
+
+.game-menu {
+  @include flex-column;
+
+  &__list {
+    @include grid-simetric(2, 2);
+    gap: 20%;
+    text-align: center;
+    padding-top: 20%;
+  }
+
+  &__anchor {
+    font-family: $fontLogo;
+    font-size: 3rem ;
+    border-style: solid;
+    border-color: black;
+    border-radius: 15px;
+    opacity: 30%;
+  }
+
+  &__anchor:visited {
+    color: black;
+  }
+
+  .game-menu__list li:last-child .game-menu__anchor {
+    opacity: 100%;
+    @include in-out-scale;
+  }
+}

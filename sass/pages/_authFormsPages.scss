@@ -1,6 +1,6 @@
 @import "../abstracts/_index.scss";
 
-.login{
+.auth{
   @include flex-column;
   padding: 2% 0 2% 0;
   position: relative;
@@ -67,7 +67,10 @@
     position: relative;
     right: 12%;
   }
+  &__cactus {
 
+
+  }
 }
 
 

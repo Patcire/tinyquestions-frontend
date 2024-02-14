@@ -1,6 +1,6 @@
 // reset css template by --> https://piccalil.li/blog/a-more-modern-css-reset/
 // mod by me
-
+@import "../abstracts/index";
 /* Box sizing rules */
 *,
 *::before,
@@ -43,6 +43,7 @@ button {
  // line-height: 1.5; max-width: 1920px;*/
 body {
   min-height: 100vh;
+  max-width: 1440px;
 
 }
 

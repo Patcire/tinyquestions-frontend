@@ -1,6 +1,9 @@
 @import "../abstracts/index";
 
 .about{
+  background-image: url("../../public/background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
   padding: 5% 25% 0 25%;
   @include flex-column;
   p{

@@ -50,6 +50,6 @@ export default {
     <ContactForm></ContactForm>
   </Modal>
 
-  <img src="../../public/background.svg" alt="color background" class="about__bg">
+  <!--img src="../../public/background.svg" alt="color background" class="about__bg"-->
 
 </template>

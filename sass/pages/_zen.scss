@@ -1,0 +1,6 @@
+@import "../abstracts/index";
+
+.zen-content{
+  @include flex-column;
+
+}

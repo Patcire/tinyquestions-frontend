@@ -1,0 +1,16 @@
+@import "../abstracts/index";
+.quiz{
+  @include flex-column;
+  padding-top: 20%;
+  &__title{
+    font-family: $fontQuestions;
+    font-size: 2rem;
+  }
+  &__opt{
+    font-family: $fontAnswers;
+    font-size: 1.5rem;
+  }
+  &__opt:hover{
+    font-size: 1.8rem;
+  }
+}
