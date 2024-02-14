@@ -27,14 +27,11 @@ export default {
     },
     onSubmit(e) {
       e.preventDefault()
-      this.$nextTick(() => {
-
-          this.$refs.regform && this.$refs.regform.validate().then(validation => {
-            validation.valid && this.handleRegister()
-          })
+        this.$refs.regform && this.$refs.regform.validate().then(validation => {
+          validation.valid && this.handleRegister()
+        })
         this.$refs.logform && this.$refs.logform.validate().then(validation => {
           validation.valid && this.handleLogin()
-        })
       })
     }
   },
