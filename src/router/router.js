@@ -5,6 +5,7 @@ import RootLayout from '/src/layouts/RootLayout.vue'
 import PrivateLayout from '/src/layouts/PrivateLayout.vue'
 import Home from '/src/pages/Home.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
+import Games from '@/pages/Games.vue'
 
 const routes = [
 
@@ -28,7 +29,8 @@ const routes = [
         children: [
           {
             path: "",
-            component: ()=> import('/src/pages/Games.vue'),
+            //component: ()=> import('/src/pages/Games.vue'),
+            component: Games,
           }
         ]
       },

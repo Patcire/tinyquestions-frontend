@@ -1,16 +1,39 @@
 @import "../abstracts/index";
 .quiz{
   @include flex-column;
-  padding-top: 20%;
+  padding-top: 15%;
+  text-align: left;
   &__title{
+    @include flex-column;
     font-family: $fontQuestions;
     font-size: 2rem;
+    border-style: solid;
+    border-color: black;
+    border-radius: 20px;
+    height: 80px;
+    width: 600px;
+    margin-bottom: 3%;
+    text-align: left;
   }
-  &__opt{
+  &__answer{
+    @include flex-column;
     font-family: $fontAnswers;
     font-size: 1.5rem;
+    height: 80px;
+    width: 400px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 20px;
+    margin-bottom: 2%;
+    cursor: pointer;
   }
-  &__opt:hover{
+  &__answer:hover{
     font-size: 1.8rem;
   }
+
+  &__opt{
+  padding: 5% 0 0 45%;
+    cursor: pointer;
+  }
+
 }
