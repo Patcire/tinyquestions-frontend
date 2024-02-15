@@ -29,6 +29,10 @@
     position: absolute;
     left: 40%;
     padding-bottom: 50px;
+    @include in-out-scale;
+    &:hover{
+      transform: scale(1.01);
+    }
   }
   &__footer{
     //width: 500px;
@@ -43,6 +47,11 @@
   //  background-color: lightyellow;
     bottom: 80%;
     right: 62%;
+    @include in-out-scale;
+    &:hover{
+      animation: rotateYAnimation 2s ease-in-out forwards, reverseRotateYAnimation 2s ease-in-out forwards;
+    }
+
   }
   &__suggestion{
     padding-top: 2%;
@@ -52,6 +61,14 @@
     font-size: 2.5rem;
     gap: 1%;
   }
+  &__free{
+    position: relative;
+    // background-color: rgba(128, 0, 128, 0.45);
+    height: 125px;
+    width: 164px;
+    @include flex-row;
+    padding-right: 6%;
+  }
   &__anchor{
     font-family: $fontLogo;
     color: black;
@@ -60,10 +77,9 @@
       transform: scale(1.02);
     }
     &--reforce{
-      -webkit-text-stroke: $purple;
       color: $purple;
-      stroke-width: 9px;
-      text-shadow: 4px 2px black;
+      -webkit-text-stroke: 1.5px black;
+      text-shadow: $shadow3;
       @include in-out-scale;
       &:hover{
         cursor: pointer;
@@ -72,14 +88,6 @@
     }
   }
 
-  &__free{
-    position: relative;
-   // background-color: rgba(128, 0, 128, 0.45);
-    height: 125px;
-    width: 164px;
-    @include flex-row;
-    padding-right: 6%;
-  }
   &__hearts{
     position: absolute;
     bottom: 18%;
