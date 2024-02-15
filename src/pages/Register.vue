@@ -15,7 +15,7 @@ export default {
       <img alt="point" class="auth__decoration" src="../../public/pointpoint.svg">
     </header>
     <AuthForm></AuthForm>
-    <img class="auth__cactus" src="../../public/cactus.svg" alt="decoration image of cactus and a boot">
+    <!--img class="auth__cactus" src="../../public/cactus.svg" alt="decoration image of cactus and a boot"-->
   </section>
 </template>
 

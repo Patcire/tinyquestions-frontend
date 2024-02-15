@@ -2,29 +2,110 @@
 
 .auth{
   @include flex-column;
-  padding: 2% 0 2% 0;
-  position: relative;
-  &__header{
-    @include flex-row;
-    gap: 5%;
-    padding: 4% 0 0 0;
-    position: absolute;
-    top:9%;
+  margin: 0 auto;
+ // background-color: rgba(65, 59, 253, 0.32);
+  width: 100%;
+  padding-top: 6%;
+  &__header {
+    width: 448px;
+   // background-color: rgba(144, 238, 144, 0.4);
+    @include flex-column;
+    height: 100px;
+    position: relative;
+    padding-top: 2%;
+    padding-bottom: 1%;
   }
   &__title{
     font-family: $fontQuestions;
-    font-size: 2rem;
+    font-size: 1.2rem;
+    @include flex-row;
+   // background-color: cadetblue;
+    z-index: 1;
+    gap: 3%;
+
   }
+  &__hug{
+  //  background-color: pink;
+    position: absolute;
+    left: 40%;
+    padding-bottom: 50px;
+  }
+  &__footer{
+    //width: 500px;
+    padding-top: 2%;
+    width: 100%;
+    position: relative;
+   // background-color: lightgrey;
+  }
+
+  &__sigh{
+    position: absolute;
+  //  background-color: lightyellow;
+    bottom: 80%;
+    right: 62%;
+  }
+
+  &__suggestion{
+    padding-top: 2%;
+   // background-color: burlywood;
+    @include flex-row;
+    font-family: $fontAnswers;
+    font-size: 2.5rem;
+    gap: 1%;
+  }
+  &__anchor{
+    font-family: $fontLogo;
+    color: black;
+    &--reforce{
+      -webkit-text-stroke: $purple;
+      color: $purple;
+      stroke-width: 9px;
+      text-shadow: 4px 2px black;
+      @include in-out-scale;
+      &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__free{
+    position: relative;
+   // background-color: rgba(128, 0, 128, 0.45);
+    height: 125px;
+    width: 164px;
+    @include flex-row;
+    padding-right: 6%;
+  }
+  &__hearts{
+    position: absolute;
+    bottom: 18%;
+    right: 14%;
+    z-index: -1;
+  }
+}
+
+.form{
+ // background-color: lightsalmon;
+  @include flex-column;
+  &__input{
+    @include input-form;
+  }
+  &__input:last-of-type{
+    margin-bottom: 8%;
+  }
+
+}
+
+/*
+
   &__suggestion{
     @include flex-row;
     width: 90%;
     gap: 1%;
     position: relative;
   }
-  &__phrase{
-    font-family: $fontAnswers;
-    font-size: 2.5rem;
-  }
+
   &__anchor{
     font-family: $fontLogo;
     font-size: 2.5rem;
@@ -32,11 +113,7 @@
   }
 
   &__anchor--reforce{
-   -webkit-text-stroke: $purple;
-    color: $purple;
-    stroke-width: 9px;
-    text-shadow: 4px 2px black;
-    @include in-out-scale;
+
     position: absolute;
     top: 29.5%;
   }
@@ -55,22 +132,12 @@
     z-index: -1;
     color: $pink;
   }
-
-  &__hug{
-    position: absolute;
-    top: 8%;
-    right: 40%;
-    z-index: -1;
-  }
-
   &__sigh{
     position: relative;
-    right: 12%;
-  }
-  &__cactus {
-
+    right: 65%;
+    bottom: 15%;
 
   }
+
 }
-
-
+*/

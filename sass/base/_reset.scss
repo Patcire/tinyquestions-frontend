@@ -42,10 +42,10 @@ button {
 // body defaults ;
  // line-height: 1.5; max-width: 1920px;*/
 body {
-  min-height: 100vh;
+  min-height: calc(100vh - 350px);
   max-width: 1440px;
-
 }
+
 
 /* Set shorter line heights on headings and interactive elements */
 h1, h2, h3, h4,
