@@ -1,11 +1,13 @@
 <script>
 import { callAPI } from '@/helpers/callAPI.js'
+import Quiz from '@/components/Quiz.vue'
 
 export default {
   name: 'Zen',
+  components: { Quiz },
   data() {
     return {
-      questions:  "",
+      questions:  [],
       counter: 0,
     }
   },
@@ -15,45 +17,31 @@ export default {
       // but now in my api there are only 27 questions
       // so now Im not controlling repeateds questions
       // when my API increase the number of questions i will fixed that
-      this.questions = [...this.questions, ...await callAPI('http://127.0.0.1:8000/api/ques/rand/4')]
+      this.questions = [...this.questions, ...(await callAPI('http://127.0.0.1:8000/api/ques/rand/4'))]//
+    },
+    handleNextQuestion(){
+      this.counter++
+      this.counter === 4 && this.getQuestionsFromAPI();
     }
   },
-  computed:{
-    nextQuestion(){
-      this.counter++
-    }
+  async created() {
+    // first call to api when the component is created
+    //this.questions = await callAPI('http://127.0.0.1:8000/api/ques/rand/4')
+    await this.getQuestionsFromAPI()
   },
   watch:{
     counter(newValue){
       newValue === this.questions.length-1 && this.getQuestionsFromAPI()
     }
   },
-  async created() {
-    // first call to api when the component is created
-    this.questions = await callAPI('http://127.0.0.1:8000/api/ques/rand/4')
-  }
 }
 
 </script>
 
 <template>
-  <section class="zen-content">
-  <form class="quiz" v-if="questions">
-
-    <legend class="quiz__title">{{questions[counter].title}}</legend>
-
-      <label class="quiz__answer">a) {{questions[counter].option_a}}
-        <input type="radio" name="option" @click="nextQuestion" class="quiz__opt">
-      </label>
-
-      <label class="quiz__answer">b) {{questions[counter].option_b}}
-        <input type="radio" name="option" @click="nextQuestion" class="quiz__opt">
-      </label>
-
-      <label class="quiz__answer">c) {{questions[counter].option_c}}
-        <input type="radio" name="option" @click="nextQuestion" class="quiz__opt">
-      </label>
-    </form>
-  </section>
-
+  <Quiz v-if="questions.length > 0 && questions[counter]"
+        :questions="questions"
+        :counter="counter"
+        @next="handleNextQuestion"
+  ></Quiz>
 </template>
