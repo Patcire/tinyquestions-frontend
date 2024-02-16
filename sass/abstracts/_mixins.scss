@@ -37,3 +37,12 @@
       grid-template-columns: repeat($columns, 1fr);
       grid-template-rows: repeat($rows, 1fr);
 }
+
+
+// Responsive breakpoints
+
+@mixin mobile {
+  @media screen and (max-width: 520px) and (min-width: 300px) {
+    @content;
+  }
+}

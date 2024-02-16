@@ -1,8 +1,11 @@
 @import "../abstracts/_index.scss";
 
+// Styles for authforms pages (login/register)
+
 .auth{
   @include flex-column;
   margin: 0 auto;
+  max-width: 1920px;
  // background-color: rgba(65, 59, 253, 0.32);
   width: 100%;
   padding-top: 6%;
@@ -96,6 +99,8 @@
   }
 }
 
+// Styles to form component
+
 .form{
  // background-color: lightsalmon;
   @include flex-column;
@@ -109,6 +114,55 @@
   }
   &__input:last-of-type{
     margin-bottom: 8%;
+  }
+
+}
+
+// Breakpoints for Responsive design
+
+@include mobile{
+  .auth{
+    padding-top: 30%;
+    overflow-y: auto;
+    &__sigh{
+      display: none;
+      animation: none;
+    }
+    &__header{
+      padding-bottom: 6%;
+    }
+    &__suggestion{
+      font-size: 2rem;
+      padding: 3%;
+      @include flex-column;
+      gap: 2%;
+    }
+    &__phrase{
+      width: 60%;
+      text-align: center;
+    }
+    &__anchor{
+      font-size: 2.6rem;
+      &--reforce{
+        font-size: 3.5rem;
+        padding-top: 5%;
+      }
+    }
+    &__free{
+      padding: 0;
+      height: 40px;
+    }
+    &__hearts{
+      height: 50px;
+      left: 60%;
+      bottom: 3px;
+    }
+  }
+
+  .form{
+    &__input{
+      width: 20rem;
+    }
   }
 
 }
