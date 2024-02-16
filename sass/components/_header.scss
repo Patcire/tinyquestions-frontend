@@ -7,10 +7,20 @@
   padding-right: 3%;
   padding-top: 2%;
 
-
   &__logo{
       width: 350px;
       height: auto
   }
+}
 
+@include mobile{
+  .main-header{
+    @include flex-row;
+    &__logo{
+      padding-top: 8%;
+      width: 280px;
+      text-align: center;
+      //background-color: burlywood;
+    }
+  }
 }

@@ -59,8 +59,64 @@
     font-size: 1.5rem;
     color: black;
   }
+}
 
-
+.hambmenu{
+  display: none;
 }
 
 
+// for mobile design
+
+@include mobile{
+  .navbar{
+    display: none;
+    &__link{
+      font-size: 2rem;
+    }
+  }
+  .hambmenu{
+    display: block;
+    position: relative;
+    background-color: lightblue;
+    padding-left: 10px;
+
+    &__submenu{
+      display: none;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      //opacity: 20%;
+      margin-top: 40px;
+      left: -50px;
+      padding: 5px;
+    }
+
+    &__icon{
+      position: absolute;
+      @include flex-column;
+      display: block;
+    }
+    &__check{
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      opacity: 0;
+      top: 40%;
+      left: 60%;
+    }
+    &__img{
+      position: absolute;
+      z-index: -1;
+    }
+    &__check:checked ~  &__submenu{
+      display: block;
+      z-index: 2;
+    }
+    .hambmenu__check:not(:checked) ~ .hambmenu__submenu {
+      display: none;
+      z-index: 0;
+    }
+
+  }
+}
