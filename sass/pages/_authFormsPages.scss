@@ -158,7 +158,6 @@
       bottom: 3px;
     }
   }
-
   .form{
     &__input{
       width: 20rem;
@@ -169,6 +168,7 @@
 @include tablet{
   .auth__phrase{
     padding: 3%;
+    font-size: 1.8rem ;
   }
   .auth__sigh{
     padding-right: 3%;
