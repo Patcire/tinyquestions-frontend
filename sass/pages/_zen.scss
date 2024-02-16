@@ -1,20 +1,25 @@
 @import "../abstracts/index";
 
 .zen{
+  padding-top: 5%;
+  @include flex-column;
   position: relative;
-  //background-image: linear-gradient(to bottom, #ffffff, rgb(189, 224, 254));
-  height: 100vw;
-  padding-top: 3%;
+  &__quizz-container{
+    position: relative;
+    @include flex-column;
+  }
   &__ornaments{
     @include flex-row;
     justify-content: space-between;
-    //background-color: lightgreen;
+    //padding: 0 400px 0 400px;
+    //background-color: #ffff7b;
     width: 100%;
-    padding: 16% 25% 2% 25%;
     position: absolute;
+    padding: 0 10%;
   }
   &__doodle{
-    height: 120px;
+    //height: 120px;
+    height: 8vw
   }
   &__phrase{
     //background-color: chocolate;
@@ -33,14 +38,19 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@include mobile{
   .zen__ornaments {
-    padding: 8% 15% 1% 15%;
+
+   display: none;
+  }
+  .zen__phrase{
+    width: 100px;
+    font-size: 1.4rem;
   }
 }
 
-@media screen and (max-width: 480px) {
+@include tablet{
   .zen__ornaments {
-    padding: 4% 10% 0.5% 10%;
+   display: none;
   }
 }

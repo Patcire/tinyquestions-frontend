@@ -45,11 +45,13 @@ export default {
       <img class="zen__doodle" alt="doodle of a candy" src="../../public/Vectorcandy.png">
     </div>
 
-    <Quiz v-if="questions.length > 0 && questions[counter]"
-          :questions="questions"
-          :counter="counter"
-          @next="handleNextQuestion"
-    ></Quiz>
+    <div class="zen__quizz-container">
+      <Quiz v-if="questions.length > 0 && questions[counter]"
+            :questions="questions"
+            :counter="counter"
+            @next="handleNextQuestion"
+      ></Quiz>
+    </div>
     <footer class="zen__phrase">
       <p class="zen__mantra">no points · no time · embrace the infinite </p>
     </footer>

@@ -1,11 +1,12 @@
 @import "../abstracts/index";
 .quiz {
-  @include flex-column;
+  //background-color: lightgreen;
+  padding-top: 5%;
   position: relative;
-
   &__header{
     position: absolute;
-    top: 20%;
+    top: 10%;
+    left: 26%;
     z-index: 2;
     font-family: $fontLogo;
     letter-spacing: 50px;
@@ -90,4 +91,38 @@
     cursor: pointer;
   }
 
+}
+
+@include mobile {
+  .quiz {
+    &__title {
+      width: 400px;
+    }
+
+    &__answers {
+      width: 300px;
+    }
+
+    &__letter {
+      font-size: 1.2rem;
+    }
+
+  }
+}
+
+@include tablet{
+  .quiz {
+
+    &__title {
+      width: 600px;
+    }
+
+    &__answers {
+      width: 500px;
+    }
+
+    &__letter {
+      font-size: 2.2rem;
+    }
+  }
 }
