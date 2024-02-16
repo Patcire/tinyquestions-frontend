@@ -22,22 +22,39 @@ export default {
 
 <template>
 
-  <section class="zen-content">
-    <form class="quiz" v-if="questions">
+  <section class="quiz">
 
-      <legend class="quiz__title">{{questions[counter].title}}</legend>
+    <header class="quiz__header">
+      <h1> Z E N</h1>
+    </header>
 
-      <label class="quiz__answer" @click="nextQuestion">a) {{questions[counter].option_a}}
-        <input type="radio" name="option"  @click="nextQuestion" class="quiz__opt">
-      </label>
+    <form class="quiz__form" v-if="questions">
+      
+      <span class="quiz__title">
+       {{questions[counter].title}}
+      </span>
 
-      <label class="quiz__answer" @click="nextQuestion">b) {{questions[counter].option_b}}
-        <input type="radio" name="option"  @click="nextQuestion" class="quiz__opt">
-      </label>
+      <div class="quiz__answers">
 
-      <label class="quiz__answer">c) {{questions[counter].option_c}}
-        <input type="radio" name="option" @click="nextQuestion" class="quiz__opt">
-      </label>
+        <label class="quiz__answer" @click="nextQuestion">
+          <span class="quiz__letter">a)</span>
+          <p class="quiz__response">{{questions[counter].option_a}}</p>
+          <input type="radio" name="option"  @click="nextQuestion" class="quiz__opt">
+        </label>
+
+        <label class="quiz__answer" @click="nextQuestion">
+          <span class="quiz__letter">b)</span>
+          <p class="quiz__response">{{questions[counter].option_b}}</p>
+          <input type="radio" name="option"  @click="nextQuestion" class="quiz__opt">
+        </label>
+
+        <label class="quiz__answer">
+          <span class="quiz__letter">c)</span>
+          <p class="quiz__response">{{questions[counter].option_c}}</p>
+          <input type="radio" name="option" @click="nextQuestion" class="quiz__opt">
+        </label>
+
+      </div>
     </form>
   </section>
 

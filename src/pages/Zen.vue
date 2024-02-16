@@ -39,9 +39,19 @@ export default {
 </script>
 
 <template>
-  <Quiz v-if="questions.length > 0 && questions[counter]"
-        :questions="questions"
-        :counter="counter"
-        @next="handleNextQuestion"
-  ></Quiz>
+  <section class="zen">
+    <div class="zen__ornaments">
+      <img class="zen__doodle" alt="doodle of a plant" src="../../public/Vectorplant.png">
+      <img class="zen__doodle" alt="doodle of a candy" src="../../public/Vectorcandy.png">
+    </div>
+
+    <Quiz v-if="questions.length > 0 && questions[counter]"
+          :questions="questions"
+          :counter="counter"
+          @next="handleNextQuestion"
+    ></Quiz>
+    <footer class="zen__phrase">
+      <p class="zen__mantra">no points · no time · embrace the infinite </p>
+    </footer>
+  </section>
 </template>

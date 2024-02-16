@@ -1,6 +1,46 @@
 @import "../abstracts/index";
 
-.zen-content{
-  @include flex-column;
+.zen{
+  position: relative;
+  //background-image: linear-gradient(to bottom, #ffffff, rgb(189, 224, 254));
+  height: 100vw;
+  padding-top: 3%;
+  &__ornaments{
+    @include flex-row;
+    justify-content: space-between;
+    //background-color: lightgreen;
+    width: 100%;
+    padding: 16% 25% 2% 25%;
+    position: absolute;
+  }
+  &__doodle{
+    height: 120px;
+  }
+  &__phrase{
+    //background-color: chocolate;
+    @include flex-row;
+    font-family: $fontQuestions;
+    font-size: 2rem;
+    padding-top: 2%;
+  }
+  &__mantra{
+    opacity: 40%;
+    text-decoration: underline;
+    text-decoration-color: $purple;
+    text-decoration-thickness: 1.5px;
+    color: white;
+    -webkit-text-stroke: 0.6px black;
+  }
+}
 
+@media screen and (max-width: 768px) {
+  .zen__ornaments {
+    padding: 8% 15% 1% 15%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .zen__ornaments {
+    padding: 4% 10% 0.5% 10%;
+  }
 }

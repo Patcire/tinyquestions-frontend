@@ -1,38 +1,92 @@
 @import "../abstracts/index";
-.quiz{
+.quiz {
   @include flex-column;
-  padding-top: 15%;
-  text-align: left;
-  &__title{
-    @include flex-column;
-    font-family: $fontQuestions;
-    font-size: 2rem;
-    border-style: solid;
-    border-color: black;
-    border-radius: 20px;
-    height: 80px;
-    width: 600px;
-    margin-bottom: 3%;
-    text-align: left;
+  position: relative;
+
+  &__header{
+    position: absolute;
+    top: 20%;
+    z-index: 2;
+    font-family: $fontLogo;
+    letter-spacing: 50px;
+    display: inline-block;
+    font-size: 3rem;
   }
-  &__answer{
+  &__form {
+   // background-color: lightblue;
     @include flex-column;
-    font-family: $fontAnswers;
-    font-size: 1.5rem;
-    height: 80px;
-    width: 400px;
-    border-style: solid;
-    border-color: black;
-    border-radius: 20px;
-    margin-bottom: 2%;
-    cursor: pointer;
-  }
-  &__answer:hover{
-    font-size: 1.8rem;
+    padding-top: 12%;
+    width: 800px;
   }
 
-  &__opt{
-  padding: 5% 0 0 45%;
+  &__title {
+   // background-color: lightcoral;
+    font-family: $fontQuestions;
+    font-size: 2rem;;
+    border: 4px solid black;
+    border-radius: 20px;
+    height: 100px;
+    width: 600px;
+    padding: 4% 0 3% 4%;
+    line-height: 1;
+  }
+
+  &__answers{
+    //background-color: lightgoldenrodyellow;
+    padding-top: 2.2%;
+    width: 600px;
+    @include flex-column;
+    position: relative;
+  }
+
+  &__answer {
+    position: relative;
+    //background-color: lightsteelblue;
+    @include flex-row;
+    font-family: $fontAnswers;
+    font-size: 1.5rem;
+    height: 72px;
+    width: 84%;
+    border: 4px solid black;
+    border-radius: 10px;
+    margin-bottom: 0.6%;
+    cursor: pointer;
+    padding-left: 10%;
+    @include in-out-scale;
+    &:hover{
+      cursor: pointer;
+      transform: scale(1.02);
+    }
+  }
+  &__letter{
+    font-family: $fontLogo;
+    font-size: 2.6rem;
+    color: $pink;
+    -webkit-text-stroke: 2.6px black;
+    //background-color: lightsalmon;
+    position: absolute;
+    right: 86%;
+
+  }
+
+  &__response{
+    position: relative;
+    text-align: left;
+    //background-color: blueviolet;
+    width: 100%;
+    padding-left: 8%;
+    font-family: $fontAnswers;
+    font-weight: bold;
+    font-size: 1.4rem;
+    max-width: 100%;
+    line-height: 1;
+  }
+  &__answer:hover {
+    font-size: 1.55rem;
+  }
+
+  &__opt {
+    padding: 5% 0 0 45%;
     cursor: pointer;
   }
 
