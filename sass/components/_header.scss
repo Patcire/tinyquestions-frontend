@@ -15,6 +15,7 @@
 
 @include mobile{
   .main-header{
+    transition: all 0.3s ease;
     @include flex-row;
     &__logo{
       padding-top: 8%;
@@ -22,5 +23,16 @@
       text-align: center;
       //background-color: burlywood;
     }
+  }
+}
+
+@include tablet {
+  .main-header{
+    transition: all 0.3s ease;
+    padding-bottom: 40px;
+  }
+
+  .main-header__logo{
+    width: 300px;
   }
 }

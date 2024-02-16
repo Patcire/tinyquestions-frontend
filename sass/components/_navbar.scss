@@ -120,3 +120,15 @@
 
   }
 }
+
+// for tablet
+
+@include tablet{
+  .navbar{
+    gap: 1.5rem;
+    //padding-left: 20%;
+  }
+  .navbar__link{
+    font-size: 1.8rem;
+  }
+}

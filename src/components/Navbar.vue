@@ -41,7 +41,7 @@ export default {
         <router-link to="/games" class="navbar__link">Games</router-link>
       </li>
       <li>
-        <router-link to="/create" class="navbar__link" >Create</router-link>
+        <router-link to="/create" class="navbar__link " >Create</router-link>
       </li>
 
       <li class="navbar__submenu">
