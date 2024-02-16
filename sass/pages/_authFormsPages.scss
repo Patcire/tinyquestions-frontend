@@ -6,7 +6,7 @@
   @include flex-column;
   margin: 0 auto;
   max-width: 1920px;
- // background-color: rgba(65, 59, 253, 0.32);
+ //background-color: rgba(65, 59, 253, 0.32);
   width: 100%;
   padding-top: 6%;
   &__header {
@@ -25,8 +25,11 @@
    // background-color: cadetblue;
     z-index: 1;
     gap: 3%;
-
+    &--register{
+      font-size: 1.6rem;
+    }
   }
+
   &__hug{
   //  background-color: pink;
     position: absolute;
@@ -90,13 +93,46 @@
       }
     }
   }
-
   &__hearts{
     position: absolute;
     bottom: 18%;
     right: 14%;
     z-index: -1;
   }
+
+  &__cactus{
+    //background-color: lightcoral;
+    height: 160px;
+    position: absolute;
+    right: 350px;
+    width: auto;
+    margin-bottom: 10.2%;
+    z-index: -1;
+    //transform: rotate(-5deg);
+    @include in-out-scale;
+    &:hover{
+      transform: scale(1.02);
+    }
+    animation: waveAnimation 2s ease-in-out infinite alternate;
+  }
+  &__boot{
+    //background-color: lightcoral;
+    height: 140px;
+    width: auto;
+    position: absolute;
+    left: 60%;
+    bottom: -32px;
+    //z-index: -1;
+    transform: rotate(-3.5deg);
+    scaleY: -1;
+    @include in-out-scale;
+    &:hover{
+      transform: scale(1.02);
+    }
+    animation: inclineAndMove 2s ease-in-out infinite alternate;
+  }
+
+
 }
 
 // Styles to form component
@@ -117,6 +153,10 @@
   }
 
 }
+
+// register
+
+
 
 // Breakpoints for Responsive design
 
@@ -163,6 +203,16 @@
       width: 20rem;
     }
   }
+  .auth__cactus{
+    right: 300px;
+    height: 140px;
+    bottom: -55px
+  }
+  .auth__boot{
+    display: none;
+  }
+
+
 }
 
 @include tablet{
@@ -172,5 +222,9 @@
   }
   .auth__sigh{
     padding-right: 3%;
+  }
+  .auth__boot{
+    bottom: -30px;
+    margin-left: 5%;
   }
 }

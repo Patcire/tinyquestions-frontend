@@ -10,12 +10,17 @@ export default {
 <template>
   <section class="auth">
     <header class="auth__header">
+      <article class="auth__title auth__title--register">
       <img alt="point" class="auth__decoration" src="../../public/pointpoint.svg">
-      <h1 class="auth__title">Register</h1>
+      <h1 class="auth__word auth_word">Register</h1>
       <img alt="point" class="auth__decoration" src="../../public/pointpoint.svg">
+      <img src="../../public/cactus.svg" class="auth__cactus" alt="doodle of a cactus">
+      </article>
     </header>
     <AuthForm></AuthForm>
-    <!--img class="auth__cactus" src="../../public/cactus.svg" alt="decoration image of cactus and a boot"-->
+    <div class="auth__footer">
+      <img src="../../public/boot.svg" class="auth__boot" alt="doodle of a boot">
+    </div>
   </section>
 </template>
 
