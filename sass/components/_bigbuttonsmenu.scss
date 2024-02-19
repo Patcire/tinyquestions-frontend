@@ -1,0 +1,60 @@
+@import "../abstracts/index";
+
+.games-menu {
+  @include flex-column;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  //background-color: lightgreen;
+  padding-top: 9% ;
+
+  &__list {
+    //background-color: lightyellow;
+    @include grid-simetric(2, 2);
+    gap: 20px;
+    text-align: center;
+  }
+
+  &__element{
+    //background-color: lightblue;
+    height: 184px;
+    width: 244px;
+    border-style: solid;
+    border-color: black;
+    border-width: 4px;
+    border-radius: 30px;
+    @include flex-column;
+    @include in-out-scale;
+    box-shadow:  $shadow2;
+   // background-color: white;
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+  &__anchor {
+    font-family: $fontLogo;
+    font-size: 2rem ;
+    opacity: 30%;
+    //background-color: purple;
+    height: 184px;
+    width: 244px;
+    border-radius: 30px; /* para el área del hover*/
+    @include flex-column;
+    @include in-out-scale;
+    &:hover{
+      transform: scale(1.2);
+    }
+
+  }
+
+  &__anchor:visited {
+    color: black;
+  }
+
+
+  .games-menu__list li:last-child .games-menu__anchor {
+    opacity: 100%;
+    @include in-out-scale;
+    color: black;
+  }
+}
