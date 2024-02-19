@@ -15,8 +15,8 @@
     width: 200px;
    // background-color: lightsalmon;
     position: relative;
-    bottom: 50%;
-    right: 280px;
+    bottom: 53%;
+    right: 290px;
    // z-index: -1;
   }
   &__daydream{
@@ -29,3 +29,38 @@
   }
 }
 
+@include mobile {
+  .games{
+    padding-top: 8%;
+    &__daydream{
+      height: 120px;
+      width: 120px;
+      top: 180%;
+      left: 150px;
+      z-index: -1;
+    }
+    &__hand{
+      display: none;
+    }
+  }
+
+}
+
+@include tablet {
+  .games{
+    padding-top: 8%;
+    &__daydream{
+      height: 160px;
+      width: 160px;
+      top: 120%;
+      left: 260px;
+      z-index: -1;
+    }
+    &__hand{
+      height: 190px;
+      width: 190px;
+      bottom: 59%;
+      right: 250px;
+    }
+  }
+}

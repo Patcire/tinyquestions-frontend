@@ -26,7 +26,7 @@
     @include flex-column;
     @include in-out-scale;
     box-shadow:  $shadow2;
-   // background-color: white;
+   background-color: white;
     &:hover{
       transform: scale(1.1);
     }
@@ -38,7 +38,7 @@
     //background-color: purple;
     height: 184px;
     width: 244px;
-    border-radius: 30px; /* para el área del hover*/
+    border-radius: 30px; /* esto lo hago para el área del hover*/
     @include flex-column;
     @include in-out-scale;
     &:hover{
@@ -56,5 +56,42 @@
     opacity: 100%;
     @include in-out-scale;
     color: black;
+  }
+}
+
+// media queries
+
+@include tablet {
+  .games-menu{
+    padding-top: 2% ;
+    &__element{
+      height: 144px;
+      width: 204px;
+    }
+    &__anchor{
+      font-size: 1.5rem ;
+      &:hover{
+        transform: scale(1.4);
+      }
+    }
+  }
+}
+
+@include mobile {
+  .games-menu{
+    &__list {
+      @include flex-column;
+      gap: 20px;
+      text-align: center;
+    }
+  &__element{
+    height: 104px;
+    width: 204px;
+    }
+    &__anchor{
+      font-size: 1.2rem ;
+      height: 144px;
+      width: 90%;
+    }
   }
 }
