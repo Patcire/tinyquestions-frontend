@@ -17,7 +17,7 @@ export default {
       // but now in my api there are only 27 questions
       // so now Im not controlling repeateds questions
       // when my API increase the number of questions i will fixed that
-      this.questions = [...this.questions, ...(await callAPI('http://127.0.0.1:8000/api/ques/rand/5'))]//
+      this.questions = [...this.questions, ...(await callAPI('http://localhost:8000/api/ques/rand/5'))]//
     },
     async handleNextQuestion(){
       this.counter++

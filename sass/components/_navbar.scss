@@ -4,6 +4,7 @@
 
   @include flex-row();
   gap: 3rem;
+  //background-color: lightgreen;
 
   &__link{
     font-family: $fontLogo;
@@ -12,6 +13,7 @@
     color: black;
     &.pointer{
       cursor: pointer;
+      font-size: 2.3rem;
     }
 
   }
@@ -28,6 +30,7 @@
   }
 
   &__submenu{
+    position: relative;
     border: none;
     background: none;
     font-family: $fontLogo;
@@ -41,15 +44,22 @@
   }
 
   &__button{
-    background-color: white;
+    background-color: #ffffff;
     border: none;
+    font-size: 2.5rem;
+    position: relative;
+    color: black;
+    &:hover{
+      cursor: pointer;
+    }
   }
 
   &__sublist{
     display: none;
     position: absolute;
+    cursor: pointer;
     z-index: 1;
-    padding-left: 3%;
+    padding-left: 1.5%;
   }
 
   &__sublink{
@@ -59,6 +69,17 @@
     font-size: 1.5rem;
     color: black;
   }
+
+}
+
+.navbar.navbar--mod{
+  background-color: lightblue;
+  gap: 1.2rem;
+}
+
+.navbar__link.navbar__link--mod,
+  .navbar__button.navbar__button--mod, .navbar__link.pointer.pointer--mod{
+  font-size: 2rem;
 }
 
 .hambmenu{
@@ -66,7 +87,7 @@
 }
 
 
-// for mobile design
+//mobileeee
 
 @include mobile{
   .navbar{
@@ -77,9 +98,10 @@
   }
   .hambmenu{
     display: block;
-    position: relative;
+    position: absolute;
     background-color: lightblue;
-    padding-left: 10px;
+    right: 60px;
+    top: 20px;
 
     &__submenu{
       display: none;
@@ -121,14 +143,37 @@
   }
 }
 
-// for tablet
+// tablettttt
 
-@include tablet{
+@include  tablet{
+  // reducex navbar (not logged)
   .navbar{
-    gap: 1.5rem;
-    //padding-left: 20%;
+    &__link,&__button{
+      font-size: 1.6rem;
+    }
   }
-  .navbar__link{
-    font-size: 1.7rem;
+  // logged navbar
+  .navbar.navbar--mod{
+    gap: 0.4rem;
+
+  }
+  .navbar__link.navbar__link--mod, .navbar__button.navbar__button--mod{
+    font-size: 1.6rem;
+  }
+
+}
+
+
+@include between1{
+  .navbar.navbar--mod{
+    gap: 0.4rem;
+
+  }
+  .navbar__link.navbar__link--mod,
+  .navbar__button.navbar__button--mod,
+  .navbar__link.pointer.pointer--mod{
+    font-size: 1.3rem;
   }
 }
+
+

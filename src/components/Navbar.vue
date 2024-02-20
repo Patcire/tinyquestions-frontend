@@ -35,17 +35,17 @@ export default {
     </ul>
 
 
-    <ul v-if="this.sessionStore.isConnected" class="navbar">
+    <ul v-if="this.sessionStore.isConnected" class="navbar navbar--mod">
 
       <li>
-        <router-link to="/games" class="navbar__link">Games</router-link>
+        <router-link to="/games" class="navbar__link navbar__link--mod">Games</router-link>
       </li>
       <li>
-        <router-link to="/create" class="navbar__link " >Create</router-link>
+        <router-link to="/create" class="navbar__link navbar__link--mod" >Create</router-link>
       </li>
 
       <li class="navbar__submenu">
-        <button class="navbar__button">Comunnity</button>
+        <button class="navbar__button navbar__button--mod">Comunnity</button>
         <ul class="navbar__sublist">
           <li>
             <router-link to="/profile" class="navbar__sublink" >My profile</router-link>
@@ -60,7 +60,7 @@ export default {
 
       </li>
       <li>
-        <a @click="auth" class="navbar__link pointer" >Exit</a>
+        <a @click="auth" class="navbar__link pointer navbar__link pointer--mod" >Exit</a>
       </li>
     </ul>
   </nav>

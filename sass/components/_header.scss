@@ -6,10 +6,12 @@
   padding-left: 3%;
   padding-right: 3%;
   padding-top: 2%;
+  //background-color: rgba(253, 148, 59, 0.61);
 
   &__logo{
       width: 350px;
-      height: auto
+      height: auto;
+      //background-color: lightblue;
   }
 }
 
@@ -18,8 +20,8 @@
     transition: all 0.3s ease;
     @include flex-row;
     &__logo{
-      padding-top: 8%;
-      width: 280px;
+     // padding-top: 8%;
+      //width: 280px;
       text-align: center;
       //background-color: burlywood;
     }
@@ -33,6 +35,6 @@
   }
 
   .main-header__logo{
-    width: 300px;
+    width: 280px;
   }
 }
