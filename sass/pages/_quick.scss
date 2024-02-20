@@ -1,0 +1,23 @@
+@import "../abstracts/index";
+
+.quick{
+  @include flex-column;
+  &__points-container{
+   // background-color: rgba(239, 140, 66, 0.52);
+    @include flex-column;
+    padding-top: 3%;
+  }
+  &__points{
+    font-family: $fontLogo;
+    font-size: 2.5rem;
+  }
+
+  &__sparkles{
+    position: absolute;
+    z-index: -1;
+    padding-top: 2%;
+    left: 39%;
+  }
+
+
+}

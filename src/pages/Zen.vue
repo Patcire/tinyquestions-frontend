@@ -50,6 +50,7 @@ export default {
             :questions="questions"
             :counter="counter"
             @next="handleNextQuestion"
+            mode="ZEN"
       ></Quiz>
     </div>
     <footer class="zen__phrase">

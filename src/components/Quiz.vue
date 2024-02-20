@@ -10,13 +10,31 @@ export default {
       type: Number,
       required: true
     },
+    mode:{
+      type: String,
+      required: true
+    },
   },
-  computed:{
-    nextQuestion(){
-      this.$emit('next')
-    }
-  },
+  methods: {
+    nextQuestion() {
+      this.$emit('next');
+      console.log('next');
+    },
+    correctOption(optionSelected) {
+      (this.questions[this.counter].correct_option === optionSelected) ?
+        this.$emit('points')
+        :
+        console.log('fallo')
+    },
+    handleSelection(optionSelected) {
 
+      this.correctOption(optionSelected)
+      setTimeout(()=>{
+        this.nextQuestion()
+      }, 300)
+    },
+
+  }
 }
 </script>
 
@@ -25,7 +43,7 @@ export default {
   <section class="quiz">
 
     <header class="quiz__header">
-      <h1> Z E N</h1>
+      <h1>{{mode}}</h1>
     </header>
 
     <form class="quiz__form" v-if="questions">
@@ -36,22 +54,22 @@ export default {
 
       <div class="quiz__answers">
 
-        <label class="quiz__answer" @click="nextQuestion">
+        <label class="quiz__answer">
           <span class="quiz__letter">a)</span>
-          <p class="quiz__response">{{questions[counter].option_a}}</p>
-          <input type="radio" name="option"  @click="nextQuestion" class="quiz__opt">
+          <span class="quiz__response">{{questions[counter].option_a}}</span>
+          <input type="radio" name="option" @click="handleSelection(questions[counter].option_a)" class="quiz__opt">
         </label>
 
-        <label class="quiz__answer" @click="nextQuestion">
+        <label class="quiz__answer">
           <span class="quiz__letter">b)</span>
-          <p class="quiz__response">{{questions[counter].option_b}}</p>
-          <input type="radio" name="option"  @click="nextQuestion" class="quiz__opt">
+          <span class="quiz__response">{{questions[counter].option_b}}</span>
+          <input type="radio" name="option"  @click="handleSelection(questions[counter].option_b)" class="quiz__opt">
         </label>
 
         <label class="quiz__answer">
           <span class="quiz__letter">c)</span>
-          <p class="quiz__response">{{questions[counter].option_c}}</p>
-          <input type="radio" name="option" @click="nextQuestion" class="quiz__opt">
+          <span class="quiz__response">{{questions[counter].option_c}}</span>
+          <input type="radio" name="option" @click="handleSelection(questions[counter].option_c)" class="quiz__opt">
         </label>
 
       </div>

@@ -59,6 +59,12 @@
   }
 }
 
+.games-menu__list li:first-child .games-menu__anchor {
+  opacity: 100%;
+  @include in-out-scale;
+  color: black;
+}
+
 // media queries
 
 @include tablet {

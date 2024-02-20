@@ -88,8 +88,8 @@ export default {
     </article>
   </nav>
 
-  <nav class= "hambmenu" v-if="this.sessionStore.isConnected">
-    <article class="hambmenu__icon">
+  <nav class= "hambmenu hambmenu--mod" v-if="this.sessionStore.isConnected">
+    <article class="hambmenu__icon hambmenu__icon--mod">
       <input type="checkbox" class="hambmenu__check">
       <label for="hambmenu__check">
         <img src="../../public/hambmenu.svg"

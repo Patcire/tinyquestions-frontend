@@ -15,6 +15,7 @@
       cursor: pointer;
       font-size: 2.3rem;
     }
+    background-color: lightsalmon;
 
   }
 
@@ -34,7 +35,6 @@
     border: none;
     background: none;
     font-family: $fontLogo;
-    font-size: 2.5rem;
     cursor: pointer;
 
     &:hover .navbar__sublist{
@@ -60,14 +60,17 @@
     cursor: pointer;
     z-index: 1;
     padding-left: 1.5%;
+    padding-top: 8%;
+    background-color: lightgreen;
   }
 
   &__sublink{
     display: block;
     font-family: $fontAnswers;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: black;
+    padding: 1%;
   }
 
 }
@@ -99,7 +102,7 @@
   .hambmenu{
     display: block;
     position: absolute;
-    background-color: lightblue;
+    //background-color: lightblue;
     right: 60px;
     top: 20px;
 
@@ -174,6 +177,17 @@
   .navbar__link.pointer.pointer--mod{
     font-size: 1.3rem;
   }
+
+  .navbar.navbar--mod{
+    display: none;
+  }
+  .hambmenu.hambmenu--mod{
+    display: block;
+    position: absolute;
+    right: 60px;
+    top: 20px;
+  }
+
 }
 
 
