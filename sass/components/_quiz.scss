@@ -5,13 +5,6 @@
   position: relative;
   &__header{
     position: absolute;
-    top: 10%;
-    left: 26%;
-    z-index: 2;
-    font-family: $fontLogo;
-    letter-spacing: 50px;
-    display: inline-block;
-    font-size: 3rem;
   }
   &__form {
    // background-color: lightblue;
@@ -30,6 +23,7 @@
     width: 600px;
     padding: 4% 0 3% 4%;
     line-height: 1;
+    box-shadow: $shadow2;
   }
 
   &__answers{
@@ -53,6 +47,7 @@
     margin-bottom: 0.6%;
     cursor: pointer;
     padding-left: 10%;
+    box-shadow: $shadow1;
     @include in-out-scale;
     &:hover{
       cursor: pointer;
@@ -102,9 +97,9 @@
   }
   &__results{
     //background-color: lightgreen;
-    @include flex-row();
+    @include flex-column();
     margin: 3%;
-   padding: 60% 0 0 0;
+   padding: 40% 0 0 0;
     font-family: $fontLogo;
     position: absolute;
   }
@@ -117,7 +112,7 @@
     font-size: 2rem;
     -webkit-text-stroke: 1px black;
     text-shadow: $shadow1;
-    animation: displayFeedback 4s;
+    animation: displayFeedback 2s;
   }
 
 }

@@ -22,7 +22,7 @@ export default {
       required: true
     },
     mode:{
-      type: String,
+      type: Array,
       required: true
     },
     numberOfQuestions:{
@@ -30,7 +30,9 @@ export default {
     }
 
   },
+
   emits: ['next'],
+
   methods: {
 
     nextQuestion() {
@@ -68,7 +70,7 @@ export default {
   <section class="quiz" v-if="questions.length > 0 && questions[counter]">
 
     <header class="quiz__header">
-      <h1>{{mode}}</h1>
+      <h1 :class=mode[1]>{{mode[0]}}</h1>
     </header>
 
     <form class="quiz__form" v-if="questions">
@@ -124,7 +126,12 @@ export default {
       :class="{'active': questions}">
       {{this.points}} of 120 possible points
     </p>
-    <button>Play Again</button>
+    <button
+      @click=""
+      class="navbar__button navbar__button--again">
+      New quiz
+    </button>
+
   </article>
 
 </template>

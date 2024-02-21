@@ -10,6 +10,7 @@ export default {
       questions:  [],
       counter: 0,
       points: 0,
+      mode: ['Quick quiz', 'quick__title']
     }
   },
   methods:{
@@ -37,7 +38,7 @@ export default {
         :questions="questions"
         :counter="counter"
         @next="handleNextQuestion"
-        mode="Quick quiz"
+        :mode="mode"
         :numberOfQuestions="this.questions.length">
   </Quiz>
   </section>
