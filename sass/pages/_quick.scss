@@ -5,19 +5,43 @@
   &__points-container{
    // background-color: rgba(239, 140, 66, 0.52);
     @include flex-column;
-    padding-top: 3%;
+    padding-top: 1%;
+    padding-right: 2%;
   }
   &__points{
     font-family: $fontLogo;
     font-size: 2.5rem;
+    position: absolute;
+    animation: none ;
+    &--mod{
+      color: $purple;
+      padding-bottom: 50%;
+      -webkit-text-stroke: 0.6px black;
+      text-shadow: $shadow3;
+      font-size: 4rem;
+      animation: displayFeedback 3s;
+    }
   }
 
   &__sparkles{
-    position: absolute;
-    z-index: -1;
-    padding-top: 2%;
-    left: 39%;
+    position: relative;
+    z-index: -9;
+    height: 160px;
+    animation: waveAnimation 5s infinite;
+   // padding-top: 2%;
+   // left: 39%;
   }
 
+  &__sum{
+    display: none;
+    font-family: $fontLogo;
+    font-size: 2.5rem;
+    position: absolute;
+    &.active{
+      display: block;
+      animation: displayFeedback 0.5s ease-in-out;
+      top:80%
+    }
+  }
 
 }
