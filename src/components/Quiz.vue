@@ -1,5 +1,5 @@
 <script>
-import login from '@/pages/Login.vue'
+import { callAPI } from '@/helpers/callAPI.js'
 
 export default {
   name: 'Quiz',
@@ -7,39 +7,43 @@ export default {
   data(){
     return{
       isCorrect: null,
-      points:0
+      points:0,
+      questions: [],
+      counter: 0
     }
   },
 
   props:{
-
-    questions:{
-      type: Array,
-      required: true
-    },
-    counter: {
-      type: Number,
-      required: true
-    },
     mode:{
-      type: Array,
+      type: Object,
       required: true
-    },
-    numberOfQuestions:{
-      type: Number
     }
-
   },
 
   emits: ['next'],
 
   methods: {
 
+    async getQuestionsFromAPI(){
+      this.questions = await callAPI(`http://localhost:8000/api/ques/rand/${this.mode.numberOfQuestions}`)
+      this.counter=0
+
+      console.log(this.questions)
+      console.log('long'+this.questions.length)
+    },
+
+    async handleNewQuiz(){
+       await this.getQuestionsFromAPI()
+       if (this.mode.rerun){
+         this.counter =0
+         this.points = 0
+       }
+    },
+
     nextQuestion() {
-      this.$emit('next');
+      this.counter++
       document.querySelectorAll('input[type="radio"]')
         .forEach(radio => radio.checked = false);
-      console.log('next');
     },
     addScore(){
       this.points += 10
@@ -62,6 +66,10 @@ export default {
 
   },
 
+  async created() {
+    await this.getQuestionsFromAPI()
+  }
+
 }
 </script>
 
@@ -70,7 +78,7 @@ export default {
   <section class="quiz" v-if="questions.length > 0 && questions[counter]">
 
     <header class="quiz__header">
-      <h1 :class=mode[1]>{{mode[0]}}</h1>
+      <h1 :class=mode.class>{{mode.title}}</h1>
     </header>
 
     <form class="quiz__form" v-if="questions">
@@ -117,7 +125,7 @@ export default {
            src="../../public/virutas.svg" alt="doodle of sparkles">
     </article>
   </section>
-  <article v-if="counter && numberOfQuestions === counter"
+  <article v-if="counter && this.mode.numberOfQuestions === counter"
            class="quiz__results"
            :class="{'active': questions}">
     <h3 class="quick__points quick__points--mod ">Total Score</h3>
@@ -127,9 +135,9 @@ export default {
       {{this.points}} of 120 possible points
     </p>
     <button
-      @click=""
+      @click="handleNewQuiz"
       class="navbar__button navbar__button--again">
-      New quiz
+      New quiz ?
     </button>
 
   </article>

@@ -7,25 +7,16 @@ export default {
   components: { Quiz },
   data() {
     return {
-      questions:  [],
-      counter: 0,
-      points: 0,
-      mode: ['Quick quiz', 'quick__title']
+      mode:
+        {
+           title:'Quick quiz',
+           class:'quick__title',
+           clock: ['true', 60],
+           numberOfQuestions: 12,
+           hasScore: true,
+           rerun: true
+        }
     }
-  },
-  methods:{
-    async getQuestionsFromAPI(){
-      this.questions = await callAPI('http://localhost:8000/api/ques/rand/12')
-      console.log(this.questions)
-      console.log('long'+this.questions.length)
-    },
-    handleNextQuestion(){
-      this.counter++
-      console.log(this.counter)
-    }
-  },
-  async created() {
-    await this.getQuestionsFromAPI()
   },
 }
 </script>{
@@ -34,13 +25,7 @@ export default {
 <template>
 
   <section class="quick">
-  <Quiz
-        :questions="questions"
-        :counter="counter"
-        @next="handleNextQuestion"
-        :mode="mode"
-        :numberOfQuestions="this.questions.length">
-  </Quiz>
+  <Quiz :mode="mode"></Quiz>
   </section>
 
 </template>
