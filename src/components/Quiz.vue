@@ -33,14 +33,17 @@ export default {
     },
 
     async handleNewQuiz(){
-       await this.getQuestionsFromAPI()
-       if (this.mode.rerun){
-         this.counter =0
-         this.points = 0
-       }
+      await this.getQuestionsFromAPI()
+      this.counter =0
+      this.points = 0
     },
-
-    nextQuestion() {
+    async infiniteQuiz(){
+      console.log('enter on the infinte')
+      console.log('counter: ' + this.counter + 'questions: ' + this.questions.length)
+      this.questions = [...this.questions, ...await callAPI(`http://localhost:8000/api/ques/rand/${this.mode.numberOfQuestions}`)]
+    },
+    async nextQuestion() {
+      (!this.mode.rerun && this.counter === this.questions.length - 4) && await this.infiniteQuiz()
       this.counter++
       document.querySelectorAll('input[type="radio"]')
         .forEach(radio => radio.checked = false);
@@ -125,7 +128,7 @@ export default {
            src="../../public/virutas.svg" alt="doodle of sparkles">
     </article>
   </section>
-  <article v-if="counter && this.mode.numberOfQuestions === counter"
+  <article v-if="mode.numberOfQuestions === counter && mode.hasScore"
            class="quiz__results"
            :class="{'active': questions}">
     <h3 class="quick__points quick__points--mod ">Total Score</h3>

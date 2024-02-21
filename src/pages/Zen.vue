@@ -5,35 +5,22 @@ import Quiz from '@/components/Quiz.vue'
 export default {
   name: 'Zen',
   components: { Quiz },
-  data() {
-    return {
-      questions:  [],
-      counter: 0,
+  data(){
+    return{
+      mode:
+        {
+          title:' Z E N',
+          class:'zen__title',
+          clock: ['false'],
+          numberOfQuestions: 10,
+          hasScore: false,
+          rerun: false
+        }
     }
   },
   methods:{
-    async getQuestionsFromAPI(){
-      // zen is an infinite quiz
-      // but now in my api there are only 27 questions
-      // so now Im not controlling repeateds questions
-      // when my API increase the number of questions i will fixed that
-      this.questions = [...this.questions, ...(await callAPI('http://localhost:8000/api/ques/rand/5'))]//
-    },
-    async handleNextQuestion(){
-      this.counter++
-      await this.getQuestionsFromAPI();
-    }
-  },
-  async created() {
-    // first call to api when the component is created
-    //this.questions = await callAPI('http://127.0.0.1:8000/api/ques/rand/4')
-    await this.getQuestionsFromAPI()
-  },
-  watch:{
-    counter(newValue){
-      newValue === this.questions.length-1 && this.getQuestionsFromAPI()
-    }
-  },
+  }
+
 }
 
 </script>
@@ -46,11 +33,8 @@ export default {
     </div>
 
     <div class="zen__quizz-container">
-      <Quiz v-if="questions.length > 0 && questions[counter]"
-            :questions="questions"
-            :counter="counter"
-            @next="handleNextQuestion"
-            mode="ZEN"
+      <Quiz
+            :mode="mode"
       ></Quiz>
     </div>
     <footer class="zen__phrase">
