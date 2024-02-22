@@ -8,7 +8,7 @@
     position: relative;
     width: 800px;
     @include flex-column;
-    background-color: #965ccd;
+    //background-color: #965ccd;
   }
   &__form {
    // background-color: blueviolet;
@@ -24,9 +24,10 @@
     border-radius: 20px;
     height: 100px;
     width: 600px;
-    padding: 4% 0 3% 4%;
+    padding: 0 5% 0 4%;
     line-height: 1;
     box-shadow: $shadow2;
+    @include flex-row
   }
 
   &__answers{
@@ -86,6 +87,7 @@
     position: absolute;
     width: 80%;
     height: 100%;
+    //@include flex-column;
     &:checked ~ .quiz__response{
       // quiero meter algo ?
     }
@@ -100,9 +102,9 @@
   }
   &__results{
     //background-color: lightgreen;
-    @include flex-column();
+    //@include flex-column();
     margin: 3%;
-   padding: 40% 0 0 0;
+   //padding: 40% 0 0 0;
     font-family: $fontLogo;
     position: absolute;
   }
@@ -155,6 +157,8 @@
     }
     &__title {
       width: 400px;
+      font-size: 1.5rem;
+      //background-color: lightcoral;
     }
 
     &__answers {
