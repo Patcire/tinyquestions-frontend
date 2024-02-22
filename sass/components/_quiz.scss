@@ -1,19 +1,17 @@
 @import "../abstracts/index";
 .quiz {
-  background-color: lightgreen;
+  //background-color: lightgreen;
   //padding-top: 5%;
-  padding-top: 5%;
  // position: relative;
   &__header{
     position: relative;
     width: 800px;
-    //background-color: lightgreen;
+   // background-color: #d7517d;
     @include flex-column;
   }
   &__form {
-   //background-color: lightblue;
+   // background-color: blueviolet;
     @include flex-column;
-    //padding-top: 12%;
     width: 800px;
   }
 

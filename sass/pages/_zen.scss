@@ -1,8 +1,8 @@
 @import "../abstracts/index";
 
 .zen{
-  padding-top: 5%;
   @include flex-column;
+  height: 95vh;
   position: relative;
   &__quizz-container{
     position: relative;
@@ -39,13 +39,14 @@
 }
 
 .zen__title{
+  //background-color: indianred;
   font-family: $fontLogo;
   font-size: 3.5rem;
   letter-spacing: 5rem;
   padding-left: 9%;
   opacity: 40%;
-  padding-bottom: 4%;
   text-shadow: $shadow1;
+  height: 106.93px;
 }
 
 @include mobile{

@@ -2,6 +2,7 @@
 
 .quick{
   @include flex-column;
+  height: 95vh;
   &__points-container{
    // background-color: rgba(239, 140, 66, 0.52);
     @include flex-column;
