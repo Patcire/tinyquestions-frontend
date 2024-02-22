@@ -1,10 +1,11 @@
 @import "../abstracts/_index.scss";
 
+/* General */
+
 .navbar{
 
   @include flex-row();
   gap: 3rem;
-  background-color: lightgreen;
   padding-top: 1.1%;
 
   &__link{
@@ -73,7 +74,6 @@
     color: black;
     padding: 1%;
   }
-
 }
 
 .navbar.navbar--mod{
@@ -90,8 +90,10 @@
   display: none;
 }
 
+/*-------------------------------*/
 
-//mobileeee
+
+/* Media Query for Mobile */
 
 @include mobile{
   .navbar{
@@ -103,7 +105,6 @@
   .hambmenu{
     display: block;
     position: absolute;
-    //background-color: lightblue;
     top: 20px;
     text-align: right;
     right: 60px;
@@ -115,13 +116,12 @@
       border-radius: 10px;
       margin-top: 40px;
       left: -80px;
-      //right: 2px;
       padding: 6px;
       border: 2px solid black;
     }
 
     &__icon{
-      position: absolute; // antes SBOSLUTE
+      position: absolute;
       @include flex-column;
       display: block;
       top: 2px;
@@ -148,7 +148,6 @@
     }
 
   }
-
   .hambmenu__submenu.hambmenu__submenu--mod{
     display: block;
     position: absolute;
@@ -156,20 +155,24 @@
     text-align: right;
     left: -200px;
   }
-
-
 }
 
-// tablettttt
+/*-------------------------------*/
+
+
+/* Media Query for tablet */
 
 @include  tablet{
-  // reducex navbar (not logged)
+
+  /* For reduce navbar (not Logged) */
+
   .navbar{
     &__link,&__button{
       font-size: 1.6rem;
     }
   }
-  // logged navbar
+  /* For full navbar (Logged) */
+
   .navbar.navbar--mod{
     gap: 0.4rem;
 
@@ -179,6 +182,11 @@
   }
 }
 
+/*-------------------------------*/
+
+
+/* Media Query for full navbar with hamburguer menu */
+  /* it cover size between reduce desktop & mobile */
 
 @include between1{
   .navbar.navbar--mod{
