@@ -6,7 +6,7 @@
 
   @include flex-row();
   gap: 3rem;
-  padding-top: 1.1%;
+  padding-top: 1.425%;
 
   &__link{
     font-family: $fontLogo;
@@ -76,6 +76,10 @@
   }
 }
 
+/*-------------------------------*/
+
+/* Navrbar logged (more elements) */
+
 .navbar.navbar--mod{
   //background-color: lightblue;
   gap: 1.2rem;
@@ -83,7 +87,7 @@
 
 .navbar__link.navbar__link--mod,
   .navbar__button.navbar__button--mod, .navbar__link.pointer.pointer--mod{
-  font-size: 2rem;
+  font-size: 25.6px;
 }
 
 .hambmenu{
@@ -91,7 +95,6 @@
 }
 
 /*-------------------------------*/
-
 
 /* Media Query for Mobile */
 
@@ -105,7 +108,7 @@
   .hambmenu{
     display: block;
     position: absolute;
-    top: 20px;
+    top: 30px;
     text-align: right;
     right: 60px;
 
@@ -124,14 +127,14 @@
       position: absolute;
       @include flex-column;
       display: block;
-      top: 2px;
+      top: 7.5px;
     }
     &__check{
       position: absolute;
       width: 30px;
       height: 30px;
       opacity: 0;
-      top: 40%;
+      //top: 40%;
       left: 60%;
     }
     &__img{

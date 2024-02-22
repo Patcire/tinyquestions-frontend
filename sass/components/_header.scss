@@ -1,5 +1,7 @@
 @import "../abstracts/mixins";
 
+/* Header */
+
 .main-header{
   @include flex-row;
   justify-content: space-between;
