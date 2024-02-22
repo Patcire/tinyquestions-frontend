@@ -102,9 +102,10 @@
   }
   &__results{
     //background-color: lightgreen;
-    //@include flex-column();
-    margin: 3%;
-   //padding: 40% 0 0 0;
+    @include flex-column();
+    //margin: 3%;
+   //padding: 70% 0 0 0;
+    top: 400px;
     font-family: $fontLogo;
     position: absolute;
   }
@@ -174,6 +175,9 @@
     }
     &__form{
       width: 100%;
+    }
+    &__calification--active{
+      font-size: 1.9rem;
     }
   }
 }
