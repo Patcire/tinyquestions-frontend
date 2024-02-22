@@ -4,7 +4,8 @@
 
   @include flex-row();
   gap: 3rem;
-  //background-color: lightgreen;
+  background-color: lightgreen;
+  padding-top: 1.1%;
 
   &__link{
     font-family: $fontLogo;
@@ -13,7 +14,7 @@
     color: black;
     &.pointer{
       cursor: pointer;
-      font-size: 2.3rem;
+      font-size: 2.6rem;
     }
     //background-color: lightsalmon;
 
@@ -61,7 +62,7 @@
     z-index: 1;
     padding-left: 1.5%;
     padding-top: 8%;
-    //background-color: lightgreen;
+    background-color: white;
   }
 
   &__sublink{
