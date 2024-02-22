@@ -3,13 +3,13 @@ import { callAPI } from '@/helpers/callAPI.js'
 
 export default {
   name: 'Quiz',
-
   data(){
     return{
       isCorrect: null,
       points:0,
       questions: [],
-      counter: 0
+      counter: 0,
+      timerAutoStart: true
     }
   },
 
@@ -36,6 +36,7 @@ export default {
       await this.getQuestionsFromAPI()
       this.counter =0
       this.points = 0
+      this.timerAutoStart = true
     },
     async infiniteQuiz(){
       console.log('enter on the infinte')
@@ -47,6 +48,10 @@ export default {
       this.counter++
       document.querySelectorAll('input[type="radio"]')
         .forEach(radio => radio.checked = false);
+    },
+    handleTimer(){
+      console.log('acabose el tiempo')
+      this.timerAutoStart = false
     },
     addScore(){
       this.points += 10
@@ -78,12 +83,25 @@ export default {
 
 <template>
 
-  <section class="quiz" v-if="questions.length > 0 && questions[counter]">
+  <section class="quiz"
+           v-if="questions.length > 0
+                 && questions[counter]
+                 && timerAutoStart
+                 ">
 
     <header class="quiz__header">
       <h1 :class=mode.class>{{mode.title}}</h1>
+      <Vountdown
+        v-if="this.mode.clock[0]"
+        :auto="this.timerAutoStart"
+        class="quiz__timer"
+        :time="this.mode.clock[1]"
+        @done="handleTimer"
+        v-slot="{seconds}"
+      >
+        <em>0:{{ seconds }} s</em>
+      </Vountdown>
     </header>
-
     <form class="quiz__form" v-if="questions">
       
       <legend class="quiz__title">
@@ -119,7 +137,7 @@ export default {
            :class="{'active' : isCorrect===false}"
            alt="a cross 'cause you fail">
     </form>
-    <article class="quick__points-container" v-if="questions.length && points>0">
+    <article class="quick__points-container" v-if="questions.length && points>0 && mode.rerun">
       <h3 class="quick__points"
           >{{points}} points
       </h3>
@@ -128,8 +146,8 @@ export default {
            src="../../public/virutas.svg" alt="doodle of sparkles">
     </article>
   </section>
-  <article v-if="mode.numberOfQuestions === counter && mode.hasScore"
-           class="quiz__results"
+  <article v-if="(mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore"
+            class="quiz__results"
            :class="{'active': questions}">
     <h3 class="quick__points quick__points--mod ">Total Score</h3>
     <p

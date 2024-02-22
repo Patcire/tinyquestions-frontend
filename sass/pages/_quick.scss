@@ -22,13 +22,14 @@
       animation: displayFeedback 1.5s;
     }
   }
-  &__title{
+  &__title{ // header quick wuizzes : quick quiz
     color: white;
     -webkit-text-stroke: 2px $lightBlue;
     text-shadow: $shadow1;
     font-family: $fontLogo;
     font-size: 3.5rem;
-    left: 18%;
+    background-color: lightyellow;
+    right: 24%;
     position: relative;
   }
 

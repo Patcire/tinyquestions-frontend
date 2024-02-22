@@ -11,7 +11,7 @@ export default {
         {
            title:'Quick quiz',
            class:'quick__title',
-           clock: ['true', 60],
+           clock: [true, 10000], // miliseconds
            numberOfQuestions: 12,
            hasScore: true,
            rerun: true

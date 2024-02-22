@@ -38,6 +38,16 @@
   }
 }
 
+.zen__title{
+  font-family: $fontLogo;
+  font-size: 3.5rem;
+  letter-spacing: 5rem;
+  padding-left: 9%;
+  opacity: 40%;
+  padding-bottom: 4%;
+  text-shadow: $shadow1;
+}
+
 @include mobile{
   .zen__ornaments {
 

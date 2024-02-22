@@ -1,15 +1,19 @@
 @import "../abstracts/index";
 .quiz {
   //background-color: lightgreen;
+  //padding-top: 5%;
   padding-top: 5%;
-  position: relative;
+ // position: relative;
   &__header{
-    position: absolute;
+    position: relative;
+    width: 800px;
+    //background-color: lightgreen;
+    @include flex-column;
   }
   &__form {
-   // background-color: lightblue;
+   //background-color: lightblue;
     @include flex-column;
-    padding-top: 12%;
+    //padding-top: 12%;
     width: 800px;
   }
 
@@ -115,6 +119,14 @@
     animation: displayFeedback 2s;
   }
 
+  &__timer{
+    background-color: lightcoral;
+    font-family: $fontQuestions;
+    font-size: 2rem;
+    position: relative;
+    left: 30%;
+  }
+
 }
 
 .navbar__button{
@@ -127,7 +139,7 @@
     color: white;
     font-size: 3rem;
     @include in-out-scale;
-    animation: displayFeedback 4s reverse;
+    animation: displayFeedback 2s reverse;
     &:hover{
       transform: scale(1.3);
     }

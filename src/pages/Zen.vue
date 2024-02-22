@@ -1,5 +1,4 @@
 <script>
-import { callAPI } from '@/helpers/callAPI.js'
 import Quiz from '@/components/Quiz.vue'
 
 export default {
@@ -11,7 +10,7 @@ export default {
         {
           title:' Z E N',
           class:'zen__title',
-          clock: ['false'],
+          clock: [false],
           numberOfQuestions: 10,
           hasScore: false,
           rerun: false
