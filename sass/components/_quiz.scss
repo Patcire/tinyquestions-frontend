@@ -1,13 +1,11 @@
 @import "../abstracts/index";
 .quiz {
   //background-color: lightgreen;
-  //padding-top: 5%;
- // position: relative;
   &__header{
     position: relative;
     width: 800px;
-   // background-color: #d7517d;
     @include flex-column;
+    background-color: #965ccd;
   }
   &__form {
    // background-color: blueviolet;
@@ -15,7 +13,7 @@
     width: 800px;
   }
 
-  &__title {
+  &__title { // the question
    // background-color: lightcoral;
     font-family: $fontQuestions;
     font-size: 2rem;;

@@ -1,9 +1,22 @@
 @import "../abstracts/index";
 
 .zen{
+  padding-top: 2%;
+  background-color: rgba(240, 128, 128, 0.34);
   @include flex-column;
-  height: 95vh;
   position: relative;
+  /*----*/
+    padding-bottom: 3%;
+  /*----*/
+  &__title{
+    font-family: $fontLogo;
+    font-size: 3.5rem;
+    letter-spacing: 5rem;
+    padding-left: 9%;
+    //opacity: 40%;
+    text-shadow: $shadow1;
+    height: 106.93px;
+  }
   &__quizz-container{
     position: relative;
     @include flex-column;
@@ -27,6 +40,7 @@
     font-family: $fontQuestions;
     font-size: 2rem;
     padding-top: 2%;
+    height: 126px;
   }
   &__mantra{
     opacity: 40%;
@@ -36,17 +50,7 @@
     color: white;
     -webkit-text-stroke: 0.6px black;
   }
-}
 
-.zen__title{
-  //background-color: indianred;
-  font-family: $fontLogo;
-  font-size: 3.5rem;
-  letter-spacing: 5rem;
-  padding-left: 9%;
-  opacity: 40%;
-  text-shadow: $shadow1;
-  height: 106.93px;
 }
 
 @include mobile{
