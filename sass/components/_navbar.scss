@@ -15,7 +15,7 @@
       cursor: pointer;
       font-size: 2.3rem;
     }
-    background-color: lightsalmon;
+    //background-color: lightsalmon;
 
   }
 
@@ -61,7 +61,7 @@
     z-index: 1;
     padding-left: 1.5%;
     padding-top: 8%;
-    background-color: lightgreen;
+    //background-color: lightgreen;
   }
 
   &__sublink{
@@ -76,7 +76,7 @@
 }
 
 .navbar.navbar--mod{
-  background-color: lightblue;
+  //background-color: lightblue;
   gap: 1.2rem;
 }
 
@@ -103,20 +103,112 @@
     display: block;
     position: absolute;
     //background-color: lightblue;
-    right: 60px;
     top: 20px;
+    text-align: right;
+    right: 60px;
 
     &__submenu{
       display: none;
       position: absolute;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgb(255, 255, 255);
+      border-radius: 10px;
+      margin-top: 40px;
+      left: -80px;
+      //right: 2px;
+      padding: 6px;
+      border: 2px solid black;
+    }
+
+    &__icon{
+      position: absolute; // antes SBOSLUTE
+      @include flex-column;
+      display: block;
+      top: 2px;
+    }
+    &__check{
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      opacity: 0;
+      top: 40%;
+      left: 60%;
+    }
+    &__img{
+      position: absolute;
+      z-index: -1;
+    }
+    &__check:checked ~  &__submenu{
+      display: block;
+      z-index: 2;
+    }
+    .hambmenu__check:not(:checked) ~ .hambmenu__submenu {
+      display: none;
+      z-index: 0;
+    }
+
+  }
+
+  .hambmenu__submenu.hambmenu__submenu--mod{
+    display: block;
+    position: absolute;
+    top: 10px;
+    text-align: right;
+    left: -200px;
+  }
+
+
+}
+
+// tablettttt
+
+@include  tablet{
+  // reducex navbar (not logged)
+  .navbar{
+    &__link,&__button{
+      font-size: 1.6rem;
+    }
+  }
+  // logged navbar
+  .navbar.navbar--mod{
+    gap: 0.4rem;
+
+  }
+  .navbar__link.navbar__link--mod, .navbar__button.navbar__button--mod {
+    font-size: 1.6rem;
+  }
+}
+
+
+@include between1{
+  .navbar.navbar--mod{
+    display: none;
+    &__link{
+      font-size: 2rem;
+    }
+  }
+  .hambmenu.hambmenu--mod {
+    display: block;
+    position: absolute;
+    //background-color: lightblue;
+    right: 60px;
+    top: 20px;
+    padding: 0 5px;
+    text-align: right;
+  }
+  .hambmenu__submenu.hambmenu__submenu--mod {
+      display: none;
+      position: absolute;
+      background-color: rgb(255, 255, 255);
       border-radius: 10px;
       //opacity: 20%;
       margin-top: 40px;
-      left: -50px;
-      padding: 5px;
-    }
+      left: -100px;
+      //right: 2px;
+      padding: 2px;
+    border: 2px solid black;
 
+  }
+  .hambmenu{
     &__icon{
       position: absolute;
       @include flex-column;
@@ -143,49 +235,6 @@
       z-index: 0;
     }
 
-  }
-}
-
-// tablettttt
-
-@include  tablet{
-  // reducex navbar (not logged)
-  .navbar{
-    &__link,&__button{
-      font-size: 1.6rem;
-    }
-  }
-  // logged navbar
-  .navbar.navbar--mod{
-    gap: 0.4rem;
-
-  }
-  .navbar__link.navbar__link--mod, .navbar__button.navbar__button--mod{
-    font-size: 1.6rem;
-  }
-
-}
-
-
-@include between1{
-  .navbar.navbar--mod{
-    gap: 0.4rem;
-
-  }
-  .navbar__link.navbar__link--mod,
-  .navbar__button.navbar__button--mod,
-  .navbar__link.pointer.pointer--mod{
-    font-size: 1.3rem;
-  }
-
-  .navbar.navbar--mod{
-    display: none;
-  }
-  .hambmenu.hambmenu--mod{
-    display: block;
-    position: absolute;
-    right: 60px;
-    top: 20px;
   }
 
 }

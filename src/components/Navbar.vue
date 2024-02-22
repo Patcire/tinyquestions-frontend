@@ -96,7 +96,7 @@ export default {
              alt="Menu icon"
              class="hambmenu__img">
       </label>
-      <ul class="hambmenu__submenu">
+      <ul class="hambmenu__submenu hambmenu__submenu--mod">
         <li>
           <router-link to="/games" class="navbar__link">Games</router-link>
         </li>
