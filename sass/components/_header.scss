@@ -13,6 +13,10 @@
   }
 }
 
+/*-----------------*/
+
+/* Media query for mobile */
+
 @include mobile{
   .main-header{
     transition: all 0.3s ease;
@@ -26,6 +30,10 @@
     }
   }
 }
+
+/*-----------------*/
+
+/* Media query for tablet */
 
 @include tablet {
   .main-header{

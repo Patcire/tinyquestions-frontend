@@ -1,4 +1,7 @@
 @import "../abstracts/index";
+
+/* Quiz */
+
 .quiz {
   //background-color: lightgreen;
   &__header{
@@ -142,10 +145,14 @@
   }
 }
 
-// mobile
+/*-----------------*/
+
+/* Media query for mobile */
 
 @include mobile {
   .quiz {
+    &__header{
+    }
     &__title {
       width: 400px;
     }
@@ -155,11 +162,20 @@
     }
 
     &__letter {
-      font-size: 1.2rem;
+      font-size: 1.8rem;
+      left: 5px;
     }
-
+    &__timer{
+      left: 18%
+    }
+    &__form{
+      width: 100%;
+    }
   }
 }
+/*-----------------*/
+
+/* Media query for tablet */
 
 @include tablet{
   .quiz {
