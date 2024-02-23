@@ -2,14 +2,9 @@
 
 export default {
   name: 'Modal',
-  data() {
-    return {
-
-    }
-  },
-
   props: {
-    show: Boolean
+    show: Boolean,
+    functionality: Function
   }
 }
 </script>

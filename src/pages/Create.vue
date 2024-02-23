@@ -1,13 +1,15 @@
 <script>
+import Customizer from '@/components/Customizer.vue'
+
 export default {
-  name: 'Create'
+  name: 'Create',
+  components: { Customizer }
 }
 </script>
 
 <template>
-  <h1>Create</h1>
+  <section class="create">
+    <Customizer></Customizer>
+  </section>
+
 </template>
-
-<style scoped>
-
-</style>
