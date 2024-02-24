@@ -187,3 +187,58 @@
   margin-top: 4%;
 
 }
+
+/*---------------------*/
+
+/* Customizer tablet */
+
+@include tablet{
+  .customizer {
+    width: 450px;
+    height: 450px;
+    &__input{
+      font-size: 2rem;
+
+    }
+    &__icon {
+      height: 50px;
+    }
+
+  }
+}
+
+/*---------------------*/
+
+/* Customizer mobile */
+
+@include mobile{
+  .customizer {
+    width: 350px;
+    height: 500px;
+
+    &__header {
+      height: 18%;
+    }
+
+
+    &__input{
+      font-size: 1.8rem;
+
+    }
+    &__icon {
+      height: 40px;
+    }
+    &__title {
+      height: 50px;
+      width: 280px;
+    }
+  }
+  .primary-button.primary-button--customizer-mod2{
+    box-shadow: $shadow1;
+    //position: absolute;
+    margin-top: 4%;
+    width: 140px;
+    height: 41px;
+  }
+
+}
