@@ -24,7 +24,32 @@
     border-radius: 30px;
     font-family: $fontAnswers;
     overflow: hidden;
-    width: 40%;
-  }
+    //width: 40%;
+    height: 400px;
+    width: 650px;
+    @include flex-column;
+ }
 
+}
+
+/*---------------------*/
+
+/* MQ for tablet */
+
+@include tablet{
+  .modal__content{
+    width: 450px;
+    height: 450px;
+  }
+}
+
+/*---------------------*/
+
+/* MQ for mobile */
+
+@include mobile{
+  .modal__content{
+    width: 350px;
+    height: 500px;
+  }
 }

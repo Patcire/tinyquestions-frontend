@@ -30,6 +30,7 @@
     font-family: $fontAnswers;
     padding: 0 0 0 3%;
 
+
     &:focus {
       outline: none;
     }
@@ -56,8 +57,6 @@
     /* new question*/
     height: 400px;
     overflow: hidden;
-    position: relative;
-
     /*timer modal*/
     &--timer{
       padding: 2%;
@@ -98,6 +97,7 @@
     border-right: none;
     text-align: center;
     font-size: 1.4rem;
+    padding: 0 22% 0 20%;
     &:focus {
       outline: none;
     }
@@ -176,9 +176,10 @@
   width: 100px;
   border-radius: 10px;
   border: 2px solid black;
+  bottom:17%;
+  display: block;
+  margin-left: 271px ;
   position: absolute;
-  margin-top: 4px;
-  margin-left: 16.4% ;
 }
 
 .primary-button.primary-button--customizer-mod2{
@@ -198,13 +199,28 @@
     height: 450px;
     &__input{
       font-size: 2rem;
-
     }
     &__icon {
       height: 50px;
     }
+    &__form{
+      width: 450px;
+      height: 450px;
+    }
 
   }
+
+  .primary-button.primary-button--modal-mod{
+    background-color: $purple;
+    width: 100px;
+    border-radius: 10px;
+    border: 2px solid black;
+    bottom: 14%;
+    display: block;
+    margin-left: 174px ;
+    position: absolute;
+  }
+
 }
 
 /*---------------------*/
@@ -219,8 +235,6 @@
     &__header {
       height: 18%;
     }
-
-
     &__input{
       font-size: 1.8rem;
 
@@ -232,7 +246,23 @@
       height: 50px;
       width: 280px;
     }
+    &__form{
+      width: 350px;
+      height: 500px;
+    }
   }
+
+  .primary-button.primary-button--modal-mod{
+    background-color: $purple;
+    width: 100px;
+    border-radius: 10px;
+    border: 2px solid black;
+    bottom:10%;
+    display: block;
+    margin-left: 128px ;
+    position: absolute;
+  }
+
   .primary-button.primary-button--customizer-mod2{
     box-shadow: $shadow1;
     //position: absolute;
@@ -240,5 +270,6 @@
     width: 140px;
     height: 41px;
   }
+
 
 }
