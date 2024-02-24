@@ -49,13 +49,6 @@ export default {
 
     async createQuestionOnDB(question) {
 
-      console.log("\ntitle\n" + question.title,
-        "\noption_a\n" + question.optionA,
-        "\noption_b\n" + question.optionB,
-        "\noption_c\n" + question.optionC,
-        "\ncorrect_option\n" + question.correctOption,
-        "\nfk_id_quiz\n" + question.quizID)
-
       const q = await postAPI("http://localhost:8000/api/usque/create", {
         "title": question.title,
         "option_a": question.optionA,
