@@ -5,13 +5,12 @@ export const callAPI= async (url) => {
 }
 
 export const postAPI= async (url, body) => {
-    await fetch(url, {
+  return await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
-  });
-
+  })
 }
 

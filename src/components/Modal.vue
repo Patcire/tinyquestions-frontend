@@ -4,13 +4,15 @@ export default {
   name: 'Modal',
   props: {
     show: Boolean,
-    functionality: Function
+    functionality: Function,
+    modder: String
   }
 }
 </script>
 
 <template>
-  <section class="modal" :class="{'modal--show' : show}">
+  <section class="modal"
+           :class="{'modal--show' : show}">
     <section class="modal__content">
       <slot></slot>
     </section>

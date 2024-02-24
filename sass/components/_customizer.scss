@@ -11,7 +11,7 @@
   border-radius: 30px;
   position: relative;
   overflow: hidden;
-
+  box-shadow: $shadow2;
 
   &__header {
     @include flex-row;
@@ -46,16 +46,31 @@
   &__icon {
     cursor: pointer;
     @include in-out-scale;
-
+    filter: drop-shadow($shadow1);
     &:hover {
       transform: scale(1.15);
     }
   }
 
   &__form {
+    /* new question*/
     height: 400px;
     overflow: hidden;
     position: relative;
+
+    /*timer modal*/
+    &--timer{
+      padding: 2%;
+      height: 200px;
+      background-color: $purple;
+      @include flex-row;
+      gap: 5%;
+      //font-family: $fontLogo;
+      letter-spacing: 0.2rem;
+      color: #999;
+      ;
+    }
+
   }
 
   &__modal-title {
@@ -68,11 +83,14 @@
     @include flex-column;
     font-size: 1.5rem;
     font-weight: bold;
+    &--timer{
+      //padding: 2%;
+      font-size: 2rem;
+    }
   }
 
-
   &__input-form {
-    //background-color: lightseagreen;
+
     height: 16.66%;
     width: 100%;
     border-top: none;
@@ -80,7 +98,6 @@
     border-right: none;
     text-align: center;
     font-size: 1.4rem;
-
     &:focus {
       outline: none;
     }
@@ -93,12 +110,16 @@
 
   &__questions-container{
     background-color: lightseagreen;
-    padding: 5% 0 5% 0;
+    //height: 100%;
+    padding: 1% 0 1% 0;
     width: 100%;
+    max-height: 100%;
     @include flex-column;
+    overflow: scroll;
   }
 
   &__title{
+    /* titles of new quest modal*/
     background-color: white;
     height: 60px;
     width: 400px;
@@ -106,14 +127,45 @@
     border-radius: 22px;
     text-align: left;
     padding: 2.5% 0 0 5%;
-    margin-bottom: 2%; ;
+    margin-bottom: 2%;
     font-family: $fontQuestions;
     font-size: 1.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    box-shadow: $shadow1;
+
+    /* titles of timer modal*/
+    &--time{
+     // padding: 5%;
+    }
+  }
+
+  &__art{
+    @include flex-column;
+    height: 100%;
+   // border: 3px dashed $lightPink;
+    border: 1px dashed black;
+    border-radius: 30px;
+    text-align: center;
+    background-color: white;
+    width: 50%;
+  }
+
+  &__sel{
+    margin-top: 2.5%;
+    width: 80%;
+    border-radius: 30px;
+    text-align: center;
+  }
+  &__opt:hover{
   }
 }
+
+.customizer__form.customizer__form-timer{
+  @include flex-column;
+}
+
 /*---------------------*/
 
 /* Customizer extra */
@@ -130,9 +182,8 @@
 }
 
 .primary-button.primary-button--customizer-mod2{
-  margin-top: 7% ;
   box-shadow: $shadow1;
-  position: absolute;
-  top: 75%;
+  //position: absolute;
+  margin-top: 4%;
 
 }
