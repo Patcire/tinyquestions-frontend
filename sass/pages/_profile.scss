@@ -1,0 +1,4 @@
+@import "../abstracts/index";
+.profile{
+  @include flex-column;
+}

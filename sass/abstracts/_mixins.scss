@@ -38,6 +38,14 @@
       grid-template-rows: repeat($rows, 1fr);
 }
 
+@mixin grid-gallery($columns){
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 3%;
+
+  //padding-inline: 1%;
+  place-items: center;
+}
 
 // Responsive breakpoints
 

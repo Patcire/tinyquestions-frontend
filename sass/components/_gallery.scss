@@ -1,0 +1,9 @@
+@import "../abstracts/index";
+
+.gallery{
+  padding-top: 2%;
+  background-color: lightgreen;
+  width: 40%;
+  border-top: 2px solid grey;
+  @include grid-gallery(4)
+}

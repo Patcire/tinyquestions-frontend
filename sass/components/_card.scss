@@ -1,0 +1,48 @@
+@import "../abstracts/index";
+
+.card{
+  @include flex-column;
+  border: 3px solid black;
+  width: 170px;
+  height: 240px;
+  border-radius: 30px;
+  box-shadow: $shadow1;
+  @include in-out-scale;
+  background-color: white;
+  overflow: hidden;
+  &:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  &__info{
+    height: 65%;
+    width: 150px;
+    background-color: lightcoral;
+    font-family: $fontAnswers;
+    @include flex-column;
+    font-size: 1.4rem;
+    //text-align: left;
+    text-align: center;
+
+  }
+  &__footer{
+    background-color: blueviolet;
+    height: 35%;
+    width: 170px;
+    font-family: $fontQuestions;
+    font-size: 1.5rem;
+    text-align: center;
+   // padding-inline: 4% 2% ;
+    border-top: 2px solid black;
+    @include flex-column;
+
+  }
+  &__name{
+    overflow: hidden;
+    //white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 150px;
+    background-color: aquamarine;
+  }
+
+}

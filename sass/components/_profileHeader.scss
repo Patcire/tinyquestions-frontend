@@ -1,0 +1,51 @@
+@import "../abstracts/index";
+
+.userinfo{
+  //background-color: lightcoral;
+  width: 100%;
+@include flex-column;
+  &__photo{
+   // background: lightblue;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    @include flex-column;
+    border: 1.8px solid black;
+  }
+  &__username{
+    padding: 0.5%;
+    font-family: $fontQuestions;
+  }
+  &__stats{
+    @include flex-row;
+    font-family: $fontAnswers;
+    font-weight: bold;
+    width: 100%;
+    gap: 1%;
+  }
+  &__settings{
+    @include flex-row;
+    font-family: $fontAnswers;
+    width: 100%;
+    padding: 1.5% 2.2% 1% 0;
+    gap: 1%;
+    }
+  &__options{
+    background: none;
+    border: none;
+    outline: none;
+    //background-color: lightgreen;
+    &:hover{
+      cursor: pointer;
+    }
+
+  }
+}
+
+@include mobile{
+  .userinfo{
+    &__settings{
+      padding-right: 9.2%;
+    }
+  }
+}
