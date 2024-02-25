@@ -9,27 +9,18 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-
   &--show{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex-column;
     z-index: 1;
   }
-
   &__content{
     background-color: #fefefe;
     border: 2px solid #888;
     border-radius: 30px;
     font-family: $fontAnswers;
     overflow: hidden;
-    //width: 40%;
-    height: 400px;
-    width: 650px;
-    @include flex-column;
- }
 
+ }
 }
 
 /*---------------------*/
@@ -38,8 +29,8 @@
 
 @include tablet{
   .modal__content{
-    width: 450px;
-    height: 450px;
+    //width: 450px;
+    //height: 450px;
   }
 }
 
@@ -49,7 +40,7 @@
 
 @include mobile{
   .modal__content{
-    width: 350px;
-    height: 500px;
+    //width: 350px;
+    //height: 500px;
   }
 }

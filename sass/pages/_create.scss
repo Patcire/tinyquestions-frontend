@@ -2,5 +2,71 @@
 
 .create{
   @include  flex-column;
-  padding-top: 4%;
+  padding-top: 6%;
+  margin: 0 auto;
+
+  &__container-wmelon{
+    position: relative;
+    right: 30%;
+    top: 550px;
+  }
+
+  &__container-electron{
+    position: relative;
+    left: 20%;
+    bottom: 680px;
+  }
+
+  &__wmelon{
+    width: 200px;
+    position: absolute;
+  }
+  &__electron{
+    width: 180px;
+    position: absolute;
+    left: 100px;
+  }
+
 }
+
+@include tablet{
+  .create{
+    &__container-wmelon{
+      right: 40%;
+      top: 450px;
+    }
+    &__container-electron{
+      left: 30%;
+      bottom: 600px;
+    }
+    &__wmelon{
+      width: 150px;
+    }
+    &__electron{
+      width: 100px;
+      left: 30px;
+    }
+  }
+}
+
+@include mobile{
+  .create{
+    padding-top: 15%;
+    &__container-wmelon{
+      right: 40%;
+      top: 550px;
+    }
+    &__container-electron{
+      left: 20%;
+      bottom: 200px;
+    }
+
+    &__wmelon{
+      width: 100px;
+    }
+    &__electron{
+      display: none;
+    }
+  }
+}
+
