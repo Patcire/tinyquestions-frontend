@@ -9,8 +9,8 @@ export default {
     }
   },
   methods: {
-    auth(){
-      this.sessionStore.checkUserCredentials()
+    exit(){
+      this.sessionStore.user.isConnected = false
       router.push('/');
     }
   }
@@ -22,7 +22,7 @@ export default {
 
   <nav>
 
-    <ul v-if="!this.sessionStore.isConnected" class="navbar">
+    <ul v-if="!this.sessionStore.user.isConnected" class="navbar">
       <li>
         <router-link to="/"  class="navbar__link">Home</router-link>
       </li>
@@ -35,7 +35,7 @@ export default {
     </ul>
 
 
-    <ul v-if="this.sessionStore.isConnected" class="navbar navbar--mod">
+    <ul v-if="this.sessionStore.user.isConnected" class="navbar navbar--mod">
 
       <li>
         <router-link to="/games" class="navbar__link navbar__link--mod">Games</router-link>
@@ -60,7 +60,7 @@ export default {
 
       </li>
       <li>
-        <a @click="auth" class="navbar__link pointer navbar__link pointer--mod" >Exit</a>
+        <a @click="exit" class="navbar__link pointer navbar__link pointer--mod" >Exit</a>
       </li>
     </ul>
   </nav>
@@ -116,7 +116,7 @@ export default {
           <router-link to="/ranks" class="navbar__sublink">Ranks</router-link>
         </li>
         <li>
-          <a @click="auth" class="navbar__link pointer" >Exit</a>
+          <a @click="exit" class="navbar__link pointer" >Exit</a>
         </li>
       </ul>
     </article>
