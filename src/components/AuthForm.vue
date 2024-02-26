@@ -9,6 +9,9 @@ export default {
 
   data() {
     return {
+      username:"",
+      password:"",
+      email:"",
       sessionStore: useSessionStore(),
       schemaLogin: validationLogin,
       schemaRegister: validationRegister,
@@ -17,13 +20,14 @@ export default {
     }
   },
   methods: {
-    handleLogin() {
-      this.sessionStore.checkUserCredentials()
-      router.push('/games');
+    async handleLogin() {
+      console.log('handling')
+      const check = await this.sessionStore.checkUserCredentials(this.username, this.password)
+      check && await router.push('/games')
     },
     handleRegister(){
-      this.sessionStore.checkUserCredentials()
-      router.push('/games');
+      this.sessionStore.register(this.email, this.username, this.password) &&
+      router.push('/games')
     },
     onSubmit(e) {
       e.preventDefault()
@@ -51,20 +55,20 @@ export default {
 
 <template>
   <vForm class="form" :validation-schema="schemaLogin" ref="logform" v-if="!registerForm">
-    <vField placeholder="Username..." class="form__input" type="string" name="username"/>
+    <vField v-model="username" placeholder="Username..." class="form__input" type="string" name="username"/>
     <vError name="username" class="contact__error"></vError>
-    <vField type="password" name="password" placeholder="Password..." class="form__input"/>
+    <vField v-model="password" type="password" name="password" placeholder="Password..." class="form__input"/>
     <vError name="password" class="contact__error"></vError>
     <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
   </vForm>
 
   <vForm class="form" :validation-schema="schemaRegister" ref="regform" v-if="registerForm">
-    <vField placeholder="Email..." class="form__input" type="email" name="email"/>
+    <vField v-model="email" placeholder="Email..." class="form__input" type="email" name="email"/>
     <vError name="email" class="contact__error"></vError>
-    <vField placeholder="Username..." class="form__input" type="string" name="username"/>
+    <vField v-model="username" placeholder="Username..." class="form__input" type="string" name="username"/>
     <vError name="username" class="contact__error"></vError>
     <vField type="password" name="password" placeholder="Password..." class="form__input"/>
-    <vError name="password" class="contact__error"></vError>
+    <vError v-model="password" name="password" class="contact__error"></vError>
     <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
   </vForm>
 

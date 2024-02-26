@@ -11,7 +11,7 @@ export default {
   },
   created() {
 
-    !this.seshStore.isConnected && router.push('/')
+    !this.seshStore.user.isConnected && router.push('/')
   }
 }
 </script>
