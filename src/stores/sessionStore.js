@@ -1,5 +1,4 @@
-import {defineStore} from 'pinia'
-import router from '@/router/router.js'
+import { defineStore } from 'pinia'
 import { postAPI } from '@/helpers/callAPI.js'
 
 export const useSessionStore = defineStore('user',{
@@ -19,23 +18,25 @@ export const useSessionStore = defineStore('user',{
     },
 
     async checkUserCredentials(username, password) {
-
       const response = await postAPI("http://localhost:8000/api/user/login", {
         "username": username,
         "password": password
       })
+      console.log(response)
+      if (!response.ok) return false
+      if (response.ok){
+        const checkedUser = await response.json()
+        if (checkedUser.user){
+          this.user.isConnected = true
+          this.user.username = username
+          this.user.points = checkedUser.points
+          this.user.quizzes_resolved = checkedUser.quizzes_resolved
 
-      const checkedUser = await response.json()
-      console.log('cu', checkedUser)
-
-      if (checkedUser.user){
-        this.user.isConnected = true
-        this.user.username = username
-        this.user.points = checkedUser.points
-        this.user.quizzes_resolved = checkedUser.quizzes_resolved
-        return this.user.isConnected
+          return this.user.isConnected
+        }
       }
-      return this.user.isConnected
+
+      return false
     },
 
     async register(email, username, password){
@@ -45,8 +46,16 @@ export const useSessionStore = defineStore('user',{
         "email": email,
         "password": password
       })
-      //const created = await response.json()
-      //return created
+      if (response.ok){
+        const created = await response.json()
+        if (created.id_user)this.user.isConnected = true
+        return this.user.isConnected
+      }
+
+      if (response.status === 409) {
+        return 'exist'
+      }
+      return false
     }
   },
   persist: {

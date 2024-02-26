@@ -23,13 +23,14 @@ export default {
     async handleLogin() {
       console.log(this.username, this.password)
       const check = await this.sessionStore.checkUserCredentials(this.username, this.password)
+      console.log(check) // if = false show modal with error
       check && await router.push('/games')
     },
     async handleRegister(){
       console.log(this.email,this.username, this.password)
       const register = await this.sessionStore.register(this.email, this.username, this.password)
-      console.log(register)
-      //router.push('/games')
+      console.log(register) // if = false show modal with error
+      register && await router.push('/games')
     },
     onSubmit(e) {
       e.preventDefault()
@@ -69,8 +70,8 @@ export default {
     <vError name="email" class="contact__error"></vError>
     <vField v-model="username" placeholder="Username..." class="form__input" type="string" name="username"/>
     <vError name="username" class="contact__error"></vError>
-    <vField type="password" name="password" placeholder="Password..." class="form__input"/>
-    <vError v-model="password" name="password" class="contact__error"></vError>
+    <vField v-model="password" type="password" name="password" placeholder="Password..." class="form__input"/>
+    <vError name="password" class="contact__error"></vError>
     <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
   </vForm>
 
