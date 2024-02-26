@@ -124,7 +124,7 @@
     bottom: -32px;
     //z-index: -1;
     transform: rotate(-3.5deg);
-    scaleY: -1;
+    //scaleY: -1;
     @include in-out-scale;
     &:hover{
       transform: scale(1.02);

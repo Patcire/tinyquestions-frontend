@@ -12,6 +12,12 @@ export const useSessionStore = defineStore('user',{
     }
   }),
   actions: {
+
+    isLogged(){
+      console.log('is loggued?:'+this.user.isConnected)
+      return this.user.isConnected
+    },
+
     async checkUserCredentials(username, password) {
 
       const response = await postAPI("http://localhost:8000/api/user/login", {
@@ -19,9 +25,10 @@ export const useSessionStore = defineStore('user',{
         "password": password
       })
 
-      const checkedUser = await response.json();
+      const checkedUser = await response.json()
+      console.log('cu', checkedUser)
 
-      if (checkedUser){
+      if (checkedUser.user){
         this.user.isConnected = true
         this.user.username = username
         this.user.points = checkedUser.points
@@ -30,18 +37,16 @@ export const useSessionStore = defineStore('user',{
       }
       return this.user.isConnected
     },
-      isLogged(){
-        console.log('is loggued?:'+this.user.isConnected)
-        return this.user.isConnected
-      },
+
     async register(email, username, password){
-      console.log('entramos on register')
+
       const response = await postAPI("http://localhost:8000/api/user/create", {
-        "email": email,
         "username": username,
+        "email": email,
         "password": password
       })
-      await console.log(await response)
+      //const created = await response.json()
+      //return created
     }
   },
   persist: {

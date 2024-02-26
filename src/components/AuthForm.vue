@@ -21,13 +21,15 @@ export default {
   },
   methods: {
     async handleLogin() {
-      console.log('handling')
+      console.log(this.username, this.password)
       const check = await this.sessionStore.checkUserCredentials(this.username, this.password)
       check && await router.push('/games')
     },
-    handleRegister(){
-      this.sessionStore.register(this.email, this.username, this.password) &&
-      router.push('/games')
+    async handleRegister(){
+      console.log(this.email,this.username, this.password)
+      const register = await this.sessionStore.register(this.email, this.username, this.password)
+      console.log(register)
+      //router.push('/games')
     },
     onSubmit(e) {
       e.preventDefault()
