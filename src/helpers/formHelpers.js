@@ -19,3 +19,4 @@ export const validationRegister = yup.object().shape({
   password: yup.string().required().min(6, 'mínimo 6 carácteres')
 });
 
+

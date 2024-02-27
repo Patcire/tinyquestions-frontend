@@ -2,12 +2,14 @@ import { defineStore } from 'pinia'
 import { postAPI } from '@/helpers/callAPI.js'
 
 export const useSessionStore = defineStore('user',{
+
   state: () => ({
     user:{
+      userID: 0,
       isConnected: false,
       username: "",
-      points:0,
-      quizzes_resolved:0
+      points: 0,
+      quizzes_resolved: 0
     }
   }),
   actions: {
@@ -15,6 +17,14 @@ export const useSessionStore = defineStore('user',{
     isLogged(){
       console.log('is loggued?:'+this.user.isConnected)
       return this.user.isConnected
+    },
+
+    setUserConnected(username, points, quizzesResolved, userID){
+      this.user.isConnected = true;
+      this.user.username = username;
+      this.user.points = points;
+      this.user.quizzes_resolved = quizzesResolved;
+      this.user.userID= userID
     },
 
     async checkUserCredentials(username, password) {
@@ -27,20 +37,15 @@ export const useSessionStore = defineStore('user',{
       if (response.ok){
         const checkedUser = await response.json()
         if (checkedUser.user){
-          this.user.isConnected = true
-          this.user.username = username
-          this.user.points = checkedUser.points
-          this.user.quizzes_resolved = checkedUser.quizzes_resolved
-
+          this.setUserConnected(username, checkedUser.user.points, checkedUser.user.quizzes_resolved, checkedUser.user.id_user)
+          console.log(this.user.userID, this.user.username)
           return this.user.isConnected
         }
       }
-
       return false
     },
 
     async register(email, username, password){
-
       const response = await postAPI("http://localhost:8000/api/user/create", {
         "username": username,
         "email": email,
@@ -48,21 +53,20 @@ export const useSessionStore = defineStore('user',{
       })
       if (response.ok){
         const created = await response.json()
-        if (created.id_user)this.user.isConnected = true
+        if (created.id_user)  this.setUserConnected(username, 0, 0)
         return this.user.isConnected
       }
-
-      if (response.status === 409) {
+      else if (response.status === 409) {
         return 'exist'
       }
       return false
     }
   },
   persist: {
-    enabled:true,
+    enabled: true,
     strategies: [
       {
-        key:"user",
+        key:'pepe',
         storage: localStorage
       }
     ]

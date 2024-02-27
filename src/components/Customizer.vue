@@ -1,126 +1,114 @@
 <script>
 import Modal from '@/components/Modal.vue'
 import { postAPI } from '@/helpers/callAPI.js'
+import { useSessionStore } from '@/stores/sessionStore.js'
 
 export default {
   name: 'Customizer',
   components: { Modal },
   data(){
     return{
+      //user
+      idUser:0,
+      seshStorage: useSessionStore(),
+      // modal data
       openAddForm: false,
       openTimeSettings: false,
-      newQuestion: {
-          title:"",
-          optionA:"",
-          optionB:"",
-          optionC:"",
-          correctOption:"",
-          quizID: 0
-      },
-      newQuiz: {
-        numberOfQuestions: 0,
-        clock:false,
-        time:0,
-        idUser:0
-      },
+      // questions data
+      titleQuestion:"",
+      optionA:"",
+      optionB:"",
+      optionC:"",
+      correctOption:"",
       createdQuestions: [],
-      createdQuiz: {...this.newQuiz}
+      // quizz data
+      quizID: 0,
+      quizName:"",
+      numberOfQuestions: 0,
+      clock:false,
+      time:5
     }
   },
   methods: {
-
+    cleanForm(){
+      this.titleQuestion = ""
+      this.optionA = ""
+      this.optionB = ""
+      this.optionC = ""
+      this.correctOption = ""
+    },
     handleModal(e) {
+      // 'cause thera is a modal form for timer and another for add a new question
       e.preventDefault()
-      // to open
+      // to open the correct one
       if (e.target.classList.contains('add')) this.openAddForm = !this.openAddForm
       if (e.target.classList.contains('time')) this.openTimeSettings = !this.openTimeSettings
       // to close
       if (this.$refs.addForm && e.target.classList.contains('modal')) this.openAddForm = !this.openAddForm
       if (this.$refs.timeForm && e.target.classList.contains('modal')) this.openTimeSettings = !this.openTimeSettings
     },
-
-    cleanForm() {
-      this.$refs.title.value = ""
-      this.$refs.optionA.value = ""
-      this.$refs.optionB.value = ""
-      this.$refs.optionC.value = ""
-      this.$refs.correctOption.value = ""
-    },
-
+    closeTimer(){
+      this.openTimeSettings = false
+  },
     async createQuestionOnDB(question) {
-
-      const q = await postAPI("http://localhost:8000/api/usque/create", {
-        "title": question.title,
+      const questionResponse = await postAPI("http://localhost:8000/api/usque/create", {
+        "title": question.titleQuestion,
         "option_a": question.optionA,
         "option_b": question.optionB,
         "option_c": question.optionC,
         "correct_option": question.correctOption,
-        "fk_id_quiz": question.quizID
+        "fk_id_quiz":  this.quizID
       })
-      await console.log('question enviada: ' + q)
     },
 
-    showQuestionCreated() {
-      this.newQuestion.title = this.$refs.title.value
-      this.newQuestion.optionA = this.$refs.optionA.value
-      this.newQuestion.optionB = this.$refs.optionB.value
-      this.newQuestion.optionC = this.$refs.optionC.value
-      this.newQuestion.correctOption = this.$refs.correctOption.value
-
-      const question = { ...this.newQuestion }
+    handleQuestionCreation() {
+      const question = {
+        titleQuestion: this.titleQuestion,
+        optionA: this.optionA,
+        optionB: this.optionB,
+        optionC: this.optionC,
+        correctOption: this.correctOption
+      }
       this.createdQuestions.push(question)
       this.openAddForm = false
-      this.cleanForm()
-    },
-
-    saveTimerSettings() {
-      if (this.$refs.clock.value && this.$refs.time.value) {
-        this.createdQuiz = {
-          ...this.newQuiz,
-          clock: this.$refs.clock.value,
-          time: this.$refs.time.value
-        }
-      }
-      this.openTimeSettings = false
+     this.cleanForm()
     },
 
     async createdQuizOnDB() {
       const quiz = {
-        ...this.createdQuiz,
+        clock: this.clock,
+        time: this.time,
+        name:this.quizName,
         numberOfQuestions: this.createdQuestions.length,
-        idUser: 1
+        idUser: this.seshStorage.user.userID
       }
-      // REAdJUST THE CODE WHEN USER LOGIN IS IMPLEMENTED
-      // BY NOW DEFAULT USER ID (1)
 
       const createdQuiz = await postAPI("http://localhost:8000/api/cust/create", {
+        "quiz_name": this.quizName || "untitled",
         "n_questions": quiz.numberOfQuestions,
-        "clock": Boolean(quiz.clock),
-        "time": parseInt(quiz.time),
-        "fk_id_user": quiz.idUser
+        "clock": Boolean(this.clock),
+        "time": parseInt(this.time),
+        "fk_id_user": this.seshStorage.user.userID
       })
 
       const createdQuizJSON = await createdQuiz.json();
 
       if (createdQuizJSON && createdQuizJSON.id_quiz) {
+        this.quizID = createdQuizJSON.id_quiz
+        for (const question of this.createdQuestions) {
+          await this.createQuestionOnDB(question);
+        }
 
-        this.createdQuestions.forEach((question) => {
-          const questionCreated = {
-            ...question,
-              quizID: createdQuizJSON.id_quiz
-          }
-          this.createQuestionOnDB(questionCreated)
-        })
-        console.log('tuto bene')
       }
     }
-
   },
+
   mounted() {
     window.onclick = (e) => {
       e.target.classList.contains('modal') && this.handleModal(e)
     }
   }
+
 }
 </script>
 
@@ -129,6 +117,7 @@ export default {
     <header class="customizer__header">
 
       <input
+        v-model="quizName"
         class="customizer__input"
         type="text"
         placeholder="Quiz name..."
@@ -151,7 +140,7 @@ export default {
     <article class="customizer__questions-container">
       <ul>
         <li v-for="question in createdQuestions">
-          <p class="customizer__title">{{question.title}}</p>
+          <p class="customizer__title">{{question.titleQuestion}}</p>
         </li>
       </ul>
     </article>
@@ -167,28 +156,33 @@ export default {
     :show="openAddForm"
     ref="addForm"
   >
-    <form @submit.prevent="showQuestionCreated">
+    <form @submit.prevent="handleQuestionCreation">
       <section class="customizer__form">
         <h2 class="customizer__modal-title">
           Add new question
         </h2>
         <input
+          v-model="titleQuestion"
           ref="title"
           placeholder="Question..."
           class="customizer__input-form">
         <input
+          v-model="optionA"
           ref="optionA"
           placeholder="Option a..."
           class="customizer__input-form">
         <input
+          v-model="optionB"
           ref="optionB"
           placeholder="Option b..."
           class="customizer__input-form">
         <input
+          v-model="optionC"
           ref="optionC"
           placeholder="Option c..."
           class="customizer__input-form">
         <input
+          v-model="correctOption"
           ref="correctOption"
           placeholder="Correct option..."
           class="customizer__input-form">
@@ -202,13 +196,13 @@ export default {
     :show="openTimeSettings"
     ref="timeForm"
   >
-    <form @submit.prevent="saveTimerSettings">
+    <form @submit.prevent="closeTimer">
       <section class="customizer__form customizer__form--timer">
           <article class="customizer__art">
           <h2 class="customizer__modal-title--timer">
             ¿Add timer?
           </h2>
-          <select ref="clock" class="customizer__sel">
+          <select v-model="clock" ref="clock" class="customizer__sel">
             <option  class="customizer__opt"
               value="false">false</option>
             <option class="customizer__opt"
@@ -220,9 +214,11 @@ export default {
         Seconds:
         </h2>
           <input
+            v-model="time"
             ref="time"
             type="number"
-            placeholder="0"
+            min="5"
+            placeholder="5"
             class="customizer__input-form"
           >
         </article>
