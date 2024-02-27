@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     handleContentShowed(contentChoose){
-      contentChoose === "myQuizzies" ?
+      contentChoose === "myQuizzes" ?
       this.contentToSendToGallery = [...this.contentMyQuizzies]
       :
       this.contentToSendToGallery = [...this.contentFavs]

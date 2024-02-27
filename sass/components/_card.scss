@@ -14,6 +14,14 @@
     transform: scale(1.05);
     cursor: pointer;
   }
+  &__action{
+    //background-color: purple;
+    animation: ease-in-out;
+    font-family: $fontLogo;
+    font-size: 1.5rem;
+    -webkit-text-stroke: 0.6px black;
+    color: $pink;
+  }
   &__info{
     height: 65%;
     width: 150px;
@@ -23,7 +31,9 @@
     font-size: 1.4rem;
     //text-align: left;
     text-align: center;
-
+    &_hover{
+      opacity: 50%
+    }
   }
   &__footer{
     background-color: blueviolet;
