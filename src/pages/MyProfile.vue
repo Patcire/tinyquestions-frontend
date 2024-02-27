@@ -12,32 +12,38 @@ export default {
 
       userID: useSessionStore().user.userID,
       selection: "myQuizzes", // by default
-      // two arrays to storage api petitions
+      // to storage api petitions
       contentMyQuizzies: [],
       contentFavs: [],
-      // an array to send the content chose to the gallery
+      contentToExplore: [],
+      // an array to send the chosen content to the gallery
       contentToSendToGallery: []
 
     }
   },
   methods: {
-    handleContentShowed(contentChoose){
-      contentChoose === "myQuizzes" ?
-      this.contentToSendToGallery = [...this.contentMyQuizzies]
-      :
-      this.contentToSendToGallery = [...this.contentFavs]
-      console.log(this.contentToSendToGallery)
+
+    handleContentShowed(contentToChose){
+      if (contentToChose === "myQuizzes") this.contentToSendToGallery = [...this.contentMyQuizzies]
+      if (contentToChose === "favs") this.contentToSendToGallery = [...this.contentFavs]
+      if (contentToChose === "explore") this.contentToSendToGallery = [...this.contentToExplore]
+
+      console.log('lenght:', this.contentToSendToGallery.length)
     }
   },
-  async created() {
-    const myQuizzesContent = await callAPI(`http://localhost:8000/api/cust/all/${this.userID}`)
-    this.contentMyQuizzies = [...myQuizzesContent]
 
+  async created() {
+    const personalQuizzes = await callAPI(`http://localhost:8000/api/cust/all/${this.userID}`)
+    const quizzesToExplore = await callAPI(`http://localhost:8000/api/cust/all`)
+    console.log('toexp: ', quizzesToExplore)
+    this.contentMyQuizzies = [...personalQuizzes]
+    this.contentToExplore = [...quizzesToExplore]
     //const favsContent = await callAPI('http://localhost:8000/api/') //implement
     //this.contentFavs = [...favsContent]
 
     this.contentToSendToGallery = [...this.contentMyQuizzies]
   }
+
 }
 </script>
 

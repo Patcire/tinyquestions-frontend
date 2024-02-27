@@ -7,21 +7,15 @@ export default {
   data(){
     return{
       seshStore: useSessionStore(),
-      myQuizzesCSSclass:"--bold",
-      favsCSSclass:""
+      contentOption:"",
+      chosenCSSclass:"--bold",
     }
   },
   methods:{
-    changeContentToMyQuizzes(){
-      this.$emit('selection', 'myQuizzes')
-      this.myQuizzesCSSclass = "--bold"
-      this.favsCSSclass= ""
-      },
-    changeContentToFavs(){
-      this.$emit('selection', 'favs')
-      this.favsCSSclass = "--bold"
-      this.myQuizzesCSSclass= ""
-    }
+    changeOption(chosenOption){
+      this.contentOption = chosenOption
+      this.$emit('selection', this.contentOption)
+      }
   }
 }
 </script>
@@ -42,18 +36,28 @@ export default {
 
     <article class="userinfo__settings">
       <button
-        @click="changeContentToMyQuizzes"
+        @click="changeOption('myQuizzes')"
         class="userinfo__options"
-        :class="myQuizzesCSSclass">
+        :class="contentOption==='myQuizzes' ? '--bold' : '' "
+        >
         My Quizzes
       </button>
       <span>|</span>
       <button
-        @click="changeContentToFavs"
-        @sendPreference="contentShowed"
+        @click="changeOption('favs')"
         class="userinfo__options"
-        :class="favsCSSclass">
+        :class="contentOption==='favs' ? '--bold' : '' "
+      >
         Favs
+      </button>
+      <span>|</span>
+      <button
+        @click="changeOption('explore')"
+        class="userinfo__options"
+        :class="contentOption==='explore' ? '--bold' : '' "
+
+      >
+        Explore
       </button>
     </article>
 
