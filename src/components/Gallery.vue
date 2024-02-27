@@ -6,22 +6,25 @@ export default {
   components: { Card },
   props:{
     content:{
-      type: String
+      type: Array
     }
   }
 }
 </script>
 
 <template>
-  <section class="gallery">
-    <h1>{{content}}</h1>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
+
+  <section class="gallery" v-if="content.length">
+    <ul v-for="quiz in content" :key="quiz.id_quiz">
+      <Card :quiz="quiz"></Card>
+    </ul>
   </section>
+
+  <article v-if="!content.length" class="no-gallery"> 
+    <h1>Nothing here :(</h1>
+    <img class="no-gallery__bird"
+      alt="doodle of a bird" src="../../public/birdbird.svg">
+  </article>
+
 </template>
 

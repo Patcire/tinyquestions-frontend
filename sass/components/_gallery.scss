@@ -7,3 +7,13 @@
   border-top: 2px solid grey;
   @include grid-gallery(4)
 }
+
+.no-gallery{
+  font-family: $fontQuestions;
+  font-size: 2rem;
+  padding-top: 5%;
+  @include flex-column;
+  &__bird{
+    padding-left: 35%;
+  }
+}

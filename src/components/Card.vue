@@ -2,8 +2,8 @@
 export default {
   name: 'Card',
   props:{
-    info:{
-      type: Array
+    quiz:{
+      type: Object
     }
   }
 }
@@ -12,11 +12,11 @@ export default {
 <template>
   <article class="card">
     <section class="card__info">
-      <p>Total questions: 9</p>
-      <p>Clock: 45s</p>
+      <p>Total questions: {{quiz.n_questions}}</p>
+      <p v-if="quiz.clock">Time: {{quiz.time}} s</p>
     </section>
     <footer class="card__footer">
-      <h1 class="card__name">Name of the quizzzzzzzzzzzzzzzzzzzzzzzzzz</h1>
+      <h1 class="card__name">{{quiz.quiz_name}}</h1>
     </footer>
   </article>
 </template>
