@@ -12,7 +12,7 @@ export default {
         title:'',
         class:'quick__title',
         clock: [false, 0], // miliseconds
-        numberOfQuestions: 12,
+        numberOfQuestions: 5,
         hasScore: true,
         rerun: false
       }
