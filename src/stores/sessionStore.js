@@ -23,12 +23,15 @@ export const useSessionStore = defineStore('user',{
     },
 
     setUserConnected(username, points, quizzesResolved, userID){
-      this.user.isConnected = true;
-      this.user.username = username;
-      this.user.points = points;
-      this.user.quizzes_resolved = quizzesResolved;
+      this.user.isConnected = true
+      this.user.username = username
+      this.user.points = points
+      this.user.quizzes_resolved = quizzesResolved
       this.user.userID= userID
+      this.user.likedStorage= []
+      this.user.myQuizzesStorage= []
     },
+
 
     async checkUserCredentials(username, password) {
       const response = await postAPI("http://localhost:8000/api/user/login", {
@@ -63,14 +66,16 @@ export const useSessionStore = defineStore('user',{
         return 'exist'
       }
       return false
-    }
+    },
+
   },
   persist: {
     enabled: true,
     strategies: [
       {
-        key:"pepe",
-        storage: localStorage
+        key: "user",
+        storage: localStorage,
+
       }
     ]
   }
