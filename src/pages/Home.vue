@@ -2,6 +2,7 @@
 import Under from '@/components/Under.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import Quiz from '@/components/Quiz.vue'
+
 export default {
   name: 'Home',
   components: { Quiz, Under },
@@ -14,7 +15,8 @@ export default {
         clock: [false, 0], // miliseconds
         numberOfQuestions: 5,
         hasScore: true,
-        rerun: false
+        rerun: false,
+        mod:'homeMod'
       }
     }
   }
@@ -30,8 +32,9 @@ export default {
           src="../../public/eyeeye.svg"
           alt="doodle of an eye">
         </div>
-
-        <Quiz :mode="mode"></Quiz>
+        <p class="home__congrats">Congrats! You finished your first quiz!</p>
+        <span class="home__congrats">:)</span>
+       <Quiz :mode="mode"></Quiz>
 
         <div class="home__subcontainter">
           <img class="home__cereals"

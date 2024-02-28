@@ -1,5 +1,6 @@
 <script>
 import { callAPI } from '@/helpers/callAPI.js'
+import router from '@/router/router.js'
 
 export default {
   name: 'Quiz',
@@ -25,6 +26,7 @@ export default {
         -numberOfQuestions: **Number**
         -hasScore: **Boolean**
         -rerun: **Boolean**
+        -mod: to mod some of the functions of the quiz **String**
       */
     }
   },
@@ -32,6 +34,9 @@ export default {
   emits: ['next'],
 
   methods: {
+    router() {
+      return router
+    },
 
     // to get questions from API
 
@@ -170,11 +175,16 @@ export default {
     <p
       class="quiz__calification quiz__calification--active"
       :class="{'active': questions}">
-      {{this.points}} of 120 possible points
+      {{this.points}} of {{this.mode.numberOfQuestions*10}} possible points
     </p>
-    <button
+    <button v-if="!this.mode.mod"
       @click="handleNewQuiz"
       class="navbar__button navbar__button--again">
+      New quiz ?
+    </button>
+    <button v-if="this.mode.mod==='homeMod'"
+            @click="router().push('/register')"
+            class="navbar__button navbar__button--again">
       New quiz ?
     </button>
 

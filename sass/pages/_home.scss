@@ -38,6 +38,11 @@
     left: 438px;
   }
 
+  &__congrats{
+    font-family: $fontQuestions;
+    font-size: 2rem ;
+  }
+
     //overflow: hidden;
     //transform: skew(0deg, 0deg);
     //clip-path: polygon(0 0, 70% 10%, 100% 40%, 100%  100%, 0% 100%);

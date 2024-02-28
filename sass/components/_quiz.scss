@@ -27,6 +27,7 @@
     padding: 0 5% 0 4%;
     line-height: 1;
     box-shadow: $shadow2;
+    background-color: white;
     @include flex-row
   }
 
@@ -52,6 +53,7 @@
     cursor: pointer;
     padding-left: 10%;
     box-shadow: $shadow1;
+    background-color: white;
     @include in-out-scale;
     &:hover{
       cursor: pointer;
