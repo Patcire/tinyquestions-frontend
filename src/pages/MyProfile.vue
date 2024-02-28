@@ -9,7 +9,7 @@ export default {
   components: { Gallery, ProfileHeader },
   data(){
     return{
-
+      bgCardColorCSS: "purple",
       userID: useSessionStore().user.userID,
       selection: "myQuizzes", // by default
       // to storage api petitions that is not on the pinia store
@@ -22,9 +22,18 @@ export default {
   methods: {
 
     handleContentShowed(contentToChose) {
-      if (contentToChose === "myQuizzes") this.contentToSendToGallery = [...useSessionStore().user.myQuizzesStorage]
-      else if (contentToChose === "liked") this.contentToSendToGallery = [...useSessionStore().user.likedStorage]
-      else if (contentToChose === "explore") this.contentToSendToGallery = [...this.contentToExplore]
+      if (contentToChose === "myQuizzes") {
+        this.contentToSendToGallery = [...useSessionStore().user.myQuizzesStorage]
+        this.bgCardColorCSS="purple"
+      }
+      else if (contentToChose === "liked") {
+        this.contentToSendToGallery = [...useSessionStore().user.likedStorage]
+        this.bgCardColorCSS="pink"
+      }
+      else if (contentToChose === "explore") {
+        this.contentToSendToGallery = [...this.contentToExplore]
+        this.bgCardColorCSS="blue"
+      }
     }
   },
 
@@ -54,7 +63,7 @@ export default {
 <template>
   <section class="profile">
     <ProfileHeader @selection="handleContentShowed"></ProfileHeader>
-    <Gallery :content="contentToSendToGallery"></Gallery>
+    <Gallery :content="contentToSendToGallery" :bgCardColorCSS="bgCardColorCSS"></Gallery>
   </section>
 
 </template>

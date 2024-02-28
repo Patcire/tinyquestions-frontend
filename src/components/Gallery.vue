@@ -7,6 +7,14 @@ export default {
   props:{
     content:{
       type: Array
+    },
+    bgCardColorCSS:{
+      type: String
+    }
+  },
+  data(){
+    return{
+
     }
   }
 }
@@ -16,7 +24,7 @@ export default {
 
   <section class="gallery" v-if="content.length">
     <ul v-for="quiz in content" :key="quiz.id_quiz">
-      <Card :quiz="quiz"></Card>
+      <Card :quiz="quiz" :bgCardColorCSS="bgCardColorCSS"></Card>
     </ul>
   </section>
 

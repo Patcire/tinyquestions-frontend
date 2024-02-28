@@ -9,6 +9,9 @@ export default {
   props:{
     quiz:{
       type: Object
+    },
+    bgCardColorCSS:{
+      type: String
     }
   },
   data(){
@@ -72,7 +75,10 @@ export default {
     </section>
 
     <p class="card__action" v-if="showPlayText">play</p>
-    <footer class="card__footer">
+    <footer
+      class="card__footer"
+      :class="this.bgCardColorCSS"
+    >
       <h1 class="card__name">{{quiz.quiz_name}}</h1>
     </footer>
 
