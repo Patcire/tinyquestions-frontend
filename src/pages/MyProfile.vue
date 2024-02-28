@@ -12,9 +12,7 @@ export default {
 
       userID: useSessionStore().user.userID,
       selection: "myQuizzes", // by default
-      // to storage api petitions
-      contentMyQuizzies: [],
-      contentFavs: [],
+      // to storage api petitions that is not on the pinia store
       contentToExplore: [],
       // an array to send the chosen content to the gallery
       contentToSendToGallery: []
@@ -23,22 +21,28 @@ export default {
   },
   methods: {
 
-    handleContentShowed(contentToChose){
-      if (contentToChose === "myQuizzes") this.contentToSendToGallery = [...this.contentMyQuizzies]
-      if (contentToChose === "favs") this.contentToSendToGallery = [...this.contentFavs]
-      if (contentToChose === "explore") this.contentToSendToGallery = [...this.contentToExplore]
+    handleContentShowed(contentToChose) {
+      if (contentToChose === "myQuizzes") this.contentToSendToGallery = [...useSessionStore().user.myQuizzesStorage]
+      else if (contentToChose === "liked") this.contentToSendToGallery = [...useSessionStore().user.likedStorage]
+      else if (contentToChose === "explore") this.contentToSendToGallery = [...this.contentToExplore]
     }
   },
 
   async created() {
-    const personalQuizzes = await callAPI(`http://localhost:8000/api/cust/all/${this.userID}`)
-    const quizzesToExplore = await callAPI(`http://localhost:8000/api/cust/all`)
-    this.contentMyQuizzies = [...personalQuizzes]
-    this.contentToExplore = [...quizzesToExplore]
-    //const favsContent = await callAPI(`http://localhost:8000/api/li/${this.userID}`) //implement
-    //this.contentFavs = [...favsContent]
+    this.contentToSendToGallery = [...useSessionStore().user.myQuizzesStorage]
+    // if the data on DB is ahead on localStorage I update it
+    const personalQuizzesFromAPI = await callAPI(`http://localhost:8000/api/cust/all/${this.userID}`)
+    if (useSessionStore().user.myQuizzesStorage !== personalQuizzesFromAPI.length ){
+      useSessionStore().user.myQuizzesStorage = [...personalQuizzesFromAPI]
+    }
+    const quizzesToExploreFromAPI = await callAPI(`http://localhost:8000/api/cust/all`)
+    if (this.contentToExplore.length !== quizzesToExploreFromAPI.length) {
+      this.contentToExplore = [...quizzesToExploreFromAPI]
+    }
 
-    this.contentToSendToGallery = [...this.contentMyQuizzies]
+   // const likedContent = await callAPI(`http://localhost:8000/api/li/${this.userID}`)
+    //this.contentLiked = [...likedContent]
+
   }
 
 }

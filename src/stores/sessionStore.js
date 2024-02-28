@@ -9,14 +9,16 @@ export const useSessionStore = defineStore('user',{
       isConnected: false,
       username: "",
       points: 0,
-      quizzes_resolved: 0
+      quizzes_resolved: 0,
+      likedStorage: [],
+      myQuizzesStorage: []
     },
 
   }),
   actions: {
 
     isLogged(){
-      console.log('is loggued?:'+this.user.isConnected)
+      //console.log('is loggued?:'+this.user.isConnected)
       return this.user.isConnected
     },
 

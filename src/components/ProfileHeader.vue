@@ -44,11 +44,11 @@ export default {
       </button>
       <span>|</span>
       <button
-        @click="changeOption('favs')"
+        @click="changeOption('liked')"
         class="userinfo__options"
-        :class="contentOption==='favs' ? '--bold' : '' "
+        :class="contentOption==='liked' ? '--bold' : '' "
       >
-        Favs
+        Liked
       </button>
       <span>|</span>
       <button
