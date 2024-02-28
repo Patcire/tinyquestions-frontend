@@ -29,19 +29,22 @@ export default {
   },
 
   async created() {
-    this.contentToSendToGallery = [...useSessionStore().user.myQuizzesStorage]
-    // if the data on DB is ahead on localStorage I update it
+    this.contentToSendToGallery = [...useSessionStore().user.myQuizzesStorage] // by default
+    // if the data on DB is ahead vs the localStorage i update the localS
     const personalQuizzesFromAPI = await callAPI(`http://localhost:8000/api/cust/all/${this.userID}`)
     if (useSessionStore().user.myQuizzesStorage !== personalQuizzesFromAPI.length ){
       useSessionStore().user.myQuizzesStorage = [...personalQuizzesFromAPI]
     }
+
+    const likedContentFromAPI = await callAPI(`http://localhost:8000/api/li/likes/${this.userID}`)
+    if (useSessionStore().user.likedStorage.length !== likedContentFromAPI.length) {
+      useSessionStore().user.likedStorage = [...likedContentFromAPI]
+    }
+
     const quizzesToExploreFromAPI = await callAPI(`http://localhost:8000/api/cust/all`)
     if (this.contentToExplore.length !== quizzesToExploreFromAPI.length) {
       this.contentToExplore = [...quizzesToExploreFromAPI]
     }
-
-   // const likedContent = await callAPI(`http://localhost:8000/api/li/${this.userID}`)
-    //this.contentLiked = [...likedContent]
 
   }
 
