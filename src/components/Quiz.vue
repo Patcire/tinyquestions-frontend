@@ -83,11 +83,12 @@ export default {
 
 <template>
 
-  <section class="quiz"
+  <section class="quiz quiz--home"
            v-if="questions.length > 0
                  && questions[counter]
-                 && timerAutoStart
-                 ">
+                 && timerAutoStart"
+  >
+
 
     <header class="quiz__header">
       <h1 :class=mode.class>{{mode.title}}</h1>
