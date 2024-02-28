@@ -22,10 +22,7 @@ export default {
   methods:{
     async giveLike(){
       this.liked= !this.liked
-      console.log('qID', this.quiz.id_quiz)
-      console.log('uID', this.userID)
       if (this.liked===true){
-        console.log('i liked itttt!')
         const likeSaveOnDB = await postAPI(`http://localhost:8000/api/li/give`, {
           "fk_id_user": this.userID,
           "fk_id_quiz": this.quiz.id_quiz
@@ -34,8 +31,16 @@ export default {
       }
       console.log('meh, i dislike it really!')
       const likeDeleteOnDB = await deleteAPI(`http://localhost:8000/api/li/dis/${this.userID}/${this.quiz.id_quiz}`)
-
     }
+  },
+  created() {
+    // when we show the quiz we must know if the quizz is already liked
+    // to change the iconm
+    const isLiked= useSessionStore().user.likedStorage.some((quizLocalStorage)=> {
+      return  quizLocalStorage.id_quiz === this.quiz.id_quiz
+    })
+
+    if(isLiked) this.liked=true
   }
 }
 </script>
