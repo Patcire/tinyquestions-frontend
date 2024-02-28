@@ -10,7 +10,8 @@ export const useSessionStore = defineStore('user',{
       username: "",
       points: 0,
       quizzes_resolved: 0
-    }
+    },
+
   }),
   actions: {
 
@@ -66,7 +67,7 @@ export const useSessionStore = defineStore('user',{
     enabled: true,
     strategies: [
       {
-        key:'pepe',
+        key:"pepe",
         storage: localStorage
       }
     ]

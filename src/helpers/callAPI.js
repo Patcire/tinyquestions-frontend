@@ -14,3 +14,12 @@ export const postAPI= async (url, body) => {
   })
 }
 
+export const deleteAPI = async (url) => {
+  return await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+}
+

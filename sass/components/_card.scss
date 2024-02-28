@@ -21,11 +21,15 @@
     font-size: 1.5rem;
     -webkit-text-stroke: 0.6px black;
     color: $pink;
+    @include in-out-scale;
+    &:hover{
+      transform: scale(1.1);
+    }
   }
   &__info{
     height: 65%;
     width: 150px;
-    background-color: lightcoral;
+    //background-color: lightcoral;
     font-family: $fontAnswers;
     @include flex-column;
     font-size: 1.4rem;
@@ -36,7 +40,7 @@
     }
   }
   &__footer{
-    background-color: blueviolet;
+    background-color: $purple;
     height: 35%;
     width: 170px;
     font-family: $fontQuestions;
@@ -52,7 +56,25 @@
     //white-space: nowrap;
     text-overflow: ellipsis;
     width: 150px;
-    background-color: aquamarine;
+    //background-color: aquamarine;
+  }
+  &__like{
+    background: none;
+    border: none;
+    background: aquamarine;
+    position: relative;
+    @include in-out-scale;
+    &:hover{
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+  &__empty-heart{
+    //background-color: lightcoral;
+    height: 30px;
+    position: absolute;
+    top: 15px;
+    left: 45px;
   }
 
 }

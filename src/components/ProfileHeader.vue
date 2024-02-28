@@ -7,7 +7,7 @@ export default {
   data(){
     return{
       seshStore: useSessionStore(),
-      contentOption:"",
+      contentOption:"myQuizzes",
       chosenCSSclass:"--bold",
     }
   },
