@@ -4,6 +4,7 @@
   @include flex-column;
   //background-color: lightgreen;
   position: relative;
+  padding: 10%;
   &__img{
     animation: spinX 3s ease-in-out infinite backwards;
     //position: absolute;

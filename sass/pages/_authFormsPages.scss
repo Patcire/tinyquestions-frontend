@@ -151,6 +151,13 @@
   &__input:last-of-type{
     margin-bottom: 8%;
   }
+  &__global-error{
+    font-family: $fontQuestions;
+    font-size: 1.2rem;
+    color: $pink;
+    width: 250px;
+    text-align: center;
+  }
 
 }
 

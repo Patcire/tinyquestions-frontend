@@ -16,23 +16,41 @@ export default {
       schemaLogin: validationLogin,
       schemaRegister: validationRegister,
       registerForm: false,
-      location
+      location,
+      showErrorOfFailSubmit: false,
+      errorFailSubmitMessage: "",
     }
   },
   methods: {
+
     async handleLogin() {
-      console.log(this.username, this.password)
       const check = await this.sessionStore.checkUserCredentials(this.username, this.password)
-      console.log(check) // if = false show modal with error
+      if (!check){
+        this.showErrorOfFailSubmit = true
+        this.errorFailSubmitMessage ="No user found with these credentials"
+        return
+      }
       check && await router.push('/games')
     },
+
     async handleRegister(){
-      console.log(this.email,this.username, this.password)
       const register = await this.sessionStore.register(this.email, this.username, this.password)
-      console.log(register) // if = false show modal with error
+      console.log(register)
+      if (!register){
+        this.showErrorOfFailSubmit = true
+        this.errorFailSubmitMessage ="something went wrong, try again!"
+        return
+      }
+      else if(register==='exist'){
+        this.showErrorOfFailSubmit = true
+        this.errorFailSubmitMessage ="username not available"
+        return
+      }
       register && await router.push('/games')
     },
+
     onSubmit(e) {
+      this.showErrorOfFailSubmit = false
       e.preventDefault()
         this.$refs.regform && this.$refs.regform.validate().then(validation => {
           validation.valid && this.handleRegister()
@@ -41,7 +59,9 @@ export default {
           validation.valid && this.handleLogin()
       })
     }
+
   },
+
   components: { vField: Field, vForm: Form, vError: ErrorMessage, },
   mounted() {
     this.location = window.location.href
@@ -59,20 +79,24 @@ export default {
 <template>
   <vForm class="form" :validation-schema="schemaLogin" ref="logform" v-if="!registerForm">
     <vField v-model="username" placeholder="Username..." class="form__input" type="string" name="username"/>
-    <vError name="username" class="contact__error"></vError>
+    <vError name="username" class="form__global-error"></vError>
     <vField v-model="password" type="password" name="password" placeholder="Password..." class="form__input"/>
-    <vError name="password" class="contact__error"></vError>
+    <vError name="password" class="form__global-error"></vError>
     <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
+    <p v-if="showErrorOfFailSubmit"
+      class="form__global-error">{{errorFailSubmitMessage}}</p>
   </vForm>
 
   <vForm class="form" :validation-schema="schemaRegister" ref="regform" v-if="registerForm">
     <vField v-model="email" placeholder="Email..." class="form__input" type="email" name="email"/>
-    <vError name="email" class="contact__error"></vError>
+    <vError name="email" class="form__global-error"></vError>
     <vField v-model="username" placeholder="Username..." class="form__input" type="string" name="username"/>
-    <vError name="username" class="contact__error"></vError>
+    <vError name="username" class="form__global-error"></vError>
     <vField v-model="password" type="password" name="password" placeholder="Password..." class="form__input"/>
-    <vError name="password" class="contact__error"></vError>
+    <vError name="password" class="form__global-error"></vError>
     <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
+    <p v-if="showErrorOfFailSubmit"
+       class="form__global-error">{{errorFailSubmitMessage}}</p>
   </vForm>
 
 </template>
