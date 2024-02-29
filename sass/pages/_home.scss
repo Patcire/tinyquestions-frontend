@@ -46,3 +46,40 @@
 
 
 }
+
+@include tablet{
+  .home{
+    &__figure{
+      width: 900px;
+    }
+    &__cereals{
+      width: 180px;
+      left:350px;
+      top: 30px
+    }
+    &__eye{
+      width: 180px;
+      bottom: 40px;
+      right: 300px;
+    }
+
+  }
+}
+
+@include mobile{
+  .home{
+    //background-color: $lightPink;
+    &__figure{
+
+    }
+    &__cereals{
+      width: 180px;
+      left:100px;
+      top: 130px;
+    }
+    &__eye{
+      display: none;
+    }
+
+  }
+}
