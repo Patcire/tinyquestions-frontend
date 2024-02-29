@@ -32,8 +32,6 @@ export default {
           src="../../public/eyeeye.svg"
           alt="doodle of an eye">
         </div>
-        <p class="home__congrats">Congrats! You finished your first quiz!</p>
-        <span class="home__congrats">:)</span>
        <Quiz :mode="mode"></Quiz>
 
         <div class="home__subcontainter">

@@ -1,10 +1,10 @@
 <script>
 import Quiz from '@/components/Quiz.vue'
-import { callAPI } from '@/helpers/callAPI.js'
+import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'Quick',
-  components: { Quiz },
+  components: { Loading, Quiz },
   data() {
     return {
       mode:
@@ -25,7 +25,7 @@ export default {
 <template>
 
   <section class="quick">
-  <Quiz :mode="mode"></Quiz>
+    <Quiz :mode="mode"></Quiz>
   </section>
 
 </template>

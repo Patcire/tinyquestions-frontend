@@ -39,6 +39,7 @@
     height: 184px;
     width: 244px;
     border-radius: 30px; /* esto lo hago para el área del hover*/
+    color: black;
     @include flex-column;
     @include in-out-scale;
     &:hover{

@@ -1,9 +1,11 @@
 <script>
 import { callAPI } from '@/helpers/callAPI.js'
 import router from '@/router/router.js'
+import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'Quiz',
+  components: { Loading },
   data(){
     return{
       isCorrectAnimationTrigger: null,
@@ -30,8 +32,6 @@ export default {
       */
     }
   },
-
-  emits: ['next'],
 
   methods: {
     router() {
@@ -81,6 +81,7 @@ export default {
     //to handle the quiz logic
 
     async handleNewQuiz(){
+      this.questions = [] // to activate the loading animation
       await this.getQuestionsFromAPIForNewQuiz()
       this.counter =0
       this.points = 0
@@ -101,6 +102,8 @@ export default {
 </script>
 
 <template>
+
+  <Loading v-if="!questions.length"></Loading>
 
   <section class="quiz quiz--home"
            v-if="questions.length > 0
@@ -168,6 +171,7 @@ export default {
            src="../../public/virutas.svg" alt="doodle of sparkles">
     </article>
   </section>
+
   <article v-if="(mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore"
             class="quiz__results"
            :class="{'active': questions}">
@@ -185,9 +189,8 @@ export default {
     <button v-if="this.mode.mod==='homeMod'"
             @click="router().push('/register')"
             class="navbar__button navbar__button--again">
-      New quiz ?
+      Register to play more!
     </button>
-
   </article>
 
 </template>
