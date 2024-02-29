@@ -59,7 +59,7 @@ export const useSessionStore = defineStore('user',{
       })
       if (response.ok){
         const created = await response.json()
-        if (created.id_user)  this.setUserConnected(username, 0, 0)
+        if (created.id_user)  this.setUserConnected(username, 0, 0, created.id_user)
         return this.user.isConnected
       }
       else if (response.status === 409) {

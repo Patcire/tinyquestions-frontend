@@ -33,9 +33,12 @@ export default {
           "fk_id_user": this.userID,
           "fk_id_quiz": this.quiz.id_quiz
         })
+        console.log(this.userID)
+        console.log(this.quiz.id_quiz)
+        console.log(likeSaveOnDB)
         // and then, if the API post fail
         // I undo the visual icon
-        if (!likeSaveOnDB) {
+        if (likeSaveOnDB.error === 'not created') {
           this.liked = false
         }
         // finally, if all was success, update the LS
