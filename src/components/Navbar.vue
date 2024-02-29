@@ -45,18 +45,7 @@ export default {
       </li>
 
       <li class="navbar__submenu">
-        <button class="navbar__button navbar__button--mod">Comunnity</button>
-        <ul class="navbar__sublist">
-          <li>
-            <router-link to="/profile" class="navbar__sublink" >My profile</router-link>
-          </li>
-          <li>
-            <router-link to="/find" class="navbar__sublink" >Find questions</router-link>
-          </li>
-          <li>
-            <router-link to="/ranks" class="navbar__sublink">Ranks</router-link>
-          </li>
-        </ul>
+        <router-link to="/profile" class="navbar__link navbar__link--mod" >Comunnity</router-link>
 
       </li>
       <li>
