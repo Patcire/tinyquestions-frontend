@@ -1,14 +1,14 @@
 <script>
+import Loading from '@/components/Loading.vue'
+import Under from '@/components/Under.vue'
+
 export default {
-  name: 'Mirror'
+  name: 'Mirror',
+  components: { Under, Loading }
 }
 </script>
 
 <template>
-  <h1>Mirror</h1>
-
+  <Under></Under>
 </template>
 
-<style scoped>
-
-</style>

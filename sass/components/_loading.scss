@@ -1,0 +1,27 @@
+@import "../abstracts/index";
+
+.loading{
+  @include flex-column;
+  //background-color: lightgreen;
+  position: relative;
+  &__img{
+    animation: spinX 3s ease-in-out infinite backwards;
+    //position: absolute;
+    //right: 70%;
+  }
+  &__subcontainer{
+    @include flex-row;
+    font-family: $fontQuestions;
+    font-size: 3rem;
+  }
+  &__word{
+
+
+  }
+  &__detail{
+    animation: ease-in-out writeWord 2s infinite alternate-reverse;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
