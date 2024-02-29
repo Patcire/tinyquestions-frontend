@@ -1,11 +1,14 @@
 <script>
+import Under from '@/components/Under.vue'
+
 export default {
-  name: 'Exploding'
+  name: 'Exploding',
+  components: { Under }
 }
 </script>
 
 <template>
-  <h1>Exploding</h1>
+  <Under></Under>
 </template>
 
 <style scoped>
