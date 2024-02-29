@@ -37,6 +37,7 @@
     width: 600px;
     @include flex-column;
     position: relative;
+    border:none
   }
 
   &__answer {

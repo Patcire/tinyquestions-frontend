@@ -27,29 +27,30 @@ export default {
 </script>
 
 <template>
+  <div class="about__circle"></div> <!--only for decoration-->
   <section class="about">
 
-    <article>
-      <p>At <strong>tinyquestion</strong> we love filler games that help you
+    <article class="about__text">
+      <p class="about__p">At <strong>tinyquestion</strong> we love filler games that help you
         to free all the stress of your day.
       </p>
 
-      <p> With that in mind and simplicity, elegancy and fun like our values,
+      <p class="about__p"> With that in mind and simplicity, elegancy and fun like our values,
         we offer to you the best way to disconnect from daily tasks.
       </p>
-      <p>Play little quizzes alone or with friends and free
+      <p class="about__p">Play little quizzes alone or with friends and free
         your mind. <strong>Maybe even you’ll learn something new!</strong>
       </p>
     </article>
+    <img class="about__doodle" src="../../public/thinker.svg" alt="head doodle" />
 
-    <img src="../../public/thinker.svg" alt="head doodle" />
-    <button @click="handleShowModal" class="primary-button">Contact</button>
+    <div class="about__container">
+      <button @click="handleShowModal" class="about__btn primary-button">Contact</button>
+    </div>
   </section>
 
   <Modal :show="popUp">
     <ContactForm></ContactForm>
   </Modal>
-
-  <!--img src="../../public/background.svg" alt="color background" class="about__bg"-->
 
 </template>

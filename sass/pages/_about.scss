@@ -1,32 +1,59 @@
 @import "../abstracts/index";
 
 .about{
+  height: 100vh;
   background-image: url("../../public/background.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 5% 25% 0 25%;
+  background-position: center center;
+  width: 100%;
   @include flex-column;
-  p{
+  position: relative;
+  &__text{
+    width: 50%;
+  }
+
+  &__p{
     font-family: $fontAnswers;
     font-weight: normal;
     font-size: 2rem;
     padding-bottom: 5%;
   }
-  p:last-child{
+  &__p:last-child{
     padding-bottom: 0;
   }
 
-  .primary-button{
-    position: absolute;
-    left: 85%;
-    top: 90%;
+  &__container{
+   // background-color: #e22b31;
+    position: relative;
+    height: 50px;
+    padding-top: 2%;
 
   }
 
-  &__bg{
-    position: absolute;
-    top: 15%;
-    z-index: -1;
-  }
 
+
+}
+
+@include tablet{
+  .about{
+    padding-bottom: 20%;
+    &__text{
+      width: 90%;
+    }
+    &__p{
+      font-size: 1.8rem;
+    }
+
+  }
+}
+@include mobile{
+  .about{
+    padding-top: 22%;
+    &__p{
+      font-size: 1.6rem;
+    }
+
+
+  }
 }

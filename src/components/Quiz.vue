@@ -133,7 +133,7 @@ export default {
        {{questions[counter].title}}
       </legend>
 
-      <div class="quiz__answers">
+      <fieldset class="quiz__answers">
 
         <label class="quiz__answer">
           <input type="radio" name="option" @click="handleOptionSelected(questions[counter].option_a)" class="quiz__opt">
@@ -152,7 +152,7 @@ export default {
           <span class="quiz__letter">c)</span>
           <span class="quiz__response">{{questions[counter].option_c}}</span>
         </label>
-      </div>
+      </fieldset>
       <img src="../../public/like.svg"
            class="quiz__like"
            :class="{'active' : isCorrectAnimationTrigger}"
