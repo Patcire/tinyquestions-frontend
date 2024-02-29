@@ -25,21 +25,24 @@ export default {
 
 <template>
   <section class="home">
-    <div class="home__figure">
-      <article class="home__container">
-        <div class="home__subcontainter">
-        <img class="home__eye"
-          src="../../public/eyeeye.svg"
-          alt="doodle of an eye">
-        </div>
-       <Quiz :mode="mode"></Quiz>
+    <div class="home__content">
+      <img src="../../public/formforma.svg" alt="figure" aria-hidden="true" class="home__figure">
+      <div class="home__figure">
+        <article class="home__container">
+          <div class="home__subcontainter">
+          <img class="home__eye"
+            src="../../public/eyeeye.svg"
+            alt="doodle of an eye">
+          </div>
+         <Quiz :mode="mode"></Quiz>
 
-        <div class="home__subcontainter">
-          <img class="home__cereals"
-            src="../../public/cerealscereals.svg"
-            alt="doodle of a cereals bowl">
-        </div>
-      </article>
+          <div class="home__subcontainter">
+            <img class="home__cereals"
+              src="../../public/cerealscereals.svg"
+              alt="doodle of a cereals bowl">
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 </template>

@@ -18,7 +18,7 @@
   &__points-container{
    // background-color: rgba(239, 140, 66, 0.52);
     @include flex-column;
-    padding-top: 1%;
+    padding-top: 3%;
     padding-right: 2%;
   }
   &__points{
@@ -28,7 +28,7 @@
     animation: none ;
     &--mod{
       color: $purple;
-      padding-bottom: 50%;
+      padding-bottom: 30%;
       -webkit-text-stroke: 0.6px black;
       text-shadow: $shadow3;
       font-size: 4rem;

@@ -90,10 +90,6 @@
     position: absolute;
     width: 80%;
     height: 100%;
-    //@include flex-column;
-    &:checked ~ .quiz__response{
-      // quiero meter algo ?
-    }
   }
   &__like, &__fail{
     position: absolute;
@@ -107,8 +103,8 @@
     //background-color: lightgreen;
     @include flex-column();
     //margin: 3%;
-   //padding: 70% 0 0 0;
-    top: 400px;
+   padding: 30% 0 0 0;
+    //top: 400px;
     font-family: $fontLogo;
     position: absolute;
   }
@@ -136,6 +132,7 @@
 
 .navbar__button{
   &--again{
+    background-color: transparent;
     position: absolute;
     bottom: -200px;
     //background-color: lightgreen;
