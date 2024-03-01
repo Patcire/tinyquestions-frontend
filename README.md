@@ -1,10 +1,75 @@
 # tinyquestions
+### *a web app of quick quizzes 🗯*
+
 ***
-0 - Flujo de naveghación
+![logo](/public/tinyquestionscover.webp)
+***
+
+!!! - ¿Cómo desplegar el proyecto en local?
+=
+***
+
+![IMPORTANT]
+
+### Primero desplegar el backend:
+
+1 - Clonar el repositorio del backend:
+> git clone https://github.com/Patcire/tinyquestions-backend.git
+
+2 - En la terminal del proyecto:
+> docker-compose up
+
+ Detener los contenedores generados y ejecutar el siguiente comando en la terminal:
+
+> composer install
+
+3 - Reinicia los contenedores y ya podrás usar la API.
+> 
+***
+
+### Ahora desplegamos el front:
+
+1- Clonamos este repositorio:
+
+> git clone https://github.com/Patcire/tinyquestions-frontend.git
+
+2 - Abrimos el proyecto y en la terminal escribimos:
+
+> npm install
+> npm run dev
+
+¡Y listo!
+
+O si prefieres no ejecutar el frontend en local puedes hacerlo
+desde la web desplegada (pero para las funcionalidades es necesario desplegar el backend en local)
+
+> https://tinyquestions.netlify.app/#/
+
+***
+
+0 - Flujo de navegación
 =
 ***
 ![diagrama navegacion](public/diag-nav.png)
 ***
+
+0.1 - Introducción
+=
+***
+
+![IMPORTANT] 
+> Para leer la documentación del proyecto al completo visitar el siguiente enlace:
+> https://github.com/Patcire/tinyquestions-frontend/blob/main/doc/doc.md
+
+Tinyquestions, estilizado tinyquestions, es una aplicación web que se enfoca en ofrecer a las usuarias y usuarios un enfoque rápido, accesible y minimalista de los clásicos juegos de trivial/quizzes.
+
+Con ello se pretende ofrecer una herramienta altamente dinámica e interactiva con la que poder distraerse y liberar el estrés de la rutina diaria de forma fácil, sencilla y sin tener que dedicarle una gran cantidad de tiempo. A su vez, colateralmente, ofrece la oportunidad de adquirir nuevos datos y conocimientos.
+
+El desarrollo del proyecto persigue por tanto la obtención de un producto final que pueda
+servir de entretenimiento a un gran número de personas adaptando los juegos de preguntas y respuestas al formato filler games (juegos simples, cortos y con dinámicas fáciles de entender).
+
+Por tanto, es prioritario el crear una web que sea cómoda y eficaz para los propósitos anteriormente descritos, otorgando por ello gran importancia al feedback que recibirán los usuarios y usuarias al interactuar con la UI y la inmediatez para poder estar jugando cuanto antes.
+
 
 1 - Documentación de ciertas funciones/tecnologías implementadas
 =
