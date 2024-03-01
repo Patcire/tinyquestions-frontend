@@ -38,7 +38,7 @@ export default {
       <button
         @click="changeOption('myQuizzes')"
         class="userinfo__options"
-        :class="{ '--bold': contentOption === 'myQuizzes' }"
+        :class="contentOption==='myQuizzes' ? '--bold' : '' "
         >
         My Quizzes
       </button>
