@@ -112,7 +112,7 @@ export default {
   >
 
     <header class="quiz__header" v-if="mode.title">
-      <h1 :class=mode.class>{{mode.title}}</h1>
+      <h1 :class=mode.class  aria-label="title of the game mode">{{mode.title}}</h1>
 
       <Vountdown
         v-if="this.mode.clock[0]"
