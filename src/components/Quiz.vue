@@ -111,7 +111,7 @@ export default {
                  && timerAutoStart"
   >
 
-    <header class="quiz__header">
+    <header class="quiz__header" v-if="mode.title">
       <h1 :class=mode.class>{{mode.title}}</h1>
 
       <Vountdown
@@ -137,19 +137,19 @@ export default {
 
         <label class="quiz__answer">
           <input type="radio" name="option" @click="handleOptionSelected(questions[counter].option_a)" class="quiz__opt">
-          <span class="quiz__letter">a)</span>
+          <span aria-hidden="true" class="quiz__letter">a)</span>
           <span class="quiz__response">{{questions[counter].option_a}}</span>
         </label>
 
         <label class="quiz__answer">
           <input type="radio" name="option" @click="handleOptionSelected(questions[counter].option_b)" class="quiz__opt">
-          <span class="quiz__letter">b)</span>
+          <span aria-hidden="true" class="quiz__letter">b)</span>
           <span class="quiz__response">{{questions[counter].option_b}}</span>
         </label>
 
         <label class="quiz__answer">
           <input type="radio" name="option" @click="handleOptionSelected(questions[counter].option_c)" class="quiz__opt">
-          <span class="quiz__letter">c)</span>
+          <span aria-hidden="true" class="quiz__letter">c)</span>
           <span class="quiz__response">{{questions[counter].option_c}}</span>
         </label>
       </fieldset>

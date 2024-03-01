@@ -28,24 +28,24 @@ export default {
             <h3>Tell us your problem</h3>
           </header>
 
-      <vField class="contact__input" type="email" name="email" placeholder=" Email..."/>
+      <vField class="contact__input" type="email" name="email" placeholder=" Email..." aria-label="email"/>
       <vError name="email" class="form__global-error"></vError>
 
-      <div class="contact__input contact__input--mod">
+      <fieldset class="contact__input contact__input--mod">
         <label class="contact__label">Date of the incidence
           <vField type="date" name="date" class="contact__date"/>
         </label>
         <vError name="date" class="form__global-error"></vError>
-      </div>
+      </fieldset>
 
-        <vField as="textarea" name="textarea" placeholder="Your message..." class="contact__textarea"></vField>
+        <vField as="textarea" name="textarea" placeholder="Your message..." aria-label="textarea" class="contact__textarea"></vField>
       <vError name="textarea" class="form__global-error"></vError>
 
-      <div class="contact__input contact__input--mod">
+      <fieldset class="contact__input contact__input--mod">
         <label class="contact__label">Accept our privacy policy
-          <vField type="checkbox" name="policy" :value="true" class="contact__checkbox"/></label>
+          <vField type="checkbox" name="policy" :value="true" aria-label="checkbox privacy policy" class="contact__checkbox"/></label>
         <vError name="policy" class="form__global-error"></vError>
-      </div>
+      </fieldset>
 
     <button type="submit" class="contact__button">Send</button>
   </vForm>

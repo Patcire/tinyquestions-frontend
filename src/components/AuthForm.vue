@@ -91,9 +91,9 @@ export default {
   <Loading v-if="isLoading"></Loading>
   <section v-if="!isLoading">
     <vForm class="form" :validation-schema="schemaLogin" ref="logform" v-if="!registerForm">
-      <vField v-model="username" placeholder="Username..." class="form__input" type="string" name="username"/>
+      <vField v-model="username" placeholder="Username..." aria-label="username" class="form__input" type="string" name="username"/>
       <vError name="username" class="form__global-error"></vError>
-      <vField v-model="password" type="password" name="password" placeholder="Password..." class="form__input"/>
+      <vField v-model="password" type="password" name="password" placeholder="Password..." aria-label="password" class="form__input"/>
       <vError name="password" class="form__global-error"></vError>
       <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
       <p v-if="showErrorOfFailSubmit"
@@ -101,11 +101,11 @@ export default {
     </vForm>
 
     <vForm class="form" :validation-schema="schemaRegister" ref="regform" v-if="registerForm">
-      <vField v-model="email" placeholder="Email..." class="form__input" type="email" name="email"/>
+      <vField v-model="email" placeholder="Email..." aria-label="email" class="form__input" type="email" name="email"/>
       <vError name="email" class="form__global-error"></vError>
-      <vField v-model="username" placeholder="Username..." class="form__input" type="string" name="username"/>
+      <vField v-model="username" placeholder="Username..." aria-label="username" class="form__input" type="string" name="username"/>
       <vError name="username" class="form__global-error"></vError>
-      <vField v-model="password" type="password" name="password" placeholder="Password..." class="form__input"/>
+      <vField v-model="password" type="password" name="password" aria-label="password" placeholder="Password..." class="form__input"/>
       <vError name="password" class="form__global-error"></vError>
       <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
       <p v-if="showErrorOfFailSubmit"
