@@ -19,7 +19,8 @@ export default {
       userID: useSessionStore().user.userID,
       showPlayText: false,
       liked: false,
-      likeIcon: "empty_heart.svg"
+      likeIcon: '../../public/like.svg',
+      emptyHeartIcon: '../../public/empty_heart.svg',
     }
   },
   methods:{
@@ -76,7 +77,7 @@ export default {
         @click="giveLikeOrDislike"
         class="card__empty-heart"
         alt="doodle of a heart"
-        :src="liked ? '../../public/like.svg' : '../../public/empty_heart.svg'"
+        :src="liked ? likeIcon : emptyHeartIcon"
       >
 
     </button>
