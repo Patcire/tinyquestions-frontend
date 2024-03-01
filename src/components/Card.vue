@@ -76,10 +76,7 @@ export default {
         @click="giveLikeOrDislike"
         class="card__empty-heart"
         alt="doodle of a heart"
-        :src="liked ?
-          '../../public/like.svg'
-        :
-          '../../public/empty_heart.svg'"
+        :src="liked ? '../../public/like.svg' : '../../public/empty_heart.svg'"
       >
 
     </button>
