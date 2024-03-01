@@ -93,16 +93,7 @@ export default {
           <router-link to="/create" class="navbar__link" >Create</router-link>
         </li>
         <li class="navbar__submenu">
-          <button class="navbar__button">Comunnity</button>
-        </li>
-        <li>
-          <router-link to="/profile" class="navbar__sublink" >My profile</router-link>
-        </li>
-        <li>
-          <router-link to="/find" class="navbar__sublink" >Find questions</router-link>
-        </li>
-        <li>
-          <router-link to="/ranks" class="navbar__sublink">Ranks</router-link>
+          <router-link to="/profile" class="navbar__link">Comunnity</router-link>
         </li>
         <li>
           <a @click="exit" class="navbar__link pointer" >Exit</a>
