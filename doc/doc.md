@@ -282,7 +282,14 @@ he decidido añadir un aria label para explicar de qué se trata.
 
 Finalmente, presento el informe TAW de mi app:
 
-![einforme TAW](../public/fieldset.PNG)
+![einforme TAW](../public/taw.PNG)
+![einforme TAW](../public/informetaw.PNG)
+
+Los fallos son todos el mismo, y es que para hacer el menú desplegable de mobile
+uso un input checkbox al que le bajo la opacidad, y coloco el icono del menú encima.
+A pesar de tener el aria label me dice que al no estar envuelto
+en una etiqueta <form> está mal. Sin embargo, he probado a envolverlo
+con la etiqueta mencionada y me deja de funcionar el menú dropdown.
 
 
 5 - Reflexiones finales del trabajo
