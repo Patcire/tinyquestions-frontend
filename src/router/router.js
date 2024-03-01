@@ -100,7 +100,7 @@ const routes = [
         ]
       },
       {
-        path: "/find",
+        path: "/custom",
         beforeEnter(to, from, next) {
           useSessionStore().isLogged() ? next() : router.push('/')
         },
@@ -108,23 +108,11 @@ const routes = [
         children: [
           {
             path: "",
-            component: ()=> import('/src/pages/FindQuizzes.vue')
+            component: ()=> import('/src/pages/CommunityQuizzes.vue')
           }
         ]
       },
-      {
-        path: "/ranks",
-        component: PrivateLayout,
-        beforeEnter(to, from, next) {
-          useSessionStore().isLogged() ? next() : router.push('/')
-        },
-        children: [
-          {
-            path: "",
-            component: ()=> import('/src/pages/Ranks.vue')
-          }
-        ]
-      },
+
       {
         path: "/create",
         component: PrivateLayout,
