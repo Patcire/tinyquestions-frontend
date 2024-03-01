@@ -38,13 +38,14 @@
     &:hover{
       cursor: pointer;
     }
+    &.--bold{
+      font-weight: bold;
+    }
 
   }
 }
 
-.options.--bold {
-  font-weight: bold;
-}
+
 
 @include mobile{
   .userinfo{
