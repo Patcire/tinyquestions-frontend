@@ -10,8 +10,9 @@ export default {
 <template>
 
   <Header></Header>
-  <router-view></router-view>
-
+  <main>
+    <router-view></router-view>
+  </main>
 </template>
 
 <style scoped>
