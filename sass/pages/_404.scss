@@ -1,0 +1,29 @@
+@import "../abstracts/_index.scss";
+
+.notFound{
+  padding: 10%;
+  @include flex-column;
+  @include in-out-scale;
+  &__message{
+    text-align: center;
+  font-family: $fontLogo;
+    font-size: 3rem;
+    letter-spacing: 15px;
+  }
+  &__ouch{
+    animation: displayFeedback 1s ease-in-out reverse;
+  }
+  &__info{
+    animation: displayFeedback 3.5s ease-in-out reverse;
+  }
+  &__subtext{
+    animation: displayFeedback 3.5s ease-in-out reverse;
+    padding: 2% 0 2% 0;
+    font-family: $fontAnswers;
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+  }
+  &__img{
+    animation: waveAnimation 2s ease-in-out infinite alternate-reverse;
+  }
+}
