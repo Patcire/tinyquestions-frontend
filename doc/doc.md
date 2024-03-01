@@ -237,7 +237,19 @@ remoto del código.
 -Para garantizar la calidad y el estándar del código CSS hemos procedido 
 a pasar su validación en https://jigsaw.w3.org/css-validator/ :
 
-![resultado de la validación]()
+![resultado de la validación](../public/css-valid.PNG)
+
+Me destaca un solo error, presente en el componente profileHeader:
+
+```css
+.options.--bold {
+font-weight: bold;
+}
+```
+```
+:class="contentOption==='myQuizzes' ? '--bold' : '' "
+```
+No sé solucionarlo.
 
 -Respecto al Dark Mode, no ha sido finalmente implementado, ya que aunque lo he empezado a implementar
 no iba a poder entregarlo al 100% y tampoco con una estructura de código correcta.
