@@ -2,10 +2,12 @@
 import Modal from '@/components/Modal.vue'
 import { postAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
+import router from '@/router/router.js'
+import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'Customizer',
-  components: { Modal },
+  components: { Loading, Modal },
   data(){
     return{
       //user
@@ -26,10 +28,17 @@ export default {
       quizName:"",
       numberOfQuestions: 0,
       clock:false,
-      time:5
+      time:5,
+      // component logic
+      isLoading: false,
+      cantSave: null,
+      saved: false
     }
   },
   methods: {
+    router() {
+      return router
+    },
     cleanForm(){
       this.titleQuestion = ""
       this.optionA = ""
@@ -38,7 +47,7 @@ export default {
       this.correctOption = ""
     },
     handleModal(e) {
-      // 'cause thera is a modal form for timer and another for add a new question
+      // 'cause thera is a different modal form for timer and another for add a new question
       e.preventDefault()
       // to open the correct one
       if (e.target.classList.contains('add')) this.openAddForm = !this.openAddForm
@@ -59,9 +68,11 @@ export default {
         "correct_option": question.correctOption,
         "fk_id_quiz":  this.quizID
       })
+      console.log(questionResponse)
+      if (questionResponse.status === 500) return false
     },
 
-    handleQuestionCreation() {
+    handleQuestionCreationVisually() { // for the user can visualize it on the page
       const question = {
         titleQuestion: this.titleQuestion,
         optionA: this.optionA,
@@ -75,6 +86,7 @@ export default {
     },
 
     async createdQuizOnDB() {
+      this.isLoading = true
       const quiz = {
         clock: this.clock,
         time: this.time,
@@ -91,16 +103,35 @@ export default {
         "fk_id_user": this.seshStorage.user.userID
       })
 
-      const createdQuizJSON = await createdQuiz.json();
+      const createdQuizJSON = await createdQuiz.json()
 
-      if (createdQuizJSON && createdQuizJSON.id_quiz) {
+      if (!createdQuiz) {
+        this.cantSave= true
+        this.isLoading = false
+        return
+      }
+      else if (createdQuizJSON && createdQuizJSON.id_quiz) {
         this.quizID = createdQuizJSON.id_quiz
         for (const question of this.createdQuestions) {
-          await this.createQuestionOnDB(question);
+           const responseQuestionCreated = await this.createQuestionOnDB(question);
+           if (responseQuestionCreated === false){
+             console.log('no creada')
+             this.cantSave = true
+             this.isLoading = false
+             return
+           }
         }
-
       }
+
+      this.saved = true
+      this.isLoading = false
+      console.log('end')
+    },
+
+    reloadPage(){
+      window.location.reload()
     }
+
   },
 
   mounted() {
@@ -113,7 +144,8 @@ export default {
 </script>
 
 <template>
-  <section class="customizer">
+  <Loading v-if="isLoading"></Loading>
+  <section class="customizer" v-if="!saved && !isLoading">
     <header class="customizer__header">
 
       <input
@@ -147,16 +179,23 @@ export default {
 
   </section>
   <button
+    v-if="!isLoading && !saved"
     @click="createdQuizOnDB()"
     class="primary-button primary-button--customizer-mod2">Save</button>
-
+  <p class="form__global-error" v-if="cantSave">Something failed on save, try again! </p>
+  <article v-if="saved">
+    <p class="form__global-error">Quiz saved</p>
+    <button
+      @click="reloadPage"
+      class="primary-button primary-button--customizer-mod2">Create more</button>
+  </article>
 
   <!--modal for new question-->
   <Modal v-if="this.openAddForm"
     :show="openAddForm"
     ref="addForm"
   >
-    <form @submit.prevent="handleQuestionCreation">
+    <form @submit.prevent="handleQuestionCreationVisually">
       <section class="customizer__form">
         <h2 class="customizer__modal-title">
           Add new question
