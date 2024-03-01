@@ -42,7 +42,6 @@
   &__icon {
     cursor: pointer;
     @include in-out-scale;
-    filter: drop-shadow($shadow1);
     &:hover {
       transform: scale(1.15);
     }

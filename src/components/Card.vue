@@ -19,7 +19,7 @@ export default {
       userID: useSessionStore().user.userID,
       showPlayText: false,
       liked: false,
-      likeIcon: "Vectorempty_heart.svg"
+      likeIcon: "empty_heart.svg"
     }
   },
   methods:{
@@ -79,7 +79,7 @@ export default {
         :src="liked ?
           '../../public/like.svg'
         :
-          '../../public/Vectorempty_heart.svg'"
+          '../../public/empty_heart.svg'"
       >
 
     </button>
