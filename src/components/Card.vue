@@ -33,9 +33,7 @@ export default {
           "fk_id_user": this.userID,
           "fk_id_quiz": this.quiz.id_quiz
         })
-        console.log(this.userID)
-        console.log(this.quiz.id_quiz)
-        console.log(likeSaveOnDB)
+
         // and then, if the API post fail
         // I undo the visual icon
         if (likeSaveOnDB.error === 'not created') {
@@ -45,7 +43,7 @@ export default {
         useSessionStore().user.likedStorage.push(this.quiz)
         return
       }
-      console.log('meh, i dislike it really!')
+
       const likeDeleteOnDB = await deleteAPI(`http://localhost:8000/api/li/dis/${this.userID}/${this.quiz.id_quiz}`)
       if (!likeDeleteOnDB)  this.liked = true
       const updateStorage = useSessionStore().user.likedStorage.filter((quizLS) => quizLS.id_quiz !== this.quiz.id_quiz )

@@ -68,7 +68,7 @@ export default {
         "correct_option": question.correctOption,
         "fk_id_quiz":  this.quizID
       })
-      console.log(questionResponse)
+
       if (questionResponse.status === 500) return false
     },
 
@@ -115,7 +115,7 @@ export default {
         for (const question of this.createdQuestions) {
            const responseQuestionCreated = await this.createQuestionOnDB(question);
            if (responseQuestionCreated === false){
-             console.log('no creada')
+
              this.cantSave = true
              this.isLoading = false
              return
@@ -125,7 +125,7 @@ export default {
 
       this.saved = true
       this.isLoading = false
-      console.log('end')
+
     },
 
     reloadPage(){
