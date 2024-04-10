@@ -20,8 +20,10 @@
     height: 106.93px;
   }
   &__quizz-container{
+    // background-color: lightcoral;
     position: relative;
     @include flex-column;
+    min-height: 449.52px;
   }
   &__ornaments{
     @include flex-row;
