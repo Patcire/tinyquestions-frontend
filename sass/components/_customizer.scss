@@ -150,6 +150,13 @@
   }
   &__opt:hover{
   }
+
+  &__saved{
+    background-color: lightcoral;
+    @include flex-column;
+    //min-height: 436.13px;
+    margin-top: 158px;
+  }
 }
 
 .customizer__form.customizer__form-timer{
@@ -273,7 +280,6 @@
     margin-top: 4%;
     width: 140px;
     height: 41px;
-    color: black;
   }
 
   .customizer__form.customizer__form--timer{

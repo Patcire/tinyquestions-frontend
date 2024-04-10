@@ -4,6 +4,7 @@ import { postAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
 import Loading from '@/components/Loading.vue'
+import { goTo } from '@/helpers/navHelpers.js'
 
 export default {
   name: 'Customizer',
@@ -36,6 +37,7 @@ export default {
     }
   },
   methods: {
+    goTo,
     router() {
       return router
     },
@@ -183,11 +185,16 @@ export default {
     @click="createdQuizOnDB()"
     class="primary-button primary-button--customizer-mod2">Save</button>
   <p class="form__global-error" v-if="cantSave">Something failed on save, try again! </p>
-  <article v-if="saved">
-    <p class="form__global-error">Quiz saved</p>
+  <article v-if="saved" class="customizer__saved">
+    <p class="form__global-error">Quiz saved!</p>
     <button
       @click="reloadPage"
-      class="primary-button primary-button--customizer-mod2">Create more</button>
+      class="primary-button primary-button--customizer-mod2">Create
+    </button>
+    <button
+      @click="goTo('/profile')"
+      class="primary-button primary-button--customizer-mod2">See it
+    </button>
   </article>
 
   <!--modal for new question-->
