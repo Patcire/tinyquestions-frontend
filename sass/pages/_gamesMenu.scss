@@ -2,10 +2,10 @@
 
 .games{
   position: relative;
-  background-color: lightblue;
+  //background-color: lightblue;
   @include flex-row;
   &__container{
-    background-color: lightgreen;
+    //background-color: lightgreen;
     height: 200px;
     width: 200px;
     position: absolute;
