@@ -2,13 +2,15 @@
 
 .games{
   position: relative;
-  //background-color: lightblue;
+  background-color: lightblue;
   @include flex-row;
   &__container{
-  //background-color: lightgreen;
+    background-color: lightgreen;
     height: 200px;
     width: 200px;
     position: absolute;
+
+
   }
   &__hand{
     height: 200px;
@@ -17,7 +19,6 @@
     position: relative;
     bottom: 53%;
     right: 290px;
-   // z-index: -1;
   }
   &__daydream{
     height: 180px;
