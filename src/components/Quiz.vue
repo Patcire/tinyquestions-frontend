@@ -2,9 +2,15 @@
 import { callAPI } from '@/helpers/callAPI.js'
 import router from '@/router/router.js'
 import Loading from '@/components/Loading.vue'
+import loading from '@/components/Loading.vue'
 
 export default {
   name: 'Quiz',
+  computed: {
+    loading() {
+      return loading
+    }
+  },
   components: { Loading },
   data(){
     return{
@@ -172,25 +178,27 @@ export default {
     </article>
   </section>
 
-  <article v-if="(mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore"
-            class="quiz__results"
-           :class="{'active': questions}">
-    <h3 class="quick__points quick__points--mod ">Total Score</h3>
-    <p
-      class="quiz__calification quiz__calification--active"
-      :class="{'active': questions}">
-      {{this.points}} of {{this.mode.numberOfQuestions*10}} possible points
-    </p>
-    <button v-if="!this.mode.mod"
-      @click="handleNewQuiz"
-      class="navbar__button navbar__button--again">
-      New quiz ?
-    </button>
-    <button v-if="this.mode.mod==='homeMod'"
-            @click="router().push('/register')"
-            class="navbar__button navbar__button--again">
-      Register to play more!
-    </button>
-  </article>
+  <div class="quiz__container">
+    <article v-if="(mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore"
+              class="quiz__results"
+             :class="{'active': questions}">
+      <h3 class="quick__points quick__points--mod ">Total Score</h3>
+      <p
+        class="quiz__calification quiz__calification--active"
+        :class="{'active': questions}">
+        {{this.points}} of {{this.mode.numberOfQuestions*10}} possible points
+      </p>
+      <button v-if="!this.mode.mod"
+        @click="handleNewQuiz"
+        class="quiz__suggest">
+        New quiz ?
+      </button>
+      <button v-if="this.mode.mod==='homeMod'"
+              @click="router().push('/register')"
+              class="quiz__suggest">
+        Register to play more!
+      </button>
+    </article>
+  </div>
 
 </template>
