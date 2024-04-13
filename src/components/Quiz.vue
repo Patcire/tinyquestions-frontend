@@ -178,26 +178,27 @@ export default {
     </article>
   </section>
 
-  <div class="quiz__container">
-    <article v-if="(mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore"
-              class="quiz__results"
-             :class="{'active': questions}">
-      <h3 class="quick__points quick__points--mod ">Total Score</h3>
+  <div v-if="(mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore"
+    class="quiz__container">
+    <article
+      class="quiz__results"
+     :class="{'active': questions}">
+      <h3 class="quiz__points quiz__points--mod ">Total Score</h3>
       <p
         class="quiz__calification quiz__calification--active"
         :class="{'active': questions}">
         {{this.points}} of {{this.mode.numberOfQuestions*10}} possible points
       </p>
-      <button v-if="!this.mode.mod"
+      <a v-if="!this.mode.mod"
         @click="handleNewQuiz"
         class="quiz__suggest">
         New quiz ?
-      </button>
-      <button v-if="this.mode.mod==='homeMod'"
+      </a>
+      <a v-if="this.mode.mod==='homeMod'"
               @click="router().push('/register')"
               class="quiz__suggest">
         Register to play more!
-      </button>
+      </a>
     </article>
   </div>
 
