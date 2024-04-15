@@ -17,7 +17,6 @@
       cursor: pointer;
       font-size: 31.6px;
     }
-    //background-color: lightsalmon;
 
   }
 
@@ -63,7 +62,6 @@
     z-index: 1;
     padding-left: 1.5%;
     padding-top: 8%;
-    background-color: white;
   }
 
   &__sublink{
@@ -99,6 +97,7 @@
 /* Media Query for Mobile */
 
 @include mobile{
+
   .navbar{
     display: none;
     &__link{
@@ -128,14 +127,13 @@
       @include flex-column;
       display: block;
       top: 7.5px;
+
     }
     &__check{
       position: absolute;
       width: 30px;
       height: 30px;
       opacity: 0;
-      visibility: hidden;
-      //top: 40%;
       left: 60%;
     }
     &__img{
@@ -158,6 +156,8 @@
     top: 10px;
     text-align: right;
     left: -200px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
   }
 }
 
@@ -170,6 +170,7 @@
 
   /* For reduce navbar (not Logged) */
   .navbar{
+    padding-left: 8px;
     &__link,&__button{
       font-size: 1.6rem;
     }
@@ -194,42 +195,30 @@
 /* Media Query for full navbar with hamburguer menu */
   /* it cover size between reduce desktop & mobile */
 
-@include between1{
-  .navbar.navbar--mod{
+@include between1 {
+  .navbar.navbar--mod {
     display: none;
-    &__link{
+
+    &__link {
       font-size: 2rem;
     }
   }
   .hambmenu.hambmenu--mod {
     display: block;
     position: absolute;
-    //background-color: lightblue;
-    right: 60px;
-    top: 20px;
-    padding: 0 5px;
     text-align: right;
-  }
-  .hambmenu__submenu.hambmenu__submenu--mod {
-      display: none;
-      position: absolute;
-      background-color: rgb(255, 255, 255);
-      border-radius: 10px;
-      //opacity: 20%;
-      margin-top: 40px;
-      left: -100px;
-      //right: 2px;
-      padding: 2px;
-    border: 2px solid black;
+    right: 30px;
+    top: 10px;
+    padding-right: 3%;
 
-  }
-  .hambmenu{
-    &__icon{
+    &__icon {
       position: absolute;
       @include flex-column;
       display: block;
     }
-    &__check{
+  }
+  .hambmenu {
+    &__check {
       position: absolute;
       width: 30px;
       height: 30px;
@@ -237,14 +226,17 @@
       top: 40%;
       left: 60%;
     }
-    &__img{
+
+    &__img {
       position: absolute;
       z-index: -1;
     }
-    &__check:checked ~  &__submenu{
+
+    &__check:checked ~ &__submenu {
       display: block;
       z-index: 2;
     }
+
     .hambmenu__check:not(:checked) ~ .hambmenu__submenu {
       display: none;
       z-index: 0;
@@ -252,5 +244,23 @@
 
   }
 
+  .hambmenu__submenu.hambmenu__submenu--mod {
+    display: block;
+    position: absolute;
+    top: 10px;
+    text-align: right;
+    left: -200px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: solid 2px black;
+    padding: 25%;
+  }
 }
+
+
+
+
+
+
+
 

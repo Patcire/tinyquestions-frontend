@@ -65,7 +65,7 @@ export default {
                   class="hambmenu__img">
           </label>
 
-        <ul class="hambmenu__submenu">
+        <ul class="hambmenu__submenu" v-if="!sessionStore.user.isConnected">
           <li>
             <router-link to="/" aria-current="page"  class="navbar__link">Home</router-link>
           </li>
@@ -80,7 +80,7 @@ export default {
 
   </nav>
 
-  <nav class= "hambmenu hambmenu--mod" v-if="this.sessionStore.isConnected">
+  <nav class= "hambmenu hambmenu--mod" v-if="this.sessionStore.user.isConnected">
       <article class="hambmenu__icon hambmenu__icon--mod">
          <input aria-label="drop menu on mobiles" type="checkbox" class="hambmenu__check">
         <label for="hambmenu__check">
