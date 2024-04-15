@@ -7,6 +7,9 @@ import loading from '@/components/Loading.vue'
 export default {
   name: 'Quiz',
   computed: {
+    Loading() {
+      return Loading
+    },
     loading() {
       return loading
     }
@@ -18,7 +21,8 @@ export default {
       points:0,
       questions: [],
       counter: 0,
-      timerAutoStart: true
+      timerAutoStart: true,
+      isLoading: false
     }
   },
 
@@ -178,7 +182,7 @@ export default {
     </article>
   </section>
 
-  <div v-if="(mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore"
+  <div v-if="((mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore) && this.questions.length"
     class="quiz__container">
     <article
       class="quiz__results"
