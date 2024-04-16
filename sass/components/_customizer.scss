@@ -163,7 +163,14 @@
   @include flex-column;
 }
 
+.div__loading{
+  background-color: lightgreen;
+  min-width: 600px;
+  min-height: 677px;
+  border-radius: 30px;
+  @include flex-column;
 
+}
 
 
 /*---------------------*/
@@ -209,6 +216,10 @@
     }
 
 
+  }
+
+  .div__loading{
+    min-height: 529px;
   }
 
   .customizer__form.customizer__form--timer{
@@ -260,6 +271,11 @@
       width: 350px;
       height: 500px;
     }
+  }
+
+  .div-loading{
+    min-width: 300px;
+    max-width: 600px;
   }
 
   .primary-button.primary-button--modal-mod{

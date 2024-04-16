@@ -146,7 +146,9 @@ export default {
 </script>
 
 <template>
-  <Loading v-if="isLoading"></Loading>
+  <div v-if="isLoading" class="div__loading">
+    <Loading ></Loading>
+  </div>
   <section class="customizer" v-if="!saved && !isLoading">
     <header class="customizer__header">
 
