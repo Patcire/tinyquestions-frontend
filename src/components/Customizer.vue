@@ -62,13 +62,15 @@ export default {
       this.openTimeSettings = false
   },
     async createQuestionOnDB(question) {
-      const questionResponse = await postAPI("http://localhost:8000/api/usque/create", {
+      const questionResponse = await postAPI("http://localhost:8000/api/ques/create", {
         "title": question.titleQuestion,
         "option_a": question.optionA,
         "option_b": question.optionB,
         "option_c": question.optionC,
         "correct_option": question.correctOption,
+        "isCustom": 1,
         "fk_id_quiz":  this.quizID
+
       })
 
       if (questionResponse.status === 500) return false
@@ -94,26 +96,41 @@ export default {
         time: this.time,
         name:this.quizName,
         numberOfQuestions: this.createdQuestions.length,
-        idUser: this.seshStorage.user.userID
+        idUser: this.seshStorage.user.userID,
       }
 
-      const createdQuiz = await postAPI("http://localhost:8000/api/cust/create", {
-        "quiz_name": this.quizName || "untitled",
-        "n_questions": quiz.numberOfQuestions,
+      const createdQuiz = await postAPI("http://localhost:8000/api/quiz/create", {
+        "number_questions": quiz.numberOfQuestions,
         "clock": Boolean(this.clock),
         "time": parseInt(this.time),
-        "fk_id_user": this.seshStorage.user.userID
+        "type": "custom"
       })
 
       const createdQuizJSON = await createdQuiz.json()
 
-      if (!createdQuiz) {
+      if (createdQuiz.status !== 201) {
         this.cantSave= true
         this.isLoading = false
         return
       }
+
       else if (createdQuizJSON && createdQuizJSON.id_quiz) {
+
         this.quizID = createdQuizJSON.id_quiz
+
+        const createdCustom = await postAPI("http://localhost:8000/api/cust/create", {
+          "quiz_name": quiz.name,
+          "id_quiz": this.quizID,
+          "fk_id_user": this.seshStorage.user.userID
+        })
+
+        if (createdCustom.status !== 201) {
+          this.cantSave= true
+          this.isLoading = false
+          return
+        }
+
+        // now we can create the questions on DB table
         for (const question of this.createdQuestions) {
            const responseQuestionCreated = await this.createQuestionOnDB(question);
            if (responseQuestionCreated === false){
