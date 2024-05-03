@@ -11,7 +11,8 @@ export const useSessionStore = defineStore('user',{
       points: 0,
       quizzes_resolved: 0,
       likedStorage: [],
-      myQuizzesStorage: []
+      myQuizzesStorage: [],
+      lastCustomQuizSelected: 0
     },
 
   }),
@@ -30,6 +31,7 @@ export const useSessionStore = defineStore('user',{
       this.user.userID= userID
       this.user.likedStorage= []
       this.user.myQuizzesStorage= []
+      this.lastCustomQuizSelected =  0
     },
 
 

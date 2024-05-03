@@ -3,6 +3,7 @@
 
 import { deleteAPI, postAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
+import router from '@/router/router.js'
 
 export default {
   name: 'Card',
@@ -21,9 +22,13 @@ export default {
       liked: false,
       likeIcon: '../../public/like.svg',
       emptyHeartIcon: '../../public/empty_heart.svg',
+      idQuizSelected: 0
     }
   },
   methods:{
+    router() {
+      return router
+    },
     async giveLikeOrDislike(){
       // I aproeached this with the
       // "optimistic" promise priciples
@@ -49,6 +54,11 @@ export default {
       if (!likeDeleteOnDB)  this.liked = true
       const updateStorage = useSessionStore().user.likedStorage.filter((quizLS) => quizLS.id_quiz !== this.quiz.id_quiz )
       useSessionStore().user.likedStorage = [...updateStorage]
+    },
+    handlePlayQuizSelected(){
+      console.log(this.idQuizSelected)
+      useSessionStore().user.lastCustomQuizSelected = this.quiz.id_quiz
+      this.router().push('/custom')
     }
 
   },
@@ -60,6 +70,8 @@ export default {
     })
 
     if(isLiked) this.liked=true
+
+    this.idQuizSelected = this.quiz.id_quiz
   }
 }
 </script>
@@ -92,11 +104,11 @@ export default {
     </button>
 
     <section class="card__info">
-      <p>Total questions: {{quiz.n_questions}}</p>
+      <p>Total questions: {{quiz.number_questions}}</p>
       <p v-if="quiz.clock">Time: {{quiz.time}} s</p>
     </section>
 
-    <p class="card__action" v-if="showPlayText">play</p>
+    <button class="card__action" v-if="showPlayText" @click="handlePlayQuizSelected">play</button>
     <footer
       class="card__footer"
       :class="this.bgCardColorCSS"

@@ -108,7 +108,7 @@ const routes = [
         children: [
           {
             path: "",
-            component: ()=> import('/src/pages/CommunityQuizzes.vue')
+            component: ()=> import('/src/pages/Custom.vue')
           }
         ]
       },

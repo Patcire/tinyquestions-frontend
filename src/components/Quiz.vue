@@ -2,17 +2,11 @@
 import { callAPI } from '@/helpers/callAPI.js'
 import router from '@/router/router.js'
 import Loading from '@/components/Loading.vue'
-import loading from '@/components/Loading.vue'
+import { useSessionStore } from '@/stores/sessionStore.js'
 
 export default {
   name: 'Quiz',
   computed: {
-    Loading() {
-      return Loading
-    },
-    loading() {
-      return loading
-    }
   },
   components: { Loading },
   data(){
@@ -39,6 +33,8 @@ export default {
         -hasScore: **Boolean**
         -rerun: **Boolean**
         -mod: to mod some of the functions of the quiz **String**
+        -isCustom: we need to know if questions can't be random **Boolean**
+        -idCustomQuiz: if is custom we need the quiz id **Number**
       */
     }
   },
@@ -57,8 +53,16 @@ export default {
     async getMoreQuestionsForZenMode(){
       this.questions = [...this.questions, ...await callAPI(`http://localhost:8000/api/ques/rand/${this.mode.numberOfQuestions}`)]
     },
+    async getQuestionsOfCustomQuiz(){
+      let quizInfo = await callAPI(`http://localhost:8000/api/cust/${useSessionStore().user.lastCustomQuizSelected}`)
+      // now we need to set some values on the mode parameters
+      // to made that quiz logic works
+      this.questions = quizInfo.questions
+      this.mode.numberOfQuestions = this.questions.length
+      this.mode.title = quizInfo.quiz_name
+    },
 
-    // to handle logic question
+    // to handle the logic of the questions
 
     async nextQuestion() {
       this.counter++
@@ -105,6 +109,10 @@ export default {
   },
 
   async created() {
+
+    this.mode.isCustom ?
+    await this.getQuestionsOfCustomQuiz()
+      :
     await this.getQuestionsFromAPIForNewQuiz()
   }
 
@@ -182,6 +190,7 @@ export default {
     </article>
   </section>
 
+  <!--Results-->
   <div v-if="((mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore) && this.questions.length"
     class="quiz__container">
     <article
