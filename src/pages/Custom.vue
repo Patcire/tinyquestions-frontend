@@ -28,7 +28,10 @@ export default {
 </script>
 
 <template>
-  <quiz :mode="mode"></quiz>
+  <section class="custom">
+    <quiz :mode="mode"></quiz>
+  </section>
+
 </template>
 
 <style scoped>

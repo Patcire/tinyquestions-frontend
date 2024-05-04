@@ -13,4 +13,70 @@
     right: 24%;
     position: relative;
   }
+  &__points-container{
+    // background-color: rgba(239, 140, 66, 0.52);
+    @include flex-column;
+    padding-top: 3%;
+    padding-right: 2%;
+  }
+  &__points{
+    font-family: $fontLogo;
+    font-size: 2.5rem;
+    position: absolute;
+    animation: none ;
+    &--mod{
+      color: $purple;
+      //padding-bottom: 30%;
+      -webkit-text-stroke: 0.6px black;
+      text-shadow: $shadow3;
+      font-size: 4rem;
+      animation: fadeIn 6s;;
+    }
+  }
+  &__sparkles{
+    position: relative;
+    z-index: -9;
+    height: 160px;
+    animation: waveAnimation 0.2s infinite;
+  }
+
+  &__sum{
+    display: none;
+    font-family: $fontLogo;
+    font-size: 2.5rem;
+    position: absolute;
+    &.active{
+      display: block;
+      animation: displayFeedback 0.5s ease-in-out;
+      top:80%
+    }
+  }
+
+}
+
+/*-----------*/
+
+/* Media query for tablet*/
+
+@include tablet{
+  .quick{
+    &__title{
+      font-size: 3rem;
+    }
+  }
+}
+
+/*-----------*/
+
+/* Media query for mobile*/
+
+@include mobile{
+  .quick{
+    padding-top: 15%;
+    &__title{
+      font-size: 2.3rem;
+      right: 12%;
+    }
+
+  }
 }
