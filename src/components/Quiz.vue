@@ -1,5 +1,5 @@
 <script>
-import { callAPI } from '@/helpers/callAPI.js'
+import { callAPI, postAPI } from '@/helpers/callAPI.js'
 import router from '@/router/router.js'
 import Loading from '@/components/Loading.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
@@ -16,7 +16,8 @@ export default {
       questions: [],
       counter: 0,
       timerAutoStart: true,
-      isLoading: false
+      isLoading: false,
+      responses: []
     }
   },
 
@@ -35,6 +36,8 @@ export default {
         -mod: to mod some of the functions of the quiz **String**
         -isCustom: we need to know if questions can't be random **Boolean**
         -idCustomQuiz: if is custom we need the quiz id **Number**
+        -type: if is not custom we need to know the type of random (f.e: quick) **String**
+        -isMultiplayer: **Boolean**
       */
     }
   },
@@ -48,7 +51,6 @@ export default {
 
     async getQuestionsFromAPIForNewQuiz(){
       this.questions = await callAPI(`http://localhost:8000/api/ques/rand/${this.mode.numberOfQuestions}`)
-      //this.counter=0
     },
     async getMoreQuestionsForZenMode(){
       this.questions = [...this.questions, ...await callAPI(`http://localhost:8000/api/ques/rand/${this.mode.numberOfQuestions}`)]
@@ -82,6 +84,7 @@ export default {
     },
 
     handleOptionSelected(optionSelected) {
+      this.responses.push(optionSelected)
       this.correctOption(optionSelected)
       setTimeout(()=>{
         this.nextQuestion()
@@ -106,6 +109,78 @@ export default {
       this.timerAutoStart = false
     },
 
+    async handleFinishedQuiz(){
+      // the app needs to save the match to generate reports later
+
+      // first we need to create the quiz on ddbb
+      const createdQuiz = await postAPI('http://localhost:8000/api/quiz/create',
+        {
+          "number_questions": this.questions.length-1,
+        "clock": this.mode.clock[0],
+        "time": this.mode.clock[1],
+        "type": this.mode.isCustom ? "custom" : this.mode.type,
+        })
+
+      if (createdQuiz.status !== 201){
+        // to do --> MODAL error al guardar
+        console.log('quiz no creater')
+        console.log(createdQuiz)
+        return
+      }
+      const data = await createdQuiz.json()
+      console.log (data.id_quiz)
+      // if the quiz is random we need to add to his dedicate table
+      // (custom quizzes are always created by user before they can play it)
+      let createdRandomQuiz = {};
+      if (!this.mode.isCustom) createdRandomQuiz = await postAPI('http://localhost:8000/api/rand/create',
+        {
+          "id_quiz": await data.id_quiz,
+          "mode": this.mode.type
+        })
+
+      if (!this.mode.isCustom && createdRandomQuiz.status !== 201){
+        // to do --> MODAL error al guardar
+        console.log('random no created')
+        console.log(createdRandomQuiz.json())
+        return
+      }
+
+      // then we create the match
+      const createdMatch = await postAPI('http://localhost:8000/api/match/create', {
+        "isMultiplayer": 0,
+        "fk_id_quiz": await data.id_quiz,
+
+      })
+
+      if (createdMatch.status !== 201){
+        // to do --> MODAL error al guardar
+        console.log(data)
+        //console.log('match no created')
+        console.log(await createdMatch.json())
+      }
+
+      const infoMatch = await createdMatch.json()
+      // and finally create the report (table user_play_match)
+      const createdReport = await postAPI('http://localhost:8000/api/play/create', {
+        "id_user": useSessionStore().user.userID,
+        "id_quiz": await data.id_quiz,
+        "points": this.points,
+        "answers": JSON.stringify(this.responses),
+        "id_match": await infoMatch.id_match
+      })
+
+      if (createdReport.status !== 200){
+        // to do --> MODAL error al guardar
+        console.log('report no created')
+        console.log(createdReport.status)
+        console.log(await createdReport.json())
+        return
+      }
+      console.log('match created')
+
+    }
+
+
   },
 
   async created() {
@@ -114,6 +189,13 @@ export default {
     await this.getQuestionsOfCustomQuiz()
       :
     await this.getQuestionsFromAPIForNewQuiz()
+  },
+
+  watch: {
+    counter(value) {
+      // when matches finish
+      if (value>this.questions.length-1) this.handleFinishedQuiz()
+    },
   }
 
 }
