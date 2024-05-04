@@ -1,0 +1,16 @@
+@import "../abstracts/index";
+/* Custom Quiz */
+
+.custom{
+  padding-top: 2%;
+  @include flex-column;
+  &__title{
+    color: white;
+    -webkit-text-stroke: 2px $purple;
+    text-shadow: $shadow1;
+    font-family: $fontLogo;
+    font-size: 3.5rem;
+    right: 24%;
+    position: relative;
+  }
+}

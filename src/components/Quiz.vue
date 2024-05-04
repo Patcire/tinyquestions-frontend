@@ -180,7 +180,9 @@ export default {
            :class="{'active' : isCorrectAnimationTrigger===false}"
            alt="a cross 'cause you fail">
     </form>
-    <article class="quick__points-container" v-if="questions.length && points>0 && mode.rerun">
+
+    <!--score-->
+    <article class="quick__points-container" v-if="questions.length && points>0 && (mode.rerun || mode.isCustom)">
       <h3 class="quick__points"
           >{{points}} points
       </h3>
@@ -202,7 +204,7 @@ export default {
         :class="{'active': questions}">
         {{this.points}} of {{this.mode.numberOfQuestions*10}} possible points
       </p>
-      <a v-if="!this.mode.mod"
+      <a v-if="!this.mode.mod && !this.mode.isCustom"
         @click="handleNewQuiz"
         class="quiz__suggest">
         New quiz ?
@@ -211,6 +213,10 @@ export default {
               @click="router().push('/register')"
               class="quiz__suggest">
         Register to play more!
+      </a>
+      <a  v-if="this.mode.isCustom" class="quiz__suggest"
+      @click="router().push('/profile')">
+        Go to Community quizzes
       </a>
     </article>
   </div>

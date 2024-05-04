@@ -11,7 +11,7 @@ export default {
       mode:
         {
           title:'',
-          class:'quick__title',
+          class:'custom__title',
           clock: [false, 45000], // miliseconds
           numberOfQuestions: 0,
           hasScore: true,
