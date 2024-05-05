@@ -17,7 +17,9 @@ export default {
       counter: 0,
       timerAutoStart: true,
       isLoading: false,
-      responses: []
+      responses: [],
+      quizID: null, // until we created on the db we don't know the id
+      matchID: null // same with match
     }
   },
 
@@ -36,7 +38,7 @@ export default {
         -mod: to mod some of the functions of the quiz **String**
         -isCustom: we need to know if questions can't be random **Boolean**
         -idCustomQuiz: if is custom we need the quiz id **Number**
-        -type: if is not custom we need to know the type of random (f.e: quick) **String**
+        -gameMode: if is not custom we need to know the mode of random game (f.e: quick) **String**
         -isMultiplayer: **Boolean**
       */
     }
@@ -68,7 +70,7 @@ export default {
 
     async nextQuestion() {
       this.counter++
-      // evaluation for infinite mode
+      // evaluation for infinite (zen) mode
       (!this.mode.rerun && this.counter === this.questions.length - 6) && await this.getMoreQuestionsForZenMode()
       document.querySelectorAll('input[type="radio"]')
         .forEach(radio => radio.checked = false);
@@ -97,6 +99,60 @@ export default {
 
     //to handle the quiz logic
 
+    async createQuizAndMatchOnDB(){
+
+      const createdQuiz = await postAPI('http://localhost:8000/api/quiz/create',
+        {
+          "number_questions": this.questions.length-1,
+          "clock": this.mode.clock[0],
+          "time": this.mode.clock[1],
+          "type": this.mode.isCustom ? "custom" : "random",
+        })
+
+      if (createdQuiz.status !== 201){
+        // to do --> MODAL error al guardar
+        console.log('quiz no creater')
+        console.log(createdQuiz)
+        return
+      }
+
+      const infoQuizCreated = await createdQuiz.json()
+      this.quizID = await infoQuizCreated.id_quiz
+      console.log('quizID: ' + await this.quizID)
+
+      // if the quiz is random we need to add to his dedicate table
+      // (custom quizzes are always created by user before they can play it)
+      let createdRandomQuiz = {}
+      if (!this.mode.isCustom) createdRandomQuiz = await postAPI('http://localhost:8000/api/rand/create',
+        {
+          "id_quiz": this.quizID,
+          "mode": this.mode.gameMode
+        })
+
+      if (!this.mode.isCustom && createdRandomQuiz.status !== 201){
+        // to do --> MODAL error al guardar
+        console.log('random no created')
+        console.log(createdRandomQuiz.json())
+      }
+
+      // then we create the match
+      const createdMatch = await postAPI('http://localhost:8000/api/match/create', {
+        "isMultiplayer": 0,
+        "fk_id_quiz": await this.quizID,
+
+      })
+
+      if (createdMatch.status !== 201){
+        // to do --> MODAL error al guardar
+        console.log(await createdMatch.json())
+        return
+      }
+
+      const infoMatch = await createdMatch.json()
+      this.matchID = await infoMatch.id_match
+      console.log("idMatch: "+ await this.matchID)
+    },
+
     async handleNewQuiz(){
       this.questions = [] // to activate the loading animation
       await this.getQuestionsFromAPIForNewQuiz()
@@ -110,47 +166,14 @@ export default {
     },
 
     async handleFinishedQuiz(){
-      // the app needs to save the match to generate reports later
-
-      // first we need to create the quiz on ddbb
-      const createdQuiz = await postAPI('http://localhost:8000/api/quiz/create',
-        {
-          "number_questions": this.questions.length-1,
-        "clock": this.mode.clock[0],
-        "time": this.mode.clock[1],
-        "type": this.mode.isCustom ? "custom" : "random",
-        })
-
-      if (createdQuiz.status !== 201){
-        // to do --> MODAL error al guardar
-        console.log('quiz no creater')
-        console.log(createdQuiz)
-        return
-      }
-      const data = await createdQuiz.json()
-      console.log (data.id_quiz)
-      // if the quiz is random we need to add to his dedicate table
-      // (custom quizzes are always created by user before they can play it)
-      let createdRandomQuiz = {}
-      if (!this.mode.isCustom) createdRandomQuiz = await postAPI('http://localhost:8000/api/rand/create',
-        {
-          "id_quiz": await data.id_quiz,
-          "mode": this.mode.type
-        })
-
-      if (!this.mode.isCustom && createdRandomQuiz.status !== 201){
-        // to do --> MODAL error al guardar
-        console.log('random no created')
-        console.log(createdRandomQuiz.json())
-        return
-      }
-
+      // the app needs to save the asociated questions
+      // responses to their respective quiz/matches on DB
       let asociatedQuestion = {}
       if(!this.mode.isCustom){
         for (const question of this.questions) {
            asociatedQuestion = await postAPI(
              'http://localhost:8000/api/has/create', {
-               "id_quiz": await data.id_quiz,
+               "id_quiz": await this.quizID,
                "id_question": question.id_question
              })
           if (asociatedQuestion.status !== 201){
@@ -158,45 +181,26 @@ export default {
             console.log(await asociatedQuestion.json())
             return
           }
-
+          console.log('asociatedQuest: ' + await asociatedQuestion.json())
         }
       }
-
-      // then we create the match
-      const createdMatch = await postAPI('http://localhost:8000/api/match/create', {
-        "isMultiplayer": 0,
-        "fk_id_quiz": await data.id_quiz,
-
-      })
-
-      if (createdMatch.status !== 201){
-        // to do --> MODAL error al guardar
-        console.log(data)
-        //console.log('match no created')
-        console.log(await createdMatch.json())
-      }
-
-      const infoMatch = await createdMatch.json()
       // and finally create the report (table user_play_match)
       const createdReport = await postAPI('http://localhost:8000/api/play/create', {
         "id_user": useSessionStore().user.userID,
-        "id_quiz": await data.id_quiz,
+        "id_quiz": await this.quizID,
         "points": this.points,
         "answers": JSON.stringify(this.responses),
-        "id_match": await infoMatch.id_match
+        "id_match": await this.matchID
       })
 
       if (createdReport.status !== 200){
         // to do --> MODAL error al guardar
         console.log('report no created')
         console.log(createdReport.status)
-        console.log(await createdReport.json())
         return
       }
       console.log(createdReport.status)
-
     }
-
 
   },
 
@@ -206,12 +210,14 @@ export default {
     await this.getQuestionsOfCustomQuiz()
       :
     await this.getQuestionsFromAPIForNewQuiz()
+
+    this.mode.gameMode !== "zen" &&  await this.createQuizAndMatchOnDB()
   },
 
   watch: {
     counter(value) {
-      // when matches finish
-      if (value>this.questions.length-1) this.handleFinishedQuiz()
+      // when matches finish and game mode is not zen
+      if (value>this.questions.length-1 && this.mode.gameMode !== "zen") this.handleFinishedQuiz()
     },
   }
 

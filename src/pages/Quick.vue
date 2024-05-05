@@ -14,7 +14,8 @@ export default {
            clock: [true, 45000], // miliseconds
            numberOfQuestions: 12,
            hasScore: true,
-           rerun: true
+           rerun: true,
+           gameMode: "quick"
         }
     }
   },

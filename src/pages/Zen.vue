@@ -13,7 +13,8 @@ export default {
           clock: [false],
           numberOfQuestions: 10,
           hasScore: false,
-          rerun: false
+          rerun: false,
+          gameMode: "zen"
         }
     }
   },
