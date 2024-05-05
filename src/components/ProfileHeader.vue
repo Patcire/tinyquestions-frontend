@@ -1,5 +1,6 @@
 <script>
 import { useSessionStore } from '@/stores/sessionStore.js'
+import router from '@/router/router.js'
 
 export default {
   name: 'ProfileHeader',
@@ -12,6 +13,9 @@ export default {
     }
   },
   methods:{
+    router() {
+      return router
+    },
     changeOption(chosenOption){
       this.contentOption = chosenOption
       this.$emit('selection', this.contentOption)
@@ -31,7 +35,7 @@ export default {
     <article class="userinfo__stats">
       <p>Total points: {{seshStore.user.points}}</p>
       <img alt="point to separate" src="../../public/pointpoint.svg">
-      <p>Solved quizzes: {{seshStore.user.quizzes_resolved}}</p>
+      <a @click="router().push('/records')"><p>Solved quizzes: {{seshStore.user.quizzes_resolved}}</p></a>
     </article>
 
     <article class="userinfo__settings">

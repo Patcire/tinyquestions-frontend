@@ -127,6 +127,20 @@ const routes = [
         ]
       },
 
+      {
+        path: "/records",
+        beforeEnter(to, from, next) {
+          useSessionStore().isLogged() ? next() : router.push('/')
+        },
+        component: PrivateLayout,
+        children: [
+          {
+            path: "",
+            component: ()=> import('/src/pages/Records.vue')
+          }
+        ]
+      },
+
     ]
 
   },
