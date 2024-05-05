@@ -118,7 +118,7 @@ export default {
           "number_questions": this.questions.length-1,
         "clock": this.mode.clock[0],
         "time": this.mode.clock[1],
-        "type": this.mode.isCustom ? "custom" : this.mode.type,
+        "type": this.mode.isCustom ? "custom" : "random",
         })
 
       if (createdQuiz.status !== 201){
@@ -131,7 +131,7 @@ export default {
       console.log (data.id_quiz)
       // if the quiz is random we need to add to his dedicate table
       // (custom quizzes are always created by user before they can play it)
-      let createdRandomQuiz = {};
+      let createdRandomQuiz = {}
       if (!this.mode.isCustom) createdRandomQuiz = await postAPI('http://localhost:8000/api/rand/create',
         {
           "id_quiz": await data.id_quiz,
@@ -143,6 +143,23 @@ export default {
         console.log('random no created')
         console.log(createdRandomQuiz.json())
         return
+      }
+
+      let asociatedQuestion = {}
+      if(!this.mode.isCustom){
+        for (const question of this.questions) {
+           asociatedQuestion = await postAPI(
+             'http://localhost:8000/api/has/create', {
+               "id_quiz": await data.id_quiz,
+               "id_question": question.id_question
+             })
+          if (asociatedQuestion.status !== 201){
+            console.log(question.id_question+' id ques')
+            console.log(await asociatedQuestion.json())
+            return
+          }
+
+        }
       }
 
       // then we create the match
