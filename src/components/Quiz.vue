@@ -176,7 +176,7 @@ export default {
         console.log(await createdReport.json())
         return
       }
-      console.log('match created')
+      console.log(createdReport.status)
 
     }
 
