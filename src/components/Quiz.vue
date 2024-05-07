@@ -101,39 +101,49 @@ export default {
 
     async createQuizAndMatchOnDB(){
 
-      const createdQuiz = await postAPI('http://localhost:8000/api/quiz/create',
-        {
-          "number_questions": this.questions.length-1,
-          "clock": this.mode.clock[0],
-          "time": this.mode.clock[1],
-          "type": this.mode.isCustom ? "custom" : "random",
-        })
+      //only for random quizzes need create the quizz
+      if (!this.mode.isCustom){
+        const createdQuiz = await postAPI('http://localhost:8000/api/quiz/create',
+          {
+            "number_questions": this.questions.length-1,
+            "clock": this.mode.clock[0],
+            "time": this.mode.clock[1],
+            "type": "random",
+          })
 
-      if (createdQuiz.status !== 201){
-        // to do --> MODAL error al guardar
-        console.log('quiz no creater')
-        console.log(createdQuiz)
-        return
+        if (createdQuiz.status !== 201){
+          // to do --> MODAL error al guardar
+          console.log('quiz no creater')
+          console.log(createdQuiz)
+          return
+        }
+
+        const infoQuizCreated = await createdQuiz.json()
+        this.quizID = await infoQuizCreated.id_quiz
+        console.log('quizID: ' + await this.quizID)
+
+        // if the quiz is random we need to add to his dedicate table
+        // (custom quizzes are always created by user before they can play it)
+        let createdRandomQuiz = {}
+        createdRandomQuiz = await postAPI('http://localhost:8000/api/rand/create',
+          {
+            "id_quiz": this.quizID,
+            "mode": this.mode.gameMode
+          })
+
+        if (createdRandomQuiz.status !== 201){
+          // to do --> MODAL error al guardar
+          console.log('random no created')
+          console.log(createdRandomQuiz.json())
+        }
+      }
+      else {
+        // if the user plays a custom quizz we pick up the existing quiz id
+        // to create the match
+        console.log('we are here')
+        this.quizID = useSessionStore().user.lastCustomQuizSelected
       }
 
-      const infoQuizCreated = await createdQuiz.json()
-      this.quizID = await infoQuizCreated.id_quiz
-      console.log('quizID: ' + await this.quizID)
-
-      // if the quiz is random we need to add to his dedicate table
-      // (custom quizzes are always created by user before they can play it)
-      let createdRandomQuiz = {}
-      if (!this.mode.isCustom) createdRandomQuiz = await postAPI('http://localhost:8000/api/rand/create',
-        {
-          "id_quiz": this.quizID,
-          "mode": this.mode.gameMode
-        })
-
-      if (!this.mode.isCustom && createdRandomQuiz.status !== 201){
-        // to do --> MODAL error al guardar
-        console.log('random no created')
-        console.log(createdRandomQuiz.json())
-      }
 
       // then we create the match
       const createdMatch = await postAPI('http://localhost:8000/api/match/create', {
@@ -151,6 +161,8 @@ export default {
       const infoMatch = await createdMatch.json()
       this.matchID = await infoMatch.id_match
       console.log("idMatch: "+ await this.matchID)
+
+
     },
 
     async handleNewQuiz(){
@@ -168,8 +180,9 @@ export default {
     async handleFinishedQuiz(){
       // the app needs to save the asociated questions
       // responses to their respective quiz/matches on DB
-      let asociatedQuestion = {}
+
       if(!this.mode.isCustom){
+        let asociatedQuestion = {}
         for (const question of this.questions) {
            asociatedQuestion = await postAPI(
              'http://localhost:8000/api/has/create', {

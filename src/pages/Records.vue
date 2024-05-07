@@ -6,7 +6,8 @@ export default {
   name: 'Records',
   data(){
     return{
-      historic: []
+      historic: [],
+      pageNumber: 1
     }
   },
   methods:{
@@ -14,7 +15,7 @@ export default {
   },
 
   async created() {
-    let response = await callAPI(`http://localhost:8000/api/user/allmat/${useSessionStore().user.userID}`)
+    let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/?page=${this.pageNumber}`)
     this.historic = [...response.data]
     console.log(this.historic)
   }
@@ -22,12 +23,30 @@ export default {
 </script>
 
 <template>
-  <h1>Game report</h1>
-  <ul>
-    <li v-for="match in historic">{{match.id_match}}</li>
-  </ul>
+  <section class="historic">
+    <h1>Game report</h1>
+    <aside class="historic__aside">
+    <ul>
+      <li v-for="report in historic">
+        <p v-if="report.randomQuiz">{{report.randomQuiz.mode}}</p>
+        <p v-if="report.customQuiz">{{report.customQuiz.quiz_name}}</p>
+
+      </li>
+    </ul>
+    </aside>
+  </section>
+
 </template>
 
 <style scoped>
+
+.historic{
+  background-color: cadetblue;
+  &__aside{
+    background-color: antiquewhite;
+  }
+
+
+}
 
 </style>

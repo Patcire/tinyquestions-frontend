@@ -109,6 +109,7 @@ export default {
       const createdQuizJSON = await createdQuiz.json()
 
       if (createdQuiz.status !== 201) {
+        console.log('quiz nanai')
         this.cantSave= true
         this.isLoading = false
         return
@@ -125,6 +126,7 @@ export default {
         })
 
         if (createdCustom.status !== 201) {
+          console.log('custom nanai')
           this.cantSave= true
           this.isLoading = false
           return
@@ -134,7 +136,7 @@ export default {
         for (const question of this.createdQuestions) {
            const responseQuestionCreated = await this.createQuestionOnDB(question);
            if (responseQuestionCreated === false){
-
+             console.log('question nanai')
              this.cantSave = true
              this.isLoading = false
              return
