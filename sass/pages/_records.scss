@@ -1,0 +1,44 @@
+@import "../abstracts/index";
+
+.records{
+  @include flex-row;
+  background-color: purple;
+
+  &__aside{
+    background-color: aquamarine;
+    @include flex-column;
+  }
+  &__header{
+    @include flex-column;
+  }
+  &__photo {
+    // background: lightblue;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    @include flex-column;
+    border: 1.8px solid black;
+  }
+
+  &__historic{
+    padding: 15px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    font-family: $fontAnswers;
+    font-size: 1.5rem;
+  }
+
+  &__row{
+    background-color: lightcoral;
+    @include flex-row;
+    padding: 2px 0 15px 0;
+    justify-content: space-between;
+
+  }
+
+  &__report{
+    background-color: lightgreen;
+  }
+
+}
+

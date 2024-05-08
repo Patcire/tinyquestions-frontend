@@ -1,6 +1,8 @@
 <script>
 import { callAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
+import router from '@/router/router.js'
+import { formatDate } from '../helpers/others.js'
 
 export default {
   name: 'Records',
@@ -11,6 +13,11 @@ export default {
     }
   },
   methods:{
+    formatDate,
+    router() {
+      return router
+    },
+    useSessionStore
 
   },
 
@@ -23,30 +30,42 @@ export default {
 </script>
 
 <template>
-  <section class="historic">
-    <h1>Game report</h1>
-    <aside class="historic__aside">
-    <ul>
+  <section class="records">
+
+  <aside class="records__aside">
+      <header class="records__header">
+
+        <article class="records__photo">
+          <img alt="doodle face" src="../../public/sigh.svg">
+        </article>
+
+        <h1 class="userinfo__username">@{{useSessionStore().user.username}}</h1>
+        <article class="userinfo__stats">
+          <a><p>Solved quizzes: {{useSessionStore().user.quizzes_resolved}}</p></a>
+        </article>
+
+    </header>
+
+    <ul class="records__historic">
       <li v-for="report in historic">
-        <p v-if="report.randomQuiz">{{report.randomQuiz.mode}}</p>
-        <p v-if="report.customQuiz">{{report.customQuiz.quiz_name}}</p>
+
+        <article class="records__row">
+          <p v-if="report.randomQuiz">{{report.randomQuiz.mode}}</p>
+          <p v-if="report.randomQuiz">{{formatDate(report.date)}}</p>
+          <p v-if="report.customQuiz">{{report.customQuiz.quiz_name}}</p>
+          <p v-if="report.customQuiz">{{formatDate(report.date)}}</p>
+        </article>
 
       </li>
     </ul>
-    </aside>
+
+  </aside>
+
+  <section class="records__report">
+    <h1>Game report</h1>
   </section>
+
+</section>
 
 </template>
 
-<style scoped>
-
-.historic{
-  background-color: cadetblue;
-  &__aside{
-    background-color: antiquewhite;
-  }
-
-
-}
-
-</style>
