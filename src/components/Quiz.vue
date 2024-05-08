@@ -86,7 +86,12 @@ export default {
     },
 
     handleOptionSelected(optionSelected) {
-      this.responses.push(optionSelected)
+      this.responses.push(
+        {"selected": optionSelected,
+          "correct": this.questions[this.counter].correct_option,
+          "wasRight": this.questions[this.counter].correct_option === optionSelected
+        }
+      )
       this.correctOption(optionSelected)
       setTimeout(()=>{
         this.nextQuestion()
