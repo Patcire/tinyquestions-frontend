@@ -2,11 +2,15 @@
 
 .records{
   @include flex-row;
+  align-items: flex-start;
   background-color: purple;
+  height: 100vh;
+  padding-top: 60px;
 
   &__aside{
     background-color: aquamarine;
     @include flex-column;
+    width: 390px;
   }
   &__header{
     @include flex-column;
@@ -19,25 +23,75 @@
     @include flex-column;
     border: 1.8px solid black;
   }
+  &__username{
+    font-family: $fontQuestions;
+    padding-top: 2px;
+    font-size: 1.6rem;
+  }
+  &__stats{
+    @include flex-row;
+    font-family: $fontAnswers;
+    padding-top: 25px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
 
   &__historic{
-    padding: 15px;
+    width: 60%;
+    padding: 25px 15px 15px 15px;
     border-left: 2px solid black;
     border-right: 2px solid black;
     font-family: $fontAnswers;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+
+  }
+
+  &__list-item{
+    padding: 2px 0 15px 0;
   }
 
   &__row{
     background-color: lightcoral;
     @include flex-row;
-    padding: 2px 0 15px 0;
     justify-content: space-between;
 
   }
 
-  &__report{
+  &__row.selected{
+      background-color: $lightBlue;
+  }
+
+  &__title{
+    width: 40%;
+    overflow: hidden;
+  }
+
+  &__inform{
     background-color: lightgreen;
+    @include flex-column;
+    width: 100%;
+  }
+
+  &__report{
+    @include flex-row;
+    font-family: $fontLogo;
+    font-size: 2rem;
+  }
+
+  &__glass{
+    background-color: grey;
+    padding-top: 20px;
+    padding-left: 2.5px;
+  }
+
+  &__letters{
+    //background-color: pink;
+    z-index: 2;
+    position: absolute;
+  }
+  &__rest{
+    margin-left: 225px;
   }
 
 }
