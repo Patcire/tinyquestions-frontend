@@ -94,5 +94,46 @@
     margin-left: 225px;
   }
 
+  &__container{
+    position: absolute;
+    &--relative{
+      position: relative;
+      background-color: red;
+      @include flex-row;
+      justify-content: left;
+    }
+  }
+
+  &__underline{
+    height: 1px;
+    border: 1px solid black;
+    width: 360px;
+    background-color: black;
+    margin-top: 40px;
+  }
+
+  &__quiz{
+
+  }
+
+  &__summary{
+    font-family: $fontAnswers;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  &__mini-icon{
+    height:30px;
+    width:30px;
+    padding-left: 3%;
+  }
+
+  &__minititle{
+    padding-bottom: 20px;
+  }
+  &__questions{
+
+  }
+
 }
 
