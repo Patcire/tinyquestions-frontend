@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { postAPI } from '@/helpers/callAPI.js'
+import { postAPI, updateAPI } from '@/helpers/callAPI.js'
 
 export const useSessionStore = defineStore('user',{
 
@@ -69,7 +69,15 @@ export const useSessionStore = defineStore('user',{
       return false
     },
 
+    async updateStats(){
+      const response = await updateAPI("http://localhost:8000/api/user/stats", {
+        "points": this.user.points,
+        "quizzes_resolved": this.user.quizzes_resolved
+      })
+     }
+
   },
+
   persist: {
     enabled: true,
     strategies: [

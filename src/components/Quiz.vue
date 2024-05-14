@@ -13,6 +13,7 @@ export default {
     return{
       isCorrectAnimationTrigger: null,
       points:0,
+      quizzesResolved:0,
       questions: [],
       counter: 0,
       timerAutoStart: true,
@@ -99,6 +100,15 @@ export default {
       setTimeout(()=>{
         this.isCorrectAnimationTrigger = null
       }, 460)
+
+    },
+
+    // to handle user Stats
+    updateUserStats(){
+      useSessionStore().user.points +=  this.points
+      useSessionStore().user.quizzes_resolved +=  1
+      console.log(useSessionStore().user.points)
+      console.log(useSessionStore().user.quizzes_resolved)
 
     },
 
@@ -218,6 +228,8 @@ export default {
         return
       }
       console.log(createdReport.status)
+      this.updateUserStats()
+
     }
 
   },
@@ -230,6 +242,11 @@ export default {
     await this.getQuestionsFromAPIForNewQuiz()
 
     this.mode.gameMode !== "zen" &&  await this.createQuizAndMatchOnDB()
+  },
+
+  async unmounted(){
+    this.mode.gameMode !== "zen" && await useSessionStore().updateStats()
+    console.log('byeee')
   },
 
   watch: {

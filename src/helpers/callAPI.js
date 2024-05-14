@@ -23,3 +23,12 @@ export const deleteAPI = async (url) => {
   })
 }
 
+export const updateAPI = async (url, body) => {
+  return await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+};
