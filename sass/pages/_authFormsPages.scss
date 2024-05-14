@@ -20,6 +20,7 @@
   }
   &__title{
     font-family: $fontQuestions;
+    font-weight: bold;
     font-size: 1.2rem;
     @include flex-row;
    // background-color: cadetblue;
@@ -153,6 +154,7 @@
   }
   &__global-error{
     font-family: $fontQuestions;
+    font-weight: bold;
     font-size: 1.2rem;
     color: $pink;
     width: 250px;

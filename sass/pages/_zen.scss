@@ -42,6 +42,7 @@
     //background-color: chocolate;
     @include flex-row;
     font-family: $fontQuestions;
+    font-weight: bold;
     font-size: 2rem;
     padding-top: 2%;
     height: 126px;

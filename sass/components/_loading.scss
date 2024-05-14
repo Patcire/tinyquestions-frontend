@@ -13,6 +13,7 @@
   &__subcontainer{
     @include flex-row;
     font-family: $fontQuestions;
+    font-weight: bold;
     font-size: 3rem;
   }
   &__word{
