@@ -63,7 +63,7 @@ export default {
       // now we need to set some values on the mode parameters
       // to made that quiz logic works
       this.questions = quizInfo.questions
-      this.mode.numberOfQuestions = this.questions.length
+      this.mode.numberOfQuestions = this.questions.length+1
       this.mode.title = quizInfo.quiz_name
     },
 
@@ -227,7 +227,7 @@ export default {
         console.log(createdReport.status)
         return
       }
-      if (!this.mode.isCustom) await this.updateUserStats()
+      if (!this.mode.isCustom) await this.updateUserStats() && console.log('stats updated')
       console.log(createdReport.status)
     }
 
@@ -274,7 +274,7 @@ export default {
         @done="handleTimesOut"
         v-slot="{seconds}"
       >
-        <em>0:{{ seconds }} s</em>
+        <em>00:{{ seconds }} s</em>
       </Vountdown>
 
     </header>
