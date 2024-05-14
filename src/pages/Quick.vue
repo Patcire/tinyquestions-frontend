@@ -15,7 +15,8 @@ export default {
            numberOfQuestions: 12,
            hasScore: true,
            rerun: true,
-           gameMode: "quick"
+           gameMode: "quick",
+           isCustom: false
         }
     }
   },

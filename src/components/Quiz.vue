@@ -104,11 +104,11 @@ export default {
     },
 
     // to handle user Stats
-    updateUserStats(){
+    async updateUserStats(){
+      console.log('iscust?'+this.mode.isCustom)
       useSessionStore().user.points +=  this.points
       useSessionStore().user.quizzes_resolved +=  1
-      console.log(useSessionStore().user.points)
-      console.log(useSessionStore().user.quizzes_resolved)
+      await useSessionStore().updateStats()
 
     },
 
@@ -227,9 +227,8 @@ export default {
         console.log(createdReport.status)
         return
       }
+      if (!this.mode.isCustom) await this.updateUserStats()
       console.log(createdReport.status)
-      this.updateUserStats()
-
     }
 
   },
@@ -242,11 +241,6 @@ export default {
     await this.getQuestionsFromAPIForNewQuiz()
 
     this.mode.gameMode !== "zen" &&  await this.createQuizAndMatchOnDB()
-  },
-
-  async unmounted(){
-    this.mode.gameMode !== "zen" && await useSessionStore().updateStats()
-    console.log('byeee')
   },
 
   watch: {
