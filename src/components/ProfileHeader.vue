@@ -35,7 +35,9 @@ export default {
     <article class="userinfo__stats">
       <p>Total points: {{seshStore.user.points}}</p>
       <img alt="point to separate" src="../../public/pointpoint.svg">
-      <a @click="router().push('/records')"><p>Solved quizzes: {{seshStore.user.quizzes_resolved}}</p></a>
+      <a @click="router().push('/records')">
+        <p class="userinfo__solved">Solved quizzes: {{seshStore.user.quizzes_resolved}}</p>
+      </a>
     </article>
 
     <article class="userinfo__settings">

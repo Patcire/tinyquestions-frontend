@@ -3,7 +3,7 @@
 .userinfo{
   //background-color: lightcoral;
   width: 100%;
-@include flex-column;
+  @include flex-column;
   &__photo{
    // background: lightblue;
     border-radius: 50%;
@@ -23,6 +23,15 @@
     width: 100%;
     gap: 1%;
   }
+
+  &__solved{
+    @include in-out-scale;
+    &:hover{
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+  }
+
   &__settings{
     @include flex-row;
     font-family: $fontAnswers;
