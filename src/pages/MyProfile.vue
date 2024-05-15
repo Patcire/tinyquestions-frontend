@@ -3,10 +3,11 @@ import ProfileHeader from '@/components/ProfileHeader.vue'
 import Gallery from '@/components/Gallery.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import { callAPI } from '@/helpers/callAPI.js'
+import Rankings from '@/components/Rankings.vue'
 
 export default {
   name: 'MyProfile',
-  components: { Gallery, ProfileHeader },
+  components: { Rankings, Gallery, ProfileHeader },
   data(){
     return{
       bgCardColorCSS: "purple",
@@ -80,7 +81,7 @@ export default {
     >
     </Gallery>
 
-    <p v-if="selection === 'ranks'">rankings</p>
+    <rankings v-if="selection === 'ranks'"></rankings>
 
   </section>
 
