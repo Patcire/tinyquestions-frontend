@@ -24,6 +24,7 @@ export default {
   methods: {
 
     handleContentShowed(contentToChose) {
+      this.selection = contentToChose
       if (contentToChose === "myQuizzes") {
         this.contentToSendToGallery = [...useSessionStore().user.myQuizzesStorage]
         this.bgCardColorCSS="purple"
@@ -35,6 +36,9 @@ export default {
       else if (contentToChose === "explore") {
         this.contentToSendToGallery = [...this.contentToExplore]
         this.bgCardColorCSS="blue"
+      }
+      else if (contentToChose === "ranks") {
+        this.loadingContent = false
       }
     }
   },
@@ -61,19 +65,23 @@ export default {
       this.contentToExplore = [...quizzesToExploreFromAPI]
       this.loadingContent = false
     }
-  }
+  },
+
 }
 </script>
 
 <template>
   <section class="profile">
     <ProfileHeader @selection="handleContentShowed"></ProfileHeader>
-    <Gallery
+    <Gallery v-if="selection !== 'ranks'"
       :content="contentToSendToGallery"
       :bgCardColorCSS="bgCardColorCSS"
       :loadingContent="loadingContent"
     >
     </Gallery>
+
+    <p v-if="selection === 'ranks'">rankings</p>
+
   </section>
 
 </template>

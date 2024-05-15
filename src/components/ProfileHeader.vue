@@ -63,6 +63,13 @@ export default {
       >
         Explore
       </button>
+
+      <span>|</span>
+      <button @click="changeOption('ranks')" class="userinfo__options"
+              :class="contentOption==='ranks' ? '--bold' : '' "
+      >
+        Rankings
+      </button>
     </article>
 
   </header>
