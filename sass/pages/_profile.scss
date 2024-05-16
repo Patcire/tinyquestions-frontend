@@ -2,3 +2,12 @@
 .profile{
   @include flex-column;
 }
+
+.rank {
+  background-color: pink;
+  width: 600px;
+  @include flex-column;
+  justify-content: flex-start;
+  height: 800px;
+  padding: 2%;
+}

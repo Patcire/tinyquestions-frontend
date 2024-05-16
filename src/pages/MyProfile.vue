@@ -3,11 +3,11 @@ import ProfileHeader from '@/components/ProfileHeader.vue'
 import Gallery from '@/components/Gallery.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import { callAPI } from '@/helpers/callAPI.js'
-import Rankings from '@/components/Rankings.vue'
+import DinamicTable from '@/components/DinamicTable.vue'
 
 export default {
   name: 'MyProfile',
-  components: { Rankings, Gallery, ProfileHeader },
+  components: { DinamicTable, Gallery, ProfileHeader },
   data(){
     return{
       bgCardColorCSS: "purple",
@@ -18,13 +18,15 @@ export default {
       // to storage api petitions that is not on the pinia store
       contentToExplore: [],
       // an array to send the chosen content to the gallery
-      contentToSendToGallery: []
+      contentToSendToGallery: [],
+      // an array to send the players ranks to table rankings
+      contentToRanking: []
 
     }
   },
   methods: {
 
-    handleContentShowed(contentToChose) {
+    async handleContentShowed(contentToChose) {
       this.selection = contentToChose
       if (contentToChose === "myQuizzes") {
         this.contentToSendToGallery = [...useSessionStore().user.myQuizzesStorage]
@@ -40,6 +42,7 @@ export default {
       }
       else if (contentToChose === "ranks") {
         this.loadingContent = false
+        this.contentToRanking = await callAPI()
       }
     }
   },
@@ -72,17 +75,18 @@ export default {
 </script>
 
 <template>
+
   <section class="profile">
     <ProfileHeader @selection="handleContentShowed"></ProfileHeader>
     <Gallery v-if="selection !== 'ranks'"
       :content="contentToSendToGallery"
       :bgCardColorCSS="bgCardColorCSS"
       :loadingContent="loadingContent"
-    >
-    </Gallery>
+    ></Gallery>
 
-    <rankings v-if="selection === 'ranks'"></rankings>
-
+    <section v-if="selection === 'ranks'" class="rank">
+      <dinamic-table url-point="/user/stats"></dinamic-table>
+    </section>
   </section>
 
 </template>
