@@ -26,6 +26,27 @@
     text-align: center;
     height: 40px;
     font-family: $fontAnswers;
+    &--user{
+      //background-color: red;
+    }
   }
+
+  &__relative{
+    position: relative;
+  }
+
+  &__special{
+    //background-color: aqua;
+    position: absolute;
+    padding-left: 30%;
+    top: -20px;
+  }
+
+  &__hearts{
+    height: 60px;
+    width: 60px;
+    fill: red;
+  }
+
 
 }

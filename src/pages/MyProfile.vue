@@ -20,7 +20,9 @@ export default {
       // an array to send the chosen content to the gallery
       contentToSendToGallery: [],
       // an array to send the players ranks to table rankings
-      contentToRanking: []
+      contentToRanking: [],
+      //
+      columnsForRankings: ["Rank", "Players", "Points"]
 
     }
   },
@@ -85,7 +87,7 @@ export default {
     ></Gallery>
 
     <section v-if="selection === 'ranks'" class="rank">
-      <dinamic-table url-point="/user/stats"></dinamic-table>
+      <dinamic-table :columns="columnsForRankings" urlPoint="user/stats"></dinamic-table>
     </section>
   </section>
 
