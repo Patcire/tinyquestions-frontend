@@ -44,7 +44,6 @@ export default {
       }
       else if (contentToChose === "ranks") {
         this.loadingContent = false
-        this.contentToRanking = await callAPI()
       }
     }
   },

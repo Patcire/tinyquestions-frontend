@@ -21,6 +21,14 @@
     //}
   }
 
+  &__column-title{
+    @include in-out-scale;
+    &:hover{
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+
   &__row{
     background-color: lightgreen;
     text-align: center;

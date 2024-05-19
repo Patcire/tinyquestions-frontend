@@ -3,7 +3,6 @@ import { callAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '../stores/sessionStore.js'
 
 export default {
-  methods: { useSessionStore },
   props:{
     urlPoint:{
       type: String,
@@ -12,22 +11,51 @@ export default {
     columns:{
       type: Array,
       required: true
-    }
+    },
   },
   name: 'Rankings',
   data(){
     return{
-      url: `http://localhost:8000/api/${this.urlPoint}`,
-      data: []
+      data: [],
+      order: 'desc',
+      allPagesInOrder: [1], // this array will contain the total pages of stats on the db order by asc/desc (defined by the user)
+      selectedIndexOfPageOrder:  0 // we play with the value of the selected index by the user on the array
     }
+  },
+  computed: {
+    apiUrl() {
+      return `http://localhost:8000/api/${this.urlPoint}/${this.order}?page=${this.allPagesInOrder[this.selectedIndexOfPageOrder]}`;
+    }
+  },
+  methods: {
+    useSessionStore,
+    changeOrder(){
+      this.order === 'desc' ? this.order = 'asc' : this.order = 'desc'
+    },
   },
 
   async created() {
-    console.log(this.url)
-    this.data = (await callAPI(this.url)).data
-    await console.log(this.data)
+    let response =  await callAPI(this.apiUrl)
+    this.data = response.data
+    for (let i = 1; i<response.last_page; i++){
+      this.allPagesInOrder.push(i+1)
+    }
+
+  },
+
+  watch:{
+    async order(value){
+      console.log('order', value)
+      console.log('url', this.apiUrl)
+      this.data = (await callAPI(this.apiUrl)).data
+    },
+    //async selectedIndexOfPageOrder(){
+    //  this.data = (await callAPI(this.apiUrl)).data
+    //},
 
   }
+
+
 }
 </script>
 
@@ -35,9 +63,13 @@ export default {
 
     <table class="table">
       <tr class="table__header">
-        <th v-for="column in columns" :key="column">{{column}}</th>
+        <th v-for="column in columns"
+            @click="this.changeOrder()"
+            class="table__column-title"
+            :key="column">{{column}}
+        </th>
       </tr>
-      <tr v-for="(player, index) in data" class="table__row">
+      <tr v-for="(player, index) in this.data" class="table__row">
         <td>{{index+1}}</td>
         <td>{{player.username}}</td>
         <td>{{player.points}}</td>
