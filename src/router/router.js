@@ -141,6 +141,20 @@ const routes = [
         ]
       },
 
+      {
+        path: "/room",
+        beforeEnter(to, from, next) {
+          useSessionStore().isLogged() ? next() : router.push('/')
+        },
+        component: PrivateLayout,
+        children: [
+          {
+            path: "",
+            component: ()=> import('/src/pages/Room.vue')
+          }
+        ]
+      },
+
     ]
 
   },
