@@ -29,23 +29,20 @@ export default {
   created() {
     this.socket = socketIO
 
+    this.socket.on('connect', () => {
+      console.log('Connected to server', this.socket.id);
+    })
+
+    this.socket.on('disconnect', (reason) => {
+      console.log('Disconnected from server', this.socket.id, 'Reason:', reason);
+    });
+
     this.socket.on('message', (msg)=>{
       console.log(msg)
       this.allMsg.push(msg)
     })
 
     },
-
-  mounted() {
-    this.socket.on('closeSocketOnClient', () => {
-      console.log('shut down');
-      this.socket.disconnect();
-    });
-  },
-
-  beforeUnmount() {
-    this.socket.emit('closeSocket')
-  }
 
 }
 </script>
