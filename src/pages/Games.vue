@@ -1,9 +1,15 @@
 <script>
 
 import BigButtonsMenu from '@/components/BigButtonsMenu.vue'
+import router from '@/router/router.js'
 
 export default {
   name: 'Games',
+  methods: {
+    router() {
+      return router
+    }
+  },
   components: { BigButtonsMenu }
 }
 
@@ -19,4 +25,6 @@ export default {
       <img class="games__daydream" src="../../public/Vectordaydream.svg" alt="hand doodle">
     </div>
   </section>
+  <button class="primary-button" @click="router().push('/room')">ROOM</button>
+
 </template>

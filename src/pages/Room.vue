@@ -2,6 +2,7 @@
 
 import { socketIO } from '@/plugins/socket.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
+import router from '@/router/router.js'
 
 export default {
   name: 'Room',
@@ -10,17 +11,34 @@ export default {
       message: '',
       allMsg: [],
       socket: null,
-      sesh: useSessionStore
+      sesh: useSessionStore,
+      roomID: null,
+      isConnected: false
     };
   },
   methods:{
+    router() {
+      return router
+    },
     sendMessage() {
       console.log('sending...'+this.message)
       console.log('pepe')
 
       this.socket.emit('message', `${useSessionStore().user.username}: ${this.message}`);
       this.message = ''
-      }
+    },
+
+    createRoom(){
+      this.roomID = crypto.randomUUID()
+      console.log(this.roomID)
+      this.socket.emit('joinRoom', this.roomID);
+
+    },
+
+  joinToExistingRoom(){
+    this.socket.emit('joinRoom', this.roomID);
+  }
+
   },
 
   created() {
@@ -32,11 +50,17 @@ export default {
 
     this.socket.on('disconnect', (reason) => {
       console.log('user disconnected from socket:', this.socket.id, 'Reason:', reason);
-    });
+    })
 
     this.socket.on('message', (msg)=>{
       console.log(msg)
       this.allMsg.push(msg)
+    })
+
+    this.socket.on('userJoinedRoom', (res)=>{
+      console.log(res)
+      console.log(res[0])
+      if (res) this.isConnected = true
     })
 
     },
@@ -48,17 +72,15 @@ export default {
 </script>
 
 <template>
-  <h1>chat cutroso</h1>
 
-  <section>
-    <span>{{sesh().user.username}}</span>
-    <span>{{sesh().user.points}}</span>
-  </section>
 
   <form>
-    <input type="text" placeholder="ej: hola" v-model="message">
-    <button @click.prevent="sendMessage">send</button>
+    <label>join to a room</label>
+    <input type="text" placeholder="ej: hola" v-model="roomID">
+    <button @click.prevent="joinToExistingRoom">send</button>
   </form>
+
+  <h3 v-if="roomID && isConnected">room: {{this.roomID}}</h3>
 
   <article>
     <ul>
@@ -69,8 +91,11 @@ export default {
   </article>
 
   <div>
-    <button @click="disconnect">Disconnect</button>
+    <button class="primary-button" @click="createRoom">create</button>
+
   </div>
+  <button class="primary-button primary-button--modal-mod" @click="router().push('/games')">games</button>
+
 </template>
 
 <style scoped>
