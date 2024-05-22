@@ -20,21 +20,18 @@ export default {
 
       this.socket.emit('message', `${useSessionStore().user.username}: ${this.message}`);
       this.message = ''
-      },
-    disconnect(){
-      this.socket.emit('turnoff');
-    }
+      }
   },
 
   created() {
     this.socket = socketIO
 
     this.socket.on('connect', () => {
-      console.log('Connected to server', this.socket.id);
+      console.log('Connected to server', this.socket.id, useSessionStore().user.username);
     })
 
     this.socket.on('disconnect', (reason) => {
-      console.log('Disconnected from server', this.socket.id, 'Reason:', reason);
+      console.log('user disconnected from socket:', this.socket.id, 'Reason:', reason);
     });
 
     this.socket.on('message', (msg)=>{
@@ -43,6 +40,9 @@ export default {
     })
 
     },
+    beforeRouteLeave() {
+      this.socket && this.socket.disconnect()
+    }
 
 }
 </script>
@@ -57,7 +57,7 @@ export default {
 
   <form>
     <input type="text" placeholder="ej: hola" v-model="message">
-    <button @click="sendMessage">send</button>
+    <button @click.prevent="sendMessage">send</button>
   </form>
 
   <article>
