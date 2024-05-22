@@ -16,6 +16,8 @@ export default {
   methods:{
     sendMessage() {
       console.log('sending...'+this.message)
+      console.log('pepe')
+
       this.socket.emit('message', `${useSessionStore().user.username}: ${this.message}`);
       this.message = ''
       },
@@ -28,6 +30,7 @@ export default {
     this.socket = socketIO
 
     this.socket.on('message', (msg)=>{
+      console.log(msg)
       this.allMsg.push(msg)
     })
 
