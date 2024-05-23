@@ -12,7 +12,9 @@ export const useSessionStore = defineStore('user',{
       quizzes_resolved: 0,
       likedStorage: [],
       myQuizzesStorage: [],
-      lastCustomQuizSelected: 0
+      lastCustomQuizSelected: 0,
+      lastCreatedRoomID: null,
+      lastJoinedRoomID: null
     },
 
   }),
@@ -32,6 +34,8 @@ export const useSessionStore = defineStore('user',{
       this.user.likedStorage= []
       this.user.myQuizzesStorage= []
       this.lastCustomQuizSelected =  0
+      this.lastCreatedRoomID =  null
+      this.lastJoinedRoomID = null
     },
 
 

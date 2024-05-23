@@ -20,20 +20,13 @@ export default {
     router() {
       return router
     },
-    sendMessage() {
-      console.log('sending...'+this.message)
-      console.log('pepe')
 
-      this.socket.emit('message', `${useSessionStore().user.username}: ${this.message}`);
-      this.message = ''
-    },
-
-    createRoom(){
-      this.roomID = crypto.randomUUID()
-      console.log(this.roomID)
-      this.socket.emit('joinRoom', this.roomID);
-
-    },
+    //createRoom(){
+    //  this.roomID = crypto.randomUUID()
+    //  console.log(this.roomID)
+    //  this.socket.emit('joinRoom', this.roomID);
+//
+    //},
 
   joinToExistingRoom(){
     this.socket.emit('joinRoom', this.roomID);
@@ -45,10 +38,16 @@ export default {
     this.socket = socketIO
 
     this.socket.on('connect', () => {
+      this.roomID = useSessionStore().user.lastCreatedRoomID || useSessionStore().user.lastJoinedRoomID
       console.log('Connected to server', this.socket.id, useSessionStore().user.username);
+      console.log(this.roomID)
+      this.socket.emit('joinRoom', this.roomID)
     })
 
     this.socket.on('disconnect', (reason) => {
+
+      useSessionStore().user.lastCreatedRoomID = null
+      useSessionStore().user.lastJoinedRoomID = null
       console.log('user disconnected from socket:', this.socket.id, 'Reason:', reason);
     })
 
@@ -74,12 +73,6 @@ export default {
 <template>
 
 
-  <form>
-    <label>join to a room</label>
-    <input type="text" placeholder="ej: hola" v-model="roomID">
-    <button @click.prevent="joinToExistingRoom">send</button>
-  </form>
-
   <h3 v-if="roomID && isConnected">room: {{this.roomID}}</h3>
 
   <article>
@@ -90,10 +83,6 @@ export default {
     </ul>
   </article>
 
-  <div>
-    <button class="primary-button" @click="createRoom">create</button>
-
-  </div>
   <button class="primary-button primary-button--modal-mod" @click="router().push('/games')">games</button>
 
 </template>

@@ -2,15 +2,31 @@
 
 import BigButtonsMenu from '@/components/BigButtonsMenu.vue'
 import router from '@/router/router.js'
+import { useSessionStore } from '@/stores/sessionStore.js'
 
 export default {
   name: 'Games',
+  components: { BigButtonsMenu },
+  data(){
+    return{
+      roomID: null
+    }
+  },
+
   methods: {
     router() {
       return router
+    },
+    generateRoomID(){
+      useSessionStore().user.lastCreatedRoomID = crypto.randomUUID()
+      this.router().push('/room')
+    },
+
+    joinToExistingRoom(){
+      useSessionStore().user.lastJoinedRoomID = this.roomID
+      this.router().push('/room')
     }
   },
-  components: { BigButtonsMenu }
 }
 
 </script>
@@ -25,6 +41,17 @@ export default {
       <img class="games__daydream" src="../../public/Vectordaydream.svg" alt="hand doodle">
     </div>
   </section>
-  <button class="primary-button" @click="router().push('/room')">ROOM</button>
+  <section>
 
+    <div>
+      <button class="primary-button" @click="generateRoomID">create</button>
+    </div>
+
+    <form>
+      <label>join to a room</label>
+      <input type="text" placeholder="ej: hola" v-model="roomID">
+      <button @click.prevent="joinToExistingRoom">send</button>
+    </form>
+
+  </section>
 </template>
