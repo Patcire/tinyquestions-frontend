@@ -1,9 +1,11 @@
 <script>
 import { useSessionStore } from '@/stores/sessionStore.js'
 import { goTo } from '@/helpers/navHelpers.js'
+import UserBanner from '@/components/UserBanner.vue'
 
 export default {
   name: 'ProfileHeader',
+  components: { UserBanner },
   emits: ['selection'],
   data(){
     return{
@@ -25,11 +27,7 @@ export default {
 <template>
   <header class="userinfo">
 
-    <article class="userinfo__photo">
-      <img alt="doodle face" src="../../public/sigh.svg">
-    </article>
-
-    <h1 class="userinfo__username">@{{seshStore.user.username}}</h1>
+  <user-banner></user-banner>
     <article class="userinfo__stats">
       <p>Total points: {{seshStore.user.points}}</p>
       <img alt="point to separate" src="../../public/pointpoint.svg">

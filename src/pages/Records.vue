@@ -3,9 +3,11 @@ import { callAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
 import { formatDate } from '../helpers/others.js'
+import UserBanner from '@/components/UserBanner.vue'
 
 export default {
   name: 'Records',
+  components: { UserBanner },
   data(){
     return{
       historic: [],
@@ -72,11 +74,7 @@ export default {
   <aside class="records__aside">
       <header class="records__header">
 
-        <article class="records__photo">
-          <img alt="doodle face" src="../../public/sigh.svg">
-        </article>
-
-        <h1 class="records__username">@{{useSessionStore().user.username}}</h1>
+       <user-banner></user-banner>
         <article class="records__stats">
           <a><p>Solved quizzes: {{useSessionStore().user.quizzes_resolved}}</p></a>
         </article>

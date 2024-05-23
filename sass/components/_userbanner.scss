@@ -1,0 +1,27 @@
+@import "../abstracts/index";
+
+.user-banner{
+  @include flex-column;
+  &__photo {
+    // background: lightblue;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    @include flex-column;
+    border: 1.8px solid black;
+  }
+  &__username{
+    font-family: $fontQuestions;
+    padding-top: 2px;
+    font-size: 1.5rem;
+    padding-bottom: 3px;
+  }
+  &__stats{
+    @include flex-row;
+    font-family: $fontAnswers;
+    padding-top: 25px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+}
