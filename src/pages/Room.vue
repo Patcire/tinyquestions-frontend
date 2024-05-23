@@ -17,7 +17,7 @@ export default {
       roomID: null,
       isConnected: false,
       playersOnMatch:[],
-      fullRoom: false
+      fullRoom: false,
     };
   },
   methods:{
@@ -31,27 +31,35 @@ export default {
     this.socket = socketIO
 
     this.socket.on('connect', () => {
-      this.roomID = useSessionStore().user.lastCreatedRoomID || useSessionStore().user.lastJoinedRoomID
+
+      this.roomID = useSessionStore().user.createdRoomID || useSessionStore().user.joinedRoomID
       useSessionStore().user.socketInUse = this.socket.id
 
-      this.socket.emit('joinRoom', this.roomID)
+      this.socket.emit('joinRoom', {
+        roomID: this.roomID,
+        username: useSessionStore().user.username,
+        admin:  useSessionStore().user.roomAdmin
+      })
     })
 
     this.socket.on('fullRoom',(res) =>{
       if (res) this.fullRoom = true
     })
 
-    this.socket.on('disconnect', () => {
 
-      useSessionStore().user.lastCreatedRoomID = null
-      useSessionStore().user.lastJoinedRoomID = null
-      useSessionStore().user.socketInUse = null
-
+    this.socket.on('userJoinedSuccesfullyToRoom', (res)=>{
+      console.log(res)
+      if (res) this.isConnected = true
     })
 
-    this.socket.on('userJoinedRoom', (res)=>{
-      console.log(res)
-      if (res.hasJoined) this.isConnected = true
+
+    this.socket.on('disconnect', () => {
+
+      useSessionStore().user.createdRoomID = null
+      useSessionStore().user.joinedRoomID = null
+      useSessionStore().user.socketInUse = null
+      useSessionStore().user.roomAdmin = false
+
     })
 
   },

@@ -18,12 +18,13 @@ export default {
       return router
     },
     generateRoomID(){
-      useSessionStore().user.lastCreatedRoomID = crypto.randomUUID()
+      useSessionStore().user.createdRoomID = crypto.randomUUID()
+      useSessionStore().user.roomAdmin = true
       this.router().push('/room')
     },
 
     joinToExistingRoom(){
-      useSessionStore().user.lastJoinedRoomID = this.roomID
+      useSessionStore().user.joinedRoomID = this.roomID
       this.router().push('/room')
     }
   },
