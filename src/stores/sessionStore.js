@@ -14,7 +14,8 @@ export const useSessionStore = defineStore('user',{
       myQuizzesStorage: [],
       lastCustomQuizSelected: 0,
       lastCreatedRoomID: null,
-      lastJoinedRoomID: null
+      lastJoinedRoomID: null,
+      socketInUse: null
     },
 
   }),
@@ -36,6 +37,7 @@ export const useSessionStore = defineStore('user',{
       this.lastCustomQuizSelected =  0
       this.lastCreatedRoomID =  null
       this.lastJoinedRoomID = null
+      this.socketInUse =  null
     },
 
 

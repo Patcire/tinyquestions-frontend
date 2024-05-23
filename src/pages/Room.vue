@@ -3,9 +3,11 @@
 import { socketIO } from '@/plugins/socket.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
+import UserBanner from '@/components/UserBanner.vue'
 
 export default {
   name: 'Room',
+  components: { UserBanner },
   data() {
     return {
       message: '',
@@ -13,24 +15,15 @@ export default {
       socket: null,
       sesh: useSessionStore,
       roomID: null,
-      isConnected: false
+      isConnected: false,
+      playersOnMatch:[],
+      fullRoom: false
     };
   },
   methods:{
     router() {
       return router
     },
-
-    //createRoom(){
-    //  this.roomID = crypto.randomUUID()
-    //  console.log(this.roomID)
-    //  this.socket.emit('joinRoom', this.roomID);
-//
-    //},
-
-  joinToExistingRoom(){
-    this.socket.emit('joinRoom', this.roomID);
-  }
 
   },
 
@@ -39,50 +32,54 @@ export default {
 
     this.socket.on('connect', () => {
       this.roomID = useSessionStore().user.lastCreatedRoomID || useSessionStore().user.lastJoinedRoomID
-      console.log('Connected to server', this.socket.id, useSessionStore().user.username);
-      console.log(this.roomID)
+      useSessionStore().user.socketInUse = this.socket.id
+
       this.socket.emit('joinRoom', this.roomID)
     })
 
-    this.socket.on('disconnect', (reason) => {
+    this.socket.on('fullRoom',(res) =>{
+      if (res) this.fullRoom = true
+    })
+
+    this.socket.on('disconnect', () => {
 
       useSessionStore().user.lastCreatedRoomID = null
       useSessionStore().user.lastJoinedRoomID = null
-      console.log('user disconnected from socket:', this.socket.id, 'Reason:', reason);
-    })
+      useSessionStore().user.socketInUse = null
 
-    this.socket.on('message', (msg)=>{
-      console.log(msg)
-      this.allMsg.push(msg)
     })
 
     this.socket.on('userJoinedRoom', (res)=>{
       console.log(res)
-      console.log(res[0])
-      if (res) this.isConnected = true
+      if (res.hasJoined) this.isConnected = true
     })
 
-    },
-    beforeRouteLeave() {
-      this.socket && this.socket.disconnect()
-    }
+  },
+
+  beforeRouteLeave() {
+    this.socket && this.socket.disconnect()
+  }
 
 }
 </script>
 
 <template>
 
+  <section class="room">
 
-  <h3 v-if="roomID && isConnected">room: {{this.roomID}}</h3>
+    <div class="room__title">
+      <h1>Multiplayer</h1>
+      <h1 class="room__title--mod">room</h1>
+    </div>
 
-  <article>
-    <ul>
-      <li v-for="(msg, index) in allMsg">
-        <p :class="{'paunlao': index%2!==0}">{{msg}}</p>
-      </li>
-    </ul>
+  <article class="room__players">
+    <user-banner></user-banner>
   </article>
 
-  <button class="primary-button primary-button--modal-mod" @click="router().push('/games')">games</button>
+  <h3 v-if="roomID && isConnected && !fullRoom">room: {{this.roomID}}</h3>
 
+  <button class="primary-button primary-button--modal-mod" @click="router().push('/games')">games</button>
+  </section>
+
+  <p v-if="fullRoom">Room field is completed!</p>
 </template>

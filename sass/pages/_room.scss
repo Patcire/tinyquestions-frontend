@@ -1,0 +1,26 @@
+@import "../abstracts/index";
+
+.room{
+  background-color: pink;
+  @include flex-column;
+
+  &__title{
+    background-color: lightyellow;
+    font-family: $fontLogo;
+    @include flex-row;
+    justify-content: space-between;
+    width: 350px;
+    font-size:  1.5rem;
+    color: $purple;
+    -webkit-text-stroke: 1px black;
+    text-shadow: $shadow1;
+    &--mod{
+      color: $blue;
+    }
+  }
+
+  &__players{
+    background-color: lightcoral;
+  }
+
+}
