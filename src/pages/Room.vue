@@ -49,7 +49,9 @@ export default {
 
     this.socket.on('userJoinedSuccesfullyToRoom', (res)=>{
       console.log(res)
-      if (res) this.isConnected = true
+      if (res.success===true) this.isConnected = true
+      this.playersOnMatch = res.players
+      console.log('onroo '+res.players)
     })
 
 
@@ -80,13 +82,22 @@ export default {
       <h1 class="room__title--mod">room</h1>
     </div>
 
-  <article class="room__players">
-    <user-banner></user-banner>
-  </article>
+    <article class="room__players">
+      <user-banner v-for="player in playersOnMatch" :player="player"></user-banner>
+    </article>
 
-  <h3 v-if="roomID && isConnected && !fullRoom">room: {{this.roomID}}</h3>
+    <img class="room__ornament" alt="ornaments" src="/public/ornament.svg">
 
-  <button class="primary-button primary-button--modal-mod" @click="router().push('/games')">games</button>
+    <article class="room__info">
+      <p>Players: {{playersOnMatch.length}}/4</p>
+      <img src="/public/pointpoint.svg" alt="point">
+      <h3 v-if="roomID && isConnected && !fullRoom">Room seed: <span class="room__id">{{this.roomID}}</span></h3>
+    </article>
+
+    <article class="room__cont">
+      <button class="primary-button">Start</button>
+    </article>
+
   </section>
 
   <p v-if="fullRoom">Room field is completed!</p>
