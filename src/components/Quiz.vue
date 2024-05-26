@@ -41,6 +41,7 @@ export default {
         -idCustomQuiz: if is custom we need the quiz id **Number**
         -gameMode: if is not custom we need to know the mode of random game (f.e: quick) **String**
         -isMultiplayer: **Boolean**
+        -questionsForMultiplayerMatch: Object taht contains questions for multiplayer match *Object*
       */
     }
   },
@@ -162,7 +163,7 @@ export default {
 
       // then we create the match
       const createdMatch = await postAPI('http://localhost:8000/api/match/create', {
-        "isMultiplayer": 0,
+        "isMultiplayer": this.mode.isMultiplayer,
         "fk_id_quiz": await this.quizID,
 
       })
@@ -234,6 +235,13 @@ export default {
   },
 
   async created() {
+
+    if(this.mode.isMultiplayer === 1){
+      console.log(this.questions)
+      this.questions = [...this.mode.questionsForMultiplayerMatch]
+
+      return
+    }
 
     this.mode.isCustom ?
     await this.getQuestionsOfCustomQuiz()

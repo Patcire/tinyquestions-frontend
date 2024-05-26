@@ -17,7 +17,8 @@ export default {
           hasScore: true,
           rerun: false,
           isCustom: true,
-          idCustomquiz: useSessionStore().user.lastCustomQuizSelected
+          idCustomquiz: useSessionStore().user.lastCustomQuizSelected,
+          isMultiplayer: 0
         }
     }
   },

@@ -16,7 +16,8 @@ export default {
            hasScore: true,
            rerun: true,
            gameMode: "quick",
-           isCustom: false
+           isCustom: false,
+           isMultiplayer: 0
         }
     }
   },

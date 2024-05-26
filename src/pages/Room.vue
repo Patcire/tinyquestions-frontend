@@ -4,10 +4,13 @@ import { socketIO } from '@/plugins/socket.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
 import UserBanner from '@/components/UserBanner.vue'
+import Quiz from '@/components/Quiz.vue'
+import { callAPI } from '@/helpers/callAPI.js'
+import { computed } from 'vue'
 
 export default {
   name: 'Room',
-  components: { UserBanner },
+  components: { Quiz, UserBanner },
   data() {
     return {
       message: '',
@@ -18,16 +21,58 @@ export default {
       isConnected: false,
       playersOnMatch:[],
       fullRoom: false,
-    };
+      gameStarted: false,
+      quizID: 4,
+      questions: [],
+      isAdmin:  useSessionStore().user.roomAdmin
+    }
+
   },
+  computed:{
+    mode(){
+      if (this.questions.length){
+        return {
+          title:'Multiplayer Random Quiz',
+          class:'custom__title',
+          clock: [false, 10000], // miliseconds
+          numberOfQuestions: this.questions.length,
+          hasScore: true,
+          rerun: false,
+          isCustom: true,
+          idCustomquiz: this.quizID,
+          isMultiplayer: 1,
+          questionsForMultiplayerMatch: this.questions
+
+        }
+      }
+     return null
+    }
+
+  },
+
   methods:{
+    useSessionStore,
     router() {
       return router
     },
+    startGame(){
+      this.gameStarted = true
+      this.socket.emit('gameStarted', {
+        roomID: this.roomID,
+        questions: this.questions
+      })
+    },
+
+    async getRandomQuestions(){
+      this.questions = await callAPI(`http://localhost:8000/api/ques/rand/12`)
+    }
 
   },
 
   created() {
+
+    this.isAdmin && this.getRandomQuestions()
+
     this.socket = socketIO
 
     this.socket.on('connect', () => {
@@ -38,7 +83,7 @@ export default {
       this.socket.emit('joinRoom', {
         roomID: this.roomID,
         username: useSessionStore().user.username,
-        admin:  useSessionStore().user.roomAdmin
+        admin:  this.isAdmin
       })
     })
 
@@ -48,12 +93,16 @@ export default {
 
 
     this.socket.on('userJoinedSuccesfullyToRoom', (res)=>{
-      console.log(res)
+
       if (res.success===true) this.isConnected = true
       this.playersOnMatch = res.players
-      console.log('onroo '+res.players)
+
     })
 
+    this.socket.on('gameStarted', (res)=>{
+        this.questions = [...res.questions]
+        this.gameStarted = true
+    })
 
     this.socket.on('disconnect', () => {
 
@@ -61,6 +110,8 @@ export default {
       useSessionStore().user.joinedRoomID = null
       useSessionStore().user.socketInUse = null
       useSessionStore().user.roomAdmin = false
+      this.playersOnMatch = []
+      this.questions = []
 
     })
 
@@ -75,7 +126,7 @@ export default {
 
 <template>
 
-  <section class="room">
+  <section v-if="!gameStarted" class="room">
 
     <div class="room__title">
       <h1>Multiplayer</h1>
@@ -95,10 +146,12 @@ export default {
     </article>
 
     <article class="room__cont">
-      <button class="primary-button">Start</button>
+      <button @click="startGame" v-if="useSessionStore().user.roomAdmin" class="primary-button">Start</button>
     </article>
 
   </section>
 
   <p v-if="fullRoom">Room field is completed!</p>
+  <quiz v-if="gameStarted && this.questions.length" :mode="mode"></quiz>
+
 </template>
