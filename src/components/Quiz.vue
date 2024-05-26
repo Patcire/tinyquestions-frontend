@@ -3,6 +3,7 @@ import { callAPI, postAPI } from '@/helpers/callAPI.js'
 import router from '@/router/router.js'
 import Loading from '@/components/Loading.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
+import { boolean } from 'yup'
 
 export default {
   name: 'Quiz',
@@ -45,6 +46,7 @@ export default {
       */
     }
   },
+  emits:['stopQuiz'],
 
   methods: {
     router() {
@@ -70,12 +72,21 @@ export default {
 
     // to handle the logic of the questions
 
+    handleStopQuiz() { // only for multiplayers matches, to stop until all players hava answered
+      this.$emit('stopQuiz', true);
+    },
+
     async nextQuestion() {
+
+      // if is a multiplayer match we need to wait until all players had answered
+        if (this.mode.isMultiplayer) this.handleStopQuiz()
+
       this.counter++
       // evaluation for infinite (zen) mode
       (!this.mode.rerun && this.counter === this.questions.length - 6) && await this.getMoreQuestionsForZenMode()
       document.querySelectorAll('input[type="radio"]')
         .forEach(radio => radio.checked = false);
+
     },
 
     addScore(){

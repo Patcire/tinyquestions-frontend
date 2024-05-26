@@ -6,7 +6,6 @@ import router from '@/router/router.js'
 import UserBanner from '@/components/UserBanner.vue'
 import Quiz from '@/components/Quiz.vue'
 import { callAPI } from '@/helpers/callAPI.js'
-import { computed } from 'vue'
 
 export default {
   name: 'Room',
@@ -24,7 +23,9 @@ export default {
       gameStarted: false,
       quizID: 4,
       questions: [],
-      isAdmin:  useSessionStore().user.roomAdmin
+      isAdmin:  useSessionStore().user.roomAdmin,
+      stopQuiz: false,
+      playersWhoAnsweredQuestion: 0
     }
 
   },
@@ -32,15 +33,14 @@ export default {
     mode(){
       if (this.questions.length){
         return {
-          title:'Multiplayer Random Quiz',
+          title:'MultiplayerQuiz',
           class:'custom__title',
           clock: [false, 10000], // miliseconds
           numberOfQuestions: this.questions.length,
           hasScore: true,
           rerun: false,
           isCustom: true,
-          idCustomquiz: this.quizID,
-          isMultiplayer: 1,
+          isMultiplayer: 1, // boolean
           questionsForMultiplayerMatch: this.questions
 
         }
@@ -104,6 +104,10 @@ export default {
         this.gameStarted = true
     })
 
+    this.socket.on('playerAnsweredQuestion', ()=>{
+      this.playersWhoAnsweredQuestion++
+    })
+
     this.socket.on('disconnect', () => {
 
       useSessionStore().user.createdRoomID = null
@@ -119,6 +123,26 @@ export default {
 
   beforeRouteLeave() {
     this.socket && this.socket.disconnect()
+  },
+
+  watch:{
+
+    stopQuiz(){
+      this.socket.emit('playerAnsweredQuestion', {
+        succes: true,
+        roomID: this.roomID})
+      },
+
+    playersWhoAnsweredQuestion(value){
+      console.log('contestan')
+      console.log(value)
+      console.log(this.playersOnMatch.length)
+      if (value === this.playersOnMatch.length){
+        this.stopQuiz = false
+        this.playersWhoAnsweredQuestion = 0
+
+      }
+    }
   }
 
 }
@@ -152,6 +176,15 @@ export default {
   </section>
 
   <p v-if="fullRoom">Room field is completed!</p>
-  <quiz v-if="gameStarted && this.questions.length" :mode="mode"></quiz>
+
+  <section class="room__quiz"
+           :class="{'--hide':this.stopQuiz}"
+           v-if="gameStarted && this.questions.length">
+    <quiz
+          :mode="mode"
+          @stopQuiz="this.stopQuiz=true"
+    ></quiz>
+
+  </section>
 
 </template>

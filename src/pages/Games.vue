@@ -18,7 +18,7 @@ export default {
       return router
     },
     generateRoomID(){
-      useSessionStore().user.createdRoomID = crypto.randomUUID()
+      useSessionStore().user.createdRoomID = crypto.randomUUID().split('-')[4]
       useSessionStore().user.roomAdmin = true
       this.router().push('/room')
     },

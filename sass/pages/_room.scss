@@ -52,4 +52,12 @@
     background-color: blueviolet;
   }
 
+  &__quiz{
+    @include flex-column;
+    &.--hide{
+     // background-color: blue;
+      display: none;
+    }
+  }
+
 }
