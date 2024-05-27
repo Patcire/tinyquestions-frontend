@@ -166,7 +166,7 @@ export default {
 
 <template>
   <div v-if="isLoading" class="div__loading">
-    <Loading ></Loading>
+    <Loading key-word="loading" imgSrc="../../public/Vectorelectron2.svg"></Loading>
   </div>
   <section class="customizer" v-if="!saved && !isLoading">
     <header class="customizer__header">

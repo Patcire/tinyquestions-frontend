@@ -6,10 +6,11 @@ import router from '@/router/router.js'
 import UserBanner from '@/components/UserBanner.vue'
 import Quiz from '@/components/Quiz.vue'
 import { callAPI } from '@/helpers/callAPI.js'
+import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'Room',
-  components: { Quiz, UserBanner },
+  components: { Loading, Quiz, UserBanner },
   data() {
     return {
       message: '',
@@ -64,7 +65,7 @@ export default {
     },
 
     async getRandomQuestions(){
-      this.questions = await callAPI(`http://localhost:8000/api/ques/rand/12`)
+      this.questions = await callAPI(`http://localhost:8000/api/ques/rand/5`)
     }
 
   },
@@ -108,21 +109,16 @@ export default {
       this.playersWhoAnsweredQuestion++
     })
 
-    this.socket.on('disconnect', () => {
-
-      useSessionStore().user.createdRoomID = null
-      useSessionStore().user.joinedRoomID = null
-      useSessionStore().user.socketInUse = null
-      useSessionStore().user.roomAdmin = false
-      this.playersOnMatch = []
-      this.questions = []
-
-    })
 
   },
 
   beforeRouteLeave() {
-    this.socket && this.socket.disconnect()
+    useSessionStore().user.createdRoomID = null
+    useSessionStore().user.joinedRoomID = null
+    useSessionStore().user.socketInUse = null
+    useSessionStore().user.roomAdmin = false
+
+    this.socket &&  this.socket.emit('turnoff', () => true)
   },
 
   watch:{
@@ -186,5 +182,11 @@ export default {
     ></quiz>
 
   </section>
+
+  <loading v-if="gameStarted && this.stopQuiz"
+           key-word="waiting"
+           imgSrc="../../public/clock.svg"
+  ></loading>
+
 
 </template>

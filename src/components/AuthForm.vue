@@ -88,7 +88,10 @@ export default {
 </script>
 
 <template>
-  <Loading v-if="isLoading"></Loading>
+  <Loading v-if="isLoading"
+           key-word="loading"
+           imgSrc="../../public/Vectorelectron2.svg">
+  </Loading>
   <section v-if="!isLoading">
     <vForm class="form" :validation-schema="schemaLogin" ref="logform" v-if="!registerForm">
       <vField v-model="username" placeholder="Username..." aria-label="username" class="form__input" type="string" name="username"/>

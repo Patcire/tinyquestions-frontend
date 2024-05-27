@@ -274,7 +274,10 @@ export default {
 
 <template>
 
-  <Loading v-if="!questions.length"></Loading>
+  <Loading v-if="!questions.length"
+           key-word="loading"
+           imgSrc="../../public/Vectorelectron2.svg"
+  ></Loading>
 
   <section class="quiz quiz--home"
            v-if="questions.length > 0
@@ -335,14 +338,16 @@ export default {
     </form>
 
     <!--score-->
-    <article class="quick__points-container" v-if="questions.length && points>0 && (mode.rerun || mode.isCustom)">
-      <h3 class="quick__points"
-          >{{points}} points
-      </h3>
-      <h3 class="quick__sum" :class="{'active' : isCorrectAnimationTrigger}"> +10 points</h3>
-      <img class="quick__sparkles"
-           src="../../public/virutas.svg" alt="doodle of sparkles">
-    </article>
+    <div v-if="!this.mode.isMultiplayer">
+      <article class="quick__points-container" v-if="questions.length && points>0 && (mode.rerun || mode.isCustom)">
+        <h3 class="quick__points"
+            >{{points}} points
+        </h3>
+        <h3 class="quick__sum" :class="{'active' : isCorrectAnimationTrigger}"> +10 points</h3>
+        <img class="quick__sparkles"
+             src="../../public/virutas.svg" alt="doodle of sparkles">
+      </article>
+    </div>
   </section>
 
   <!--Results-->
