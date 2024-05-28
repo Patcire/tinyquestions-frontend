@@ -60,4 +60,18 @@
     }
   }
 
+  &__after-response{
+    background-color: lightsalmon;
+    @include flex-column;
+    text-align: center;
+    font-family: $fontAnswers;
+    font-size: 1.4rem;
+    padding-top: 5%;
+  }
+
+  &__points{
+    padding-top: 3%;
+    font-family: $fontLogo;
+    font-size: 1.5rem;
+  }
 }

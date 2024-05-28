@@ -46,7 +46,7 @@ export default {
       */
     }
   },
-  emits:['stopQuiz'],
+  emits:['hideQuiz', 'responses'],
 
   methods: {
     router() {
@@ -72,20 +72,20 @@ export default {
 
     // to handle the logic of the questions
 
-    handleStopQuiz() { // only for multiplayers matches, to stop until all players hava answered
-      this.$emit('stopQuiz', true);
+    handleHideQuiz() { // only for multiplayers matches, to hide until all players hava answered
+      this.$emit('hideQuiz', true);
     },
 
     async nextQuestion() {
 
       // if is a multiplayer match we need to wait until all players had answered
-        if (this.mode.isMultiplayer) this.handleStopQuiz()
+        if (this.mode.isMultiplayer) this.handleHideQuiz()
 
       this.counter++
       // evaluation for infinite (zen) mode
       (!this.mode.rerun && this.counter === this.questions.length - 6) && await this.getMoreQuestionsForZenMode()
       document.querySelectorAll('input[type="radio"]')
-        .forEach(radio => radio.checked = false);
+        .forEach(radio => radio.checked = false)
 
     },
 
@@ -99,12 +99,17 @@ export default {
     },
 
     handleOptionSelected(optionSelected) {
-      this.responses.push(
-        {"selected": optionSelected,
+      this.responses.push({
+          "selected": optionSelected,
           "correct": this.questions[this.counter].correct_option,
           "wasRight": this.questions[this.counter].correct_option === optionSelected
-        }
-      )
+        })
+      if (this.mode.isMultiplayer) this.$emit('responses', {
+        "selected": optionSelected,
+        "correct": this.questions[this.counter].correct_option,
+        "wasRight": this.questions[this.counter].correct_option === optionSelected,
+        "questionNumber": this.counter+1,
+      })
       this.correctOption(optionSelected)
       setTimeout(()=>{
         this.nextQuestion()
