@@ -19,14 +19,6 @@
 2 - En la terminal del proyecto:
 > docker-compose up
 
- Detener los contenedores generados y ejecutar el siguiente comando en la terminal:
-
-> composer install
-
-3 - Reinicia los contenedores y ya podrás usar la API.
-> 
-***
-
 ### Ahora desplegamos el front:
 
 1- Clonamos este repositorio:
