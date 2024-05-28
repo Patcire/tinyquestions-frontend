@@ -356,7 +356,7 @@ export default {
   </section>
 
   <!--Results-->
-  <div v-if="((mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore) && this.questions.length"
+  <div v-if="((mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore) && this.questions.length && !this.mode.isMultiplayer"
     class="quiz__container">
     <article
       class="quiz__results"

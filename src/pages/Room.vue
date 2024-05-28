@@ -23,7 +23,6 @@ export default {
       questions: [],
       isAdmin:  useSessionStore().user.roomAdmin,
       hideQuiz: false,
-      //playersWhoAnsweredQuestion: 0,
       responseOfUser: [],
       points: 0,
       activeAnswerResults:  false
@@ -142,28 +141,6 @@ export default {
     this.socket &&  this.socket.emit('turnoff', () => true)
   },
 
-  watch:{
-
-    //hideQuiz(){
-    //
-
-    //playersWhoAnsweredQuestion(value){
-//
-    //  if (value === this.playersOnMatch.length){
-    //    this.socket.emit('handleGoToNextQuestion', true)
-    //    this.activeAnswerResults = true
-    //    this.playersWhoAnsweredQuestion = 0
-    //    setTimeout(()=>{
-    //      this.hideQuiz = false
-    //      this.activeAnswerResults = false
-    //    }, 4000)
-//
-    //  }
-    //},
-
-
-  }
-
 }
 </script>
 
@@ -219,7 +196,7 @@ export default {
       <p>You
         <strong>
           {{
-            (responseOfUser?.wasRight) ? 'were right!' : 'failed'
+            (responseOfUser?.wasRight) ? 'were right!' : 'failed :('
           }}
         </strong>
       </p>
