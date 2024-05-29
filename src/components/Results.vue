@@ -3,17 +3,22 @@ import router from '@/router/router.js'
 
 export default {
   name: 'Results',
+  emits:['handleNewQuiz'],
   methods: {
     router() {
       return router
+    },
+    emitStartNewQuiz(){
+      this.$emit('handleNewQuiz');
     }
   },
   props:{
     mode:{type:Object, required: true},
     questions:{type:Object, required: true},
-    points:{type: Number, required: true},
-    handleNewQuiz:{type:Function, required: true}
-  }
+    points:{type: Number, required: true}
+  },
+
+
 }
 </script>
 
@@ -28,7 +33,7 @@ export default {
       {{this.points}} of {{this.mode.numberOfQuestions*10}} possible points
     </p>
     <a v-if="!this.mode.mod && !this.mode.isCustom"
-       @click="handleNewQuiz"
+       @click="emitStartNewQuiz"
        class="quiz__suggest">
       New quiz ?
     </a>

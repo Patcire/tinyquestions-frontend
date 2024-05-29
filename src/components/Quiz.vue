@@ -204,6 +204,7 @@ export default {
       this.counter =0
       this.points = 0
       this.timerAutoStart = true
+      this.mode.gameMode !== "zen" &&  await this.createQuizAndMatchOnDB()
     },
 
     handleTimesOut(){
@@ -363,7 +364,7 @@ export default {
       :points="this.points"
       :questions="this.questions"
       :mode="this.mode"
-      :handle-new-quiz="handleNewQuiz"
+      @handleNewQuiz="handleNewQuiz"
     ></results>
   </div>
 
