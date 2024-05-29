@@ -47,7 +47,7 @@ export default {
       */
     }
   },
-  emits:['hideQuiz', 'responses'],
+  emits:['hideQuiz', 'responses', 'playerFinishTheQuiz'],
 
   methods: {
     router() {
@@ -248,6 +248,8 @@ export default {
       }
       if (!this.mode.isCustom) await this.updateUserStats() && console.log('stats updated')
       console.log(createdReport.status)
+      if (!this.mode.isMultiplayer) this.$emit('playerFinishTheQuiz')
+
     }
 
   },

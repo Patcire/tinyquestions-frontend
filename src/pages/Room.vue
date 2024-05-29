@@ -7,10 +7,11 @@ import UserBanner from '@/components/UserBanner.vue'
 import Quiz from '@/components/Quiz.vue'
 import { callAPI } from '@/helpers/callAPI.js'
 import Loading from '@/components/Loading.vue'
+import Podium from '@/components/Podium.vue'
 
 export default {
   name: 'Room',
-  components: { Loading, Quiz, UserBanner },
+  components: { Podium, Loading, Quiz, UserBanner },
   data() {
     return {
       socket: null,
@@ -25,7 +26,8 @@ export default {
       hideQuiz: false,
       responseOfUser: [],
       points: 0,
-      activeAnswerResults:  false
+      activeAnswerResults:  false,
+      allPlayersFinishedTheQuiz: false
     }
 
   },
@@ -42,7 +44,6 @@ export default {
           isCustom: true,
           isMultiplayer: 1, // boolean
           questionsForMultiplayerMatch: this.questions
-
         }
       }
      return null
@@ -76,6 +77,13 @@ export default {
     handleHideQuiz() {
       this.hideQuiz = true
       this.socket.emit('playerAnsweredQuestion', {
+        succes: true,
+        roomID: this.roomID
+      })
+    },
+
+    handlePlayerFinishTheQuiz(){
+      this.socket.emit('playerFinish', {
         succes: true,
         roomID: this.roomID
       })
@@ -129,6 +137,7 @@ export default {
       }, 4000)
     })
 
+    this.socket.on('allPlayersHaveFinished', this.allPlayersFinishedTheQuiz = true )
 
   },
 
@@ -180,6 +189,7 @@ export default {
           :mode="mode"
           @hideQuiz="handleHideQuiz"
           @responses="this.saveResponses"
+          @playerFinishTheQuiz="handlePlayerFinishTheQuiz"
     ></quiz>
 
   </section>
@@ -204,7 +214,8 @@ export default {
 
     <p class="room__points">Total: {{ this.points }} points</p>
 
-
   </section>
+
+ <podium v-if="allPlayersFinishedTheQuiz"></podium>
 
 </template>
