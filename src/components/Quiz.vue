@@ -4,12 +4,13 @@ import router from '@/router/router.js'
 import Loading from '@/components/Loading.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import { boolean } from 'yup'
+import Results from '@/components/Results.vue'
 
 export default {
   name: 'Quiz',
   computed: {
   },
-  components: { Loading },
+  components: { Results, Loading },
   data(){
     return{
       isCorrectAnimationTrigger: null,
@@ -358,30 +359,12 @@ export default {
   <!--Results-->
   <div v-if="((mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore) && this.questions.length && !this.mode.isMultiplayer"
     class="quiz__container">
-    <article
-      class="quiz__results"
-     :class="{'active': questions}">
-      <h3 class="quiz__points quiz__points--mod ">Total Score</h3>
-      <p
-        class="quiz__calification quiz__calification--active"
-        :class="{'active': questions}">
-        {{this.points}} of {{this.mode.numberOfQuestions*10}} possible points
-      </p>
-      <a v-if="!this.mode.mod && !this.mode.isCustom"
-        @click="handleNewQuiz"
-        class="quiz__suggest">
-        New quiz ?
-      </a>
-      <a v-if="this.mode.mod==='homeMod'"
-              @click="router().push('/register')"
-              class="quiz__suggest">
-        Register to play more!
-      </a>
-      <a  v-if="this.mode.isCustom" class="quiz__suggest"
-      @click="router().push('/profile')">
-        Go to Community quizzes
-      </a>
-    </article>
+    <results
+      :points="this.points"
+      :questions="this.questions"
+      :mode="this.mode"
+      :handle-new-quiz="handleNewQuiz"
+    ></results>
   </div>
 
 </template>
