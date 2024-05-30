@@ -2,4 +2,14 @@
 
 .podium{
   background-color: darkseagreen;
+  @include flex-column;
+  padding-top: 5%;
+  font-family: $fontLogo;
+  font-size: 1.6rem;
+
+  &__ranks{
+    padding-top: 5%;
+    font-family: $fontQuestions;
+    font-weight: bold;
+  }
 }

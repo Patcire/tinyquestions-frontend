@@ -27,7 +27,8 @@ export default {
       responseOfUser: [],
       points: 0,
       activeAnswerResults:  false,
-      allPlayersFinishedTheQuiz: false
+      allPlayersFinishedTheQuiz: false,
+      infoForPodium: null
     }
 
   },
@@ -71,7 +72,7 @@ export default {
     saveResponses(response) {
       console.log(response)
       this.responseOfUser = response
-      this.points = 10 * response.questionNumber
+      this.points = response.wasRight ? this.points+10 : this.points
     },
 
     handleHideQuiz() {
@@ -82,10 +83,10 @@ export default {
       })
     },
 
-    handlePlayerFinishTheQuiz(){
+    handlePlayerFinishTheQuiz(finalScore){
       console.log('entra aquí yemite')
       this.socket.emit('playerFinish', {
-        succes: true,
+        finalScore: finalScore,
         roomID: this.roomID
       })
     }
@@ -138,8 +139,11 @@ export default {
       }, 1500)
     })
 
-    this.socket.on('allPlayersHaveFinished', ()=>{
-      this.allPlayersFinishedTheQuiz = true })
+    this.socket.on('allPlayersHaveFinished', (res)=>{
+      console.log(res)
+      this.allPlayersFinishedTheQuiz = true
+      this.infoForPodium=res
+    })
 
   },
 
@@ -218,6 +222,9 @@ export default {
 
   </section>
 
- <podium v-if="allPlayersFinishedTheQuiz"></podium>
+ <podium v-if="allPlayersFinishedTheQuiz &&
+            !this.activeAnswerResults && infoForPodium !== null"
+          :infoForPodium="this.infoForPodium"
+ ></podium>
 
 </template>

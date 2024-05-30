@@ -22,7 +22,8 @@ export default {
       isLoading: false,
       responses: [],
       quizID: null, // until we created on the db we don't know the id
-      matchID: null // same with match
+      matchID: null, // same with match
+      seshStore: useSessionStore().user
     }
   },
 
@@ -216,7 +217,10 @@ export default {
       // responses to their respective quiz/matches on DB
 
       if (this.mode.isMultiplayer){
-        this.$emit('playerFinishTheQuiz', true)
+        this.$emit('playerFinishTheQuiz', {
+          username: this.seshStore.username,
+          points: this.points
+        })
         return
       }
 
