@@ -83,6 +83,7 @@ export default {
     },
 
     handlePlayerFinishTheQuiz(){
+      console.log('entra aquí yemite')
       this.socket.emit('playerFinish', {
         succes: true,
         roomID: this.roomID
@@ -134,10 +135,11 @@ export default {
       setTimeout(()=>{
         this.activeAnswerResults = false
         this.hideQuiz = false
-      }, 4000)
+      }, 1500)
     })
 
-    this.socket.on('allPlayersHaveFinished', this.allPlayersFinishedTheQuiz = true )
+    this.socket.on('allPlayersHaveFinished', ()=>{
+      this.allPlayersFinishedTheQuiz = true })
 
   },
 

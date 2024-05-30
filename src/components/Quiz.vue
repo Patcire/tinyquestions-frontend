@@ -215,6 +215,11 @@ export default {
       // the app needs to save the asociated questions
       // responses to their respective quiz/matches on DB
 
+      if (this.mode.isMultiplayer){
+        this.$emit('playerFinishTheQuiz', true)
+        return
+      }
+
       if(!this.mode.isCustom){
         let asociatedQuestion = {}
         for (const question of this.questions) {
@@ -248,7 +253,6 @@ export default {
       }
       if (!this.mode.isCustom) await this.updateUserStats() && console.log('stats updated')
       console.log(createdReport.status)
-      if (!this.mode.isMultiplayer) this.$emit('playerFinishTheQuiz')
 
     }
 

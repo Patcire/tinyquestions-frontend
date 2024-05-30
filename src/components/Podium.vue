@@ -6,7 +6,7 @@ export default {
 
 <template>
   <section class="room__podium">
-    <h3>Podium</h3>
+    <h3>epee</h3>
   </section>
 </template>
 
