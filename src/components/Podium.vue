@@ -3,6 +3,14 @@ export default {
   name: 'Podium',
   props: {
     infoForPodium:{type: Array, required: true}
+  },
+  data(){
+    return{
+
+    }
+  },
+  created() {
+    //
   }
 }
 </script>
@@ -13,8 +21,8 @@ export default {
     <article class="podium__ranks">
       <ol>
         <li v-for=" (user, index) in infoForPodium">
-          <p>
-            {{ infoForPodium.length-index}}º {{user.username}} : {{ user.points }}
+          <p :class="{'podium__winner': index === 1}">
+            {{ infoForPodium.length-index}}º {{user.username}} : {{ user.points }} points
           </p>
         </li>
       </ol>

@@ -9,6 +9,7 @@ import { callAPI } from '@/helpers/callAPI.js'
 import Loading from '@/components/Loading.vue'
 import Podium from '@/components/Podium.vue'
 
+
 export default {
   name: 'Room',
   components: { Podium, Loading, Quiz, UserBanner },
@@ -18,26 +19,26 @@ export default {
       sesh: useSessionStore,
       roomID: null,
       isConnected: false,
-      playersOnMatch:[],
+      playersOnMatch: [],
       fullRoom: false,
       gameStarted: false,
       questions: [],
-      isAdmin:  useSessionStore().user.roomAdmin,
+      isAdmin: useSessionStore().user.roomAdmin,
       hideQuiz: false,
       responseOfUser: [],
       points: 0,
-      activeAnswerResults:  false,
+      activeAnswerResults: false,
       allPlayersFinishedTheQuiz: false,
       infoForPodium: null
     }
 
   },
-  computed:{
-    mode(){
-      if (this.questions.length){
+  computed: {
+    mode() {
+      if (this.questions.length) {
         return {
-          title:'MultiplayerQuiz',
-          class:'custom__title',
+          title: 'MultiplayerQuiz',
+          class: 'custom__title',
           clock: [false, 10000], // miliseconds
           numberOfQuestions: this.questions.length,
           hasScore: true,
@@ -47,7 +48,7 @@ export default {
           questionsForMultiplayerMatch: this.questions
         }
       }
-     return null
+      return null
     }
 
   },
@@ -72,7 +73,7 @@ export default {
     saveResponses(response) {
       console.log(response)
       this.responseOfUser = response
-      this.points = response.wasRight ? this.points+10 : this.points
+      this.points = response.wasRight ? this.points + 10 : this.points
     },
 
     handleHideQuiz() {
@@ -83,13 +84,23 @@ export default {
       })
     },
 
-    handlePlayerFinishTheQuiz(finalScore){
-      console.log('entra aquí yemite')
+    handlePlayerFinishTheQuiz(finalScore) {
       this.socket.emit('playerFinish', {
         finalScore: finalScore,
         roomID: this.roomID
       })
-    }
+    },
+
+    //async startNewGame() {
+    //  this.hideQuiz= false
+    //  this.responseOfUser= []
+    //  this.points= 0
+    //  this.activeAnswerResults= false
+    //  this.allPlayersFinishedTheQuiz= false
+    //  this.infoForPodium= null
+    //  this.mode.questionsForMultiplayerMatch = await callAPI('http://localhost:8000/api/ques/rand/5')
+    //  this.startGame()
+    //}
 
   },
 
@@ -107,42 +118,42 @@ export default {
       this.socket.emit('joinRoom', {
         roomID: this.roomID,
         username: useSessionStore().user.username,
-        admin:  this.isAdmin
+        admin: this.isAdmin
       })
     })
 
-    this.socket.on('fullRoom',(res) =>{
+    this.socket.on('fullRoom', (res) => {
       if (res) this.fullRoom = true
     })
 
 
-    this.socket.on('userJoinedSuccesfullyToRoom', (res)=>{
+    this.socket.on('userJoinedSuccesfullyToRoom', (res) => {
 
-      if (res.success===true) this.isConnected = true
+      if (res.success === true) this.isConnected = true
       this.playersOnMatch = res.players
 
     })
 
-    this.socket.on('gameStarted', (res)=>{
-        this.questions = [...res.questions]
-        this.gameStarted = true
+    this.socket.on('gameStarted', (res) => {
+      this.questions = [...res.questions]
+      this.gameStarted = true
     })
 
-    this.socket.on('playerAnsweredQuestion', ()=> true)
+    this.socket.on('playerAnsweredQuestion', () => true)
 
-    this.socket.on('showResultsOfQuestion', ()=>{
+    this.socket.on('showResultsOfQuestion', () => {
       console.log('deben mostrarse results')
-        this.activeAnswerResults = true
-      setTimeout(()=>{
+      this.activeAnswerResults = true
+      setTimeout(() => {
         this.activeAnswerResults = false
         this.hideQuiz = false
       }, 1500)
     })
 
-    this.socket.on('allPlayersHaveFinished', (res)=>{
+    this.socket.on('allPlayersHaveFinished', (res) => {
       console.log(res)
       this.allPlayersFinishedTheQuiz = true
-      this.infoForPodium=res
+      this.infoForPodium = res
     })
 
   },
@@ -153,8 +164,9 @@ export default {
     useSessionStore().user.socketInUse = null
     useSessionStore().user.roomAdmin = false
 
-    this.socket &&  this.socket.emit('turnoff', () => true)
+    this.socket && this.socket.emit('turnoff', () => true)
   },
+
 
 }
 </script>
@@ -222,9 +234,21 @@ export default {
 
   </section>
 
- <podium v-if="allPlayersFinishedTheQuiz &&
-            !this.activeAnswerResults && infoForPodium !== null"
-          :infoForPodium="this.infoForPodium"
- ></podium>
+  <article class="room__final-results"
+           v-if="allPlayersFinishedTheQuiz && !this.activeAnswerResults && infoForPodium !== null">
+   <podium :infoForPodium="this.infoForPodium"></podium>
+   <div class="podium__container">
+     <img class="podium__sparks"
+          alt="color sparks" src="/public/virutas.svg">
+   </div>
+   <div class="podium__container--mod">
+     <img class="podium__doodle" alt="melon doodle" src="/public/Vectorwmelon.svg">
+     <img class="podium__doodle" alt="melon doodle" src="/public/cerealscereals.svg">
+   </div>
 
+    <!--
+   <button class="primary-button"
+     v-if="useSessionStore().user.roomAdmin" @click="startNewGame">Again</button>
+    -->
+  </article>
 </template>
