@@ -22,7 +22,7 @@ export default {
       <ol>
         <li v-for=" (user, index) in infoForPodium">
           <p :class="{'podium__winner': index === 1}">
-            {{ infoForPodium.length-index}}º {{user.username}} : {{ user.points }} points
+            {{ infoForPodium.length-index}}º {{user.username}} : {{ user.finalScore }} points
           </p>
         </li>
       </ol>

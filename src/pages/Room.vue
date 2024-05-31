@@ -84,9 +84,10 @@ export default {
       })
     },
 
-    handlePlayerFinishTheQuiz(finalScore) {
+    handlePlayerFinishTheQuiz(infoServer) {
       this.socket.emit('playerFinish', {
-        finalScore: finalScore,
+        username: useSessionStore().user.username,
+        finalScore: infoServer.points,
         roomID: this.roomID
       })
     },
