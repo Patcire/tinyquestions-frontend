@@ -9,7 +9,6 @@ import { callAPI } from '@/helpers/callAPI.js'
 import Loading from '@/components/Loading.vue'
 import Podium from '@/components/Podium.vue'
 
-
 export default {
   name: 'Room',
   components: { Podium, Loading, Quiz, UserBanner },
@@ -102,6 +101,9 @@ export default {
     //  this.mode.questionsForMultiplayerMatch = await callAPI('http://localhost:8000/api/ques/rand/5')
     //  this.startGame()
     //}
+    copySeed(e){
+      navigator.clipboard.writeText(this.roomID)
+    }
 
   },
 
@@ -188,9 +190,17 @@ export default {
     <img class="room__ornament" alt="ornaments" src="/public/ornament.svg">
 
     <article class="room__info">
+
       <p>Players: {{playersOnMatch.length}}/4</p>
       <img src="/public/pointpoint.svg" alt="point">
-      <h3 v-if="roomID && isConnected && !fullRoom">Room seed: <span class="room__id">{{this.roomID}}</span></h3>
+      <h3 v-if="roomID && isConnected && !fullRoom">Room seed: <button @click="copySeed(e)"  popovertarget="popover" class="room__id">{{this.roomID}}</button></h3>
+
+      <div class="room__wrapper">
+        <div id="popover" class="room__popover" popover>
+          <p class="room__pop-message">Copied</p>
+        </div>
+      </div>
+
     </article>
 
     <article class="room__cont">

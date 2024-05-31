@@ -32,6 +32,7 @@
   }
 
   &__info{
+    position: relative;
     font-family: $fontAnswers;
     font-weight: bold;
     @include flex-row;
@@ -45,6 +46,45 @@
   &__id{
     color: $pink;
     -webkit-text-stroke: 1px black;
+    @include in-out-scale;
+    background: none;
+    border: none;
+    &:hover{
+      cursor: pointer;
+      color: $lightPink;
+      -webkit-text-stroke: 1.3px black;
+    }
+  }
+
+  [popover] {
+    background: black;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 1.2rem;
+    max-width: 20ch;
+    line-height: 1.4;
+    top: 2rem;
+    margin: 0 auto;
+    font-family: $fontAnswers;
+    font-weight: bold;
+  }
+
+  [popover]:popover-open {
+    translate: 0 0;
+    transition: display 0.7s
+  }
+
+  // close popover
+  [popover] {
+    transition: translate 0.7s ease-out, display 0.7s ease-out allow-discrete;
+    translate: 0 -22rem;
+  }
+
+
+  &__pop-message{
+    z-index: 9;
+    left: 600px;
+
   }
 
   &__cont{
@@ -78,4 +118,5 @@
   &__final-results{
     @include flex-column;
   }
+
 }
