@@ -184,7 +184,10 @@ export default {
     </div>
 
     <article class="room__players">
-      <user-banner v-for="player in playersOnMatch" :player="player"></user-banner>
+      <div class="room__cont--row">
+        <user-banner v-for="(player, index) in playersOnMatch" :player="player" :admin="index"></user-banner>
+      </div>
+
     </article>
 
     <img class="room__ornament" alt="ornaments" src="/public/ornament.svg">
@@ -193,18 +196,18 @@ export default {
 
       <p>Players: {{playersOnMatch.length}}/4</p>
       <img src="/public/pointpoint.svg" alt="point">
-      <h3 v-if="roomID && isConnected && !fullRoom">Room seed: <button @click="copySeed(e)"  popovertarget="popover" class="room__id">{{this.roomID}}</button></h3>
+      <p class="room__info-content" v-if="roomID && isConnected && !fullRoom">Room seed: <button @click="copySeed(e)"  popovertarget="popover" class="room__id">{{this.roomID}}</button></p>
 
-      <div class="room__wrapper">
+
         <div id="popover" class="room__popover" popover>
           <p class="room__pop-message">Copied</p>
         </div>
-      </div>
+
 
     </article>
 
     <article class="room__cont">
-      <button @click="startGame" v-if="useSessionStore().user.roomAdmin" class="primary-button">Start</button>
+      <button @click="startGame" v-if="useSessionStore().user.roomAdmin" class="primary-button room__pb--mod">Start</button>
     </article>
 
   </section>
