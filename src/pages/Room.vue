@@ -20,7 +20,6 @@ export default {
       isConnected: false,
       playersOnMatch: [],
       fullRoom: false,
-      userIsNotInRoom: false,
       gameStarted: false,
       questions: [],
       isAdmin: useSessionStore().user.roomAdmin,
@@ -29,7 +28,8 @@ export default {
       points: 0,
       activeAnswerResults: false,
       allPlayersFinishedTheQuiz: false,
-      infoForPodium: null
+      infoForPodium: null,
+      maxPlayers: null
     }
 
   },
@@ -113,6 +113,8 @@ export default {
     this.isAdmin && this.getRandomQuestions()
 
     this.socket = socketIO
+    this.socket.on('maxPlayers', (res) => this.maxPlayers = res)
+
 
     this.socket.on('connect', () => {
 
@@ -187,7 +189,7 @@ export default {
 
     <article class="room__players">
       <div class="room__cont--row">
-        <user-banner v-for="(player, index) in playersOnMatch" :player="player" :admin="index"></user-banner>
+        <user-banner v-for="(player, index) in playersOnMatch" :player="player.username" :admin="index"></user-banner>
       </div>
 
     </article>
@@ -196,7 +198,7 @@ export default {
 
     <article class="room__info">
 
-      <p>Players: {{playersOnMatch.length}}/4</p>
+      <p>Players: {{playersOnMatch.length}}/{{this.maxPlayers}}</p>
       <img src="/public/pointpoint.svg" alt="point">
       <p class="room__info-content" v-if="roomID && isConnected && !fullRoom">Room seed: <button @click="copySeed(e)"  popovertarget="popover" class="room__id">{{this.roomID}}</button></p>
 
