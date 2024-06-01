@@ -20,6 +20,7 @@ export default {
       isConnected: false,
       playersOnMatch: [],
       fullRoom: false,
+      userIsNotInRoom: false,
       gameStarted: false,
       questions: [],
       isAdmin: useSessionStore().user.roomAdmin,
@@ -101,7 +102,7 @@ export default {
     //  this.mode.questionsForMultiplayerMatch = await callAPI('http://localhost:8000/api/ques/rand/5')
     //  this.startGame()
     //}
-    copySeed(e){
+    copySeed(){
       navigator.clipboard.writeText(this.roomID)
     }
 
@@ -126,7 +127,7 @@ export default {
     })
 
     this.socket.on('fullRoom', (res) => {
-      if (res) this.fullRoom = true
+      if (res && !this.playersOnMatch.includes(useSessionStore().user.username)) this.fullRoom = true
     })
 
 
@@ -176,7 +177,8 @@ export default {
 
 <template>
 
-  <section v-if="!gameStarted" class="room">
+  <!-- waiting room state (pre-match)-->
+  <section v-if="!gameStarted && !this.fullRoom" class="room">
 
     <div class="room__title">
       <h1>Multiplayer</h1>
@@ -212,8 +214,13 @@ export default {
 
   </section>
 
-  <p v-if="fullRoom">Room field is completed!</p>
+  <!--if room is complete-->
+  <section v-if="fullRoom" class="room__complete">
+    <p>Room field is completed :(</p>
+    <button class="primary-button" @click="router().push('/games')">Go back</button>
+  </section>
 
+  <!--quiz of the multiplayer match-->
   <section class="room__quiz"
            :class="{'--hide':this.hideQuiz}"
            v-if="gameStarted && this.questions.length">
@@ -223,14 +230,15 @@ export default {
           @responses="this.saveResponses"
           @playerFinishTheQuiz="handlePlayerFinishTheQuiz"
     ></quiz>
-
   </section>
 
+  <!--loader-->
   <loading v-if="gameStarted && this.hideQuiz && !this.activeAnswerResults"
            key-word="waiting"
            imgSrc="../../public/clock.svg"
   ></loading>
 
+  <!--response info-->
   <section v-if="this.hideQuiz && this.activeAnswerResults" class="room__after-response">
 
     <article>
@@ -243,11 +251,11 @@ export default {
         </strong>
       </p>
     </article>
-
     <p class="room__points">Total: {{ this.points }} points</p>
 
   </section>
 
+  <!--podium afer match-->
   <article class="room__final-results"
            v-if="allPlayersFinishedTheQuiz && !this.activeAnswerResults && infoForPodium !== null">
    <podium :infoForPodium="this.infoForPodium"></podium>
@@ -265,4 +273,5 @@ export default {
      v-if="useSessionStore().user.roomAdmin" @click="startNewGame">Again</button>
     -->
   </article>
+
 </template>
