@@ -155,6 +155,12 @@ export default {
         this.infoForPodium = res
       })
 
+      this.socket.on('userExitTheRoom', (res) => {
+        console.log('an user leaves the room ', res)
+        this.playersOnMatch = res
+      })
+
+
     }
 
   },
@@ -167,7 +173,14 @@ export default {
 
   beforeRouteLeave() {
     console.log('exit')
-    this.socket && this.socket.emit('turnoff', this.roomID)
+    if (this.playersOnMatch.length === 1) this.socket.emit('deleteRoom', this.roomID)
+    else{
+      this.socket && this.socket.emit('turnoff', {
+        roomID: this.roomID,
+        username: useSessionStore().user.username
+      })
+    }
+
     this.socket.disconnect()
     useSessionStore().user.createdRoomID = null
     useSessionStore().user.joinedRoomID = null
