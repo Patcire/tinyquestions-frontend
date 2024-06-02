@@ -271,6 +271,7 @@ export default {
      <img class="podium__doodle" alt="melon doodle" src="/public/cerealscereals.svg">
    </div>
 
+    <button class="primary-button" @click="router().push('/games')">Go back</button>
     <!--
    <button class="primary-button"
      v-if="useSessionStore().user.roomAdmin" @click="startNewGame">Again</button>
