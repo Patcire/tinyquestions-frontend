@@ -18,8 +18,8 @@ export default {
 
   <section class="user-banner">
 
-    <article class="user-banner__photo">
-      <img alt="doodle face" src="../../public/sigh.svg">
+    <article class="user-banner__circle">
+      <img alt="doodle face" src="../../public/sigh.svg" class="user-banner__photo">
     </article>
 
     <h1 v-if="!player" class="user-banner__username">@{{useSessionStore().user.username}}</h1>

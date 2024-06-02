@@ -1,11 +1,13 @@
 @import "../abstracts/index";
 
+// Web size
+
 .room{
-  background-color: pink;
+  //background-color: pink;
   @include flex-column;
 
   &__title{
-    background-color: lightyellow;
+    //background-color: lightyellow;
     font-family: $fontLogo;
     @include flex-row;
     justify-content: space-between;
@@ -21,7 +23,7 @@
   }
 
   &__players{
-    background-color: lightcoral;
+    //background-color: lightcoral;
     @include flex-column;
     padding-top: 5%;
     padding-bottom: 2%;
@@ -29,7 +31,7 @@
 
   &__user{
     @include flex-column;
-    background-color: lightsteelblue;
+    //background-color: lightsteelblue;
   }
 
   &__ornament{
@@ -97,7 +99,7 @@
   }
 
   &__cont{
-    background-color: blueviolet;
+    //background-color: blueviolet;
     padding-top: 4%;
   }
 
@@ -116,7 +118,7 @@
   }
 
   &__after-response{
-    background-color: lightsalmon;
+    //background-color: lightsalmon;
     @include flex-column;
     text-align: center;
     font-family: $fontAnswers;
@@ -149,4 +151,60 @@
     color: $pink;
   }
 
+}
+
+/*
+----------------------
+ */
+
+
+// tablet size
+
+@include tablet{
+  .room{
+
+    &__players{
+      //background-color: darkseagreen;
+    }
+
+    &__cont--row{
+      gap: 15px;
+    }
+  }
+}
+
+/*
+----------------------
+ */
+
+
+// mobile size
+
+@include mobile{
+  .room{
+
+    &__players{
+      //background-color: #e39259;
+      width: 90%;
+      max-width: 408px;
+    }
+
+    &__cont--row{
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    &__ornament{
+      height: 110px;
+    }
+
+    &__info{
+      height: 100px;
+      width: 150px;
+      font-size: 1.1rem;
+      @include flex-column;
+      text-align: center;
+    }
+
+  }
 }
