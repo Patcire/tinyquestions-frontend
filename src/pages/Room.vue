@@ -1,6 +1,5 @@
 <script>
 
-import { socketIO } from '@/plugins/socket.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
 import UserBanner from '@/components/UserBanner.vue'
@@ -8,6 +7,7 @@ import Quiz from '@/components/Quiz.vue'
 import { callAPI } from '@/helpers/callAPI.js'
 import Loading from '@/components/Loading.vue'
 import Podium from '@/components/Podium.vue'
+import { io } from 'socket.io-client'
 
 export default {
   name: 'Room',
@@ -37,7 +37,7 @@ export default {
     mode() {
       if (this.questions.length) {
         return {
-          title: 'MultiplayerQuiz',
+          title: 'Multimatch',
           class: 'custom__title',
           clock: [false, 10000], // miliseconds
           numberOfQuestions: this.questions.length,
@@ -71,7 +71,6 @@ export default {
     },
 
     saveResponses(response) {
-      console.log(response)
       this.responseOfUser = response
       this.points = response.wasRight ? this.points + 10 : this.points
     },
@@ -104,75 +103,77 @@ export default {
     //}
     copySeed(){
       navigator.clipboard.writeText(this.roomID)
+    },
+
+    handleSocket(){
+
+      this.socket = io.connect('http://localhost:3200', {
+        transports: ['websocket'],
+        forceNew: true})
+
+      this.socket.on('maxPlayers', (res) => this.maxPlayers = res)
+
+      this.socket.on('connect', () => {
+
+        this.roomID = useSessionStore().user.createdRoomID || useSessionStore().user.joinedRoomID
+        useSessionStore().user.socketInUse = this.socket.id
+        this.socket.emit('joinRoom', {
+          roomID: this.roomID,
+          username: useSessionStore().user.username,
+          admin: this.isAdmin
+        })
+      })
+
+      this.socket.on('fullRoom', (res) => {
+        if (res && !this.playersOnMatch.includes(useSessionStore().user.username)) this.fullRoom = true
+      })
+
+      this.socket.on('userJoinedSuccesfullyToRoom', (res) => {
+        console.log('user joined ', res.players )
+        if (res.success === true) this.isConnected = true
+        this.playersOnMatch = res.players
+
+      })
+
+      this.socket.on('gameStarted', (res) => {
+        this.questions = [...res.questions]
+        this.gameStarted = true
+      })
+
+      this.socket.on('playerAnsweredQuestion', () => true)
+
+      this.socket.on('showResultsOfQuestion', () => {
+        this.activeAnswerResults = true
+        setTimeout(() => {
+          this.activeAnswerResults = false
+          this.hideQuiz = false
+        }, 1500)
+      })
+
+      this.socket.on('allPlayersHaveFinished', (res) => {
+        this.allPlayersFinishedTheQuiz = true
+        this.infoForPodium = res
+      })
+
     }
 
   },
 
   created() {
-
     this.isAdmin && this.getRandomQuestions()
-
-    this.socket = socketIO
-    this.socket.on('maxPlayers', (res) => this.maxPlayers = res)
-
-
-    this.socket.on('connect', () => {
-
-      this.roomID = useSessionStore().user.createdRoomID || useSessionStore().user.joinedRoomID
-      useSessionStore().user.socketInUse = this.socket.id
-
-      this.socket.emit('joinRoom', {
-        roomID: this.roomID,
-        username: useSessionStore().user.username,
-        admin: this.isAdmin
-      })
-    })
-
-    this.socket.on('fullRoom', (res) => {
-      if (res && !this.playersOnMatch.includes(useSessionStore().user.username)) this.fullRoom = true
-    })
-
-
-    this.socket.on('userJoinedSuccesfullyToRoom', (res) => {
-
-      if (res.success === true) this.isConnected = true
-      this.playersOnMatch = res.players
-
-    })
-
-    this.socket.on('gameStarted', (res) => {
-      this.questions = [...res.questions]
-      this.gameStarted = true
-    })
-
-    this.socket.on('playerAnsweredQuestion', () => true)
-
-    this.socket.on('showResultsOfQuestion', () => {
-      console.log('deben mostrarse results')
-      this.activeAnswerResults = true
-      setTimeout(() => {
-        this.activeAnswerResults = false
-        this.hideQuiz = false
-      }, 1500)
-    })
-
-    this.socket.on('allPlayersHaveFinished', (res) => {
-      console.log(res)
-      this.allPlayersFinishedTheQuiz = true
-      this.infoForPodium = res
-    })
+    this.handleSocket()
 
   },
 
   beforeRouteLeave() {
+    console.log('exit')
+    this.socket && this.socket.emit('turnoff', this.roomID)
+    this.socket.disconnect()
     useSessionStore().user.createdRoomID = null
     useSessionStore().user.joinedRoomID = null
     useSessionStore().user.socketInUse = null
     useSessionStore().user.roomAdmin = false
-
-    this.socket && this.socket.emit('turnoff', () => true)
-  },
-
+  }
 
 }
 </script>

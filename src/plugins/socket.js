@@ -1,7 +1,9 @@
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
+//
+// export const socketIO = io.connect('http://localhost:3200', {
+//     transports: ['websocket'],
+//     forceNew: true
+// })
 
-export const socketIO = io('http://localhost:3200', {
-    transports: ['websocket'],
-    reconnectionAttempts: 5,
-    reconnectionDelay: 1000
-})
+//  I am not using this cause the forcenew dont work with the export/import module
+// and without socketIO is not working well
