@@ -34,26 +34,38 @@ export default {
 </script>
 
 <template>
+
   <section class="games">
-    <div class="games__container">
-      <img class="games__hand" src="../../public/Vectorhand.svg" alt="hand doodle">
-    </div>
-    <BigButtonsMenu></BigButtonsMenu>
-    <div class="games__container games__container--mod">
-      <img class="games__daydream" src="../../public/Vectordaydream.svg" alt="hand doodle">
-    </div>
+
+    <article class="games__content">
+      <div class="games__container">
+        <img class="games__hand" src="../../public/Vectorhand.svg" alt="hand doodle">
+      </div>
+      <BigButtonsMenu></BigButtonsMenu>
+      <div class="games__container games__container--mod">
+        <img class="games__daydream" src="../../public/Vectordaydream.svg" alt="hand doodle">
+      </div>
+    </article>
+
+    <article class="multi">
+      <h3 class="multi__title">Multiplayer</h3>
+
+      <form class="multi__join">
+        <input type="text" placeholder="Room seed..."
+               v-model="roomID" class="multi__input">
+        <button @click.prevent="joinToExistingRoom" class="multi__b-mod primary-button">Enter</button>
+      </form>
+
+      <div class="multi__create">
+        <h3 class="">Or create new one</h3>
+        <button  @click="generateRoomID" class="multi__new">
+          <img  class="multi__box" alt="doodle of a box" src="/public/Vectorbox.svg">
+        </button>
+      </div>
+
+    </article>
+
   </section>
-  <section>
 
-    <div>
-      <button class="primary-button" @click="generateRoomID">create</button>
-    </div>
 
-    <form>
-      <label>join to a room</label>
-      <input type="text" placeholder="ej: hola" v-model="roomID">
-      <button @click.prevent="joinToExistingRoom">send</button>
-    </form>
-
-  </section>
 </template>

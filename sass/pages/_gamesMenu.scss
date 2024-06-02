@@ -1,9 +1,16 @@
 @import "../abstracts/index";
 
 .games{
-  position: relative;
-  //background-color: lightblue;
+  //background-color: burlywood;
   @include flex-row;
+  padding-top: 3%;
+  gap: 5%;
+  &__content{
+    position: relative;
+    //background-color: lightblue;
+    @include flex-row;
+  }
+
   &__container{
     //background-color: lightgreen;
     height: 200px;
@@ -15,9 +22,9 @@
   &__hand{
     height: 200px;
     width: 200px;
-   // background-color: lightsalmon;
+    //background-color: lightsalmon;
     position: relative;
-    bottom: 53%;
+    bottom: 83.5%;
     right: 290px;
   }
   &__daydream{
@@ -27,7 +34,61 @@
     position: relative;
     top: 160%;
     left: 270px;
+    display: none;
   }
+
+}
+
+.multi{
+    //background-color: lightpink;
+    height: 533px;
+    @include flex-column;
+    justify-content: flex-start;
+
+  &__title{
+    font-family: $fontLogo;
+    color: $purple;
+    -webkit-text-stroke: 1px black;
+    font-size: 2.5rem;
+    text-shadow: $shadow3;
+    //background-color: crimson;
+  }
+
+  &__join{
+    @include flex-column;
+    //padding-bottom: 5%;
+    padding-top: 48px;
+  }
+  &__input{
+    @include input-form;
+    margin-top: 3px;
+  }
+
+  &__create{
+    @include flex-column;
+    //background-color: darkseagreen;
+    width: 100%;
+    padding-top: 10%;
+    font-family: $fontAnswers;
+
+  }
+
+  &__new{
+    padding-top: 5%;
+    background: none;
+    border: none;
+    transition: ease-in-out;
+  }
+
+  &__box{
+    height: 200px;
+    @include in-out-scale;
+    &:hover{
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+
 }
 
 @include mobile {
