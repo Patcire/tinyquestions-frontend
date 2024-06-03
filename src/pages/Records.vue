@@ -4,10 +4,11 @@ import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
 import { formatDate } from '../helpers/others.js'
 import UserBanner from '@/components/UserBanner.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   name: 'Records',
-  components: { UserBanner },
+  components: { Pagination, UserBanner },
   data(){
     return{
       historic: [],
@@ -81,27 +82,31 @@ export default {
 
     </header>
 
-    <ul v-if="historic" class="records__historic">
-      <li v-for="(report, index) in historic"
-      class="records__list-item"
-      >
+    <article class="records__list-container">
+      <pagination @click-prev-page="console.log('prev')" @click-next-pag="console.log('next')">
+        <ul v-if="historic" class="records__historic">
+          <li v-for="(report, index) in historic"
+          class="records__list-item"
+          >
 
-        <article
-          class="records__row"
-          :id="report.randomQuiz ? report.randomQuiz.id_quiz : report.customQuiz.id_quiz"
-          key="index"
-          :class="{selected: selectedMatch === index}"
-          @click="handleSelectedItem(index,
-          report.randomQuiz ? report.randomQuiz.id_quiz : report.customQuiz.id_quiz)"
-        >
-          <p class="records__title" v-if="report.randomQuiz">{{report.randomQuiz.mode}}</p>
-          <p v-if="report.randomQuiz"><strong>{{formatDate(report.date)}}</strong></p>
-          <p class="records__title" v-if="report.customQuiz">{{report.customQuiz.quiz_name}}</p>
-          <p v-if="report.customQuiz"><strong>{{formatDate(report.date)}}</strong></p>
-        </article>
+            <article
+              class="records__row"
+              :id="report.randomQuiz ? report.randomQuiz.id_quiz : report.customQuiz.id_quiz"
+              key="index"
+              :class="{selected: selectedMatch === index}"
+              @click="handleSelectedItem(index,
+              report.randomQuiz ? report.randomQuiz.id_quiz : report.customQuiz.id_quiz)"
+            >
+              <p class="records__title" v-if="report.randomQuiz">{{report.randomQuiz.mode}}</p>
+              <p v-if="report.randomQuiz"><strong>{{formatDate(report.date)}}</strong></p>
+              <p class="records__title" v-if="report.customQuiz">{{report.customQuiz.quiz_name}}</p>
+              <p v-if="report.customQuiz"><strong>{{formatDate(report.date)}}</strong></p>
+            </article>
 
-      </li>
-    </ul>
+          </li>
+        </ul>
+      </pagination>
+    </article>
   </aside>
 
   <section class="records__inform">

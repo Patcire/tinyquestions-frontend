@@ -1,0 +1,20 @@
+@import "../abstracts/index";
+
+.pagination{
+  width: 100%;
+  @include flex-column;
+  &__arrow{
+    height: 20px;
+    &:hover{
+      cursor:pointer;
+    }
+    &--down{
+      transform: rotate(180deg);
+      &:hover{
+        cursor: pointer;
+      }
+
+    }
+  }
+
+}

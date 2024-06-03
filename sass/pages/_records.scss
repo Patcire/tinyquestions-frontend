@@ -3,14 +3,19 @@
 .records{
   @include flex-row;
   align-items: flex-start;
-  background-color: purple;
+  //background-color: purple;
   height: 100vh;
   padding-top: 60px;
+  width: 100%;
 
   &__aside{
     background-color: aquamarine;
     @include flex-column;
-    width: 390px;
+    //width: 390px;
+    width: 30%;
+    //max-width: 390px;
+    padding-left: 10%;
+
   }
   &__header{
     @include flex-column;
@@ -37,8 +42,16 @@
     font-size: 1.2rem;
   }
 
+  &__list-container{
+    @include flex-column;
+    position: relative;
+    background-color: crimson;
+  }
+
   &__historic{
-    width: 60%;
+    width: 100%;
+    max-width: 390px;
+    background-color: lightpink;
     padding: 25px 15px 15px 15px;
     border-left: 2px solid black;
     border-right: 2px solid black;
@@ -65,6 +78,8 @@
   &__title{
     width: 40%;
     overflow: hidden;
+    text-overflow: ellipsis ;
+    text-align: center;
   }
 
   &__inform{
