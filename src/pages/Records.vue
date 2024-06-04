@@ -62,9 +62,11 @@ export default {
 
     selectedMatch(){
       this.rightAnswers = 0
+      console.log(JSON.parse(this.historic[this.selectedMatch].answers))
       JSON.parse(this.historic[this.selectedMatch].answers).forEach((response)=>{
        response.wasRight && this.rightAnswers++
       })
+      this.answersInfo = JSON.parse(this.historic[this.selectedMatch].answers)
     },
 
     questionsInfo(){
@@ -118,7 +120,6 @@ export default {
   </aside>
 
   <section class="records__inform">
-
     <article class="records__report" aria-label="Game report">
       <h1 >Game rep</h1>
       <img class="records__glass"
@@ -134,7 +135,7 @@ export default {
 
     </article>
 
-
+    <p v-if="!this.selectedMatch" class="records__note">Choose a quizz to see the report :)</p>
 
     <section class="records__quiz" v-if="selectedMatch !== null">
 
@@ -168,6 +169,7 @@ export default {
               <p class="records__question" :class="{selectedQuestion: selectedQuestion === index}">
                 {{index+1}}. {{question.title}}
               </p>
+              <img v-if="!answersInfo[index].wasRight" alt="point" src="/public/fail.svg" height="20px">
             </div>
 
             <article class="records__answers" v-if="selectedQuestion === index">
