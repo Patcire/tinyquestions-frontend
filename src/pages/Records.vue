@@ -12,7 +12,8 @@ export default {
   data(){
     return{
       historic: [],
-      pageNumber: 1,
+      actualPage: 1,
+      lastPage: 0,
       selectedMatch: null,
       selectedQuestion: undefined,
       questionsInfo: {},
@@ -38,17 +39,23 @@ export default {
     },
 
     handleAnswerView(index){
-      // if it is the same but user clicks again, answers will hide
+      // if it is the same but user clicks again, answer will hide
       this.selectedQuestion === index? this.selectedQuestion = -1 : this.selectedQuestion = index
       this.answersInfo = JSON.parse(this.historic[this.selectedMatch].answers)
+    },
+
+    async handleCallAPI(page){
+     // console.log('page is', page)
+      let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/9/?page=${page}`)
+      this.historic = response.data
+      this.lastPage = response.last_page
+
     }
 
   },
 
   async created() {
-    let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/?page=${this.pageNumber}`)
-    this.historic = response.data
-    console.log(this.historic)
+    await this.handleCallAPI(this.actualPage)
   },
 
   watch:{
@@ -62,7 +69,7 @@ export default {
 
     questionsInfo(){
       console.log(this.questionsInfo)
-    }
+    },
 
   }
 
@@ -82,9 +89,10 @@ export default {
 
     </header>
 
-    <article class="records__list-container">
-      <pagination @click-prev-page="console.log('prev')" @click-next-pag="console.log('next')">
-        <ul v-if="historic" class="records__historic">
+    <article v-if="historic.length" class="records__list-container">
+      <pagination :actualPage="this.actualPage" :lastPage="this.lastPage"
+        @moveToActualPag="handleCallAPI">
+        <ul class="records__historic">
           <li v-for="(report, index) in historic"
           class="records__list-item"
           >

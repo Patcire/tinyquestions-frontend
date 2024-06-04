@@ -8,9 +8,6 @@ export default {
     player: { required: false, type: String }, // for multiplayer matches,
     admin: { required: false, type: Number }
   },
-  created() {
-    console.log(this.player)
-  }
 }
 </script>
 

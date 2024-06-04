@@ -9,15 +9,15 @@
   &__circle {
     // background: lightblue;
     border-radius: 50%;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     @include flex-column;
     border: 1.8px solid black;
     box-shadow: $shadow1;
   }
   &__username{
     font-family: $fontQuestions;
-    padding-top: 2px;
+    padding-top: 4.5px;
     font-size: 1.5rem;
     padding-bottom: 3px;
   }
