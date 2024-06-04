@@ -6,7 +6,8 @@ export default {
   methods: { useSessionStore },
   props: {
     player: { required: false, type: String }, // for multiplayer matches,
-    admin: { required: false, type: Number }
+    admin: { required: false, type: Number },
+    hideName: { required: false, type: Boolean }
   },
 }
 </script>
@@ -19,7 +20,7 @@ export default {
       <img alt="doodle face" src="../../public/sigh.svg" class="user-banner__photo">
     </article>
 
-    <h1 v-if="!player" class="user-banner__username">@{{useSessionStore().user.username}}</h1>
+    <h1 v-if="!player && !hideName" class="user-banner__username">@{{useSessionStore().user.username}}</h1>
     <h1 v-if="player" class="user-banner__username">@{{player}}</h1>
     <!-- Who creates the room(admin) is the first rendered-->
     <div v-if="admin===0" class="user-banner__container">

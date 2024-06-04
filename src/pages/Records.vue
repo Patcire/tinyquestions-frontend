@@ -45,11 +45,9 @@ export default {
     },
 
     async handleCallAPI(page){
-     // console.log('page is', page)
       let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/9/?page=${page}`)
       this.historic = response.data
       this.lastPage = response.last_page
-
     }
 
   },
@@ -62,8 +60,7 @@ export default {
 
     selectedMatch(){
       this.rightAnswers = 0
-      console.log(JSON.parse(this.historic[this.selectedMatch].answers))
-      JSON.parse(this.historic[this.selectedMatch].answers).forEach((response)=>{
+      this.historic && JSON.parse(this.historic[this.selectedMatch].answers).forEach((response)=>{
        response.wasRight && this.rightAnswers++
       })
       this.answersInfo = JSON.parse(this.historic[this.selectedMatch].answers)
@@ -72,6 +69,11 @@ export default {
     questionsInfo(){
       console.log(this.questionsInfo)
     },
+
+    actualPage(value){
+      console.log(value)
+      this.selectedMatch = -1
+    }
 
   }
 
@@ -84,9 +86,10 @@ export default {
   <aside class="records__aside">
       <header class="records__header">
 
-       <user-banner></user-banner>
+       <user-banner :hideName="true"></user-banner>
         <article class="records__stats">
-          <a><p>Solved quizzes: {{useSessionStore().user.quizzes_resolved}}</p></a>
+          <p class="records__name2">@{{useSessionStore().user.username}}</p>
+          <p class="records__solved">Solved quizzes: {{useSessionStore().user.quizzes_resolved}}</p>
         </article>
 
     </header>

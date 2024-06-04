@@ -34,12 +34,16 @@
     font-size: 1.6rem;
   }
   &__stats{
-    @include flex-row;
+    @include flex-column;
     font-family: $fontAnswers;
     padding-top: 5px;
     padding-bottom: 15px;
     font-weight: bold;
     font-size: 1rem;
+  }
+
+  &__name2{
+    font-size: 1.2rem;
   }
 
   &__list-container{
@@ -209,4 +213,59 @@
 
 
 }
+
+// tablet size
+
+@include tablet{
+  .records{
+    &__underline{
+      width: 340px;
+    }
+  }
+}
+
+// mobile size
+
+@include mobile{
+  .records{
+    @include flex-column;
+    height: 100%;
+    width: 100%;
+
+    &__aside{
+      padding: 2%;
+      width: 80%;
+    }
+
+    &__header{
+      display: flex;
+      flex-direction:row ;
+      background-color: indianred;
+
+    }
+    &__stats{
+      @include flex-column;
+      background-color: $lightBlue;
+      padding-bottom: 80px;
+    }
+    &__underline{
+      width: 240px;
+    }
+    &__name2{
+      font-family: $fontQuestions;
+      font-size: 1.4rem;
+    }
+
+    &__solved{
+      font-size: 0.8rem;
+    }
+
+  }
+
+  .pagination{
+
+  }
+
+}
+
 
