@@ -96,7 +96,7 @@
 
   &__quiz{
     width: 60%;
-    background-color: darkseagreen;
+    //background-color: darkseagreen;
     @include flex-column;
   }
 
@@ -169,7 +169,7 @@
   }
 
   &__questions{
-    background-color: lightyellow;
+    //background-color: lightyellow;
     padding: 2%;
     font-family: $fontQuestions;
     font-weight: lighter;
