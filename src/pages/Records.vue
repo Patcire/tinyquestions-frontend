@@ -5,10 +5,11 @@ import router from '@/router/router.js'
 import { formatDate } from '../helpers/others.js'
 import UserBanner from '@/components/UserBanner.vue'
 import Pagination from '@/components/Pagination.vue'
+import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'Records',
-  components: { Pagination, UserBanner },
+  components: { Loading, Pagination, UserBanner },
   data(){
     return{
       historic: [],
@@ -35,15 +36,17 @@ export default {
       this.selectedMatch = index
       this.rightAnswers = 0
       this.answersInfo = []
-      this.historic[index].customQuiz ?
+      if (this.historic[index].customQuiz){
+        useSessionStore().user.lastCustomQuizSelected = this.historic[index].customQuiz.id_quiz
         this.questionsInfo = await callAPI(`http://localhost:8000/api/ques/allFrom/${id}`)
-          :
+      }
+      else{
         this.questionsInfo = await callAPI(`http://localhost:8000/api/has/${id}`)
+      }
 
       if (this.historic[this.selectedMatch].answers) this.answersInfo = JSON.parse(this.historic[this.selectedMatch].answers)
 
       await this.historic[this.selectedMatch].answers && JSON.parse(this.historic[this.selectedMatch].answers).forEach((response)=>{
-        console.log(response+response.wasRight)
         response.wasRight && this.rightAnswers++
       })
     },
@@ -54,7 +57,7 @@ export default {
     },
 
     async handleCallAPI(page){
-      let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/3/?page=${page}`)
+      let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/9/?page=${page}`)
       this.historic = response.data
       this.lastPage = response.last_page
     },
@@ -140,6 +143,7 @@ export default {
     </article>
 
     <p v-if="this.selectedMatch === null" class="records__note">Choose a quizz to see the report :)</p>
+    <loading key-word="loading" v-if="this.selectedMatch !== null && (!this.questionsInfo.length || !this.answersInfo.length)"></loading>
 
     <section class="records__quiz" v-if="this.selectedMatch !== null && this.questionsInfo.length && this.answersInfo.length">
 
@@ -183,6 +187,13 @@ export default {
         </ul>
 
       </article>
+
+      <button v-if=" this.historic[selectedMatch].customQuiz "
+              @click="router().push('/custom')"
+              class="primary-button"
+      >
+        Replay
+      </button>
 
     </section>
 

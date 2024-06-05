@@ -201,6 +201,7 @@ export default {
 
     async handleNewQuiz(){
       this.questions = [] // to activate the loading animation
+      this.responses = []
       await this.getQuestionsFromAPIForNewQuiz()
       this.counter =0
       this.points = 0

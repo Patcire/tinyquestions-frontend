@@ -177,8 +177,8 @@
     font-family: $fontQuestions;
     font-weight: lighter;
     font-size: 1.5rem;
-    //width: 540px;
-    width: 100%;
+    width: 540px;
+    //width: 60%;
     //padding-left: 20%;
     //@include flex-column;
   }
@@ -228,6 +228,7 @@
 
 }
 
+
 // tablet size
 
 @include tablet{
@@ -237,9 +238,10 @@
     }
     &__quiz{
       width: 84%;
+      //background-color: indianred;
     }
     &__questions{
-      //width: 100%;
+      width: 90%;
     }
     &__summary{
       width: 100%;
@@ -263,13 +265,13 @@
     &__header{
       display: flex;
       flex-direction:row ;
-     // background-color: indianred;
+     //background-color: indianred;
 
     }
     &__stats{
       @include flex-column;
-     // background-color: $lightBlue;
-      padding-bottom: 80px;
+     //background-color: $lightBlue;
+      padding-bottom: 40px;
     }
     &__underline{
       width: 240px;
@@ -289,6 +291,10 @@
     &__summary{
     width: 100%;
   }
+
+    &__questions{
+      width: 90%;
+    }
 
   }
 
