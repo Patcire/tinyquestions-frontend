@@ -57,6 +57,7 @@
   &__historic{
     width: 100%;
     max-width: 390px;
+    min-width: 180px;
     //background-color: lightpink;
     padding: 15px 15px 5px 15px;
     border-left: 2px solid black;
@@ -137,6 +138,7 @@
       @include flex-row;
       gap: 10px;
       justify-content: left;
+      //background-color: indianred;
     }
   }
 
@@ -155,6 +157,7 @@
     font-weight: bold;
     font-size: 1.1rem;
     //background-color: red;
+    width: 80%;
   }
 
   &__mini-icon{
@@ -170,12 +173,14 @@
 
   &__questions{
     //background-color: lightyellow;
-    padding: 2%;
+    padding: 2% 2% 2% 2%;
     font-family: $fontQuestions;
     font-weight: lighter;
     font-size: 1.5rem;
+    //width: 540px;
     width: 100%;
-    padding-left: 20%;
+    //padding-left: 20%;
+    //@include flex-column;
   }
 
   &__question{
@@ -192,11 +197,15 @@
   }
 
   &__answers{
+    position: relative;
+    gap: 0;
+    //justify-content: left;
     font-family: $fontAnswers;
     font-weight: bold;
     font-size: 1.2rem;
     padding: 7% 0 7% 0;
     @include flex-column;
+    //background-color: lightpink;
   }
 
   &__yr-answer{
@@ -228,6 +237,12 @@
     }
     &__quiz{
       width: 84%;
+    }
+    &__questions{
+      //width: 100%;
+    }
+    &__summary{
+      width: 100%;
     }
   }
 }
@@ -269,8 +284,11 @@
     }
 
     &__quiz{
-      width: 84%;
+      width: 100%;
     }
+    &__summary{
+    width: 100%;
+  }
 
   }
 
