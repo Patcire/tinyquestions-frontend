@@ -3,13 +3,13 @@
 .records{
   @include flex-row;
   align-items: flex-start;
-  background-color: purple;
+  //background-color: purple;
   height: 800px;
   padding-top: 30px;
   width: 100%;
 
   &__aside{
-    background-color: aquamarine;
+    //background-color: aquamarine;
     @include flex-column;
     //width: 390px;
     width: 30%;
@@ -49,7 +49,7 @@
   &__list-container{
     @include flex-column;
     position: relative;
-    background-color: crimson;
+    //background-color: crimson;
     width: 100%;
     max-width: 390px;
   }
@@ -57,7 +57,7 @@
   &__historic{
     width: 100%;
     max-width: 390px;
-    background-color: lightpink;
+    //background-color: lightpink;
     padding: 15px 15px 5px 15px;
     border-left: 2px solid black;
     border-right: 2px solid black;
@@ -89,23 +89,26 @@
   }
 
   &__inform{
-    background-color: lightgreen;
+    //background-color: lightgreen;
     @include flex-column;
     width: 100%;
   }
 
   &__quiz{
     width: 60%;
+    background-color: darkseagreen;
+    @include flex-column;
   }
 
   &__report{
     @include flex-row;
     font-family: $fontLogo;
     font-size: 2rem;
+
   }
 
   &__glass{
-    background-color: grey;
+    //background-color: grey;
     padding-top: 20px;
     padding-left: 2.5px;
   }
@@ -122,7 +125,7 @@
   &__container{
     position: absolute;
     &--relative{
-      background-color: burlywood;
+      //background-color: burlywood;
       position: relative;
       @include flex-row;
       justify-content: left;
@@ -151,7 +154,7 @@
     font-family: $fontAnswers;
     font-weight: bold;
     font-size: 1.1rem;
-    background-color: red;
+    //background-color: red;
   }
 
   &__mini-icon{
@@ -171,6 +174,8 @@
     font-family: $fontQuestions;
     font-weight: lighter;
     font-size: 1.5rem;
+    width: 100%;
+    padding-left: 20%;
   }
 
   &__question{
@@ -221,6 +226,9 @@
     &__underline{
       width: 340px;
     }
+    &__quiz{
+      width: 84%;
+    }
   }
 }
 
@@ -240,12 +248,12 @@
     &__header{
       display: flex;
       flex-direction:row ;
-      background-color: indianred;
+     // background-color: indianred;
 
     }
     &__stats{
       @include flex-column;
-      background-color: $lightBlue;
+     // background-color: $lightBlue;
       padding-bottom: 80px;
     }
     &__underline{
@@ -258,6 +266,10 @@
 
     &__solved{
       font-size: 0.8rem;
+    }
+
+    &__quiz{
+      width: 84%;
     }
 
   }

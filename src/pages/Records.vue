@@ -45,7 +45,7 @@ export default {
     },
 
     async handleCallAPI(page){
-      let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/9/?page=${page}`)
+      let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/3/?page=${page}`)
       this.historic = response.data
       this.lastPage = response.last_page
     }

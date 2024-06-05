@@ -139,7 +139,7 @@ export default {
       if (!this.mode.isCustom){
         const createdQuiz = await postAPI('http://localhost:8000/api/quiz/create',
           {
-            "number_questions": this.questions.length-1,
+            "number_questions": this.questions.length,
             "clock": this.mode.clock[0],
             "time": this.mode.clock[1],
             "type": "random",
