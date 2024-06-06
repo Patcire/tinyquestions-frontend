@@ -22,20 +22,40 @@ export default {
       order: 'desc',
       allPagesInOrder: [1], // this array will contain the total pages of stats on the db order by asc/desc (defined by the user)
       selectedIndexOfPageOrder:  0, // we play with the value of the selected index by the user on the array
-      actualPage: 1,
+      lengthOfApiResponse: 0,
+      minPositionOfRankPage: 0,
+      maxPositionOfRankPage: 0,
+      countAllUsersRegistered: 0
 
     }
   },
   computed: {
     apiUrl() {
       return `http://localhost:8000/api/${this.urlPoint}/${this.order}?page=${this.allPagesInOrder[this.selectedIndexOfPageOrder]}`;
-    }
+    },
+
   },
   methods: {
     useSessionStore,
     changeOrder(){
       this.order === 'desc' ? this.order = 'asc' : this.order = 'desc'
     },
+
+    handleMoveToActualPage(page){
+      if (this.selectedIndexOfPageOrder !== page-1) this.selectedIndexOfPageOrder= page-1
+    },
+
+    handleUserPositionsWhenDesc(){
+      let startPage =  this.allPagesInOrder[this.selectedIndexOfPageOrder]-1
+      this.minPositionOfRankPage =  startPage*this.lengthOfApiResponse
+    },
+
+    handleUserPositionsWhenAsc(){
+      let startPage =  this.allPagesInOrder[this.selectedIndexOfPageOrder]-1
+      this.maxPositionOfRankPage =  this.countAllUsersRegistered
+    },
+
+
   },
 
   async created() {
@@ -44,7 +64,11 @@ export default {
     for (let i = 1; i<response.last_page; i++){
       this.allPagesInOrder.push(i+1)
     }
-    await console.log(this.allPagesInOrder)
+
+    this.lengthOfApiResponse= this.data.length
+    this.handleUserPositionsWhenDesc()
+    let userCount = await (callAPI('http://localhost:8000/api/user/count'))
+    this.countAllUsersRegistered = userCount.count
 
   },
 
@@ -53,10 +77,13 @@ export default {
       console.log('order', value)
       console.log('url', this.apiUrl)
       this.data = (await callAPI(this.apiUrl)).data
+
     },
-    //async selectedIndexOfPageOrder(){
-    //  this.data = (await callAPI(this.apiUrl)).data
-    //},
+
+    async selectedIndexOfPageOrder(){
+      this.data = (await callAPI(this.apiUrl)).data
+      this.order === 'desc' ? this.handleUserPositionsWhenDesc() : this.handleUserPositionsWhenAsc()
+    },
 
   }
 
@@ -75,7 +102,11 @@ export default {
         </th>
       </tr>
       <tr v-for="(player, index) in this.data" class="table__row">
-        <td>{{index+1}}</td>
+        <td v-if="this.order === 'desc'">{{index+1+this.minPositionOfRankPage }}</td>
+        <td v-if="this.order === 'asc'">{{
+            countAllUsersRegistered-(index*this.allPagesInOrder[this.selectedIndexOfPageOrder])
+          }}
+        </td>
         <td>{{player.username}}</td>
         <td>{{player.points}}</td>
       </tr>
@@ -94,8 +125,12 @@ export default {
 
 
     <pagination :lastPage="this.allPagesInOrder[this.allPagesInOrder.length-1]"
-                :actualPage="this.actualPage" :displayRow="true">
-      <p class="pagination__count">{{this.actualPage}}/{{this.allPagesInOrder[this.allPagesInOrder.length-1]}}</p>
+                :actualPage="this.allPagesInOrder[this.selectedIndexOfPageOrder]"
+                :displayRow="true"
+                @moveToActualPag="handleMoveToActualPage"
+                v-if="this.data.length"
+    >
+      <p class="pagination__count">{{this.allPagesInOrder[this.selectedIndexOfPageOrder]}}/{{this.allPagesInOrder[this.allPagesInOrder.length-1]}}</p>
     </pagination>
 
 
