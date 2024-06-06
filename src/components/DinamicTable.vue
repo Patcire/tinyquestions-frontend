@@ -1,8 +1,10 @@
 <script>
 import { callAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '../stores/sessionStore.js'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
+  components: { Pagination },
   props:{
     urlPoint:{
       type: String,
@@ -19,7 +21,9 @@ export default {
       data: [],
       order: 'desc',
       allPagesInOrder: [1], // this array will contain the total pages of stats on the db order by asc/desc (defined by the user)
-      selectedIndexOfPageOrder:  0 // we play with the value of the selected index by the user on the array
+      selectedIndexOfPageOrder:  0, // we play with the value of the selected index by the user on the array
+      actualPage: 1,
+
     }
   },
   computed: {
@@ -40,6 +44,7 @@ export default {
     for (let i = 1; i<response.last_page; i++){
       this.allPagesInOrder.push(i+1)
     }
+    await console.log(this.allPagesInOrder)
 
   },
 
@@ -61,7 +66,7 @@ export default {
 
 <template>
 
-    <table class="table">
+    <table class="table" v-if="this.data.length">
       <tr class="table__header">
         <th v-for="column in columns"
             @click="this.changeOrder()"
@@ -86,6 +91,13 @@ export default {
         <td><strong>{{ useSessionStore().user.points }}</strong></td>
       </tr>
     </table>
+
+
+    <pagination :lastPage="this.allPagesInOrder[this.allPagesInOrder.length-1]"
+                :actualPage="this.actualPage" :displayRow="true">
+      <p class="pagination__count">{{this.actualPage}}/{{this.allPagesInOrder[this.allPagesInOrder.length-1]}}</p>
+    </pagination>
+
 
 </template>
 

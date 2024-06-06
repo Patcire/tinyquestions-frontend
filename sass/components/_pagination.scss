@@ -3,6 +3,7 @@
 .pagination{
   width: 100%;
   @include flex-column;
+
   &__arrow{
     height: 20px;
     &:hover{
@@ -13,8 +14,37 @@
       &:hover{
         cursor: pointer;
       }
-
     }
   }
 
+  &__count{
+    font-family: $fontAnswers;
+    font-weight: bold;
+    font-size: 1.2rem;
+    //background-color: darkseagreen;
+  }
+
+
 }
+
+.pagination.__row{
+  display: flex;
+  flex-direction: row;
+  padding-top: 5%;
+  //background-color: blueviolet;
+  width: auto;
+}
+
+.pagination.__row .pagination__arrow{
+  transform: rotate(-90deg);
+  //background-color: #fff300;
+  height: 15px;
+}
+
+.pagination.__row .pagination__arrow--down{
+  transform: rotate(90deg);
+  //background-color: #fff300;
+  height: 15px;
+
+}
+

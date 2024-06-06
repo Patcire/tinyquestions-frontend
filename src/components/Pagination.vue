@@ -3,7 +3,8 @@ export default {
   name: 'Pagination',
   props:{
     actualPage: {required: true, type: Number },
-    lastPage: {required: true, type: Number }
+    lastPage: {required: true, type: Number },
+    displayRow: {required: false, type: Boolean },
   },
   emits:['moveToActualPag'],
   data(){
@@ -27,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <section class="pagination">
+  <section class="pagination" :class="{'__row': this.displayRow}">
 
     <img @click="handlePrevPage"
       alt="arrow up" src="/public/arrow.svg" class="pagination__arrow">

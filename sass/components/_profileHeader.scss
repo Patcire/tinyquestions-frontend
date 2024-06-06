@@ -3,6 +3,7 @@
 .userinfo{
   //background-color: lightcoral;
   width: 100%;
+  max-width: 900px;
   @include flex-column;
   &__photo{
    // background: lightblue;
@@ -33,10 +34,11 @@
   }
 
   &__settings{
+    //background-color: #fff300;
     @include flex-row;
     font-family: $fontAnswers;
-    width: 100%;
-    padding: 1.5% 2.2% 1% 0;
+    width: 150%;
+    padding: 1.5% 0 1% 0;
     gap: 1%;
     }
   &__options{
@@ -59,7 +61,7 @@
 @include mobile{
   .userinfo{
     &__settings{
-      padding-right: 9.2%;
+      //padding-right: 9.2%;
     }
   }
 }

@@ -4,10 +4,11 @@ import Gallery from '@/components/Gallery.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import { callAPI } from '@/helpers/callAPI.js'
 import DinamicTable from '@/components/DinamicTable.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   name: 'MyProfile',
-  components: { DinamicTable, Gallery, ProfileHeader },
+  components: { Pagination, DinamicTable, Gallery, ProfileHeader },
   data(){
     return{
       bgCardColorCSS: "purple",
@@ -19,10 +20,11 @@ export default {
       contentToExplore: [],
       // an array to send the chosen content to the gallery
       contentToSendToGallery: [],
-      // an array to send the players ranks to table rankings
-      contentToRanking: [],
-      //
-      columnsForRankings: ["Rank", "Players", "Points"]
+
+      // for rankings
+      //contentToRanking: [], // an array to send the players ranks to table rankings
+      columnsForRankings: ["Rank", "Players", "Points"],
+
 
     }
   },
