@@ -47,15 +47,14 @@ export default {
     },
 
     handleUserPositionsWhenDesc(){
-      let startPage =  this.allPagesInOrder[this.selectedIndexOfPageOrder]-1
-      this.minPositionOfRankPage =  startPage*this.lengthOfApiResponse
+      let pageToRender =  this.allPagesInOrder[this.selectedIndexOfPageOrder]-1
+      this.minPositionOfRankPage =  pageToRender*this.lengthOfApiResponse
     },
 
     handleUserPositionsWhenAsc(){
-      let startPage =  this.allPagesInOrder[this.selectedIndexOfPageOrder]-1
-      this.maxPositionOfRankPage =  this.countAllUsersRegistered
+      let pageToRender =  this.allPagesInOrder[this.selectedIndexOfPageOrder]-1
+      this.maxPositionOfRankPage =  this.countAllUsersRegistered-((pageToRender)*this.lengthOfApiResponse)
     },
-
 
   },
 
@@ -69,7 +68,9 @@ export default {
     this.lengthOfApiResponse= this.data.length
     this.handleUserPositionsWhenDesc()
     let userCount = await (callAPI(`${apiDirection}/api/user/count`))
+    await console.log(userCount)
     this.countAllUsersRegistered = userCount.count
+    this.maxPositionOfRankPage =  this.countAllUsersRegistered
 
   },
 
@@ -82,8 +83,8 @@ export default {
     },
 
     async selectedIndexOfPageOrder(){
-      this.data = (await callAPI(this.apiUrl)).data
       this.order === 'desc' ? this.handleUserPositionsWhenDesc() : this.handleUserPositionsWhenAsc()
+      this.data = (await callAPI(this.apiUrl)).data
     },
 
   }
@@ -104,9 +105,7 @@ export default {
       </tr>
       <tr v-for="(player, index) in this.data" class="table__row">
         <td v-if="this.order === 'desc'">{{index+1+this.minPositionOfRankPage }}</td>
-        <td v-if="this.order === 'asc'">{{
-            countAllUsersRegistered-(index*this.allPagesInOrder[this.selectedIndexOfPageOrder])
-          }}
+        <td v-if="this.order === 'asc'">{{maxPositionOfRankPage-index}}
         </td>
         <td>{{player.username}}</td>
         <td>{{player.points}}</td>

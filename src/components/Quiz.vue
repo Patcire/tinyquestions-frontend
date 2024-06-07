@@ -243,7 +243,7 @@ export default {
         }
       }
       // and finally create the report (table user_play_match)
-      const createdReport = await postAPI(`${apiDirection}//api/play/create`, {
+      const createdReport = await postAPI(`${apiDirection}/api/play/create`, {
         "id_user": useSessionStore().user.userID,
         "id_quiz": await this.quizID,
         "points": this.points,
