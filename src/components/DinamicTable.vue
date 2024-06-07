@@ -19,20 +19,20 @@ export default {
   name: 'Rankings',
   data(){
     return{
-      data: [],
+      viewData: [],
       order: 'desc',
-      allPagesInOrder: [1], // this array will contain the total pages of stats on the db order by asc/desc (defined by the user)
-      selectedIndexOfPageOrder:  0, // we play with the value of the selected index by the user on the array
+      lastPage: null,
+      actualPage:1,
       lengthOfApiResponse: 0,
-      minPositionOfRankPage: 0,
-      maxPositionOfRankPage: 0,
+      topPositionOfDescRankPage: 0,
+      topPositionOfAscRankPage: 0,
       countAllUsersRegistered: 0
 
     }
   },
   computed: {
     apiUrl() {
-      return `${apiDirection}/api/${this.urlPoint}/${this.order}?page=${this.allPagesInOrder[this.selectedIndexOfPageOrder]}`;
+      return `${apiDirection}/api/${this.urlPoint}/${this.order}?page=${this.actualPage}`;
     },
 
   },
@@ -40,52 +40,44 @@ export default {
     useSessionStore,
     changeOrder(){
       this.order === 'desc' ? this.order = 'asc' : this.order = 'desc'
+      this.handleMoveToActualPage(this.actualPage)
     },
 
-    handleMoveToActualPage(page){
-      if (this.selectedIndexOfPageOrder !== page-1) this.selectedIndexOfPageOrder= page-1
+    handleUserPositionsWhenDesc(index){
+      let topRankOfThePage = (this.actualPage-1)*this.lengthOfApiResponse
+      return this.actualPage !== 1 ? index+1+topRankOfThePage : index+1
     },
 
-    handleUserPositionsWhenDesc(){
-      let pageToRender =  this.allPagesInOrder[this.selectedIndexOfPageOrder]-1
-      this.minPositionOfRankPage =  pageToRender*this.lengthOfApiResponse
+    handleUserPositionsWhenAsc(index){
+      let topRankOfThePage = this.countAllUsersRegistered-((this.actualPage-1)*this.lengthOfApiResponse)
+      let temporalStorageUsersCount = this.countAllUsersRegistered
+      return this.actualPage !== 1 ? topRankOfThePage-index : temporalStorageUsersCount-index
     },
 
-    handleUserPositionsWhenAsc(){
-      let pageToRender =  this.allPagesInOrder[this.selectedIndexOfPageOrder]-1
-      this.maxPositionOfRankPage =  this.countAllUsersRegistered-((pageToRender)*this.lengthOfApiResponse)
+    async handleMoveToActualPage(page){
+      if (this.actualPage !== page) this.actualPage= page
+      this.viewData = (await callAPI(this.apiUrl)).data
     },
 
   },
 
   async created() {
-    let response =  await callAPI(this.apiUrl)
-    this.data = response.data
-    for (let i = 1; i<response.last_page; i++){
-      this.allPagesInOrder.push(i+1)
-    }
-
-    this.lengthOfApiResponse= this.data.length
     this.handleUserPositionsWhenDesc()
     let userCount = await (callAPI(`${apiDirection}/api/user/count`))
-    await console.log(userCount)
+    let response =  await callAPI(this.apiUrl)
+    this.viewData = response.data
+    this.lengthOfApiResponse= this.viewData.length
+    this.lastPage = response.last_page
     this.countAllUsersRegistered = userCount.count
-    this.maxPositionOfRankPage =  this.countAllUsersRegistered
+    this.topPositionOfAscRankPage =  this.countAllUsersRegistered
 
   },
 
   watch:{
-    async order(value){
-      console.log('order', value)
-      console.log('url', this.apiUrl)
-      this.data = (await callAPI(this.apiUrl)).data
-
+     actualPage(value){
+        this.handleMoveToActualPage(value)
     },
 
-    async selectedIndexOfPageOrder(){
-      this.order === 'desc' ? this.handleUserPositionsWhenDesc() : this.handleUserPositionsWhenAsc()
-      this.data = (await callAPI(this.apiUrl)).data
-    },
 
   }
 
@@ -95,7 +87,7 @@ export default {
 
 <template>
 
-    <table class="table" v-if="this.data.length">
+    <table class="table" v-if="this.viewData.length">
       <tr class="table__header">
         <th v-for="column in columns"
             @click="this.changeOrder()"
@@ -103,9 +95,9 @@ export default {
             :key="column">{{column}}
         </th>
       </tr>
-      <tr v-for="(player, index) in this.data" class="table__row">
-        <td v-if="this.order === 'desc'">{{index+1+this.minPositionOfRankPage }}</td>
-        <td v-if="this.order === 'asc'">{{maxPositionOfRankPage-index}}
+      <tr v-for="(player, index) in this.viewData" class="table__row">
+        <td v-if="this.order === 'desc'">{{ handleUserPositionsWhenDesc(index) }}</td>
+        <td v-if="this.order === 'asc'">{{ handleUserPositionsWhenAsc(index) }}
         </td>
         <td>{{player.username}}</td>
         <td>{{player.points}}</td>
@@ -124,13 +116,13 @@ export default {
     </table>
 
 
-    <pagination :lastPage="this.allPagesInOrder[this.allPagesInOrder.length-1]"
-                :actualPage="this.allPagesInOrder[this.selectedIndexOfPageOrder]"
+    <pagination :lastPage="this.lastPage"
+                :actualPage="this.actualPage"
                 :displayRow="true"
                 @moveToActualPag="handleMoveToActualPage"
-                v-if="this.data.length"
+                v-if="this.viewData.length"
     >
-      <p class="pagination__count">{{this.allPagesInOrder[this.selectedIndexOfPageOrder]}}/{{this.allPagesInOrder[this.allPagesInOrder.length-1]}}</p>
+      <p class="pagination__count">{{this.actualPage}}/{{this.lastPage}}</p>
     </pagination>
 
 
