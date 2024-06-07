@@ -8,7 +8,7 @@ import { callAPI } from '@/helpers/callAPI.js'
 import Loading from '@/components/Loading.vue'
 import Podium from '@/components/Podium.vue'
 import { io } from 'socket.io-client'
-import { apiDirection } from '@/helpers/others.js'
+import { apiDirection, socketDirection } from '@/helpers/others.js'
 
 export default {
   name: 'Room',
@@ -108,7 +108,7 @@ export default {
 
     handleSocket(){
 
-      this.socket = io.connect('http://localhost:', {
+      this.socket = io.connect(`${socketDirection}`, {
         transports: ['websocket'],
         forceNew: true})
 
