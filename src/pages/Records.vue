@@ -2,7 +2,7 @@
 import { callAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
-import { formatDate } from '../helpers/others.js'
+import { apiDirection, formatDate } from '../helpers/others.js'
 import UserBanner from '@/components/UserBanner.vue'
 import Pagination from '@/components/Pagination.vue'
 import Loading from '@/components/Loading.vue'
@@ -38,10 +38,10 @@ export default {
       this.answersInfo = []
       if (this.historic[index].customQuiz){
         useSessionStore().user.lastCustomQuizSelected = this.historic[index].customQuiz.id_quiz
-        this.questionsInfo = await callAPI(`http://localhost:8000/api/ques/allFrom/${id}`)
+        this.questionsInfo = await callAPI(`${apiDirection}/api/ques/allFrom/${id}`)
       }
       else{
-        this.questionsInfo = await callAPI(`http://localhost:8000/api/has/${id}`)
+        this.questionsInfo = await callAPI(`${apiDirection}/api/has/${id}`)
       }
 
       if (this.historic[this.selectedMatch].answers) this.answersInfo = JSON.parse(this.historic[this.selectedMatch].answers)
@@ -57,7 +57,7 @@ export default {
     },
 
     async handleCallAPI(page){
-      let response = await callAPI(`http://localhost:8000/api/play/${useSessionStore().user.userID}/9/?page=${page}`)
+      let response = await callAPI(`${apiDirection}/api/play/${useSessionStore().user.userID}/9/?page=${page}`)
       this.historic = response.data
       this.lastPage = response.last_page
     },

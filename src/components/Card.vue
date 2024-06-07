@@ -4,6 +4,7 @@
 import { deleteAPI, postAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
+import { apiDirection } from '@/helpers/others.js'
 
 export default {
   name: 'Card',
@@ -35,7 +36,7 @@ export default {
       //  i  shopw the like/dislike visually
       this.liked= !this.liked
       if (this.liked===true){
-        const likeSaveOnDB = await postAPI(`http://localhost:8000/api/li/give`, {
+        const likeSaveOnDB = await postAPI(`${apiDirection}/api/li/give`, {
           "fk_id_user": this.userID,
           "fk_id_quiz": this.quiz.id_quiz
         })
@@ -50,7 +51,7 @@ export default {
         return
       }
 
-      const likeDeleteOnDB = await deleteAPI(`http://localhost:8000/api/li/dis/${this.userID}/${this.quiz.id_quiz}`)
+      const likeDeleteOnDB = await deleteAPI(`${apiDirection}/api/li/dis/${this.userID}/${this.quiz.id_quiz}`)
       if (!likeDeleteOnDB)  this.liked = true
       const updateStorage = useSessionStore().user.likedStorage.filter((quizLS) => quizLS.id_quiz !== this.quiz.id_quiz )
       useSessionStore().user.likedStorage = [...updateStorage]

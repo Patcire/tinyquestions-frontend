@@ -5,3 +5,7 @@ export const formatDate = (date) =>{
   const prepDate = noHours[0].split('-').reverse()
   return `${prepDate[0]}/${prepDate[1]}/${prepDate[2].substring(2)}`
 }
+
+
+export const apiDirection = "http://159.69.150.218:8001"
+//export const apiDirection = "http://localhost:8001" // to run on local uncomment this and comment the other

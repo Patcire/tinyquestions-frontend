@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { postAPI, updateAPI } from '@/helpers/callAPI.js'
+import { apiDirection } from '@/helpers/others.js'
 
 export const useSessionStore = defineStore('user',{
 
@@ -44,7 +45,7 @@ export const useSessionStore = defineStore('user',{
 
 
     async checkUserCredentials(username, password) {
-      const response = await postAPI("http://localhost:8000/api/user/login", {
+      const response = await postAPI(`${apiDirection}/api/user/login`, {
         "username": username,
         "password": password
       })
@@ -61,7 +62,7 @@ export const useSessionStore = defineStore('user',{
     },
 
     async register(email, username, password){
-      const response = await postAPI("http://localhost:8000/api/user/create", {
+      const response = await postAPI(`${apiDirection}/api/user/create`, {
         "username": username,
         "email": email,
         "password": password
@@ -78,7 +79,7 @@ export const useSessionStore = defineStore('user',{
     },
 
     async updateStats(){
-      const response = await updateAPI(`http://localhost:8000/api/user/stats/${this.user.username}`, {
+      const response = await updateAPI(`${apiDirection}/api/user/stats/${this.user.username}`, {
         "points": this.user.points,
         "quizzes_resolved": this.user.quizzes_resolved
       })

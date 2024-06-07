@@ -2,6 +2,7 @@
 import { callAPI } from '@/helpers/callAPI.js'
 import { useSessionStore } from '../stores/sessionStore.js'
 import Pagination from '@/components/Pagination.vue'
+import { apiDirection } from '@/helpers/others.js'
 
 export default {
   components: { Pagination },
@@ -31,7 +32,7 @@ export default {
   },
   computed: {
     apiUrl() {
-      return `http://localhost:8000/api/${this.urlPoint}/${this.order}?page=${this.allPagesInOrder[this.selectedIndexOfPageOrder]}`;
+      return `${apiDirection}/api/${this.urlPoint}/${this.order}?page=${this.allPagesInOrder[this.selectedIndexOfPageOrder]}`;
     },
 
   },
@@ -67,7 +68,7 @@ export default {
 
     this.lengthOfApiResponse= this.data.length
     this.handleUserPositionsWhenDesc()
-    let userCount = await (callAPI('http://localhost:8000/api/user/count'))
+    let userCount = await (callAPI(`${apiDirection}/api/user/count`))
     this.countAllUsersRegistered = userCount.count
 
   },

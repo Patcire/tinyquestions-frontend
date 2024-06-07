@@ -5,6 +5,7 @@ import Loading from '@/components/Loading.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
 import { boolean } from 'yup'
 import Results from '@/components/Results.vue'
+import { apiDirection } from '@/helpers/others.js'
 
 export default {
   name: 'Quiz',
@@ -58,13 +59,13 @@ export default {
     // to get questions from API
 
     async getQuestionsFromAPIForNewQuiz(){
-      this.questions = await callAPI(`http://localhost:8000/api/ques/rand/${this.mode.numberOfQuestions}`)
+      this.questions = await callAPI(`${apiDirection}/api/ques/rand/${this.mode.numberOfQuestions}`)
     },
     async getMoreQuestionsForZenMode(){
-      this.questions = [...this.questions, ...await callAPI(`http://localhost:8000/api/ques/rand/${this.mode.numberOfQuestions}`)]
+      this.questions = [...this.questions, ...await callAPI(`${apiDirection}/api/ques/rand/${this.mode.numberOfQuestions}`)]
     },
     async getQuestionsOfCustomQuiz(){
-      let quizInfo = await callAPI(`http://localhost:8000/api/cust/${useSessionStore().user.lastCustomQuizSelected}`)
+      let quizInfo = await callAPI(`${apiDirection}/api/cust/${useSessionStore().user.lastCustomQuizSelected}`)
       // now we need to set some values on the mode parameters
       // to made that quiz logic works
       this.questions = quizInfo.questions
@@ -137,7 +138,7 @@ export default {
 
       //only for random quizzes need create the quizz
       if (!this.mode.isCustom){
-        const createdQuiz = await postAPI('http://localhost:8000/api/quiz/create',
+        const createdQuiz = await postAPI(`${apiDirection}/api/quiz/create`,
           {
             "number_questions": this.questions.length,
             "clock": this.mode.clock[0],
@@ -159,7 +160,7 @@ export default {
         // if the quiz is random we need to add to his dedicate table
         // (custom quizzes are always created by user before they can play it)
         let createdRandomQuiz = {}
-        createdRandomQuiz = await postAPI('http://localhost:8000/api/rand/create',
+        createdRandomQuiz = await postAPI(`${apiDirection}/api/rand/create`,
           {
             "id_quiz": this.quizID,
             "mode": this.mode.gameMode
@@ -180,7 +181,7 @@ export default {
 
 
       // then we create the match
-      const createdMatch = await postAPI('http://localhost:8000/api/match/create', {
+      const createdMatch = await postAPI(`${apiDirection}/api/match/create`, {
         "isMultiplayer": this.mode.isMultiplayer,
         "fk_id_quiz": await this.quizID,
 
@@ -229,7 +230,7 @@ export default {
         let asociatedQuestion = {}
         for (const question of this.questions) {
            asociatedQuestion = await postAPI(
-             'http://localhost:8000/api/has/create', {
+             `${apiDirection}/api/has/create`, {
                "id_quiz": await this.quizID,
                "id_question": question.id_question
              })
@@ -242,7 +243,7 @@ export default {
         }
       }
       // and finally create the report (table user_play_match)
-      const createdReport = await postAPI('http://localhost:8000/api/play/create', {
+      const createdReport = await postAPI(`${apiDirection}//api/play/create`, {
         "id_user": useSessionStore().user.userID,
         "id_quiz": await this.quizID,
         "points": this.points,

@@ -5,6 +5,7 @@ import { useSessionStore } from '@/stores/sessionStore.js'
 import { callAPI } from '@/helpers/callAPI.js'
 import DinamicTable from '@/components/DinamicTable.vue'
 import Pagination from '@/components/Pagination.vue'
+import { apiDirection } from '@/helpers/others.js'
 
 export default {
   name: 'MyProfile',
@@ -52,7 +53,7 @@ export default {
   async created() {
     // if the data on DB is ahead vs the localStorage i update the localS
 
-    const personalQuizzesFromAPI = await callAPI(`http://localhost:8000/api/cust/all/${this.userID}`)
+    const personalQuizzesFromAPI = await callAPI(`${apiDirection}/api/cust/all/${this.userID}`)
     if (personalQuizzesFromAPI.error === 'no quizzes found for the user') this.loadingContent = false
     else if (useSessionStore().user.myQuizzesStorage !== personalQuizzesFromAPI.length ){
         useSessionStore().user.myQuizzesStorage = [...personalQuizzesFromAPI]
@@ -60,14 +61,14 @@ export default {
         this.loadingContent = false
     }
 
-    const likedContentFromAPI = await callAPI(`http://localhost:8000/api/li/likes/${this.userID}`)
+    const likedContentFromAPI = await callAPI(`${apiDirection}/api/li/likes/${this.userID}`)
     if (likedContentFromAPI.error === 'this user has not liked quizzes') this.loadingContent = true
     else if (likedContentFromAPI.length && useSessionStore().user.likedStorage.length !== likedContentFromAPI.length) {
       useSessionStore().user.likedStorage = [...likedContentFromAPI]
       this.loadingContent = false
     }
 
-    const quizzesToExploreFromAPI = await callAPI(`http://localhost:8000/api/cust/all`)
+    const quizzesToExploreFromAPI = await callAPI(`${apiDirection}/api/cust/all`)
     if (this.contentToExplore.length !== quizzesToExploreFromAPI.length) {
       this.contentToExplore = [...quizzesToExploreFromAPI]
       this.loadingContent = false

@@ -8,6 +8,7 @@ import { callAPI } from '@/helpers/callAPI.js'
 import Loading from '@/components/Loading.vue'
 import Podium from '@/components/Podium.vue'
 import { io } from 'socket.io-client'
+import { apiDirection } from '@/helpers/others.js'
 
 export default {
   name: 'Room',
@@ -67,7 +68,7 @@ export default {
     },
 
     async getRandomQuestions() {
-      this.questions = await callAPI(`http://localhost:8000/api/ques/rand/5`)
+      this.questions = await callAPI(`${apiDirection}/api/ques/rand/5`)
     },
 
     saveResponses(response) {
@@ -98,7 +99,7 @@ export default {
     //  this.activeAnswerResults= false
     //  this.allPlayersFinishedTheQuiz= false
     //  this.infoForPodium= null
-    //  this.mode.questionsForMultiplayerMatch = await callAPI('http://localhost:8000/api/ques/rand/5')
+    //  this.mode.questionsForMultiplayerMatch = await callAPI('${apiDirection}/api/ques/rand/5')
     //  this.startGame()
     //}
     copySeed(){
@@ -107,7 +108,7 @@ export default {
 
     handleSocket(){
 
-      this.socket = io.connect('http://localhost:3200', {
+      this.socket = io.connect('http://localhost:', {
         transports: ['websocket'],
         forceNew: true})
 

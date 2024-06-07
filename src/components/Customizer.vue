@@ -5,6 +5,7 @@ import { useSessionStore } from '@/stores/sessionStore.js'
 import router from '@/router/router.js'
 import Loading from '@/components/Loading.vue'
 import { goTo } from '@/helpers/navHelpers.js'
+import { apiDirection } from '@/helpers/others.js'
 
 export default {
   name: 'Customizer',
@@ -62,7 +63,7 @@ export default {
       this.openTimeSettings = false
   },
     async createQuestionOnDB(question) {
-      const questionResponse = await postAPI("http://localhost:8000/api/ques/create", {
+      const questionResponse = await postAPI(`${apiDirection}/api/ques/create`, {
         "title": question.titleQuestion,
         "option_a": question.optionA,
         "option_b": question.optionB,
@@ -99,7 +100,7 @@ export default {
         idUser: this.seshStorage.user.userID,
       }
 
-      const createdQuiz = await postAPI("http://localhost:8000/api/quiz/create", {
+      const createdQuiz = await postAPI(`${apiDirection}/api/quiz/create`, {
         "number_questions": quiz.numberOfQuestions,
         "clock": Boolean(this.clock),
         "time": parseInt(this.time),
@@ -119,7 +120,7 @@ export default {
 
         this.quizID = createdQuizJSON.id_quiz
 
-        const createdCustom = await postAPI("http://localhost:8000/api/cust/create", {
+        const createdCustom = await postAPI(`${apiDirection}/api/cust/create`, {
           "quiz_name": quiz.name,
           "id_quiz": this.quizID,
           "fk_id_user": this.seshStorage.user.userID
