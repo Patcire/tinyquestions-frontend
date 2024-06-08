@@ -41,7 +41,7 @@
         
     - Verás algo como esto:
         
-        ![**Figura 7**. Código a modificar en el front](https://internal-buckaroo-a26.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F93ad78ff-5f34-4de9-a9e6-55c3ebc2407f%2F81b2388f-20c9-42cd-b01c-90d98976f985%2FUntitled.png?table=block&id=9576e07f-fda0-44c4-9480-e30e768d968f&spaceId=93ad78ff-5f34-4de9-a9e6-55c3ebc2407f&width=1290&userId=&cache=v2](https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F93ad78ff-5f34-4de9-a9e6-55c3ebc2407f%2F81b2388f-20c9-42cd-b01c-90d98976f985%2FUntitled.png?table=block&id=9576e07f-fda0-44c4-9480-e30e768d968f&spaceId=93ad78ff-5f34-4de9-a9e6-55c3ebc2407f&width=1290&userId=52087b40-49e4-4c8c-89c7-46631953549e&cache=v2))
+        ![**Figura 7**. Código a modificar en el front](https://internal-buckaroo-a26.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F93ad78ff-5f34-4de9-a9e6-55c3ebc2407f%2F81b2388f-20c9-42cd-b01c-90d98976f985%2FUntitled.png?table=block&id=9576e07f-fda0-44c4-9480-e30e768d968f&spaceId=93ad78ff-5f34-4de9-a9e6-55c3ebc2407f&width=1290&userId=&cache=v2](https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F93ad78ff-5f34-4de9-a9e6-55c3ebc2407f%2F81b2388f-20c9-42cd-b01c-90d98976f985%2FUntitled.png?table=block&id=9576e07f-fda0-44c4-9480-e30e768d968f&spaceId=93ad78ff-5f34-4de9-a9e6-55c3ebc2407f&width=1290&userId=52087b40-49e4-4c8c-89c7-46631953549e&cache=v2)
         
         **Figura 7**. Código a modificar en el front
         
