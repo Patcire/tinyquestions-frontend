@@ -11,7 +11,7 @@
 
 > [!NOTE]
 > Para ver la documentación completa de la app visita:
-> **[Documentación Completa](https://internal-buckaroo-a26.notion.site/tinyquestions-8518a1c3128342eeb06610fc12508847?pvs=4)**
+> **[tinyquestions.doc](https://internal-buckaroo-a26.notion.site/tinyquestions-8518a1c3128342eeb06610fc12508847?pvs=4)**
 
 ### Primero desplegar el backend, puedes encontra la guía de instalación en el REDME.md del propio repo:
 
