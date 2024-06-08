@@ -67,13 +67,9 @@
 
 ***
 
-0.1 - Introducción
+0.1 - Sobre la app
 =
 ***
-
-> [!IMPORTANT] 
-> Para leer la documentación del proyecto al completo visitar el siguiente enlace:
-> [https://github.com/Patcire/tinyquestions-frontend/blob/main/doc/doc.md](https://internal-buckaroo-a26.notion.site/tinyquestions-8518a1c3128342eeb06610fc12508847)
 
 Tinyquestions, estilizado tinyquestions, es una aplicación web que se enfoca en ofrecer a las usuarias y usuarios un enfoque rápido, accesible y minimalista de los clásicos juegos de trivial/quizzes.
 
@@ -84,3 +80,6 @@ servir de entretenimiento a un gran número de personas adaptando los juegos de 
 
 Por tanto, es prioritario el crear una web que sea cómoda y eficaz para los propósitos anteriormente descritos, otorgando por ello gran importancia al feedback que recibirán los usuarios y usuarias al interactuar con la UI y la inmediatez para poder estar jugando cuanto antes.
 
+> [!IMPORTANT] 
+> Recuerda, puedes acceder a la documentación completa en:
+> [tinyquestions.doc](https://internal-buckaroo-a26.notion.site/tinyquestions-8518a1c3128342eeb06610fc12508847)
