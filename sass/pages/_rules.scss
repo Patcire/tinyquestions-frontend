@@ -1,0 +1,81 @@
+@import "../abstracts/index";
+
+.rules{
+  //background-color: darkseagreen;
+  @include flex-column;
+  padding: 5% 10%  0 10%;
+  font-family: $fontQuestions;
+  font-size: 1.3rem;
+  &__title{
+    font-family: $fontLogo;
+    font-size: 1.8rem;
+  }
+  &__list{
+    //background-color: darkseagreen;
+    @include flex-column;
+    align-items: flex-start;
+    //text-align: left;
+    width: 70%;
+    max-width: 800px;
+  }
+  &__element{
+    padding: 2% 0 0 0;
+    &--mod{
+    padding-top: 3%;
+  }
+    &--mod2{
+      padding: 5% 0 7% 0;
+    }
+  }
+  &__final{
+    font-size: 1.8rem;
+    font-family: $fontLogo;
+    padding-bottom: 3%;
+  }
+  &__container{
+    @include flex-column;
+  }
+  &__doodle{
+    padding-top: 25%;
+    padding-bottom: 5%;
+    height: 150px;
+  }
+}
+
+@include mobile{
+
+  .rules{
+    &__title{
+      text-align: center;
+      align-items: center;
+      font-size: 1.5rem;
+      padding-bottom: 2%;
+    }
+    &__list{
+      align-items: center;
+      width: 92%;
+    }
+
+    &__doodle{
+      padding-top: 4%;
+      visibility: hidden;
+      height: 80px;
+    }
+
+    &__final{
+      font-size: 1.3rem;
+      padding-bottom: 5%;
+    }
+
+  }
+
+}
+
+@include tablet{
+  .rules{
+    &__list{
+    width: 90%;
+     // background-color: blueviolet;
+    }
+  }
+}

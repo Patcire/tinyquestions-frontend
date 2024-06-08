@@ -22,15 +22,26 @@ const routes = [
       { path: "/register", component: ()=> import('/src/pages/Register.vue')},
 
       // Private pages
-
+      {
+        path: "/rules",
+        component: PrivateLayout,
+        beforeEnter(to, from, next) {
+          useSessionStore().isLogged() ? next() : router.push('/')
+        },
+        children: [
+          {
+            path: "",
+            component: ()=> import('/src/pages/Rules.vue')
+          }
+        ]
+      },
       {
         path: "/games",
         component: PrivateLayout,
         children: [
           {
             path: "",
-            //component: ()=> import('/src/pages/Games.vue'),
-            component: Games,
+            component: ()=> import('/src/pages/Games.vue'),
           }
         ]
       },

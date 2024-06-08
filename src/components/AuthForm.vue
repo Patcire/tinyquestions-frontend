@@ -57,7 +57,7 @@ export default {
         return
       }
       this.isLoading = false
-      register && await router.push('/games')
+      register && await router.push('/rules')
     },
 
     onSubmit(e) {
