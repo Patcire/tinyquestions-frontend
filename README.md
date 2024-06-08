@@ -9,7 +9,9 @@
 =
 ***
 
-> ![IMPORTANT]
+> [!NOTE]
+> Para ver la documentación completa de la app visita:
+> **[Documentación Completa](https://internal-buckaroo-a26.notion.site/tinyquestions-8518a1c3128342eeb06610fc12508847?pvs=4)**
 
 ### Primero desplegar el backend, puedes encontra la guía de instalación en el REDME.md del propio repo:
 
@@ -39,7 +41,7 @@
         
     - Verás algo como esto:
         
-        ![**Figura 7**. Código a modificar en el front](https://prod-files-secure.s3.us-west-2.amazonaws.com/93ad78ff-5f34-4de9-a9e6-55c3ebc2407f/81b2388f-20c9-42cd-b01c-90d98976f985/Untitled.png)
+        ![**Figura 7**. Código a modificar en el front]([https://prod-files-secure.s3.us-west-2.amazonaws.com/93ad78ff-5f34-4de9-a9e6-55c3ebc2407f/81b2388f-20c9-42cd-b01c-90d98976f985/Untitled.png](https://internal-buckaroo-a26.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F93ad78ff-5f34-4de9-a9e6-55c3ebc2407f%2F81b2388f-20c9-42cd-b01c-90d98976f985%2FUntitled.png?table=block&id=9576e07f-fda0-44c4-9480-e30e768d968f&spaceId=93ad78ff-5f34-4de9-a9e6-55c3ebc2407f&width=1290&userId=&cache=v2))
         
         **Figura 7**. Código a modificar en el front
         
@@ -69,7 +71,7 @@
 =
 ***
 
-> ![IMPORTANT] 
+> [!IMPORTANT] 
 > Para leer la documentación del proyecto al completo visitar el siguiente enlace:
 > [https://github.com/Patcire/tinyquestions-frontend/blob/main/doc/doc.md](https://internal-buckaroo-a26.notion.site/tinyquestions-8518a1c3128342eeb06610fc12508847)
 
