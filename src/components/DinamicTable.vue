@@ -95,7 +95,10 @@ export default {
             :key="column">{{column}}
         </th>
       </tr>
-      <tr v-for="(player, index) in this.viewData" class="table__row">
+      <tr  class="table__row"
+           :class="{'--strong': player.username === useSessionStore().user.username}"
+           v-for="(player, index) in this.viewData"
+      >
         <td v-if="this.order === 'desc'">{{ handleUserPositionsWhenDesc(index) }}</td>
         <td v-if="this.order === 'asc'">{{ handleUserPositionsWhenAsc(index) }}
         </td>
