@@ -26,7 +26,8 @@ export default {
       lengthOfApiResponse: 0,
       topPositionOfDescRankPage: 0,
       topPositionOfAscRankPage: 0,
-      countAllUsersRegistered: 0
+      countAllUsersRegistered: 0,
+      isUserOnPage: null
 
     }
   },
@@ -59,6 +60,7 @@ export default {
       this.viewData = (await callAPI(this.apiUrl)).data
     },
 
+
   },
 
   async created() {
@@ -77,10 +79,14 @@ export default {
      actualPage(value){
         this.handleMoveToActualPage(value)
     },
-
-
+    viewData(value){
+      console.log(value)
+      value.some(user => user.username === useSessionStore().user.username) ?
+        this.isUserOnPage= true
+        :
+        this.isUserOnPage= false
+    }
   }
-
 
 }
 </script>
@@ -96,7 +102,7 @@ export default {
         </th>
       </tr>
       <tr  class="table__row"
-           :class="{'--strong': player.username === useSessionStore().user.username}"
+           :class="{'--strong': this.isUserOnPage && player.username===useSessionStore().user.username}"
            v-for="(player, index) in this.viewData"
       >
         <td v-if="this.order === 'desc'">{{ handleUserPositionsWhenDesc(index) }}</td>
@@ -106,7 +112,7 @@ export default {
         <td>{{player.points}}</td>
       </tr>
       <!--Special row for user position-->
-      <tr class="table__row table__row--user">
+      <tr class="table__row table__row--user" v-if="!isUserOnPage">
         <td class="table__relative">
           <div class="table__special">
             <img alt="hearts" src="/public/hearts.svg" class="table__hearts">
