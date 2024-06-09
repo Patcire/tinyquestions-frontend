@@ -79,7 +79,7 @@ export const useSessionStore = defineStore('user',{
     },
 
     async updateStats(){
-      const response = await updateAPI(`${apiDirection}/api/user/stats/${this.user.username}`, {
+      const response = await updateAPI(`${apiDirection}/api/user/userstat/${this.user.username}`, {
         "points": this.user.points,
         "quizzes_resolved": this.user.quizzes_resolved
       })
