@@ -28,7 +28,7 @@ export default {
 <template>
   <section class="zen">
     <div class="zen__ornaments">
-      <img class="zen__doodle" alt="doodle of a plant" src="/public/Vecorplant.png">
+      <img class="zen__doodle" alt="doodle of a plant" src="/public/Vectorplant.png">
       <img class="zen__doodle" alt="doodle of a candy" src="/public/Vectorcandy.png">
     </div>
 
