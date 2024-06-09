@@ -3,6 +3,7 @@
 import BigButtonsMenu from '@/components/BigButtonsMenu.vue'
 import router from '@/router/router.js'
 import { useSessionStore } from '@/stores/sessionStore.js'
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'Games',
@@ -18,7 +19,7 @@ export default {
       return router
     },
     generateRoomID(){
-      useSessionStore().user.createdRoomID = crypto.randomUUID().split('-')[4]
+      useSessionStore().user.createdRoomID = uuidv4().split('-')[4]
       useSessionStore().user.roomAdmin = true
       this.router().push('/room')
     },

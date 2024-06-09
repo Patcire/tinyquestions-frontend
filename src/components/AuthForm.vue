@@ -4,6 +4,7 @@ import router from '@/router/router.js'
 import { validationLogin, validationRegister } from '@/helpers/formHelpers.js'
 import { ErrorMessage, Field, Form } from 'vee-validate'
 import Loading from '@/components/Loading.vue'
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'AuthForm',
@@ -89,7 +90,7 @@ export default {
   },
 
   created() {
-    this.randomID = crypto.randomUUID()
+    this.randomID = uuidv4()
   }
 
 }
