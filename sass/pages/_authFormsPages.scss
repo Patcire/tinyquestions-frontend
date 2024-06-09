@@ -237,3 +237,42 @@
     margin-left: 5%;
   }
 }
+
+/*****/
+
+.dialog__container{
+  @include flex-column;
+  z-index: 10;
+  position: relative;
+}
+
+.dialog__info{
+  position: absolute;
+  background-color: black;
+  color: white;
+  font-family: $fontQuestions;
+  @include flex-column;
+  font-size: 1.5rem;
+  border-radius: 15px;
+  padding: 10%;
+}
+
+.dialog__container::backdrop {
+  background: linear-gradient(#000d, #d0829c);
+}
+
+.dialog__message{
+  padding: 2% 0 4% 0;
+}
+
+.dialog__button{
+  padding: 2%;
+  border-radius: 10px;
+  border-color: white;
+  font-weight: bold;
+  @include in-out-scale;
+  &:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}

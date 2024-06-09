@@ -7,7 +7,7 @@ import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'AuthForm',
-
+  components: { Loading, vField: Field, vForm: Form, vError: ErrorMessage, },
   data() {
     return {
       username:"",
@@ -20,11 +20,13 @@ export default {
       location,
       showErrorOfFailSubmit: false,
       errorFailSubmitMessage: "",
-      isLoading: false
+      isLoading: false,
+      randomID: null,
+      hideDialog: false
     }
   },
-  methods: {
 
+  methods: {
     async handleLogin() {
       this.isLoading = true
       const check = await this.sessionStore.checkUserCredentials(this.username, this.password)
@@ -69,21 +71,27 @@ export default {
         this.$refs.logform && this.$refs.logform.validate().then(validation => {
           validation.valid && this.handleLogin()
       })
-    }
+    },
 
-  },
-
-  components: { Loading, vField: Field, vForm: Form, vError: ErrorMessage, },
-  mounted() {
-    this.location = window.location.href
   },
   watch: {
     location(loc) {
       if (loc.includes('register')) {
         this.registerForm = true
+        this.email = `rand-${this.randomID.split('-')[4]}@mijita.ganesh23452345`
+        this.password = this.randomID.split('-')[4]
       }
     }
+  },
+
+  mounted() {
+    this.location = window.location.href
+  },
+
+  created() {
+    this.randomID = crypto.randomUUID()
   }
+
 }
 </script>
 
@@ -93,6 +101,8 @@ export default {
            imgSrc="../../public/Vectorelectron2.svg">
   </Loading>
   <section v-if="!isLoading">
+
+  <!--login form-->
     <vForm class="form" :validation-schema="schemaLogin" ref="logform" v-if="!registerForm">
       <vField v-model="username" placeholder="Username..." aria-label="username" class="form__input" type="string" name="username"/>
       <vError name="username" class="form__global-error"></vError>
@@ -103,17 +113,35 @@ export default {
         class="form__global-error">{{errorFailSubmitMessage}}</p>
     </vForm>
 
+
+    <!--register dialog-->
+    <div class="dialog__container" v-if="registerForm && !hideDialog">
+      <dialog open class="dialog__info">
+        <p class="dialog__message">
+          Temporarily, and for security, email and password are generated randomly.</p>
+        <p>
+          Still, you can choose the username and use the account with the next password (save it!).
+        </p>
+        <p class="dialog__message">
+          password: <strong>{{this.password}}</strong>
+        </p>
+        <button @click="this.hideDialog = true" class="dialog__button">Understood</button>
+      </dialog>
+    </div>
+
+    <!--register form-->
     <vForm class="form" :validation-schema="schemaRegister" ref="regform" v-if="registerForm">
-      <vField v-model="email" placeholder="Email..." aria-label="email" class="form__input" type="email" name="email"/>
+      <vField v-model="email" placeholder="Email..." aria-label="email" class="form__input" type="email" name="email" disabled/>
       <vError name="email" class="form__global-error"></vError>
       <vField v-model="username" placeholder="Username..." aria-label="username" class="form__input" type="string" name="username"/>
       <vError name="username" class="form__global-error"></vError>
-      <vField v-model="password" type="password" name="password" aria-label="password" placeholder="Password..." class="form__input"/>
+      <vField v-model="password" type="password" name="password" aria-label="password" placeholder="Password..." class="form__input" disabled/>
       <vError name="password" class="form__global-error"></vError>
-      <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
+      <button v-if="hideDialog" type="submit"  class="primary-button" @click="onSubmit">Enter</button>
       <p v-if="showErrorOfFailSubmit"
          class="form__global-error">{{errorFailSubmitMessage}}</p>
     </vForm>
+
   </section>
 
 </template>
