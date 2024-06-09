@@ -125,7 +125,6 @@ export default {
 
     // to handle user Stats
     async updateUserStats(){
-      console.log('iscust?'+this.mode.isCustom)
       useSessionStore().user.points +=  this.points
       useSessionStore().user.quizzes_resolved +=  1
       await useSessionStore().updateStats()
@@ -148,14 +147,11 @@ export default {
 
         if (createdQuiz.status !== 201){
           // to do --> MODAL error al guardar
-          console.log('quiz no creater')
-          console.log(createdQuiz)
           return
         }
 
         const infoQuizCreated = await createdQuiz.json()
         this.quizID = await infoQuizCreated.id_quiz
-        console.log('quizID: ' + await this.quizID)
 
         // if the quiz is random we need to add to his dedicate table
         // (custom quizzes are always created by user before they can play it)
@@ -168,14 +164,11 @@ export default {
 
         if (createdRandomQuiz.status !== 201){
           // to do --> MODAL error al guardar
-          console.log('random no created')
-          console.log(createdRandomQuiz.json())
         }
       }
       else {
         // if the user plays a custom quizz we pick up the existing quiz id
         // to create the match
-        console.log('we are here')
         this.quizID = useSessionStore().user.lastCustomQuizSelected
       }
 
@@ -189,14 +182,11 @@ export default {
 
       if (createdMatch.status !== 201){
         // to do --> MODAL error al guardar
-        console.log(await createdMatch.json())
         return
       }
 
       const infoMatch = await createdMatch.json()
       this.matchID = await infoMatch.id_match
-      console.log("idMatch: "+ await this.matchID)
-
 
     },
 
@@ -235,11 +225,9 @@ export default {
                "id_question": question.id_question
              })
           if (asociatedQuestion.status !== 201){
-            console.log(question.id_question+' id ques')
-            console.log(await asociatedQuestion.json())
             return
           }
-          console.log('asociatedQuest: ' + await asociatedQuestion.json())
+
         }
       }
       // and finally create the report (table user_play_match)
@@ -253,12 +241,9 @@ export default {
 
       if (createdReport.status !== 200){
         // to do --> MODAL error al guardar
-        console.log('report no created')
-        console.log(createdReport.status)
         return
       }
-      if (!this.mode.isCustom) await this.updateUserStats() && console.log('stats updated')
-      console.log(createdReport.status)
+      if (!this.mode.isCustom) await this.updateUserStats()
 
     }
 
@@ -267,7 +252,6 @@ export default {
   async created() {
 
     if(this.mode.isMultiplayer === 1){
-      console.log(this.questions)
       this.questions = [...this.mode.questionsForMultiplayerMatch]
 
       return

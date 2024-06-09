@@ -130,7 +130,6 @@ export default {
       })
 
       this.socket.on('userJoinedSuccesfullyToRoom', (res) => {
-        console.log('user joined ', res.players )
         if (res.success === true) this.isConnected = true
         this.playersOnMatch = res.players
 
@@ -157,7 +156,6 @@ export default {
       })
 
       this.socket.on('userExitTheRoom', (res) => {
-        console.log('an user leaves the room ', res)
         this.playersOnMatch = res
       })
 
@@ -173,7 +171,6 @@ export default {
   },
 
   beforeRouteLeave() {
-    console.log('exit')
     if (this.playersOnMatch.length === 1) this.socket.emit('deleteRoom', this.roomID)
     else{
       this.socket && this.socket.emit('turnoff', {

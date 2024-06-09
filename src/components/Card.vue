@@ -57,7 +57,6 @@ export default {
       useSessionStore().user.likedStorage = [...updateStorage]
     },
     handlePlayQuizSelected(){
-      console.log(this.idQuizSelected)
       useSessionStore().user.lastCustomQuizSelected = this.quiz.id_quiz
       this.router().push('/custom')
     }

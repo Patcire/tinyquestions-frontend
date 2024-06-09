@@ -31,8 +31,7 @@ export default {
     useSessionStore,
 
     async handleSelectedMatch(index, id){
-      this.answersInfo && console.log(this.answersInfo)
-      console.log('index:' ,index, 'id: ', id)
+      this.answersInfo
       this.selectedMatch = index
       this.rightAnswers = 0
       this.answersInfo = []
