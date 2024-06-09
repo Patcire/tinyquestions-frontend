@@ -93,7 +93,7 @@ const routes = [
         children: [
           {
             path: "",
-            component: ()=> import('/src/pages/zen.vue')
+            component: ()=> import('/src/pages/Zen.vue')
           }
         ]
       },
