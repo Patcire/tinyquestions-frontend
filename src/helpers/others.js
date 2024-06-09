@@ -7,11 +7,9 @@ export const formatDate = (date) =>{
 }
 
 
-export const apiDirection = "http://tinyq.batu.es/:8001"
-//export const apiDirection = "http://159.69.150.218:8001"
+export const apiDirection = "http://159.69.150.218:8001"
 //export const apiDirection = "http://localhost:8001" // to run on local uncomment this and comment the other
 
 
-export const socketDirection = "http://tinyq.batu.es/:3200"
-//export const socketDirection = "http://159.69.150.218:3200"
+export const socketDirection = "http://159.69.150.218:3200"
 // //export const apiDirection = "http://localhost:3200" // to run on local uncomment this and comment the other
