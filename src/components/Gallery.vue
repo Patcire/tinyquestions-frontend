@@ -19,7 +19,7 @@ export default {
 
 <template>
   <Loading v-if="!content.length && loadingContent"
-           key-word="loading" imgSrc="../../public/Vectorelectron2.svg"></Loading>
+           key-word="loading" imgSrc="public/Vectorelectron2.svg"></Loading>
   <section class="gallery" v-if="content.length">
     <ul v-for="quiz in content" :key="quiz.id_quiz">
       <Card :quiz="quiz" :bgCardColorCSS="bgCardColorCSS"></Card>

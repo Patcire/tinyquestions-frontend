@@ -279,7 +279,7 @@ export default {
 
   <Loading v-if="!questions.length"
            key-word="loading"
-           imgSrc="../../public/Vectorelectron2.svg"
+           imgSrc="/public/Ve"
   ></Loading>
 
   <section class="quiz quiz--home"
