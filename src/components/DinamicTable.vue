@@ -80,7 +80,6 @@ export default {
         this.handleMoveToActualPage(value)
     },
     viewData(value){
-      console.log(value)
       value.some(user => user.username === useSessionStore().user.username) ?
         this.isUserOnPage= true
         :
@@ -117,7 +116,6 @@ export default {
           <div class="table__special">
             <img alt="hearts" src="/public/hearts.svg" class="table__hearts">
           </div>
-          <strong>678</strong>
         </td>
         <td><strong>{{useSessionStore().user.username}}</strong></td>
         <td><strong>{{ useSessionStore().user.points }}</strong></td>
