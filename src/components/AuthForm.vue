@@ -99,7 +99,7 @@ export default {
 <template>
   <Loading v-if="isLoading"
            key-word="loading"
-           imgSrc="public/Vectorelectron2.svg">
+           imgSrc="/Vectorelectron2.svg">
   </Loading>
   <section v-if="!isLoading">
 

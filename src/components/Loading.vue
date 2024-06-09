@@ -2,7 +2,7 @@
 export default {
   name: 'Loading',
   props: {
-    imgSrc:{String},
+    imgSrc:{String, default:''},
     keyWord:{String, required: true},
   },
 }
