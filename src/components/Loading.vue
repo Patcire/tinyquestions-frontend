@@ -2,12 +2,12 @@
 export default {
   name: 'Loading',
   props: {
-    imgSrc:{String, default:''},
+    imgSrc:{String},
     keyWord:{String, required: true},
   },
 }
 </script>
-
+git
 <template>
   <article class="loading">
     <img v-if="this.imgSrc"
