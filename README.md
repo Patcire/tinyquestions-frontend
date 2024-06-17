@@ -10,7 +10,7 @@
 ***
 
 > [!NOTE]
-> Para ver la documentación completa de la app visita:
+> Para ver la documentación completa de la app visita el link:
 > **[tinyquestions.doc](https://internal-buckaroo-a26.notion.site/tinyquestions-8518a1c3128342eeb06610fc12508847?pvs=4)**
 
 ### Primero desplegar el backend, puedes encontra la guía de instalación en el README.md del propio repo:
