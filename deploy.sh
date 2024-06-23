@@ -2,6 +2,6 @@
 
 DEPLOY_PATH="/tinyquestions-frontend"
 
-chown -R www-data /root/tinyquestions-frontend/dist/
+chown -R www-data tinyquestions-frontend/dist/
 systemctl restart apache2
 cd ${DEPLOY_PATH}
