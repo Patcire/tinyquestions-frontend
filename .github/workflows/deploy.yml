@@ -20,7 +20,7 @@ jobs:
         run: sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -o StrictHostKeyChecking=no root@159.69.150.218 'chmod +x /root/tinyquestions-frontend/deploy.sh'
 
       - name: Copy files via SCP
-        run: sshpass -p ${{ secrets.VPS_PASSWORD }} scp -o StrictHostKeyChecking=no -r ./* root@159.69.150.218:/tinyquestions-frontend
+        run: sshpass -p ${{ secrets.VPS_PASSWORD }} scp -o StrictHostKeyChecking=no -r ./* root@159.69.150.218:/root/tinyquestions-frontend
 
       - name: Execute deploy script
         run: sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -o StrictHostKeyChecking=no root@159.69.150.218 'bash -s' < ./deploy.sh
