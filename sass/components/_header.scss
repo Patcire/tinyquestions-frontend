@@ -12,6 +12,9 @@
   &__logo{
       width: 350px;
       height: auto;
+    &:hover{
+      cursor: pointer;
+    }
   }
 }
 
@@ -24,11 +27,9 @@
     transition: all 0.3s ease;
     @include flex-row;
     &__logo{
-     // padding-top: 8%;
       width: 280px;
       text-align: center;
       padding-top: 2%;
-      //background-color: burlywood;
     }
   }
 }

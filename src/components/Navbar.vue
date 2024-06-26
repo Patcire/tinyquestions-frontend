@@ -22,10 +22,9 @@ export default {
 <template>
 
   <nav>
-
     <ul v-if="!this.sessionStore.user.isConnected" class="navbar">
       <li>
-        <router-link to="/" aria-current="page" class="navbar__link">Home</router-link>
+        <router-link to="/login" class="navbar__link">Login</router-link>
       </li>
       <li>
         <router-link to="/play" class="navbar__link">Play</router-link>
@@ -37,7 +36,6 @@ export default {
 
 
     <ul v-if="this.sessionStore.user.isConnected" class="navbar navbar--mod">
-
       <li>
         <router-link to="/games" class="navbar__link navbar__link--mod">Games</router-link>
       </li>
@@ -47,7 +45,6 @@ export default {
 
       <li class="navbar__submenu">
         <router-link to="/profile" class="navbar__link navbar__link--mod" >Comunnity</router-link>
-
       </li>
       <li>
         <a @click="exit" class="navbar__link pointer navbar__link pointer--mod" >Exit</a>

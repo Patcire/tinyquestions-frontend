@@ -18,8 +18,11 @@ const routes = [
 
       { path: "/", component: Home},
       { path: "/about", component: ()=> import('/src/pages/About.vue') },
-      { path: "/play", component: ()=> import('/src/pages/Login.vue')},
+      { path: "/login", component: ()=> import('/src/pages/Login.vue')},
       { path: "/register", component: ()=> import('/src/pages/Register.vue')},
+      { path: "/play", component: ()=> import('/src/pages/Games.vue')},
+      { path: "/quick", component: ()=> import('/src/pages/Games.vue')},
+      { path: "/zen", component: ()=> import('/src/pages/Games.vue')},
 
       // Private pages
       {
@@ -32,68 +35,6 @@ const routes = [
           {
             path: "",
             component: ()=> import('/src/pages/Rules.vue')
-          }
-        ]
-      },
-      {
-        path: "/games",
-        component: PrivateLayout,
-        children: [
-          {
-            path: "",
-            component: ()=> import('/src/pages/Games.vue'),
-          }
-        ]
-      },
-      {
-        path: "/quick",
-        component: PrivateLayout,
-        beforeEnter(to, from, next) {
-          useSessionStore().isLogged() ? next() : router.push('/')
-        },
-        children: [
-          {
-            path: "",
-            component: ()=> import('/src/pages/Quick.vue'),
-          }
-        ]
-      },
-      {
-        path: "/mirror",
-        component: PrivateLayout,
-        beforeEnter(to, from, next) {
-          useSessionStore().isLogged() ? next() : router.push('/')
-        },
-        children: [
-          {
-            path: "",
-            component: ()=> import('/src/pages/Mirror.vue')
-          }
-        ]
-      },
-      {
-        path: "/exploding",
-        component: PrivateLayout,
-        beforeEnter(to, from, next) {
-          useSessionStore().isLogged() ? next() : router.push('/')
-        },
-        children: [
-          {
-            path: "",
-            component: ()=> import('/src/pages/Exploding.vue')
-          }
-        ]
-      },
-      {
-        path: "/zen",
-        component: PrivateLayout,
-        beforeEnter(to, from, next) {
-          useSessionStore().isLogged() ? next() : router.push('/')
-        },
-        children: [
-          {
-            path: "",
-            component: ()=> import('/src/pages/Zen.vue')
           }
         ]
       },
