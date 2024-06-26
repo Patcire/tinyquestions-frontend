@@ -262,13 +262,13 @@ export default {
       :
     await this.getQuestionsFromAPIForNewQuiz()
 
-    this.mode.gameMode !== "zen" &&  await this.createQuizAndMatchOnDB()
+    useSessionStore().user.isConnected && this.mode.gameMode !== "zen" &&  await this.createQuizAndMatchOnDB()
   },
 
   watch: {
     counter(value) {
       // when matches finish and game mode is not zen
-      if (value>this.questions.length-1 && this.mode.gameMode !== "zen") this.handleFinishedQuiz()
+      if (useSessionStore().user.isConnected && value>this.questions.length-1 && this.mode.gameMode !== "zen") this.handleFinishedQuiz()
     },
   }
 
@@ -277,11 +277,7 @@ export default {
 
 <template>
 
-  <Loading v-if="!questions.length"
-           key-word="loading"
-           imgSrc="/public/electron.svg"
-  ></Loading>
-
+  <Loading v-if="!questions.length" key-word="loading" imgSrc="/public/electron.svg"></Loading>
   <section class="quiz quiz--home"
            v-if="questions.length > 0
                  && questions[counter]
@@ -330,6 +326,7 @@ export default {
           <span class="quiz__response">{{questions[counter].option_c}}</span>
         </label>
       </fieldset>
+      <!--img for right/fail-->
       <img src="../../public/like.svg"
            class="quiz__like"
            :class="{'active' : isCorrectAnimationTrigger}"
