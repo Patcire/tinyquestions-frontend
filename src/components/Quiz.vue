@@ -10,8 +10,6 @@ import Score from '@/components/Score.vue'
 
 export default {
   name: 'Quiz',
-  computed: {
-  },
   components: { Score, Results, Loading },
   data(){
     return{
@@ -26,6 +24,18 @@ export default {
       quizID: null, // until we created on the db we don't know the id
       matchID: null, // same with match
       seshStore: useSessionStore().user
+    }
+  },
+  // reactive conditions
+
+  computed: {
+    showScore(){
+      return !this.mode.isMultiplayer && this.questions.length && this.points>0 &&
+        (this.mode.rerun || this.mode.isCustom)
+    },
+    showResults(){
+      return ((this.mode.numberOfQuestions === this.counter || !this.timerAutoStart) && this.mode.hasScore)
+        && this.questions.length && !this.mode.isMultiplayer
     }
   },
 
@@ -279,11 +289,7 @@ export default {
 <template>
 
   <Loading v-if="!questions.length" key-word="loading" imgSrc="/public/electron.svg"></Loading>
-  <section class="quiz quiz--home"
-           v-if="questions.length > 0
-                 && questions[counter]
-                 && timerAutoStart"
-  >
+  <section class="quiz quiz--home" v-if="questions.length > 0 && questions[counter] && timerAutoStart">
 
     <header class="quiz__header" v-if="mode.title">
       <h1 :class=mode.class  aria-label="title of the game mode">{{mode.title}}</h1>
@@ -326,6 +332,7 @@ export default {
           <span class="quiz__response">{{questions[counter].option_c}}</span>
         </label>
       </fieldset>
+
       <!--img for right/fail-->
       <img src="../../public/like.svg"
            class="quiz__like"
@@ -335,16 +342,17 @@ export default {
            class="quiz__fail"
            :class="{'active' : isCorrectAnimationTrigger===false}"
            alt="a cross 'cause you fail">
+
     </form>
 
     <!--score-->
-    <div v-if="!this.mode.isMultiplayer && questions.length && points>0 && (mode.rerun || mode.isCustom)">
+    <div v-if="showScore">
       <Score :isCorrectAnimationTrigger="this.isCorrectAnimationTrigger" :points="this.points"></Score>
     </div>
   </section>
 
   <!--Results-->
-  <div v-if="((mode.numberOfQuestions === counter || !timerAutoStart) && mode.hasScore) && this.questions.length && !this.mode.isMultiplayer"
+  <div v-if="showResults"
     class="quiz__container">
     <results
       :points="this.points"
