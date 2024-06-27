@@ -6,12 +6,13 @@ import { useSessionStore } from '@/stores/sessionStore.js'
 import { boolean } from 'yup'
 import Results from '@/components/Results.vue'
 import { apiDirection } from '@/helpers/others.js'
+import Score from '@/components/Score.vue'
 
 export default {
   name: 'Quiz',
   computed: {
   },
-  components: { Results, Loading },
+  components: { Score, Results, Loading },
   data(){
     return{
       isCorrectAnimationTrigger: null,
@@ -338,15 +339,8 @@ export default {
     </form>
 
     <!--score-->
-    <div v-if="!this.mode.isMultiplayer">
-      <article class="quick__points-container" v-if="questions.length && points>0 && (mode.rerun || mode.isCustom)">
-        <h3 class="quick__points"
-            >{{points}} points
-        </h3>
-        <h3 class="quick__sum" :class="{'active' : isCorrectAnimationTrigger}"> +10 points</h3>
-        <img class="quick__sparkles"
-             src="../../public/virutas.svg" alt="doodle of sparkles">
-      </article>
+    <div v-if="!this.mode.isMultiplayer && questions.length && points>0 && (mode.rerun || mode.isCustom)">
+      <Score :isCorrectAnimationTrigger="this.isCorrectAnimationTrigger" :points="this.points"></Score>
     </div>
   </section>
 
