@@ -302,13 +302,11 @@ export default {
     </header>
 
     <form class="quiz__form" v-if="questions">
-      
-      <legend class="quiz__title">
-       {{questions[counter].title}}
-      </legend>
 
       <fieldset class="quiz__answers">
-
+        <legend class="quiz__title">
+          {{questions[counter].title}}
+        </legend>
         <label class="quiz__answer">
           <input type="radio" name="option" @click="handleOptionSelected(questions[counter].option_a)" class="quiz__opt">
           <span aria-hidden="true" class="quiz__letter">a)</span>
