@@ -296,7 +296,8 @@ export default {
         @done="handleTimesOut"
         v-slot="{seconds}"
       >
-        <em>00:{{ seconds }} s</em>
+        <em v-if="seconds>=10">00:{{ seconds }} s</em>
+        <em v-if="seconds<10">00:0{{ seconds }} s</em>
       </Vountdown>
 
     </header>
