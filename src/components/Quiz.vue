@@ -3,10 +3,11 @@ import { callAPI, postAPI } from '@/helpers/callAPI.js'
 import router from '@/router/router.js'
 import Loading from '@/components/Loading.vue'
 import { useSessionStore } from '@/stores/sessionStore.js'
-import { boolean } from 'yup'
+import { array, boolean } from 'yup'
 import Results from '@/components/Results.vue'
 import { apiDirection } from '@/helpers/others.js'
 import Score from '@/components/Score.vue'
+import { shuffle } from '@/helpers/Maths.js'
 
 export default {
   name: 'Quiz',
@@ -23,11 +24,12 @@ export default {
       responses: [],
       quizID: null, // until we created on the db we don't know the id
       matchID: null, // same with match
-      seshStore: useSessionStore().user
+      seshStore: useSessionStore().user,
+      options: ['option_a', 'option_b', 'option_c']
     }
   },
-  // reactive conditions
 
+  // reactive conditions
   computed: {
     showScore(){
       return !this.mode.isMultiplayer && this.questions.length && this.points>0 &&
@@ -274,14 +276,17 @@ export default {
     await this.getQuestionsFromAPIForNewQuiz()
 
     useSessionStore().user.isConnected && this.mode.gameMode !== "zen" &&  await this.createQuizAndMatchOnDB()
+    this.options = [...shuffle(this.options)]
   },
 
   watch: {
     counter(value) {
       // when matches finish and game mode is not zen
       if (useSessionStore().user.isConnected && value>this.questions.length-1 && this.mode.gameMode !== "zen") this.handleFinishedQuiz()
+      // to shuffle options
+      this.options = [...shuffle(this.options)]
     },
-  }
+  },
 
 }
 </script>
@@ -314,22 +319,23 @@ export default {
         <legend class="quiz__title">
           {{questions[counter].title}}
         </legend>
+
         <label class="quiz__answer">
-          <input type="radio" name="option" @click="handleOptionSelected(questions[counter].option_a)" class="quiz__opt">
+          <input type="radio" name="option" @click="handleOptionSelected(questions[counter][options[0]])" class="quiz__opt">
           <span aria-hidden="true" class="quiz__letter">a)</span>
-          <span class="quiz__response">{{questions[counter].option_a}}</span>
+          <span class="quiz__response">{{questions[counter][options[0]]}}</span>
         </label>
 
         <label class="quiz__answer">
-          <input type="radio" name="option" @click="handleOptionSelected(questions[counter].option_b)" class="quiz__opt">
+          <input type="radio" name="option" @click="handleOptionSelected(questions[counter][options[1]])" class="quiz__opt">
           <span aria-hidden="true" class="quiz__letter">b)</span>
-          <span class="quiz__response">{{questions[counter].option_b}}</span>
+          <span class="quiz__response">{{questions[counter][options[1]]}}</span>
         </label>
 
         <label class="quiz__answer">
-          <input type="radio" name="option" @click="handleOptionSelected(questions[counter].option_c)" class="quiz__opt">
+          <input type="radio" name="option" @click="handleOptionSelected(questions[counter][options[2]])" class="quiz__opt">
           <span aria-hidden="true" class="quiz__letter">c)</span>
-          <span class="quiz__response">{{questions[counter].option_c}}</span>
+          <span class="quiz__response">{{questions[counter][options[2]]}}</span>
         </label>
       </fieldset>
 
