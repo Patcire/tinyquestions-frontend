@@ -17,7 +17,8 @@ export const useSessionStore = defineStore('user',{
       createdRoomID: null,
       joinedRoomID: null,
       socketInUse: null,
-      roomAdmin: false
+      roomAdmin: false,
+      token: '',
     },
 
   }),
@@ -28,7 +29,7 @@ export const useSessionStore = defineStore('user',{
       return this.user.isConnected
     },
 
-    setUserConnected(username, points, quizzesResolved, userID){
+    setUserConnected(username, points, quizzesResolved, userID, token){
       this.user.isConnected = true
       this.user.username = username
       this.user.points = points
@@ -41,6 +42,7 @@ export const useSessionStore = defineStore('user',{
       this.createdRoomID =  null
       this.joinedRoomID = null
       this.socketInUse =  null
+      this.user.token = token
     },
 
 
@@ -54,7 +56,12 @@ export const useSessionStore = defineStore('user',{
       if (response.ok){
         const checkedUser = await response.json()
         if (checkedUser.user){
-          this.setUserConnected(username, checkedUser.user.points, checkedUser.user.quizzes_resolved, checkedUser.user.id_user)
+          this.setUserConnected(username,
+            checkedUser.user.points,
+            checkedUser.user.quizzes_resolved,
+            checkedUser.user.id_user,
+            checkedUser.token
+          )
           return this.user.isConnected
         }
       }
@@ -69,7 +76,7 @@ export const useSessionStore = defineStore('user',{
       })
       if (response.ok){
         const created = await response.json()
-        if (created.id_user)  this.setUserConnected(username, 0, 0, created.id_user)
+        if (created.user.id_user)  this.setUserConnected(username, 0, 0, created.user.id_user, created.token)
         return this.user.isConnected
       }
       else if (response.status === 409) {

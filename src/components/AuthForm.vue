@@ -46,7 +46,6 @@ export default {
     async handleRegister(){
       this.isLoading = true
       const register = await this.sessionStore.register(this.email, this.username, this.password)
-
       if (!register){
         this.isLoading = false
         this.showErrorOfFailSubmit = true
@@ -79,8 +78,8 @@ export default {
     location(loc) {
       if (loc.includes('register')) {
         this.registerForm = true
-        this.email = `rand-${this.randomID.split('-')[4]}@mijita.ganesh23452345`
-        this.password = this.randomID.split('-')[4]
+        //this.email = `rand-${this.randomID.split('-')[4]}@mijita.ganesh23452345`
+        //this.password = this.randomID.split('-')[4]
       }
     }
   },
@@ -115,7 +114,7 @@ export default {
     </vForm>
 
 
-    <!--register dialog-->
+    <!--register dialog
     <div class="dialog__container" v-if="registerForm && !hideDialog">
       <dialog open class="dialog__info">
         <p class="dialog__message">
@@ -129,16 +128,17 @@ export default {
         <button @click="this.hideDialog = true" class="dialog__button">Understood</button>
       </dialog>
     </div>
-
+    -->
     <!--register form-->
     <vForm class="form" :validation-schema="schemaRegister" ref="regform" v-if="registerForm">
-      <vField v-model="email" placeholder="Email..." aria-label="email" class="form__input" type="email" name="email" disabled/>
+      <vField v-model="email" placeholder="Email..." aria-label="email" class="form__input" type="email" name="email"/>
       <vError name="email" class="form__global-error"></vError>
       <vField v-model="username" placeholder="Username..." aria-label="username" class="form__input" type="string" name="username"/>
       <vError name="username" class="form__global-error"></vError>
-      <vField v-model="password" type="password" name="password" aria-label="password" placeholder="Password..." class="form__input" disabled/>
+      <vField v-model="password" type="password" name="password" aria-label="password" placeholder="Password..." class="form__input" />
       <vError name="password" class="form__global-error"></vError>
-      <button v-if="hideDialog" type="submit"  class="primary-button" @click="onSubmit">Enter</button>
+      <!--<button v-if="hideDialog" type="submit"  class="primary-button" @click="onSubmit">Enter</button>-->
+      <button type="submit"  class="primary-button" @click="onSubmit">Enter</button>
       <p v-if="showErrorOfFailSubmit"
          class="form__global-error">{{errorFailSubmitMessage}}</p>
     </vForm>
