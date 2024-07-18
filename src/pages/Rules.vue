@@ -47,7 +47,7 @@ export default {
 
         <h3 class="rules__final">And that's all, let's play!</h3>
       <div class="rules__container">
-        <button class="primary-button" @click="router().push('/games')">Games</button>
+        <button class="primary-button" @click="router().push('/play')">Games</button>
         <img class="rules__doodle" alt="doodle of a plant" src="/public/Vectorplant.png">
       </div>
   </section>
