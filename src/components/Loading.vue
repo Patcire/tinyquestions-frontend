@@ -10,7 +10,7 @@ export default {
 git
 <template>
   <article class="loading">
-    <img v-if="this.imgSrc.includes('clock')"
+    <img v-if="this.imgSrc  && this.imgSrc.includes('clock')"
       class="loading__img"
       :src="imgSrc"
       alt="doodle">

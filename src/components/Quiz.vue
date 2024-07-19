@@ -156,13 +156,14 @@ export default {
             "clock": this.mode.clock[0],
             "time": this.mode.clock[1],
             "type": "random",
-          })
+          },
+        )
 
         if (createdQuiz.status !== 201){
           // to do --> MODAL error al guardar
           return
         }
-
+        console.log('created')
         const infoQuizCreated = await createdQuiz.json()
         this.quizID = await infoQuizCreated.id_quiz
 
