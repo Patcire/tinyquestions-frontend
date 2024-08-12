@@ -5,7 +5,7 @@
   padding: 5%;
   position: relative;
   @include flex-column;
-  background-color: lightgreen;
+  //background-color: lightgreen;
 
   &__content{
     @include flex-column;

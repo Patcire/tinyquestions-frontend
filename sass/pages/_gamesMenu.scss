@@ -94,6 +94,7 @@
 @include mobile {
   .games{
     padding-top: 8%;
+    @include flex-column;
     &__daydream{
       height: 120px;
       width: 120px;
@@ -106,11 +107,30 @@
     }
   }
 
+  .multi{
+    padding-top: 8%;
+    //background-color: #d0829c;
+    &__title{
+      font-size: 2rem;;
+    }
+    &__join{
+      padding-top: 20px;
+    }
+    &__input{
+      width: 20rem;
+    }
+    &__box{
+      margin-bottom: 40px;
+    }
+
+  }
+
 }
 
 @include tablet {
   .games{
     padding-top: 8%;
+    @include flex-column;
     &__daydream{
       height: 160px;
       width: 160px;
@@ -123,6 +143,14 @@
       width: 190px;
       bottom: 59%;
       right: 250px;
+    }
+  }
+
+  .multi {
+    padding-top: 8%;
+    background-color: #d0829c;
+    &__join{
+      padding-top: 20px;
     }
   }
 }
