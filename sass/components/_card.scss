@@ -21,6 +21,8 @@
     font-size: 1.5rem;
     -webkit-text-stroke: 0.6px black;
     color: $pink;
+    background-color: white;
+    border: none;
     @include in-out-scale;
     &:hover{
       transform: scale(1.1);
