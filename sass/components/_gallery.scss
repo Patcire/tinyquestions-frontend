@@ -2,8 +2,9 @@
 
 .gallery{
   padding-top: 2%;
+  padding-bottom: 15%;
   //background-color: lightgreen;
-  width: 40%;
+  width: 60%;
   border-top: 2px solid grey;
   @include grid-gallery(4)
 }
@@ -15,5 +16,13 @@
   @include flex-column;
   &__bird{
     padding-left: 35%;
+  }
+}
+
+@include mobile {
+  .gallery{
+    width: 87%;
+    height: auto;
+    padding-bottom: 75%; // only for fit last row
   }
 }

@@ -88,3 +88,9 @@
 .blue{
   background-color: $blue;
 }
+
+@include mobile{
+  .card{
+
+  }
+}
