@@ -110,16 +110,15 @@
     top: 30px;
     text-align: right;
     right: 60px;
-
     &__submenu{
       display: none;
       position: absolute;
       background-color: rgb(255, 255, 255);
       border-radius: 10px;
       margin-top: 40px;
-      left: -80px;
       padding: 6px;
       border: 2px solid black;
+      transform: translateX(-75%);
     }
 
     &__icon{
@@ -127,7 +126,6 @@
       @include flex-column;
       display: block;
       top: 7.5px;
-
     }
     &__check{
       position: absolute;
@@ -141,7 +139,8 @@
       z-index: -1;
     }
     &__check:checked ~  &__submenu{
-      display: block;
+      display: flex;
+      flex-direction: column;
       z-index: 2;
     }
     .hambmenu__check:not(:checked) ~ .hambmenu__submenu {
