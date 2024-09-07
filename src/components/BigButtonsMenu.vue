@@ -13,11 +13,11 @@ export default {
           Play</router-link>
       </li>
       <li class="games-menu__element">
-        <router-link to="/mirror" class="games-menu__anchor">
+        <router-link to="/mirror" class="games-menu__anchor games-menu__anchor--disabled">
           Mirror</router-link>
       </li>
       <li class="games-menu__element">
-        <router-link to="/exploding" class="games-menu__anchor">
+        <router-link to="/exploding" class="games-menu__anchor games-menu__anchor--disabled">
           Exploding
           questions</router-link>
       </li>

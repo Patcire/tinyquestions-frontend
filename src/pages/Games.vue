@@ -36,8 +36,8 @@ export default {
 <template>
 
   <section class="games">
-
     <article class="games__content">
+      <h3 class="multi__title multi__title--mod">Singleplayer</h3>
       <div class="games__container">
         <img class="games__hand" src="/public/Vectorhand.svg" alt="hand doodle">
       </div>
