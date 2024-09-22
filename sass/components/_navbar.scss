@@ -3,10 +3,8 @@
 /* General */
 
 .navbar{
-
   @include flex-row();
   gap: 3rem;
-  padding-top: 1.425%;
 
   &__link{
     font-family: $fontLogo;
@@ -15,7 +13,7 @@
     color: black;
     &.pointer{
       cursor: pointer;
-      font-size: 31.6px;
+      font-size: 2.5rem;
     }
 
   }
@@ -74,30 +72,14 @@
   }
 }
 
-/*-------------------------------*/
-
-/* Navrbar logged (more elements) */
-
-.navbar.navbar--mod{
-  //background-color: lightblue;
-  gap: 1.2rem;
-}
-
-.navbar__link.navbar__link--mod,
-  .navbar__button.navbar__button--mod, .navbar__link.pointer.pointer--mod{
-  font-size: 31.6px;
-}
-
 .hambmenu{
   display: none;
 }
 
 /*-------------------------------*/
 
-/* Media Query for Mobile */
-
-@include mobile{
-
+/* Media Query for hambmenu */
+@include under900{
   .navbar{
     display: none;
     &__link{
@@ -106,10 +88,26 @@
   }
   .hambmenu{
     display: block;
-    position: absolute;
-    top: 30px;
     text-align: right;
-    right: 60px;
+    position: relative;
+    @include flex-column;
+
+    &__icon{
+     @include flex-column;
+      position: relative;
+    }
+    &__img{
+      z-index: -1;
+      width: 40px;
+      position: absolute;
+      transform: translate(-50%, -62%);
+    }
+
+    &__check{
+      width: 40px;
+      height: 40px;
+      opacity: 0;
+    }
     &__submenu{
       display: none;
       position: absolute;
@@ -118,26 +116,9 @@
       margin-top: 40px;
       padding: 6px;
       border: 2px solid black;
-      transform: translateX(-75%);
+      transform: translate(-45%, 50%);
     }
 
-    &__icon{
-      position: absolute;
-      @include flex-column;
-      display: block;
-      top: 7.5px;
-    }
-    &__check{
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      opacity: 0;
-      left: 60%;
-    }
-    &__img{
-      position: absolute;
-      z-index: -1;
-    }
     &__check:checked ~  &__submenu{
       display: flex;
       flex-direction: column;
@@ -147,7 +128,6 @@
       display: none;
       z-index: 0;
     }
-
   }
   .hambmenu__submenu.hambmenu__submenu--mod{
     display: block;
@@ -158,102 +138,6 @@
     border-radius: 10px;
   }
 }
-
-/*-------------------------------*/
-
-
-/* Media Query for tablet */
-
-@include  tablet{
-
-  /* For reduce navbar (not Logged) */
-  .navbar{
-    padding-left: 8px;
-    &__link,&__button{
-      font-size: 1.6rem;
-    }
-  }
-  /* For full navbar (Logged) */
-
-  .navbar.navbar--mod{
-    gap: 0.4rem;
-
-  }
-  .navbar__link.navbar__link--mod, .navbar__button.navbar__button--mod {
-    font-size: 1.6rem;
-  }
-  .navbar__link.pointer.pointer--mod{
-    font-size: 1.6rem;
-  }
-}
-
-/*-------------------------------*/
-
-
-/* Media Query for full navbar with hamburguer menu */
-  /* it cover size between reduce desktop & mobile */
-
-@include between1 {
-  .navbar.navbar--mod {
-    display: none;
-
-    &__link {
-      font-size: 2rem;
-    }
-  }
-  .hambmenu.hambmenu--mod {
-    display: block;
-    position: absolute;
-    text-align: right;
-    right: 30px;
-    top: 10px;
-    padding-right: 3%;
-
-    &__icon {
-      position: absolute;
-      @include flex-column;
-      display: block;
-    }
-  }
-  .hambmenu {
-    &__check {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      opacity: 0;
-      top: 40%;
-      left: 60%;
-    }
-
-    &__img {
-      position: absolute;
-      z-index: -1;
-    }
-
-    &__check:checked ~ &__submenu {
-      display: block;
-      z-index: 2;
-    }
-
-    .hambmenu__check:not(:checked) ~ .hambmenu__submenu {
-      display: none;
-      z-index: 0;
-    }
-
-  }
-
-  .hambmenu__submenu.hambmenu__submenu--mod {
-    display: block;
-    position: absolute;
-    top: 10px;
-    text-align: right;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    border: solid 2px black;
-    padding: 25%;
-  }
-}
-
 
 
 

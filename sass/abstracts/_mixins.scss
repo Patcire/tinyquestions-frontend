@@ -71,3 +71,8 @@
   }
 }
 
+@mixin under900{
+  @media screen and (min-width: 300px) and (max-width: 1150px) {
+    @content
+  }
+}

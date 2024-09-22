@@ -7,9 +7,10 @@
   justify-content: space-between;
   padding-left: 3%;
   padding-right: 3%;
-  //background-color: rgba(253, 148, 59, 0.61);
+  background-color: rgba(253, 148, 59, 0.61);
   height: 10vh;
   &__logo{
+    background-color: rgba(4, 154, 143, 0.31);
       width: 350px;
       height: auto;
     &:hover{
@@ -22,29 +23,26 @@
 
 /* Media query for mobile */
 
-@include mobile{
+@include under900{
   .main-header{
     transition: all 0.3s ease;
     @include flex-row;
     &__logo{
       width: 280px;
       text-align: center;
-      padding-top: 2%;
     }
   }
 }
 
-/*-----------------*/
+@include under900 {
 
-/* Media query for tablet */
-
-@include tablet {
   .main-header{
-    transition: all 0.3s ease;
-    padding-bottom: 40px;
+    justify-content: space-between;
   }
-
   .main-header__logo{
-    width: 280px;
+   width: 270px;
+    padding-top: 0;
   }
 }
+
+/*-----------------*/
