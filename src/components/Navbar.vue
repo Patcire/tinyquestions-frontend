@@ -22,7 +22,7 @@ export default {
 <template>
 
   <nav class="navbar">
-    <ul>
+    <ul class="navbar__list">
       <li>
         <router-link to="/play" class="navbar__link">Play</router-link>
       </li>
