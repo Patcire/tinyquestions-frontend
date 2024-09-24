@@ -19,8 +19,22 @@
     border-radius: 30px;
     font-family: $fontAnswers;
     overflow: hidden;
+    position: absolute;
 
- }
+  }
+  &__button-container{
+    padding-top: 500px;
+  }
+
+}
+
+.primary-button.primary-button--modal{
+  background-color: $purple;
+  width: 100px;
+  border-radius: 10px;
+  border: 2px solid black;
+  bottom:17%;
+  display: block;
 }
 
 /*---------------------*/

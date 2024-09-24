@@ -78,6 +78,7 @@ export default {
     },
 
     handleQuestionCreationVisually() { // for the user can visualize it on the page
+      console.log('pipoo')
       const question = {
         titleQuestion: this.titleQuestion,
         optionA: this.optionA,
@@ -217,9 +218,12 @@ export default {
   </article>
 
   <!--modal for new question-->
-  <Modal v-if="this.openAddForm"
+  <Modal
+    v-if="this.openAddForm"
     :show="openAddForm"
     ref="addForm"
+    button-text="Add"
+    @activeModalFunction="handleQuestionCreationVisually"
   >
     <form @submit.prevent="handleQuestionCreationVisually">
       <section class="customizer__form">
@@ -252,7 +256,6 @@ export default {
           placeholder="Correct option..."
           class="customizer__input-form">
       </section>
-      <button type="submit" class="primary-button primary-button--modal-mod">Add</button>
     </form>
   </Modal>
 
