@@ -6,8 +6,8 @@
   color: grey;
   overflow: hidden;
   text-align: center;
-  width: 500px;
-  height: 700px;
+  width: 650px;
+  height: 400px;
 
   &__title{
     background-color: $purple;
@@ -16,13 +16,18 @@
     @include flex-column;
   }
 
+  &__input-container{
+    @include flex-column;
+    height: 15%;
+  }
+
   &__input{
     width: 100%;
     border: none;
     text-align: center;
     border-bottom: 2px solid grey;
-    height: 20%;
     position: relative;
+    height: 100%;
 
   }
 
@@ -34,6 +39,10 @@
     border: white;
     padding: 3%;
 
+  }
+
+  &__textarea-container{
+    @include flex-column;
   }
 
   &__textarea{
