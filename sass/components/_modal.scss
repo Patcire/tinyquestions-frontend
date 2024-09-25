@@ -35,18 +35,12 @@
   border: 2px solid black;
   bottom:17%;
   display: block;
+  color: black;
 }
 
 /*---------------------*/
 
 /* MQ for tablet */
-
-@include tablet{
-  .modal__content{
-    //width: 450px;
-    //height: 450px;
-  }
-}
 
 /*---------------------*/
 
@@ -57,4 +51,9 @@
     //width: 350px;
     //height: 500px;
   }
+
+  .modal__button-container{
+    padding-top: 700px;
+  }
+
 }
