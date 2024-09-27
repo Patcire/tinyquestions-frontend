@@ -28,29 +28,21 @@
     border-bottom: 2px solid grey;
     position: relative;
     height: 100%;
+    &--mod{
+      padding-top:  2%;
 
-  }
-
-  &__date{
-    @include flex-column;
-    text-align: center;
-    border: none;
-    width: 100%;
-    border: white;
-    padding: 3%;
-
+    }
   }
 
   &__textarea-container{
     @include flex-column;
+    border: none;
   }
 
   &__textarea{
-    max-height: 100px;
-    min-height: 100px;
+    max-height: 80px;
+    min-height: 80px;
     min-width: 100%;
-    max-width: 100%;
-    border-bottom: 2px solid gray;
     text-align: center;
     padding-top: 2%;
   }
@@ -63,6 +55,7 @@
     height: 30px;
     width: 30px;
     padding: 5%;
+    accent-color: $blue;
   }
 
   &__button{
