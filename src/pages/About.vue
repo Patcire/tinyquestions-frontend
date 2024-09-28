@@ -49,7 +49,10 @@ export default {
     </div>
   </section>
 
-  <Modal :show="popUp">
+  <Modal
+    :show="popUp"
+    buttonText="Send"
+  >
     <ContactForm></ContactForm>
   </Modal>
 

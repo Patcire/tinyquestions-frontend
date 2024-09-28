@@ -30,22 +30,48 @@
     height: 100%;
     &--mod{
       padding-top:  2%;
-
     }
   }
 
   &__textarea-container{
     @include flex-column;
-    border: none;
   }
 
   &__textarea{
-    max-height: 80px;
-    min-height: 80px;
-    min-width: 100%;
     text-align: center;
     padding-top: 2%;
+    outline: none;
+    resize: none;
+    border: none;
+    width: 100%;
+    scrollbar-color: $purple white; // only for firefox
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+    &::-webkit-scrollbar-track {
+      background: white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(205, 180, 219, 0.62);
+      border-radius: 10px;
+      border: 2px solid #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: $purple;
+    }
+
   }
+
+  &__textarea:focus{
+    border-top: 1px solid grey;
+  }
+
+  &__textarea:not([rows]) {
+    min-height: 11rem;
+  }
+
   &__label{
   padding: 2%;
   }
@@ -69,17 +95,24 @@
 }
 
 @include mobile{
-  .contact{
+  .contact {
     width: 300px;
     font-size: 1.4rem;
-    &__checkbox{
+
+    &__checkbox {
       @include flex-column;
       margin-left: 45%;
+      height: 20px;
     }
-    &__button{
 
-      left: 37%;
+    &__input {
+      &--mod {
+      }
     }
+    &__textarea-container{
+
+    }
+
   }
 }
 
