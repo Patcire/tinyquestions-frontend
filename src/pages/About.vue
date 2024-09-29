@@ -8,20 +8,25 @@ export default {
   components: { Modal, ContactForm },
   data(){
     return{
-      popUp: false
+      popUp: false,
+      sendMesage: false
     }
   },
   methods: {
     handleShowModal(e) {
       e.preventDefault()
       this.popUp = !this.popUp
+    },
+    activateMessage(){
+      this.sendMesage = true
+      this.popUp = false
     }
   },
   mounted() {
     window.onclick = (e) => {
       e.target.classList.contains('modal') && this.handleShowModal(e)
       }
-    }
+  },
 }
 
 </script>
@@ -52,8 +57,9 @@ export default {
   <Modal
     :show="popUp"
     buttonText="Send"
+    @activeModalFunction="activateMessage()"
   >
-    <ContactForm></ContactForm>
+    <ContactForm :toSend="this.sendMesage"></ContactForm>
   </Modal>
 
 </template>

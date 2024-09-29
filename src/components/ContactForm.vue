@@ -4,13 +4,21 @@ import { validationContact } from '@/helpers/formHelpers.js'
 
 export default {
   name: 'ContactForm',
+  props: {
+    toSend: {
+      type: Boolean,
+      required: true
+    }
+  },
   data(){
-
     return{
       schema: validationContact
     }
   },
-  methods: {
+  watch: {
+    toSend(){
+      //todo
+    }
   },
   components:{
     vField: Field,
@@ -22,7 +30,10 @@ export default {
 
 <template>
 
-  <vForm :validation-schema="this.schema" class="contact">
+  <vForm
+    :validation-schema="this.schema"
+    class="contact"
+  >
 
     <header class="contact__title">
       <h3>Tell us your problem</h3>
