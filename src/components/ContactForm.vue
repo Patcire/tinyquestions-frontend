@@ -33,7 +33,7 @@ export default {
       <vError name="email" class="form__global-error"></vError>
     </div>
 
-    <div class="contact__input-container">
+    <div class="contact__input-container contact__input-container--mod">
       <fieldset class="contact__input contact__input--mod">
         <label class="contact__label">Accept our privacy policy
         <vField type="checkbox" name="policy" :value="true" aria-label="checkbox privacy policy" class="contact__checkbox"/></label>

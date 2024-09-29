@@ -105,6 +105,12 @@
       height: 20px;
     }
 
+    &__input-container {
+      &--mod {
+        height: 25%;
+      }
+    }
+
     &__input {
       &--mod {
       }

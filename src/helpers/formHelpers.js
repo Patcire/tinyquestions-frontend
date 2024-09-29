@@ -4,7 +4,7 @@ export const validationContact = yup.object().shape({
   email: yup.string().required().email('Invalid email format'),
   date: yup.date().required('Select the incidence date').max(2025, 'not trolling pls').min(2024, 'this web was created at 2024'),
   textarea: yup.string().required(),
-  policy: yup.boolean().oneOf([true]).required('You have to accept our privacy policy'),
+  policy: yup.boolean().oneOf([true]).required('You must accept our privacy policy'),
 });
 
 export const validationLogin = yup.object().shape({
