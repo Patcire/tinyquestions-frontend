@@ -38,9 +38,9 @@ export default {
       New quiz ?
     </a>
     <a v-if="this.mode.mod==='homeMod'"
-       @click="router().push('/register')"
+       @click="router().push('/play')"
        class="quiz__suggest">
-      Register to play more!
+       play more!
     </a>
     <a  v-if="this.mode.isCustom" class="quiz__suggest"
         @click="router().push('/profile')">
