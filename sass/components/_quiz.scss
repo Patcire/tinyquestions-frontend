@@ -114,9 +114,6 @@
     @include flex-column();
     padding: 0 0 0 0;
     font-family: $fontLogo;
-    top: 300px;
-    width: 200px;
-    text-align: center;
     & .active{
     }
   }
@@ -207,6 +204,11 @@
     }
     &__suggest{
       font-size:1.9rem
+    }
+    &__results{
+      top: 300px;
+      width: 200px;
+      text-align: center;
     }
   }
 }
