@@ -40,7 +40,7 @@ export default {
         return
       }
       this.isLoading = false
-      check && await router.push('/games')
+      check && await router.push('/play')
     },
 
     async handleRegister(){
