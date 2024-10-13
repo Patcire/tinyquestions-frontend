@@ -14,3 +14,12 @@
   padding-top: 1%;
 }
 
+
+@include mobile{
+  .rank{
+    width: 90%;
+    min-height: 400px;
+    max-height: 400px;
+  }
+
+}
