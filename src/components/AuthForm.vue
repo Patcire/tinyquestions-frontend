@@ -119,7 +119,7 @@ export default {
     <div class="dialog__container" v-if="registerForm && !hideDialog">
       <dialog open class="dialog__info">
         <p class="dialog__message">
-          Temporarily, and for security, email and password are generated randomly.</p>
+          Temporarily, emails and passwords are generated randomly.</p>
         <p>
           Still, you can choose the username and use the account with the next password (save it!).
         </p>
