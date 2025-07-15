@@ -7,7 +7,7 @@ export const formatDate = (date) =>{
 }
 
 
-export const apiDirection = "http://159.69.150.218:8001"
+export const apiDirection = "http://159.69.150.218:8000"
 //export const apiDirection = "http://localhost:8001" // to run on local uncomment this and comment the other
 
 
